@@ -11,7 +11,7 @@ in the future as the different parts are getting fleshed out:
  * **winston-node-libs** is a set of libraries used by nodes to e.g. interface with GPIO
  * **winston-server** is the master server that is responsible for collecting data from the nodes
 
-The goal is to run the nodes on Rasperry Pi devices and to connect various
+The goal is to run the nodes on Raspberry Pi devices and to connect various
 sensors and actuators to these nodes. The nodes then communicate to the
 server which collects the data and provides a secure and encrypted way
 for the nodes and other clients to communicate.
