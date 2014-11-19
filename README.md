@@ -3,13 +3,12 @@ winston
 
 This is the Winston Home Automation system.
 
-There are several parts to the whole system and I will extens this readme
+There are several parts to the whole system and this readme fill be extended
 in the future as the different parts are getting fleshed out:
 
  * **winston-android** is an Android client for communicating with the Winston server.
- * **winston-node** is the service that is deployed to winston nodes
  * **winston-node-libs** is a set of libraries used by nodes to e.g. interface with GPIO
- * **winston-server** is the master server that is responsible for collecting data from the nodes
+ * **winston-server** contains the master and node servers. The latter is run on the Winston nodes, communicates to sensors and actuators directly, and the former is responsible for collecting data from the nodes and communicates with the clients.
 
 The goal is to run the nodes on Raspberry Pi devices and to connect various
 sensors and actuators to these nodes. The nodes then communicate to the
