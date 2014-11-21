@@ -22,3 +22,5 @@ hardware that supports the JVM.
 Speaking of which, the goal of this project is to use Java throughout. But we
 might make use of existing libraries and wrap them in a way they can be called
 from Winston.
+
+[![Build Status](https://travis-ci.org/shaeberling/winston.svg)](https://travis-ci.org/shaeberling/winston)
