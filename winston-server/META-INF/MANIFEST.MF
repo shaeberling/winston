@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Implementation-Title: Winston
+Implementation-Version: 0.0.1
+

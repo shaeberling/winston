@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+version = '0.0.1'
+mainClassName = 'com.s13g.winston.testing.GpioTestDaemon'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: '../winston-libs/libs', include: ['*.jar'])
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Winston',
+                   'Implementation-Version': version
+    }
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
