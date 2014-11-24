@@ -35,8 +35,8 @@ import com.pi4j.io.gpio.RaspiPin;
  * <p>
  * NOTE: Right now this is just testing some basic GPIO functions.
  */
-public class GpioTestDaemon {
-  private static Logger LOG = LogManager.getLogger(GpioTestDaemon.class);
+public class GpioProxyDaemon {
+  private static Logger LOG = LogManager.getLogger(GpioProxyDaemon.class);
   private static final int NUM_PINS = 4;
   private static final GpioPinDigitalOutput[] pins = new GpioPinDigitalOutput[4];
 
