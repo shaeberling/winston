@@ -3,14 +3,12 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 version = '0.0.1'
 
-repositories {
-   flatDir {
-       dirs 'libs'
-   }
-}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+jar {
 }
 
 task wrapper(type: Wrapper) {

@@ -3,11 +3,10 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 version = '0.0.1'
-mainClassName = 'com.s13g.winston.testing.GpioTestDaemon'
 
 dependencies {
+    compile project(':winston-libs')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile fileTree(dir: '../winston-libs/libs', include: ['*.jar'])
 }
 
 jar {
