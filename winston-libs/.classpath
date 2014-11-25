@@ -2,10 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="lib" path="libs/pi4j-core.jar">
+	<classpathentry exported="true" kind="lib" path="libs/pi4j-core.jar" sourcepath="libs/pi4j-core-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/winston-node-libs/libs/pi4j-core-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/winston-libs/libs/pi4j-core-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="libs/log4j-api-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/log4j-core-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/commons-codec-1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpclient-4.3.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/httpcore-4.3.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/protobuf-java-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

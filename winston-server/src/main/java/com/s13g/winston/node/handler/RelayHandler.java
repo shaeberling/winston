@@ -1,0 +1,53 @@
+/*
+ * Copyright 2014 Sascha Haeberling
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.s13g.winston.node.handler;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.s13g.winston.lib.relay.RelayController;
+
+/**
+ * Handles relay requests.
+ */
+public class RelayHandler implements Handler {
+  private static final Logger LOG = LogManager.getLogger(RelayHandler.class);
+  private final String rpcName = "relay";
+  private final RelayController mRelayController;
+
+  public RelayHandler(RelayController relayController) {
+    mRelayController = relayController;
+  }
+
+  @Override
+  public void handleRequest(String arguments) {
+    LOG.info("Relay arguments: " + arguments);
+
+    // TODO: Argument validation!
+    final int relayNo = Integer.parseInt(arguments.substring(0, arguments.indexOf('/')));
+    final boolean relayOn = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1,
+        arguments.length())) != 0;
+
+    LOG.info("Relay: " + relayNo + " switch to on: " + relayOn);
+    mRelayController.switchRelay(relayNo, relayOn);
+  }
+
+  @Override
+  public String getRpcName() {
+    return rpcName;
+  }
+}

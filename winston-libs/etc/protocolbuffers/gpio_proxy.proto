@@ -1,0 +1,15 @@
+package com.s13g.winston.lib.pi4jproxy.proto;
+
+option java_package = "com.s13g.winston.lib.pi4jproxy.proto";
+option java_outer_classname = "GpioProxyProtos";
+
+message GpioRequest {
+  required string command = 1;
+  repeated Param params = 2;
+  optional string email = 3;
+
+  message Param {
+    required string type = 1;
+    required string value = 2;
+  }
+}
