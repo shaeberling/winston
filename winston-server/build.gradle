@@ -14,7 +14,6 @@ jar {
         attributes 'Implementation-Title': 'Winston',
                    'Implementation-Version': version
     }
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it).matching{ exclude "**/*.java", "**/*.html" }.visit { element -> println element } }.each { println it }
 }
 
 
