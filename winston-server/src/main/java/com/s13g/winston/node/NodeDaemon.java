@@ -37,11 +37,14 @@ import com.s13g.winston.lib.core.Provider;
 import com.s13g.winston.lib.core.SingletonProvider;
 import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.led.LedControllerFactory;
+import com.s13g.winston.lib.reed.ReedController;
+import com.s13g.winston.lib.reed.ReedControllerFactory;
 import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerFactory;
 import com.s13g.winston.node.handler.Handler;
 import com.s13g.winston.node.handler.LedHandler;
 import com.s13g.winston.node.handler.RelayHandler;
+import com.s13g.winston.node.plugin.ReedToLedPlugin;
 
 /**
  * The node daemon is the main executable that is started on a Winston node.
@@ -62,14 +65,16 @@ public class NodeDaemon implements Container {
     // loaded and configuration needs to be forwarded to them.
     final LedController ledController = LedControllerFactory.create(new int[] { 1, 4 },
         gpioController, null);
-    final RelayController relayController = RelayControllerFactory.create(new int[] { 5, 6 },
+    final RelayController relayController = RelayControllerFactory.create(new int[] {},
         gpioController, null);
-    // final ReedController reedController = ReedControllerFactory.create(new
-    // int[] { 1, 4 },
-    // gpioController, null);
+    final ReedController reedController = ReedControllerFactory.create(new int[] { 5, 6 },
+        gpioController, null);
 
     sRegisteredHandlers = createHandlerMap(new Handler[] { new LedHandler(ledController),
         new RelayHandler(relayController) });
+
+    new ReedToLedPlugin(ReedToLedPlugin.createMapping(new int[] { 0, 0, 1, 1 }), reedController,
+        ledController);
     startServing(new NodeDaemon(), PORT, NUM_THREADS);
   }
 

@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-package com.s13g.winston.lib.reed;
+package com.s13g.winston.lib.core.util;
 
-public class ReedControllerProxyClientImpl implements ReedController {
+/**
+ * Simple immutable data structure which holds two values.
+ */
+public class Pair<A, B> {
+  public final A first;
+  public final B second;
 
-  @Override
-  public boolean isClosed(int num) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void addListener(RelayStateChangedListener listener) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void removeListener(RelayStateChangedListener listener) {
-    throw new UnsupportedOperationException();
+  /**
+   * Initialize the {@link Pair}.
+   */
+  public Pair(A first, B second) {
+    this.first = first;
+    this.second = second;
   }
 }

@@ -17,6 +17,7 @@
 package com.s13g.winston.lib.reed;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,22 +31,6 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.s13g.winston.lib.core.Pins;
 
 public class ReedControllerImpl implements ReedController {
-  /**
-   * Classes implementing this interface can be informed when the state of a
-   * relay changes.
-   */
-  private static interface RelayStateChangedListener {
-    /**
-     * Called when the state of a relay changes.
-     *
-     * @param relayNum
-     *          the number of the relay.
-     * @param closed
-     *          whether the relay is now closed. If false, the relay is open.
-     */
-    void onRelayStateChanged(int relayNum, boolean closed);
-  }
-
   private static final Logger LOG = LogManager.getLogger(ReedControllerImpl.class);
   /**
    * Contains the current state of the reed relay. If true, the relay is closed,
@@ -53,12 +38,21 @@ public class ReedControllerImpl implements ReedController {
    */
   private final boolean mRelayClosed[];
 
+  private final HashSet<RelayStateChangedListener> mListeners = new HashSet<>();
+
   public ReedControllerImpl(int mapping[], GpioController gpioController) {
     LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
     mRelayClosed = new boolean[mapping.length];
     initializePins(mapping, gpioController, (relayNum, closed) -> {
       LOG.debug("Relay " + relayNum + " now " + (closed ? "Closed" : "Open"));
       mRelayClosed[relayNum] = closed;
+
+      synchronized (mListeners) {
+        // TODO: Think about creating a separate event delivery thread.
+        for (final RelayStateChangedListener listener : mListeners) {
+          listener.onRelayStateChanged(relayNum, closed);
+        }
+      }
     });
     LOG.info("Reed relays initialized");
   }
@@ -71,6 +65,28 @@ public class ReedControllerImpl implements ReedController {
     }
 
     return mRelayClosed[num];
+  }
+
+  @Override
+  public void addListener(RelayStateChangedListener listener) {
+    synchronized (mListeners) {
+      if (mListeners.contains(listener)) {
+        LOG.error("Listener already registered");
+        return;
+      }
+      mListeners.add(listener);
+    }
+  }
+
+  @Override
+  public void removeListener(RelayStateChangedListener listener) {
+    synchronized (mListeners) {
+      if (!mListeners.contains(listener)) {
+        LOG.error("Listener never registered");
+        return;
+      }
+      mListeners.remove(listener);
+    }
   }
 
   private static GpioPinDigitalInput[] initializePins(int mapping[], GpioController gpioController,

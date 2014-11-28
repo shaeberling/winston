@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-package com.s13g.winston.lib.reed;
+package com.s13g.winston.node.plugin;
 
-public class ReedControllerProxyClientImpl implements ReedController {
+/**
+ * A {@link NodePlugin} runs inside the node and get listen to events coming
+ * from node sensors and take action using the node's controllers.
+ */
+public interface NodePlugin {
 
-  @Override
-  public boolean isClosed(int num) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void addListener(RelayStateChangedListener listener) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void removeListener(RelayStateChangedListener listener) {
-    throw new UnsupportedOperationException();
-  }
 }
