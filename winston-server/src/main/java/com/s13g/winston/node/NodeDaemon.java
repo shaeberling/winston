@@ -80,6 +80,7 @@ public class NodeDaemon implements Container {
     } catch (final IOException e) {
       LOG.warn("Could not deliver response");
     }
+    LOG.debug("Request handled");
   }
 
   /**

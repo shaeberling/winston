@@ -39,25 +39,27 @@ public class RelayControllerProxyClientImpl implements RelayController {
 
   @Override
   public void switchRelay(int num, boolean on) {
-    final String rpcUrl = String.format(mRequestFormat, mServerName, num, on ? 1 : 0);
-    LOG.info("rpcUrl: " + rpcUrl);
+    sendRpcUrl(String.format(mRequestFormat, mServerName, num, on ? 1 : 0));
+  }
 
-    // TODO: This is bad because requests might be received out of order!
-    mExecutor
-        .execute(() -> {
-          try {
-            final HttpURLConnection connection = (HttpURLConnection) (new URL(rpcUrl))
-                .openConnection();
-            connection.setRequestMethod("GET");
-            connection.setUseCaches(false);
-            final InputStream is = connection.getInputStream();
-            is.read();
-            is.close();
-          } catch (final MalformedURLException e1) {
-            e1.printStackTrace();
-          } catch (final IOException e2) {
-            e2.printStackTrace();
-          }
-        });
+  @Override
+  public void clickRelay(int num) {
+    sendRpcUrl(String.format(mRequestFormat, mServerName, num, 2));
+  }
+
+  private void sendRpcUrl(String rpcUrl) {
+    LOG.info("rpcUrl: " + rpcUrl);
+    try {
+      final HttpURLConnection connection = (HttpURLConnection) (new URL(rpcUrl)).openConnection();
+      connection.setRequestMethod("GET");
+      connection.setUseCaches(false);
+      final InputStream is = connection.getInputStream();
+      is.read();
+      is.close();
+    } catch (final MalformedURLException e1) {
+      e1.printStackTrace();
+    } catch (final IOException e2) {
+      e2.printStackTrace();
+    }
   }
 }

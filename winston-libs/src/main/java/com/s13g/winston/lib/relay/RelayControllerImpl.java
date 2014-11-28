@@ -44,7 +44,7 @@ public class RelayControllerImpl implements RelayController {
   }
 
   @Override
-  public void switchRelay(int num, boolean on) {
+  public synchronized void switchRelay(int num, boolean on) {
     LOG.info("Switching relay" + num + " on? " + on);
     if (mActivePins.containsKey(num)) {
       // If we already initialize the pin, simply switch the state.
@@ -74,5 +74,31 @@ public class RelayControllerImpl implements RelayController {
     // when the app exits.
     pin.setShutdownOptions(true, PinState.HIGH, PinPullResistance.OFF);
     mActivePins.put(num, pin);
+  }
+
+  @Override
+  public synchronized void clickRelay(int num) {
+    if (isRelayOn(num)) {
+      LOG.warn("Cannot click relay " + num + " since it appears to be on.");
+      return;
+    }
+
+    try {
+      switchRelay(num, true);
+      Thread.sleep(500);
+      switchRelay(num, false);
+    } catch (final InterruptedException ex) {
+      LOG.error("Interrupted during click event.", ex);
+    }
+  }
+
+  /**
+   * @return Whether the relay with the given number is currently on.
+   */
+  private synchronized boolean isRelayOn(int num) {
+    if (!mActivePins.containsKey(num)) {
+      return false;
+    }
+    return mActivePins.get(num).isLow();
   }
 }

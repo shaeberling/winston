@@ -42,4 +42,15 @@ public interface RelayController {
    *          Whether to switch it on, otherwise off.
    */
   public void switchRelay(int num, boolean on);
+
+  /**
+   * Performs a standard click (on/off) with the default delay.
+   * <p>
+   * If the relay is currently on, no click will be performed. The relay has to
+   * be off when this method is called.
+   *
+   * @param num
+   *          the relay to click.
+   */
+  public void clickRelay(int num);
 }
