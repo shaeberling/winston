@@ -43,6 +43,13 @@ public class GpioProxyTestApp {
     final RelayController relayController = RelayControllerFactory.create(new int[] { 1, 2, 3, 4 },
         gpioController, "192.168.1.120:1984");
 
+    allRelaysOff(relayController);
+    for (int relay = 0; relay <= 3; ++relay) {
+      relayController.clickRelay(relay);
+      Thread.sleep(50);
+    }
+
+    allRelaysOff(relayController);
     for (int loops = 0; loops < 3; ++loops) {
       for (int num = 0; num < 16; ++num) {
         for (int x = 1, i = 0; x <= 8; x = (x << 1), i++) {
@@ -57,5 +64,11 @@ public class GpioProxyTestApp {
       gpioController.provide().shutdown();
     }
     LOG.info("And we're done here.");
+  }
+
+  private static void allRelaysOff(RelayController relayController) {
+    for (int relay = 0; relay <= 3; ++relay) {
+      relayController.switchRelay(relay, false);
+    }
   }
 }

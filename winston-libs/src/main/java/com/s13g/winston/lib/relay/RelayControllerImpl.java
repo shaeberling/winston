@@ -25,6 +25,7 @@ import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
+import com.s13g.winston.lib.core.Pins;
 
 /**
  * A {@link RelayController} that uses Pi4J to access the GPIO pins directly.
@@ -67,7 +68,7 @@ public class RelayControllerImpl implements RelayController {
     // Only if a pin has not been provisioned yet and is to be switched on,
     // provision it to the relay state 'ON' which is 'LOW'.
     final GpioPinDigitalOutput pin = mGpioController.provisionDigitalOutputPin(
-        GPIO_PIN[mMapping[num]], PinState.LOW);
+        Pins.GPIO_PIN[mMapping[num]], PinState.LOW);
 
     // Important: When the program is exited the pin needs to go into 'HIGH'
     // state so that the relay stays off. We don't want garage doors to open

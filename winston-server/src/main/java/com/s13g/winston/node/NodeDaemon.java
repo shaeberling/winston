@@ -35,6 +35,8 @@ import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.s13g.winston.lib.core.Provider;
 import com.s13g.winston.lib.core.SingletonProvider;
+import com.s13g.winston.lib.reed.ReedController;
+import com.s13g.winston.lib.reed.ReedControllerFactory;
 import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerFactory;
 import com.s13g.winston.node.handler.Handler;
@@ -59,6 +61,9 @@ public class NodeDaemon implements Container {
     // loaded and configuration needs to be forwarded to them.
     final RelayController relayController = RelayControllerFactory.create(new int[] { 1, 2, 3, 4 },
         gpioController, null);
+    final ReedController reedController = ReedControllerFactory.create(new int[] { 1, 4 },
+        gpioController, null);
+
     sRegisteredHandlers = createHandlerMap(new Handler[] { new RelayHandler(relayController) });
     startServing(new NodeDaemon(), PORT, NUM_THREADS);
   }
