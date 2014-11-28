@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.relay;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -40,12 +41,18 @@ public class RelayControllerImpl implements RelayController {
   private final HashMap<Integer, GpioPinDigitalOutput> mActivePins = new HashMap<>();
 
   public RelayControllerImpl(int[] mapping, GpioController gpioController) {
+    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
     mMapping = mapping;
     mGpioController = gpioController;
   }
 
   @Override
   public synchronized void switchRelay(int num, boolean on) {
+    if (num < 0 || num >= mMapping.length) {
+      LOG.warn("Invalid relay number: " + num);
+      return;
+    }
+
     LOG.info("Switching relay" + num + " on? " + on);
     if (mActivePins.containsKey(num)) {
       // If we already initialize the pin, simply switch the state.

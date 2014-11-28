@@ -35,11 +35,12 @@ import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.s13g.winston.lib.core.Provider;
 import com.s13g.winston.lib.core.SingletonProvider;
-import com.s13g.winston.lib.reed.ReedController;
-import com.s13g.winston.lib.reed.ReedControllerFactory;
+import com.s13g.winston.lib.led.LedController;
+import com.s13g.winston.lib.led.LedControllerFactory;
 import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerFactory;
 import com.s13g.winston.node.handler.Handler;
+import com.s13g.winston.node.handler.LedHandler;
 import com.s13g.winston.node.handler.RelayHandler;
 
 /**
@@ -59,12 +60,16 @@ public class NodeDaemon implements Container {
         .getInstance());
     // TODO: Depending on configuration file, different modules need to be
     // loaded and configuration needs to be forwarded to them.
-    final RelayController relayController = RelayControllerFactory.create(new int[] { 1, 2, 3, 4 },
+    final LedController ledController = LedControllerFactory.create(new int[] { 1, 4 },
         gpioController, null);
-    final ReedController reedController = ReedControllerFactory.create(new int[] { 1, 4 },
+    final RelayController relayController = RelayControllerFactory.create(new int[] { 5, 6 },
         gpioController, null);
+    // final ReedController reedController = ReedControllerFactory.create(new
+    // int[] { 1, 4 },
+    // gpioController, null);
 
-    sRegisteredHandlers = createHandlerMap(new Handler[] { new RelayHandler(relayController) });
+    sRegisteredHandlers = createHandlerMap(new Handler[] { new LedHandler(ledController),
+        new RelayHandler(relayController) });
     startServing(new NodeDaemon(), PORT, NUM_THREADS);
   }
 

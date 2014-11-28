@@ -32,7 +32,7 @@ public class RelayHandler implements Handler {
   }
 
   private static final Logger LOG = LogManager.getLogger(RelayHandler.class);
-  private final String rpcName = "relay";
+  private static final String RPC_NAME = "relay";
   private final RelayController mRelayController;
 
   private static enum RelayCommand {
@@ -72,6 +72,6 @@ public class RelayHandler implements Handler {
 
   @Override
   public String getRpcName() {
-    return rpcName;
+    return RPC_NAME;
   }
 }

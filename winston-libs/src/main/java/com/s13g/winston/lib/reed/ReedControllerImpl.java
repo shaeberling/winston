@@ -16,6 +16,8 @@
 
 package com.s13g.winston.lib.reed;
 
+import java.util.Arrays;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,6 +54,7 @@ public class ReedControllerImpl implements ReedController {
   private final boolean mRelayClosed[];
 
   public ReedControllerImpl(int mapping[], GpioController gpioController) {
+    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
     mRelayClosed = new boolean[mapping.length];
     initializePins(mapping, gpioController, (relayNum, closed) -> {
       LOG.debug("Relay " + relayNum + " now " + (closed ? "Closed" : "Open"));
@@ -62,6 +65,11 @@ public class ReedControllerImpl implements ReedController {
 
   @Override
   public boolean isClosed(int num) {
+    if (num < 0 || num >= mRelayClosed.length) {
+      LOG.warn("Invalid reed relay number: " + num);
+      return false;
+    }
+
     return mRelayClosed[num];
   }
 
@@ -71,6 +79,7 @@ public class ReedControllerImpl implements ReedController {
     for (int i = 0; i < mapping.length; ++i) {
       pins[i] = gpioController.provisionDigitalInputPin(Pins.GPIO_PIN[mapping[i]],
           PinPullResistance.PULL_UP);
+      pins[i].setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
       final int relayNum = i;
       pins[i].addListener(new GpioPinListenerDigital() {
 
