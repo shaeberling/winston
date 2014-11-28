@@ -79,6 +79,10 @@ public class ReedControllerImpl implements ReedController {
           listener.onRelayStateChanged(relayNum, event.getState() == PinState.LOW);
         }
       });
+
+      // Tell the listener about the current state before change events are
+      // received.
+      listener.onRelayStateChanged(relayNum, pins[i].getState() == PinState.LOW);
     }
     return pins;
   }
