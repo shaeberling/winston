@@ -29,7 +29,6 @@ public class LedHandler implements Handler {
   }
 
   private static final Logger LOG = LogManager.getLogger(LedHandler.class);
-  private static final String RPC_NAME = "led";
   private final LedController mLedController;
 
   private static enum LedCommand {
@@ -50,21 +49,22 @@ public class LedHandler implements Handler {
   }
 
   @Override
-  public void handleRequest(String arguments) {
+  public String handleRequest(String arguments) {
     // TODO: Argument validation!
     final int ledNo = Integer.parseInt(arguments.substring(0, arguments.indexOf('/')));
     final int commandNo = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1,
         arguments.length()));
     if (commandNo < 0 || commandNo >= COMMANDS.length) {
       LOG.warn("Unkown LED command: " + commandNo);
-      return;
+      return "FAIL";
     }
     mCommands.get(COMMANDS[commandNo]).runForLed(ledNo);
+    return "OK";
   }
 
   @Override
-  public String getRpcName() {
-    return RPC_NAME;
+  public HandlerType getRpcName() {
+    return HandlerType.LED;
   }
 
 }

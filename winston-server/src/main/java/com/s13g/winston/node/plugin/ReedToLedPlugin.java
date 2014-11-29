@@ -44,6 +44,7 @@ public class ReedToLedPlugin implements NodePlugin, ReedController.RelayStateCha
 
   @Override
   public void onRelayStateChanged(int relayNum, boolean closed) {
+    LOG.debug("plugin: relay changed: " + relayNum + " to " + closed);
     if (!mMapping.containsKey(relayNum)) {
       // Ignore relay change since we don't listen to state changes of this one.
       return;

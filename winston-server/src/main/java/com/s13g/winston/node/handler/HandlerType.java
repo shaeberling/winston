@@ -16,11 +16,10 @@
 
 package com.s13g.winston.node.handler;
 
-/** General request Handler */
-public interface Handler {
-  /** Handle the request. */
-  public String handleRequest(String arguments);
-
-  /** Gets the RPC method name this handler is listening to. */
-  public HandlerType getRpcName();
+/**
+ * Types of handlers. Every handler has to be registered here to avoid name
+ * conflicts.
+ */
+public enum HandlerType {
+  LED, REED, RELAY
 }

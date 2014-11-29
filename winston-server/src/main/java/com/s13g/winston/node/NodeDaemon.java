@@ -43,6 +43,7 @@ import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerFactory;
 import com.s13g.winston.node.handler.Handler;
 import com.s13g.winston.node.handler.LedHandler;
+import com.s13g.winston.node.handler.ReedHandler;
 import com.s13g.winston.node.handler.RelayHandler;
 import com.s13g.winston.node.plugin.ReedToLedPlugin;
 
@@ -71,7 +72,7 @@ public class NodeDaemon implements Container {
         gpioController, null);
 
     sRegisteredHandlers = createHandlerMap(new Handler[] { new LedHandler(ledController),
-        new RelayHandler(relayController) });
+        new RelayHandler(relayController), new ReedHandler(reedController) });
 
     new ReedToLedPlugin(ReedToLedPlugin.createMapping(new int[] { 0, 0, 1, 1 }), reedController,
         ledController);
@@ -83,14 +84,14 @@ public class NodeDaemon implements Container {
     final String requestUrl = req.getAddress().toString();
     LOG.info("Request: " + requestUrl);
 
-    boolean handled = false;
+    String returnValue = null;
     if (requestUrl.startsWith(IO_PREFIX)) {
-      handled = handleIoRequest(requestUrl.substring(IO_PREFIX.length()));
+      returnValue = handleIoRequest(requestUrl.substring(IO_PREFIX.length()));
     }
 
     try {
-      resp.setStatus(handled ? Status.OK : Status.NOT_FOUND);
-      resp.getPrintStream().append(handled ? "OK" : "NOK");
+      resp.setStatus(returnValue != null ? Status.OK : Status.NOT_FOUND);
+      resp.getPrintStream().append(returnValue);
       resp.close();
     } catch (final IOException e) {
       LOG.warn("Could not deliver response");
@@ -101,17 +102,17 @@ public class NodeDaemon implements Container {
   /**
    * Handles '/io' requests.
    *
-   * @return Whether the request was handled. TODO: Have to find a way to
-   *         communicate error. Maybe through exceptions?
+   * @return If the request was handled this returns the return values of the
+   *         handler, otherwise null is returned.
    */
-  private boolean handleIoRequest(String command) {
+  private String handleIoRequest(String command) {
     final String rpcName = command.substring(0, command.indexOf('/'));
     LOG.info("IO RPC: " + rpcName);
     if (sRegisteredHandlers.containsKey(rpcName)) {
-      sRegisteredHandlers.get(rpcName).handleRequest(command.substring(rpcName.length() + 1));
-      return true;
+      return sRegisteredHandlers.get(rpcName)
+          .handleRequest(command.substring(rpcName.length() + 1));
     } else {
-      return false;
+      return null;
     }
   }
 
@@ -130,7 +131,7 @@ public class NodeDaemon implements Container {
   private static HashMap<String, Handler> createHandlerMap(Handler[] handlers) {
     final HashMap<String, Handler> handlerMap = new HashMap<>();
     for (final Handler handler : handlers) {
-      handlerMap.put(handler.getRpcName(), handler);
+      handlerMap.put(handler.getRpcName().name().toLowerCase(), handler);
     }
     return handlerMap;
   }

@@ -16,11 +16,27 @@
 
 package com.s13g.winston.node.handler;
 
-/** General request Handler */
-public interface Handler {
-  /** Handle the request. */
-  public String handleRequest(String arguments);
+import com.s13g.winston.lib.reed.ReedController;
 
-  /** Gets the RPC method name this handler is listening to. */
-  public HandlerType getRpcName();
+/**
+ * Handles reed relay requests.
+ */
+public class ReedHandler implements Handler {
+  private final ReedController mReedController;
+
+  public ReedHandler(ReedController reedController) {
+    mReedController = reedController;
+  }
+
+  @Override
+  public String handleRequest(String arguments) {
+    // TODO: Argument validation!
+    final int reedNo = Integer.parseInt(arguments);
+    return mReedController.isClosed(reedNo) ? "1" : "0";
+  }
+
+  @Override
+  public HandlerType getRpcName() {
+    return HandlerType.REED;
+  }
 }

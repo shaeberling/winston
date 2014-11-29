@@ -63,7 +63,6 @@ public class ReedControllerImpl implements ReedController {
       LOG.warn("Invalid reed relay number: " + num);
       return false;
     }
-
     return mRelayClosed[num];
   }
 
@@ -75,6 +74,11 @@ public class ReedControllerImpl implements ReedController {
         return;
       }
       mListeners.add(listener);
+    }
+    // Send out initial state to newly registered listener.
+    // TODO: Think about creating a separate event delivery thread.
+    for (int i = 0; i < mRelayClosed.length; ++i) {
+      listener.onRelayStateChanged(i, mRelayClosed[i]);
     }
   }
 
@@ -95,7 +99,6 @@ public class ReedControllerImpl implements ReedController {
     for (int i = 0; i < mapping.length; ++i) {
       pins[i] = gpioController.provisionDigitalInputPin(Pins.GPIO_PIN[mapping[i]],
           PinPullResistance.PULL_UP);
-      pins[i].setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
       final int relayNum = i;
       pins[i].addListener(new GpioPinListenerDigital() {
 
