@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Winston</string>
+    <string name="action_garage_1">Garage 1</string>
+    <string name="action_garage_2">Garage 2</string>
+    <string name="status_open">OPEN</string>
+    <string name="status_closed">CLOSED</string>
+    <string name="status_moving">MOVING</string>
+    <string name="status_error">ERROR</string>
+    <string name="status_unknown">...</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
