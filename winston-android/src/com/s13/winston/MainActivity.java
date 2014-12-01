@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 	private static final String SERVER_URL = "http://192.168.1.120:1984/io/%s";
 	private static final String RELAY_CLICK_PARAM = "relay/%d/2";
 	private static final String REED_STATUS_PARAM = "reed/%d";
-	private final ExecutorService mPool = Executors.newFixedThreadPool(15);
+	private ExecutorService mPool;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,41 +66,23 @@ public class MainActivity extends Activity {
 				clickGarage(1);
 			}
 		});
+	}
 
-		final TextView statusGarage1 = (TextView) findViewById(R.id.status_garage_1);
-		statusGarage1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Future<GarageStatus> result = getGarageStatus(0, 1);
-				mPool.execute(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							final GarageStatus status = result.get();
-							statusGarage1.post(new Runnable() {
-								@Override
-								public void run() {
-									statusGarage1.setText(GarageStatus
-											.toStringId(status));
-								}
-							});
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						} catch (ExecutionException e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mPool = Executors.newFixedThreadPool(15);
 
+		TextView statusGarage1 = (TextView) findViewById(R.id.status_garage_1);
+		scheduleUpdateGarageStatus(0, 1, statusGarage1);
 		TextView statusGarage2 = (TextView) findViewById(R.id.status_garage_2);
-		statusGarage2.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO...
-			}
-		});
+		scheduleUpdateGarageStatus(2, 3, statusGarage2);
+	}
+
+	@Override
+	protected void onPause() {
+		mPool.shutdown();
+		super.onPause();
 	}
 
 	@Override
@@ -120,6 +102,47 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void updateGarageStatus(final int openReed, final int closedReed,
+			final TextView textView) {
+		final Future<GarageStatus> result = getGarageStatus(openReed,
+				closedReed);
+		mPool.execute(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					final GarageStatus status = result.get();
+					textView.post(new Runnable() {
+						@Override
+						public void run() {
+							textView.setText(GarageStatus.toStringId(status));
+						}
+					});
+					scheduleUpdateGarageStatus(openReed, closedReed, textView);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	private void scheduleUpdateGarageStatus(final int openReed,
+			final int closedReed, final TextView textView) {
+		mPool.execute(new Runnable() {
+
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					return;
+				}
+				updateGarageStatus(openReed, closedReed, textView);
+			}
+		});
 	}
 
 	private void clickGarage(int num) {
