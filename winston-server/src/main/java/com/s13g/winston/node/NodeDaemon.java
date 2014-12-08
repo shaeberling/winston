@@ -51,92 +51,88 @@ import com.s13g.winston.node.plugin.ReedToLedPlugin;
  * The node daemon is the main executable that is started on a Winston node.
  */
 public class NodeDaemon implements Container {
-	private static Logger LOG = LogManager.getLogger(NodeDaemon.class);
-	private static final int NUM_THREADS = 4;
-	private static final int PORT = 1984;
-	private static final String IO_PREFIX = "/io/";
-	private static HashMap<String, Handler> sRegisteredHandlers;
+  private static Logger LOG = LogManager.getLogger(NodeDaemon.class);
+  private static final int NUM_THREADS = 4;
+  private static final int PORT = 1984;
+  private static final String IO_PREFIX = "/io/";
+  private static HashMap<String, Handler> sRegisteredHandlers;
 
-	public static void main(final String... args) throws IOException {
-		LOG.info("Node starting up...");
+  public static void main(final String... args) throws IOException {
+    LOG.info("Node starting up...");
 
-		final Provider<GpioController> gpioController = SingletonProvider
-				.from(() -> GpioFactory.getInstance());
-		// TODO: Depending on configuration file, different modules need to be
-		// loaded and configuration needs to be forwarded to them.
-		final LedController ledController = LedControllerFactory.create(
-				new int[] { 1, 4 }, gpioController, null);
-		final RelayController relayController = RelayControllerFactory.create(
-				new int[] { 0, 7, 9, 8 }, gpioController, null);
-		final ReedController reedController = ReedControllerFactory.create(
-				new int[] { 5, 6 }, gpioController, null);
+    final Provider<GpioController> gpioController = SingletonProvider.from(() -> GpioFactory
+        .getInstance());
+    // TODO: Depending on configuration file, different modules need to be
+    // loaded and configuration needs to be forwarded to them.
+    final LedController ledController = LedControllerFactory.create(new int[] {},
+        gpioController, null);
+    final RelayController relayController = RelayControllerFactory.create(new int[] { 1, 4, 5, 6 },
+        gpioController, null);
+    final ReedController reedController = ReedControllerFactory.create(new int[] { },
+        gpioController, null);
 
-		sRegisteredHandlers = createHandlerMap(new Handler[] {
-				new LedHandler(ledController),
-				new RelayHandler(relayController),
-				new ReedHandler(reedController) });
+    sRegisteredHandlers = createHandlerMap(new Handler[] { new LedHandler(ledController),
+        new RelayHandler(relayController), new ReedHandler(reedController) });
 
-		new ReedToLedPlugin(ReedToLedPlugin.createMapping(new int[] { 0, 0, 1,
-				1 }), reedController, ledController);
-		startServing(new NodeDaemon(), PORT, NUM_THREADS);
-	}
+    new ReedToLedPlugin(ReedToLedPlugin.createMapping(new int[] { 0, 0, 1, 1 }), reedController,
+        ledController);
+    startServing(new NodeDaemon(), PORT, NUM_THREADS);
+  }
 
-	@Override
-	public void handle(Request req, Response resp) {
-		final String requestUrl = req.getAddress().toString();
-		LOG.info("Request: " + requestUrl);
+  @Override
+  public void handle(Request req, Response resp) {
+    final String requestUrl = req.getAddress().toString();
+    LOG.info("Request: " + requestUrl);
 
-		String returnValue = null;
-		if (requestUrl.startsWith(IO_PREFIX)) {
-			returnValue = handleIoRequest(requestUrl.substring(IO_PREFIX
-					.length()));
-		}
+    String returnValue = null;
+    if (requestUrl.startsWith(IO_PREFIX)) {
+      returnValue = handleIoRequest(requestUrl.substring(IO_PREFIX.length()));
+    }
 
-		try {
-			resp.setStatus(returnValue != null ? Status.OK : Status.NOT_FOUND);
-			resp.getPrintStream().append(returnValue);
-			resp.close();
-		} catch (final IOException e) {
-			LOG.warn("Could not deliver response");
-		}
-		LOG.debug("Request handled");
-	}
+    try {
+      resp.setStatus(returnValue != null ? Status.OK : Status.NOT_FOUND);
+      resp.getPrintStream().append(returnValue);
+      resp.close();
+    } catch (final IOException e) {
+      LOG.warn("Could not deliver response");
+    }
+    LOG.debug("Request handled");
+  }
 
-	/**
-	 * Handles '/io' requests.
-	 *
-	 * @return If the request was handled this returns the return values of the
-	 *         handler, otherwise null is returned.
-	 */
-	private String handleIoRequest(String command) {
-		final String rpcName = command.substring(0, command.indexOf('/'));
-		LOG.info("IO RPC: " + rpcName);
-		if (sRegisteredHandlers.containsKey(rpcName)) {
-			return sRegisteredHandlers.get(rpcName).handleRequest(
-					command.substring(rpcName.length() + 1));
-		} else {
-			return null;
-		}
-	}
+  /**
+   * Handles '/io' requests.
+   *
+   * @return If the request was handled this returns the return values of the
+   *         handler, otherwise null is returned.
+   */
+  private String handleIoRequest(String command) {
+    final String rpcName = command.substring(0, command.indexOf('/'));
+    LOG.info("IO RPC: " + rpcName);
+    if (sRegisteredHandlers.containsKey(rpcName)) {
+      return sRegisteredHandlers.get(rpcName)
+          .handleRequest(command.substring(rpcName.length() + 1));
+    } else {
+      return null;
+    }
+  }
 
-	private static void startServing(Container container, int port,
-			int numThreads) throws IOException {
-		final ContainerSocketProcessor processor = new ContainerSocketProcessor(
-				container, numThreads);
+  private static void startServing(Container container, int port, int numThreads)
+      throws IOException {
+    final ContainerSocketProcessor processor = new ContainerSocketProcessor(container, numThreads);
 
-		// Since this server will run forever, no need to close connection.
-		@SuppressWarnings("resource")
-		final Connection connection = new SocketConnection(processor);
-		final SocketAddress address = new InetSocketAddress(port);
-		LOG.info("Listening to: " + address.toString());
-		connection.connect(address);
-	}
+    // Since this server will run forever, no need to close connection.
+    @SuppressWarnings("resource")
+    final Connection connection = new SocketConnection(processor);
+    final SocketAddress address = new InetSocketAddress(port);
+    LOG.info("Listening to: " + address.toString());
+    connection.connect(address);
+  }
 
-	private static HashMap<String, Handler> createHandlerMap(Handler[] handlers) {
-		final HashMap<String, Handler> handlerMap = new HashMap<>();
-		for (final Handler handler : handlers) {
-			handlerMap.put(handler.getRpcName().name().toLowerCase(), handler);
-		}
-		return handlerMap;
-	}
+  private static HashMap<String, Handler> createHandlerMap(Handler[] handlers) {
+    final HashMap<String, Handler> handlerMap = new HashMap<>();
+    for (final Handler handler : handlers) {
+      handlerMap.put(handler.getRpcName().name().toLowerCase(), handler);
+    }
+    return handlerMap;
+  }
 }
