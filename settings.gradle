@@ -1,1 +1,2 @@
-include 'winston-libs', 'winston-server'
+include ":winston-android", ":winston-libs", ":winston-server"
+

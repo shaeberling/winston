@@ -1,2 +1,50 @@
-apply plugin: 'java'
+allprojects {
+  task hello << { task -> println "I'm $task.project.name" }
+}
 
+// Define common properties for ALL projects.
+subprojects {
+  apply plugin: "java"
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    testCompile "junit:junit:4+"
+  }
+}
+
+// Winston ANDROID app.
+project (':winston-android') {
+}
+
+// Common Winston LIBRARIES.
+project (':winston-libs') {
+  version = '0.0.1'
+  dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+  }
+}
+
+// Winston SERVER binaries.
+project (':winston-server') {
+  apply plugin: 'application'
+
+  version = '0.0.1'
+
+  dependencies {
+    compile project(':winston-libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+  }
+
+  jar {
+    manifest {
+      attributes 'Implementation-Title': 'Winston',
+                 'Implementation-Version': version
+    }
+  }
+}
+
+// To create a gradle wrapper.
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
