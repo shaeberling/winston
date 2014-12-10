@@ -21,6 +21,9 @@ project (':winston-android') {
 project (':winston-libs') {
   version = '0.0.1'
   dependencies {
+    compile 'org.apache.logging.log4j:log4j-core:2.1'
+    compile 'org.apache.logging.log4j:log4j-api:2.1'
+    compile 'com.google.protobuf:protobuf-java:2.6+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
   }
 }
@@ -33,7 +36,7 @@ project (':winston-server') {
 
   dependencies {
     compile project(':winston-libs')
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'org.simpleframework:simple-http:6+'
   }
 
   jar {
