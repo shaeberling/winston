@@ -66,9 +66,9 @@ public class NodeDaemon implements Container {
     // loaded and configuration needs to be forwarded to them.
     final LedController ledController = LedControllerFactory.create(new int[] {},
         gpioController, null);
-    final RelayController relayController = RelayControllerFactory.create(new int[] { 1, 4, 5, 6 },
+    final RelayController relayController = RelayControllerFactory.create(new int[] { 6, 5, 4, 1 },
         gpioController, null);
-    final ReedController reedController = ReedControllerFactory.create(new int[] { },
+    final ReedController reedController = ReedControllerFactory.create(new int[] { 7, 0 },
         gpioController, null);
 
     sRegisteredHandlers = createHandlerMap(new Handler[] { new LedHandler(ledController),
