@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.s13.winston;
+package com.s13g.winston;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.s13.winston.GarageStatusFuture.GarageStatus;
+import com.s13g.winston.R;
+import com.s13g.winston.GarageStatusFuture.GarageStatus;
 
 /**
  * A future that listens to two reed status futures to determine the status of

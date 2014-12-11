@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.s13.winston;
+package com.s13g.winston;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,11 +38,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.s13.winston.GarageStatusFuture.GarageStatus;
+import com.s13g.winston.R;
+import com.s13g.winston.GarageStatusFuture.GarageStatus;
 
 public class MainActivity extends Activity {
 	private static final Logger LOG = Logger.getLogger("MainActivity");
-	private static final String SERVER_URL = "http://192.168.1.120:1984/io/%s";
+	private static final String SERVER_URL = "http://192.168.1.122:1984/io/%s";
 	private static final String RELAY_CLICK_PARAM = "relay/%d/2";
 	private static final String REED_STATUS_PARAM = "reed/%d";
 	private ExecutorService mPool;
@@ -74,9 +75,9 @@ public class MainActivity extends Activity {
 		mPool = Executors.newFixedThreadPool(15);
 
 		TextView statusGarage1 = (TextView) findViewById(R.id.status_garage_1);
-		scheduleUpdateGarageStatus(0, 1, statusGarage1);
+		scheduleUpdateGarageStatus(3, 2, statusGarage1);
 		TextView statusGarage2 = (TextView) findViewById(R.id.status_garage_2);
-		scheduleUpdateGarageStatus(2, 3, statusGarage2);
+		scheduleUpdateGarageStatus(1, 0, statusGarage2);
 	}
 
 	@Override
