@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.s13.winston.MainActivity" >
+    tools:context="com.s13g.winston.MainActivity" >
 
     <item
         android:id="@+id/action_settings"
