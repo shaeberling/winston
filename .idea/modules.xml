@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/winston-android/winston-android.iml" filepath="$PROJECT_DIR$/winston-android/winston-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/winston-libs/winston-libs.iml" filepath="$PROJECT_DIR$/winston-libs/winston-libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/winston-server/winston-server.iml" filepath="$PROJECT_DIR$/winston-server/winston-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ws-winston.iml" filepath="$PROJECT_DIR$/ws-winston.iml" />
+    </modules>
+  </component>
+</project>
+
