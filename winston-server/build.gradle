@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+version = '0.0.1'
+
+dependencies {
+  compile project(':winston-libs')
+  compile 'org.simpleframework:simple-http:6+'
+}
+
+task node (type: Jar) {
+  mainClassName = 'com.s13g.winston.node.NodeDaemon'
+  baseName 'winston-node-daemon'
+  manifest {
+    attributes 'Implementation-Title': 'Winston Node Daemon',
+               'Implementation-Version': version,
+               'Main-Class': mainClassName
+    }
+}
+
+task master (type: Jar) {
+  mainClassName = 'com.s13g.winston.node.MasterDaemon'
+  baseName 'winston-master-daemon'
+  manifest {
+    attributes 'Implementation-Title': 'Winston Master Daemon',
+               'Implementation-Version': version,
+                'Main-Class': mainClassName
+  }
+}
+

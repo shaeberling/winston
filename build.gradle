@@ -1,49 +1,20 @@
-allprojects {
-  task hello << { task -> println "I'm $task.project.name" }
-}
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-// Define common properties for ALL projects.
-subprojects {
-  apply plugin: "java"
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    testCompile "junit:junit:4+"
-  }
-}
-
-// Winston ANDROID app.
-project (':winston-android') {
-}
-
-// Common Winston LIBRARIES.
-project (':winston-libs') {
-  version = '0.0.1'
-  dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.1'
-    compile 'org.apache.logging.log4j:log4j-api:2.1'
-    compile 'com.google.protobuf:protobuf-java:2.6+'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-  }
-}
-
-// Winston SERVER binaries.
-project (':winston-server') {
-  apply plugin: 'application'
-
-  version = '0.0.1'
-
-  dependencies {
-    compile project(':winston-libs')
-    compile 'org.simpleframework:simple-http:6+'
-  }
-
-  jar {
-    manifest {
-      attributes 'Implementation-Title': 'Winston',
-                 'Implementation-Version': version
+buildscript {
+    repositories {
+        jcenter()
     }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+  repositories {
+    jcenter()
   }
 }
 
