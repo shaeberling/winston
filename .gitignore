@@ -1,9 +1,18 @@
 *.class
-bin
-.metadata
-RemoteSystemsTempFiles
-.settings
-.gradle/
-build/
 
+.DS_Store
+.metadata
+.settings
+
+local.properties
+
+.gradle/
+.idea/libraries
+.idea/workspace.xml
+.idea/tasks.xml
+
+bin/
+build/
+logs/
+RemoteSystemsTempFiles/
 
