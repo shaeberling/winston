@@ -100,12 +100,8 @@ public class ReedControllerImpl implements ReedController {
       pins[i] = gpioController.provisionDigitalInputPin(Pins.GPIO_PIN[mapping[i]],
           PinPullResistance.PULL_UP);
       final int relayNum = i;
-      pins[i].addListener(new GpioPinListenerDigital() {
-
-        @Override
-        public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-          listener.onRelayStateChanged(relayNum, event.getState() == PinState.LOW);
-        }
+      pins[i].addListener((GpioPinListenerDigital) event -> {
+        listener.onRelayStateChanged(relayNum, event.getState() == PinState.LOW);
       });
 
       // Tell the listener about the current state before change events are

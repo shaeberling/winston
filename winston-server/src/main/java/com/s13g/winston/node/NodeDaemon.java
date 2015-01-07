@@ -60,15 +60,14 @@ public class NodeDaemon implements Container {
   public static void main(final String... args) throws IOException {
     LOG.info("Node starting up...");
 
-    final Provider<GpioController> gpioController = SingletonProvider.from(() -> GpioFactory
-        .getInstance());
+    final Provider<GpioController> gpioController = SingletonProvider.from(GpioFactory::getInstance);
     // TODO: Depending on configuration file, different modules need to be
     // loaded and configuration needs to be forwarded to them.
     final LedController ledController = LedControllerFactory.create(new int[] {},
         gpioController, null);
-    final RelayController relayController = RelayControllerFactory.create(new int[] { 6, 5, 4, 1 },
+    final RelayController relayController = RelayControllerFactory.create(new int[] { 4, 1, 6, 5},
         gpioController, null);
-    final ReedController reedController = ReedControllerFactory.create(new int[] { 7, 0 },
+    final ReedController reedController = ReedControllerFactory.create(new int[] {},
         gpioController, null);
 
     sRegisteredHandlers = createHandlerMap(new Handler[] { new LedHandler(ledController),

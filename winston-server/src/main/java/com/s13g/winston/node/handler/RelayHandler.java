@@ -63,7 +63,7 @@ public class RelayHandler implements Handler {
     final int commandNo = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1,
         arguments.length()));
     if (commandNo < 0 || commandNo >= COMMANDS.length) {
-      LOG.warn("Unkown relay command: " + commandNo);
+      LOG.warn("Unknown relay command: " + commandNo);
       return "FAIL";
     }
     mCommands.get(COMMANDS[commandNo]).runForRelay(relayNo);
