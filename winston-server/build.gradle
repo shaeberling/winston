@@ -1,5 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'application'
+apply plugin: 'gradle-one-jar'
+
 version = '0.0.1'
 
 dependencies {
@@ -7,23 +8,25 @@ dependencies {
   compile 'org.simpleframework:simple-http:6+'
 }
 
-task node (type: Jar) {
-  mainClassName = 'com.s13g.winston.node.NodeDaemon'
-  baseName 'winston-node-daemon'
+task nodeDaemon (type: OneJar) {
+  mainClass = 'com.s13g.winston.node.NodeDaemon'
+  archiveName = 'winston-node-daemon.jar'
   manifest {
     attributes 'Implementation-Title': 'Winston Node Daemon',
                'Implementation-Version': version,
-               'Main-Class': mainClassName
-    }
+               'Timestamp': String.valueOf(System.currentTimeMillis())
+  }
+  useStable = false
 }
 
-task master (type: Jar) {
-  mainClassName = 'com.s13g.winston.node.MasterDaemon'
-  baseName 'winston-master-daemon'
+task masterDaemon (type: OneJar) {
+  mainClass = 'com.s13g.winston.master.MasterDaemon'
+  archiveName 'winston-master-daemon.jar'
   manifest {
     attributes 'Implementation-Title': 'Winston Master Daemon',
                'Implementation-Version': version,
-                'Main-Class': mainClassName
+               'Timestamp': String.valueOf(System.currentTimeMillis())
   }
+  useStable = false
 }
 
