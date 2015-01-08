@@ -29,16 +29,13 @@ public class ReedControllerFactory {
    * the reed controller. Otherwise, a reed controller will be returned that
    * will access the GPIO pins directly.
    *
-   * @param mapping
-   *          the mapping of GPIO pins.
-   * @param gpioController
-   *          the GPIO controller.
-   * @param proxyUrl
-   *          if a proxy should be created, this has to point to the proxy URL
+   * @param mapping        the mapping of GPIO pins.
+   * @param gpioController the GPIO controller.
+   * @param proxyUrl       if a proxy should be created, this has to point to the proxy URL
    * @return A usable reed controller.
    */
   public static ReedController create(int[] mapping, Provider<GpioController> gpioController,
-      String proxyUrl) {
+                                      String proxyUrl) {
     if (proxyUrl != null) {
       return new ReedControllerProxyClientImpl();
     } else {

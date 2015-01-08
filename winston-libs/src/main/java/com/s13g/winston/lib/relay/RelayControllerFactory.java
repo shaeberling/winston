@@ -24,18 +24,15 @@ public class RelayControllerFactory {
   /**
    * Creates a relay controller.
    *
-   * @param mapping
-   *          A list of GPIO pins, once for each relay used.
-   * @param gpioController
-   *          the gpio controller to use if we're not using a proxy, wrapped in
-   *          a provider. If proxyUrl is given, no gpioController is needed.
-   * @param proxyUrl
-   *          Can be null. If given, a proxy implementation will be used,
-   *          otherwise the real implementation that uses GPIO directly.
+   * @param mapping        A list of GPIO pins, once for each relay used.
+   * @param gpioController the gpio controller to use if we're not using a proxy, wrapped in
+   *                       a provider. If proxyUrl is given, no gpioController is needed.
+   * @param proxyUrl       Can be null. If given, a proxy implementation will be used,
+   *                       otherwise the real implementation that uses GPIO directly.
    * @return A relay controller.
    */
   public static RelayController create(int[] mapping, Provider<GpioController> gpioController,
-      String proxyUrl) {
+                                       String proxyUrl) {
     return proxyUrl != null ? new RelayControllerProxyClientImpl(proxyUrl)
         : new RelayControllerImpl(mapping, gpioController.provide());
   }

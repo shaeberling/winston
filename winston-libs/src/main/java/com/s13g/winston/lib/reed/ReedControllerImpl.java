@@ -16,19 +16,18 @@
 
 package com.s13g.winston.lib.reed;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
-import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.s13g.winston.lib.core.Pins;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class ReedControllerImpl implements ReedController {
   private static final Logger LOG = LogManager.getLogger(ReedControllerImpl.class);
@@ -55,6 +54,24 @@ public class ReedControllerImpl implements ReedController {
       }
     });
     LOG.info("Reed relays initialized");
+  }
+
+  private static GpioPinDigitalInput[] initializePins(int mapping[], GpioController gpioController,
+                                                      final RelayStateChangedListener listener) {
+    final GpioPinDigitalInput[] pins = new GpioPinDigitalInput[mapping.length];
+    for (int i = 0; i < mapping.length; ++i) {
+      pins[i] = gpioController.provisionDigitalInputPin(Pins.GPIO_PIN[mapping[i]],
+          PinPullResistance.PULL_UP);
+      final int relayNum = i;
+      pins[i].addListener((GpioPinListenerDigital) event -> {
+        listener.onRelayStateChanged(relayNum, event.getState() == PinState.LOW);
+      });
+
+      // Tell the listener about the current state before change events are
+      // received.
+      listener.onRelayStateChanged(relayNum, pins[i].getState() == PinState.LOW);
+    }
+    return pins;
   }
 
   @Override
@@ -91,23 +108,5 @@ public class ReedControllerImpl implements ReedController {
       }
       mListeners.remove(listener);
     }
-  }
-
-  private static GpioPinDigitalInput[] initializePins(int mapping[], GpioController gpioController,
-      final RelayStateChangedListener listener) {
-    final GpioPinDigitalInput[] pins = new GpioPinDigitalInput[mapping.length];
-    for (int i = 0; i < mapping.length; ++i) {
-      pins[i] = gpioController.provisionDigitalInputPin(Pins.GPIO_PIN[mapping[i]],
-          PinPullResistance.PULL_UP);
-      final int relayNum = i;
-      pins[i].addListener((GpioPinListenerDigital) event -> {
-        listener.onRelayStateChanged(relayNum, event.getState() == PinState.LOW);
-      });
-
-      // Tell the listener about the current state before change events are
-      // received.
-      listener.onRelayStateChanged(relayNum, pins[i].getState() == PinState.LOW);
-    }
-    return pins;
   }
 }

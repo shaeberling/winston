@@ -16,7 +16,9 @@
 
 package com.s13g.winston.lib.core;
 
-/** General provider */
+/**
+ * General provider
+ */
 public interface Provider<T> {
   T provide();
 }

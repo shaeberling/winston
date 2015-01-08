@@ -4,9 +4,63 @@
 package com.s13g.winston.lib.pi4jproxy.proto;
 
 public final class GpioProxyProtos {
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_fieldAccessorTable;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.FileDescriptor
+      descriptor;
+  static {
+    java.lang.String[] descriptorData = {
+      "\n$etc/protocolbuffers/gpio_proxy.proto\022$" +
+      "com.s13g.winston.lib.pi4jproxy.proto\"\234\001\n" +
+      "\013GpioRequest\022\017\n\007command\030\001 \002(\t\022G\n\006params\030" +
+      "\002 \003(\01327.com.s13g.winston.lib.pi4jproxy.p" +
+      "roto.GpioRequest.Param\022\r\n\005email\030\003 \001(\t\032$\n" +
+      "\005Param\022\014\n\004type\030\001 \002(\t\022\r\n\005value\030\002 \002(\tB7\n$c" +
+      "om.s13g.winston.lib.pi4jproxy.protoB\017Gpi" +
+      "oProxyProtos"
+    };
+    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
+    com.google.protobuf.Descriptors.FileDescriptor
+      .internalBuildGeneratedFileFrom(descriptorData,
+        new com.google.protobuf.Descriptors.FileDescriptor[] {
+        }, assigner);
+    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor,
+        new java.lang.String[] { "Command", "Params", "Email", });
+    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor =
+      internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor.getNestedTypes().get(0);
+    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor,
+        new java.lang.String[] { "Type", "Value", });
+  }
   private GpioProxyProtos() {}
+
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+  }
+
+  public static com.google.protobuf.Descriptors.FileDescriptor
+      getDescriptor() {
+    return descriptor;
   }
   public interface GpioRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest)
@@ -29,7 +83,7 @@ public final class GpioProxyProtos {
     /**
      * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
      */
-    java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> 
+    java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param>
         getParamsList();
     /**
      * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
@@ -42,7 +96,7 @@ public final class GpioProxyProtos {
     /**
      * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
      */
-    java.util.List<? extends com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder> 
+    java.util.List<? extends com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder>
         getParamsOrBuilderList();
     /**
      * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
@@ -64,6 +118,7 @@ public final class GpioProxyProtos {
     com.google.protobuf.ByteString
         getEmailBytes();
   }
+
   /**
    * Protobuf type {@code com.s13g.winston.lib.pi4jproxy.proto.GpioRequest}
    */
@@ -71,28 +126,34 @@ public final class GpioProxyProtos {
       com.google.protobuf.GeneratedMessage implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest)
       GpioRequestOrBuilder {
+    public static final int COMMAND_FIELD_NUMBER = 1;
+    public static final int PARAMS_FIELD_NUMBER = 2;
+    public static final int EMAIL_FIELD_NUMBER = 3;
+    private static final GpioRequest defaultInstance;
+    private static final long serialVersionUID = 0L;
+    public static com.google.protobuf.Parser<GpioRequest> PARSER =
+        new com.google.protobuf.AbstractParser<GpioRequest>() {
+      public GpioRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GpioRequest(input, extensionRegistry);
+      }
+    };
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    private int bitField0_;
+    private java.lang.Object command_;
+    private java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> params_;
+    private java.lang.Object email_;
+    private byte memoizedIsInitialized = -1;
+    private int memoizedSerializedSize = -1;
     // Use GpioRequest.newBuilder() to construct.
     private GpioRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
+
     private GpioRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final GpioRequest defaultInstance;
-    public static GpioRequest getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public GpioRequest getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
     private GpioRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -151,9 +212,92 @@ public final class GpioProxyProtos {
         makeExtensionsImmutable();
       }
     }
+
+    public static GpioRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor;
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+
+    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+
+    public static Builder newBuilder(com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+
+    public GpioRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -163,21 +307,210 @@ public final class GpioProxyProtos {
               com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.class, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<GpioRequest> PARSER =
-        new com.google.protobuf.AbstractParser<GpioRequest>() {
-      public GpioRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GpioRequest(input, extensionRegistry);
-      }
-    };
-
     @java.lang.Override
     public com.google.protobuf.Parser<GpioRequest> getParserForType() {
       return PARSER;
     }
 
+    /**
+     * <code>required string command = 1;</code>
+     */
+    public boolean hasCommand() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+
+    /**
+     * <code>required string command = 1;</code>
+     */
+    public java.lang.String getCommand() {
+      java.lang.Object ref = command_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          command_ = s;
+        }
+        return s;
+      }
+    }
+
+    /**
+     * <code>required string command = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCommandBytes() {
+      java.lang.Object ref = command_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        command_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    /**
+     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
+     */
+    public java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> getParamsList() {
+      return params_;
+    }
+
+    /**
+     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
+     */
+    public java.util.List<? extends com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder>
+        getParamsOrBuilderList() {
+      return params_;
+    }
+
+    /**
+     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
+     */
+    public int getParamsCount() {
+      return params_.size();
+    }
+
+    /**
+     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
+     */
+    public com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param getParams(int index) {
+      return params_.get(index);
+    }
+
+    /**
+     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
+     */
+    public com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder getParamsOrBuilder(
+        int index) {
+      return params_.get(index);
+    }
+
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          email_ = s;
+        }
+        return s;
+      }
+    }
+
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b =
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      command_ = "";
+      params_ = java.util.Collections.emptyList();
+      email_ = "";
+    }
+
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasCommand()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getParamsCount(); i++) {
+        if (!getParams(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getCommandBytes());
+      }
+      for (int i = 0; i < params_.size(); i++) {
+        output.writeMessage(2, params_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(3, getEmailBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getCommandBytes());
+      }
+      for (int i = 0; i < params_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, params_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getEmailBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
     public interface ParamOrBuilder extends
         // @@protoc_insertion_point(interface_extends:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param)
         com.google.protobuf.MessageOrBuilder {
@@ -210,6 +543,7 @@ public final class GpioProxyProtos {
       com.google.protobuf.ByteString
           getValueBytes();
     }
+
     /**
      * Protobuf type {@code com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param}
      */
@@ -217,28 +551,33 @@ public final class GpioProxyProtos {
         com.google.protobuf.GeneratedMessage implements
         // @@protoc_insertion_point(message_implements:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param)
         ParamOrBuilder {
+      public static final int TYPE_FIELD_NUMBER = 1;
+      public static final int VALUE_FIELD_NUMBER = 2;
+      private static final Param defaultInstance;
+      private static final long serialVersionUID = 0L;
+      public static com.google.protobuf.Parser<Param> PARSER =
+          new com.google.protobuf.AbstractParser<Param>() {
+        public Param parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Param(input, extensionRegistry);
+        }
+      };
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      private int bitField0_;
+      private java.lang.Object type_;
+      private java.lang.Object value_;
+      private byte memoizedIsInitialized = -1;
+      private int memoizedSerializedSize = -1;
+
       // Use Param.newBuilder() to construct.
       private Param(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
         this.unknownFields = builder.getUnknownFields();
       }
+
       private Param(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-      private static final Param defaultInstance;
-      public static Param getDefaultInstance() {
-        return defaultInstance;
-      }
-
-      public Param getDefaultInstanceForType() {
-        return defaultInstance;
-      }
-
-      private final com.google.protobuf.UnknownFieldSet unknownFields;
-      @java.lang.Override
-      public final com.google.protobuf.UnknownFieldSet
-          getUnknownFields() {
-        return this.unknownFields;
-      }
       private Param(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -286,9 +625,92 @@ public final class GpioProxyProtos {
           makeExtensionsImmutable();
         }
       }
+
+      public static Param getDefaultInstance() {
+        return defaultInstance;
+      }
+
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor;
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+
+      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+
+      public static Builder newBuilder(com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+
+      public Param getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -298,30 +720,18 @@ public final class GpioProxyProtos {
                 com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.class, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder.class);
       }
 
-      public static com.google.protobuf.Parser<Param> PARSER =
-          new com.google.protobuf.AbstractParser<Param>() {
-        public Param parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Param(input, extensionRegistry);
-        }
-      };
-
       @java.lang.Override
       public com.google.protobuf.Parser<Param> getParserForType() {
         return PARSER;
       }
 
-      private int bitField0_;
-      public static final int TYPE_FIELD_NUMBER = 1;
-      private java.lang.Object type_;
       /**
        * <code>required string type = 1;</code>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+
       /**
        * <code>required string type = 1;</code>
        */
@@ -330,7 +740,7 @@ public final class GpioProxyProtos {
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
+          com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
@@ -339,6 +749,7 @@ public final class GpioProxyProtos {
           return s;
         }
       }
+
       /**
        * <code>required string type = 1;</code>
        */
@@ -346,7 +757,7 @@ public final class GpioProxyProtos {
           getTypeBytes() {
         java.lang.Object ref = type_;
         if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           type_ = b;
@@ -356,14 +767,13 @@ public final class GpioProxyProtos {
         }
       }
 
-      public static final int VALUE_FIELD_NUMBER = 2;
-      private java.lang.Object value_;
       /**
        * <code>required string value = 2;</code>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+
       /**
        * <code>required string value = 2;</code>
        */
@@ -372,7 +782,7 @@ public final class GpioProxyProtos {
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
-          com.google.protobuf.ByteString bs = 
+          com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
@@ -381,6 +791,7 @@ public final class GpioProxyProtos {
           return s;
         }
       }
+
       /**
        * <code>required string value = 2;</code>
        */
@@ -388,7 +799,7 @@ public final class GpioProxyProtos {
           getValueBytes() {
         java.lang.Object ref = value_;
         if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
           value_ = b;
@@ -402,7 +813,7 @@ public final class GpioProxyProtos {
         type_ = "";
         value_ = "";
       }
-      private byte memoizedIsInitialized = -1;
+
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -432,7 +843,6 @@ public final class GpioProxyProtos {
         getUnknownFields().writeTo(output);
       }
 
-      private int memoizedSerializedSize = -1;
       public int getSerializedSize() {
         int size = memoizedSerializedSize;
         if (size != -1) return size;
@@ -451,71 +861,14 @@ public final class GpioProxyProtos {
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       protected java.lang.Object writeReplace()
           throws java.io.ObjectStreamException {
         return super.writeReplace();
       }
 
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input, extensionRegistry);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-
-      public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param prototype) {
-        return newBuilder().mergeFrom(prototype);
-      }
+
       public Builder toBuilder() { return newBuilder(this); }
 
       @java.lang.Override
@@ -531,9 +884,27 @@ public final class GpioProxyProtos {
           com.google.protobuf.GeneratedMessage.Builder<Builder> implements
           // @@protoc_insertion_point(builder_implements:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param)
           com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder {
+        private int bitField0_;
+        private java.lang.Object type_ = "";
+        private java.lang.Object value_ = "";
+
+        // Construct using com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
           return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor;
+        }
+
+        private static Builder create() {
+          return new Builder();
         }
 
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -543,22 +914,9 @@ public final class GpioProxyProtos {
                   com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.class, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder.class);
         }
 
-        // Construct using com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.newBuilder()
-        private Builder() {
-          maybeForceBuilderInitialization();
-        }
-
-        private Builder(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          super(parent);
-          maybeForceBuilderInitialization();
-        }
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           }
-        }
-        private static Builder create() {
-          return new Builder();
         }
 
         public Builder clear() {
@@ -635,11 +993,11 @@ public final class GpioProxyProtos {
 
         public final boolean isInitialized() {
           if (!hasType()) {
-            
+
             return false;
           }
           if (!hasValue()) {
-            
+
             return false;
           }
           return true;
@@ -662,15 +1020,14 @@ public final class GpioProxyProtos {
           }
           return this;
         }
-        private int bitField0_;
 
-        private java.lang.Object type_ = "";
         /**
          * <code>required string type = 1;</code>
          */
         public boolean hasType() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
+
         /**
          * <code>required string type = 1;</code>
          */
@@ -688,22 +1045,7 @@ public final class GpioProxyProtos {
             return (java.lang.String) ref;
           }
         }
-        /**
-         * <code>required string type = 1;</code>
-         */
-        public com.google.protobuf.ByteString
-            getTypeBytes() {
-          java.lang.Object ref = type_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            type_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
+
         /**
          * <code>required string type = 1;</code>
          */
@@ -717,15 +1059,24 @@ public final class GpioProxyProtos {
           onChanged();
           return this;
         }
+
         /**
          * <code>required string type = 1;</code>
          */
-        public Builder clearType() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          type_ = getDefaultInstance().getType();
-          onChanged();
-          return this;
+        public com.google.protobuf.ByteString
+            getTypeBytes() {
+          java.lang.Object ref = type_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            type_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
         }
+
         /**
          * <code>required string type = 1;</code>
          */
@@ -740,7 +1091,16 @@ public final class GpioProxyProtos {
           return this;
         }
 
-        private java.lang.Object value_ = "";
+        /**
+         * <code>required string type = 1;</code>
+         */
+        public Builder clearType() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          type_ = getDefaultInstance().getType();
+          onChanged();
+          return this;
+        }
+
         /**
          * <code>required string value = 2;</code>
          */
@@ -764,22 +1124,7 @@ public final class GpioProxyProtos {
             return (java.lang.String) ref;
           }
         }
-        /**
-         * <code>required string value = 2;</code>
-         */
-        public com.google.protobuf.ByteString
-            getValueBytes() {
-          java.lang.Object ref = value_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            value_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
+
         /**
          * <code>required string value = 2;</code>
          */
@@ -793,15 +1138,24 @@ public final class GpioProxyProtos {
           onChanged();
           return this;
         }
+
         /**
          * <code>required string value = 2;</code>
          */
-        public Builder clearValue() {
-          bitField0_ = (bitField0_ & ~0x00000002);
-          value_ = getDefaultInstance().getValue();
-          onChanged();
-          return this;
+        public com.google.protobuf.ByteString
+            getValueBytes() {
+          java.lang.Object ref = value_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            value_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
         }
+
         /**
          * <code>required string value = 2;</code>
          */
@@ -812,6 +1166,16 @@ public final class GpioProxyProtos {
   }
   bitField0_ |= 0x00000002;
           value_ = value;
+          onChanged();
+          return this;
+        }
+
+        /**
+         * <code>required string value = 2;</code>
+         */
+        public Builder clearValue() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          value_ = getDefaultInstance().getValue();
           onChanged();
           return this;
         }
@@ -827,262 +1191,6 @@ public final class GpioProxyProtos {
       // @@protoc_insertion_point(class_scope:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param)
     }
 
-    private int bitField0_;
-    public static final int COMMAND_FIELD_NUMBER = 1;
-    private java.lang.Object command_;
-    /**
-     * <code>required string command = 1;</code>
-     */
-    public boolean hasCommand() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required string command = 1;</code>
-     */
-    public java.lang.String getCommand() {
-      java.lang.Object ref = command_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          command_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string command = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getCommandBytes() {
-      java.lang.Object ref = command_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        command_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PARAMS_FIELD_NUMBER = 2;
-    private java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> params_;
-    /**
-     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
-     */
-    public java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> getParamsList() {
-      return params_;
-    }
-    /**
-     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
-     */
-    public java.util.List<? extends com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder> 
-        getParamsOrBuilderList() {
-      return params_;
-    }
-    /**
-     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
-     */
-    public int getParamsCount() {
-      return params_.size();
-    }
-    /**
-     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
-     */
-    public com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param getParams(int index) {
-      return params_.get(index);
-    }
-    /**
-     * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
-     */
-    public com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder getParamsOrBuilder(
-        int index) {
-      return params_.get(index);
-    }
-
-    public static final int EMAIL_FIELD_NUMBER = 3;
-    private java.lang.Object email_;
-    /**
-     * <code>optional string email = 3;</code>
-     */
-    public boolean hasEmail() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string email = 3;</code>
-     */
-    public java.lang.String getEmail() {
-      java.lang.Object ref = email_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          email_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string email = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getEmailBytes() {
-      java.lang.Object ref = email_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        email_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private void initFields() {
-      command_ = "";
-      params_ = java.util.Collections.emptyList();
-      email_ = "";
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasCommand()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      for (int i = 0; i < getParamsCount(); i++) {
-        if (!getParams(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getCommandBytes());
-      }
-      for (int i = 0; i < params_.size(); i++) {
-        output.writeMessage(2, params_.get(i));
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(3, getEmailBytes());
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getCommandBytes());
-      }
-      for (int i = 0; i < params_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, params_.get(i));
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getEmailBytes());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
     /**
      * Protobuf type {@code com.s13g.winston.lib.pi4jproxy.proto.GpioRequest}
      */
@@ -1090,18 +1198,13 @@ public final class GpioProxyProtos {
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest)
         com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.class, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Builder.class);
-      }
-
+      private int bitField0_;
+      private java.lang.Object command_ = "";
+      private java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> params_ =
+        java.util.Collections.emptyList();
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder> paramsBuilder_;
+      private java.lang.Object email_ = "";
       // Construct using com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
@@ -1112,13 +1215,27 @@ public final class GpioProxyProtos {
         super(parent);
         maybeForceBuilderInitialization();
       }
+
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor;
+      }
+
+      private static Builder create() {
+        return new Builder();
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.class, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Builder.class);
+      }
+
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getParamsFieldBuilder();
         }
-      }
-      private static Builder create() {
-        return new Builder();
       }
 
       public Builder clear() {
@@ -1217,7 +1334,7 @@ public final class GpioProxyProtos {
               paramsBuilder_ = null;
               params_ = other.params_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              paramsBuilder_ = 
+              paramsBuilder_ =
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getParamsFieldBuilder() : null;
             } else {
@@ -1236,12 +1353,12 @@ public final class GpioProxyProtos {
 
       public final boolean isInitialized() {
         if (!hasCommand()) {
-          
+
           return false;
         }
         for (int i = 0; i < getParamsCount(); i++) {
           if (!getParams(i).isInitialized()) {
-            
+
             return false;
           }
         }
@@ -1265,15 +1382,14 @@ public final class GpioProxyProtos {
         }
         return this;
       }
-      private int bitField0_;
 
-      private java.lang.Object command_ = "";
       /**
        * <code>required string command = 1;</code>
        */
       public boolean hasCommand() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
+
       /**
        * <code>required string command = 1;</code>
        */
@@ -1291,22 +1407,7 @@ public final class GpioProxyProtos {
           return (java.lang.String) ref;
         }
       }
-      /**
-       * <code>required string command = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getCommandBytes() {
-        java.lang.Object ref = command_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          command_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
+
       /**
        * <code>required string command = 1;</code>
        */
@@ -1320,15 +1421,24 @@ public final class GpioProxyProtos {
         onChanged();
         return this;
       }
+
       /**
        * <code>required string command = 1;</code>
        */
-      public Builder clearCommand() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        command_ = getDefaultInstance().getCommand();
-        onChanged();
-        return this;
+      public com.google.protobuf.ByteString
+          getCommandBytes() {
+        java.lang.Object ref = command_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          command_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
+
       /**
        * <code>required string command = 1;</code>
        */
@@ -1343,17 +1453,22 @@ public final class GpioProxyProtos {
         return this;
       }
 
-      private java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param> params_ =
-        java.util.Collections.emptyList();
+      /**
+       * <code>required string command = 1;</code>
+       */
+      public Builder clearCommand() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        command_ = getDefaultInstance().getCommand();
+        onChanged();
+        return this;
+      }
+
       private void ensureParamsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           params_ = new java.util.ArrayList<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param>(params_);
           bitField0_ |= 0x00000002;
          }
       }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder> paramsBuilder_;
 
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
@@ -1365,6 +1480,7 @@ public final class GpioProxyProtos {
           return paramsBuilder_.getMessageList();
         }
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1375,6 +1491,7 @@ public final class GpioProxyProtos {
           return paramsBuilder_.getCount();
         }
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1385,6 +1502,7 @@ public final class GpioProxyProtos {
           return paramsBuilder_.getMessage(index);
         }
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1402,6 +1520,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1416,6 +1535,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1432,6 +1552,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1449,6 +1570,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1463,6 +1585,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1477,6 +1600,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1492,6 +1616,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1505,6 +1630,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1518,6 +1644,7 @@ public final class GpioProxyProtos {
         }
         return this;
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1525,6 +1652,7 @@ public final class GpioProxyProtos {
           int index) {
         return getParamsFieldBuilder().getBuilder(index);
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1535,10 +1663,11 @@ public final class GpioProxyProtos {
           return paramsBuilder_.getMessageOrBuilder(index);
         }
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
-      public java.util.List<? extends com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder> 
+      public java.util.List<? extends com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder>
            getParamsOrBuilderList() {
         if (paramsBuilder_ != null) {
           return paramsBuilder_.getMessageOrBuilderList();
@@ -1546,6 +1675,7 @@ public final class GpioProxyProtos {
           return java.util.Collections.unmodifiableList(params_);
         }
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1553,6 +1683,7 @@ public final class GpioProxyProtos {
         return getParamsFieldBuilder().addBuilder(
             com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.getDefaultInstance());
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
@@ -1561,15 +1692,17 @@ public final class GpioProxyProtos {
         return getParamsFieldBuilder().addBuilder(
             index, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.getDefaultInstance());
       }
+
       /**
        * <code>repeated .com.s13g.winston.lib.pi4jproxy.proto.GpioRequest.Param params = 2;</code>
        */
-      public java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder> 
+      public java.util.List<com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder>
            getParamsBuilderList() {
         return getParamsFieldBuilder().getBuilderList();
       }
+
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder> 
+          com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.Param.Builder, com.s13g.winston.lib.pi4jproxy.proto.GpioProxyProtos.GpioRequest.ParamOrBuilder>
           getParamsFieldBuilder() {
         if (paramsBuilder_ == null) {
           paramsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
@@ -1583,7 +1716,6 @@ public final class GpioProxyProtos {
         return paramsBuilder_;
       }
 
-      private java.lang.Object email_ = "";
       /**
        * <code>optional string email = 3;</code>
        */
@@ -1607,22 +1739,7 @@ public final class GpioProxyProtos {
           return (java.lang.String) ref;
         }
       }
-      /**
-       * <code>optional string email = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getEmailBytes() {
-        java.lang.Object ref = email_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          email_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
+
       /**
        * <code>optional string email = 3;</code>
        */
@@ -1636,15 +1753,24 @@ public final class GpioProxyProtos {
         onChanged();
         return this;
       }
+
       /**
        * <code>optional string email = 3;</code>
        */
-      public Builder clearEmail() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        email_ = getDefaultInstance().getEmail();
-        onChanged();
-        return this;
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
+
       /**
        * <code>optional string email = 3;</code>
        */
@@ -1659,6 +1785,16 @@ public final class GpioProxyProtos {
         return this;
       }
 
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder clearEmail() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest)
     }
 
@@ -1668,60 +1804,6 @@ public final class GpioProxyProtos {
     }
 
     // @@protoc_insertion_point(class_scope:com.s13g.winston.lib.pi4jproxy.proto.GpioRequest)
-  }
-
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_fieldAccessorTable;
-
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n$etc/protocolbuffers/gpio_proxy.proto\022$" +
-      "com.s13g.winston.lib.pi4jproxy.proto\"\234\001\n" +
-      "\013GpioRequest\022\017\n\007command\030\001 \002(\t\022G\n\006params\030" +
-      "\002 \003(\01327.com.s13g.winston.lib.pi4jproxy.p" +
-      "roto.GpioRequest.Param\022\r\n\005email\030\003 \001(\t\032$\n" +
-      "\005Param\022\014\n\004type\030\001 \002(\t\022\r\n\005value\030\002 \002(\tB7\n$c" +
-      "om.s13g.winston.lib.pi4jproxy.protoB\017Gpi" +
-      "oProxyProtos"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
-    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor,
-        new java.lang.String[] { "Command", "Params", "Email", });
-    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor =
-      internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_descriptor.getNestedTypes().get(0);
-    internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_com_s13g_winston_lib_pi4jproxy_proto_GpioRequest_Param_descriptor,
-        new java.lang.String[] { "Type", "Value", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

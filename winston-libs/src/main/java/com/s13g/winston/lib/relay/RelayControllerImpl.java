@@ -16,17 +16,17 @@
 
 package com.s13g.winston.lib.relay;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.s13g.winston.lib.core.Pins;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * A {@link RelayController} that uses Pi4J to access the GPIO pins directly.
@@ -34,7 +34,9 @@ import com.s13g.winston.lib.core.Pins;
 public class RelayControllerImpl implements RelayController {
   private static final Logger LOG = LogManager.getLogger(RelayControllerImpl.class);
 
-  /** Maps relay number to GPIO number. */
+  /**
+   * Maps relay number to GPIO number.
+   */
   private final int[] mMapping;
   private final GpioController mGpioController;
 

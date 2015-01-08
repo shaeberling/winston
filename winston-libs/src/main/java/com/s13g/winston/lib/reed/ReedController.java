@@ -18,6 +18,21 @@ package com.s13g.winston.lib.reed;
 
 public interface ReedController {
   /**
+   * Returns whether the reed sensor with the given number is currently closed.
+   */
+  public boolean isClosed(int num);
+
+  /**
+   * Adds the given listener, if it is not already added.
+   */
+  public void addListener(RelayStateChangedListener listener);
+
+  /**
+   * Removes the given listener, if it was previously added.
+   */
+  public void removeListener(RelayStateChangedListener listener);
+
+  /**
    * Classes implementing this interface can be informed when the state of a
    * relay changes.
    */
@@ -25,20 +40,9 @@ public interface ReedController {
     /**
      * Called when the state of a relay changes.
      *
-     * @param relayNum
-     *          the number of the relay.
-     * @param closed
-     *          whether the relay is now closed. If false, the relay is open.
+     * @param relayNum the number of the relay.
+     * @param closed   whether the relay is now closed. If false, the relay is open.
      */
     void onRelayStateChanged(int relayNum, boolean closed);
   }
-
-  /** Returns whether the reed sensor with the given number is currently closed. */
-  public boolean isClosed(int num);
-
-  /** Adds the given listener, if it is not already added. */
-  public void addListener(RelayStateChangedListener listener);
-
-  /** Removes the given listener, if it was previously added. */
-  public void removeListener(RelayStateChangedListener listener);
 }

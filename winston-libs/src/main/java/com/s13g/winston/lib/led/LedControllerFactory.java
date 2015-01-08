@@ -26,18 +26,15 @@ public class LedControllerFactory {
   /**
    * Creates an LED controller.
    *
-   * @param mapping
-   *          A list of GPIO pins, once for each relay used.
-   * @param gpioController
-   *          the gpio controller to use if we're not using a proxy, wrapped in
-   *          a provider. If proxyUrl is given, no gpioController is needed.
-   * @param proxyUrl
-   *          Can be null. If given, a proxy implementation will be used,
-   *          otherwise the real implementation that uses GPIO directly.
+   * @param mapping        A list of GPIO pins, once for each relay used.
+   * @param gpioController the gpio controller to use if we're not using a proxy, wrapped in
+   *                       a provider. If proxyUrl is given, no gpioController is needed.
+   * @param proxyUrl       Can be null. If given, a proxy implementation will be used,
+   *                       otherwise the real implementation that uses GPIO directly.
    * @return An LED controller.
    */
   public static LedController create(int[] mapping, Provider<GpioController> gpioController,
-      String proxyUrl) {
+                                     String proxyUrl) {
     if (proxyUrl != null) {
       return new LedControllerProxyClientImpl();
     } else {

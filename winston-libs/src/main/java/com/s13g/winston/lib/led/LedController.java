@@ -20,6 +20,8 @@ package com.s13g.winston.lib.led;
  * Controls the high/low state of pins to e.g. switch on/off LEDs.
  */
 public interface LedController {
-  /** Switched the given LED on or off. */
+  /**
+   * Switched the given LED on or off.
+   */
   public void switchLed(int num, boolean on);
 }

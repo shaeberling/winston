@@ -16,16 +16,16 @@
 
 package com.s13g.winston.lib.led;
 
-import java.util.Arrays;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.s13g.winston.lib.core.Pins;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Arrays;
 
 /**
  * A controller that can be used to switch LED by controlling the HIGH/LOW state
@@ -40,6 +40,16 @@ public class LedControllerImpl implements LedController {
     mPins = initializePins(mapping, gpioController);
   }
 
+  private static GpioPinDigitalOutput[] initializePins(int mapping[],
+                                                       GpioController gpioController) {
+    final GpioPinDigitalOutput[] pins = new GpioPinDigitalOutput[mapping.length];
+    for (int i = 0; i < mapping.length; ++i) {
+      pins[i] = gpioController.provisionDigitalOutputPin(Pins.GPIO_PIN[mapping[i]], PinState.LOW);
+      pins[i].setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
+    }
+    return pins;
+  }
+
   @Override
   public void switchLed(int num, boolean on) {
     if (num < 0 || num >= mPins.length) {
@@ -47,15 +57,5 @@ public class LedControllerImpl implements LedController {
       return;
     }
     mPins[num].setState(on ? PinState.HIGH : PinState.LOW);
-  }
-
-  private static GpioPinDigitalOutput[] initializePins(int mapping[],
-      GpioController gpioController) {
-    final GpioPinDigitalOutput[] pins = new GpioPinDigitalOutput[mapping.length];
-    for (int i = 0; i < mapping.length; ++i) {
-      pins[i] = gpioController.provisionDigitalOutputPin(Pins.GPIO_PIN[mapping[i]], PinState.LOW);
-      pins[i].setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-    }
-    return pins;
   }
 }

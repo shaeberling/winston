@@ -25,10 +25,8 @@ public interface RelayController {
   /**
    * Switches the relay with the given number.
    *
-   * @param num
-   *          the relay number, starting with 0.
-   * @param on
-   *          Whether to switch it on, otherwise off.
+   * @param num the relay number, starting with 0.
+   * @param on  Whether to switch it on, otherwise off.
    */
   public void switchRelay(int num, boolean on);
 
@@ -38,8 +36,7 @@ public interface RelayController {
    * If the relay is currently on, no click will be performed. The relay has to
    * be off when this method is called.
    *
-   * @param num
-   *          the relay to click.
+   * @param num the relay to click.
    */
   public void clickRelay(int num);
 }

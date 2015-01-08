@@ -24,12 +24,12 @@ public class SingletonProvider<T> implements Provider<T> {
   private final Provider<T> mProvider;
   private T mCached;
 
-  public static <T> SingletonProvider<T> from(Provider<T> provider) {
-    return new SingletonProvider<T>(provider);
-  }
-
   private SingletonProvider(Provider<T> provider) {
     mProvider = provider;
+  }
+
+  public static <T> SingletonProvider<T> from(Provider<T> provider) {
+    return new SingletonProvider<T>(provider);
   }
 
   @Override

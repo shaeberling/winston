@@ -16,14 +16,14 @@
 
 package com.s13g.winston.testing;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.s13g.winston.lib.core.SingletonProvider;
 import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerFactory;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * A stand-alone test application that is performing a few random GPIO tests
@@ -32,15 +32,15 @@ import com.s13g.winston.lib.relay.RelayControllerFactory;
  * a computer using the Pi4J Proxy implementation.
  */
 public class GpioProxyTestApp {
-  private static Logger LOG = LogManager.getLogger(GpioProxyTestApp.class);
   private static final boolean USE_GPIO_PROXY = true;
+  private static Logger LOG = LogManager.getLogger(GpioProxyTestApp.class);
 
   public static void main(String[] args) throws InterruptedException {
     LOG.info("Starting up");
 
     final SingletonProvider<GpioController> gpioController = SingletonProvider
         .from(() -> GpioFactory.getInstance());
-    final RelayController relayController = RelayControllerFactory.create(new int[] { 1, 2, 3, 4 },
+    final RelayController relayController = RelayControllerFactory.create(new int[]{1, 2, 3, 4},
         gpioController, "192.168.1.120:1984");
 
     allRelaysOff(relayController);
