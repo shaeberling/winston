@@ -27,3 +27,6 @@ android:
 
 # TODO: replace 'test' with 'check'.
 script: "./build-server-jar.sh && ./gradlew test"
+
+after_success:
+- ./gradlew jacocoTestReport coveralls
