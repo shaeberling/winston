@@ -16,17 +16,20 @@
 
 package com.s13g.winston.lib.core.crypto;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class KeyGeneratorTest extends TestCase {
+public class KeyGeneratorTest {
 
   /**
    * We cannot test easily whether the generated key is random enough, but at least we can make sure
    * that a key is successfully created and it's a different key every time.
    */
+  @Test
   public void testKeyGeneration() {
     final int NUM_KEYS = 10;
     Set<byte[]> generatedKeys = new HashSet<>(NUM_KEYS);

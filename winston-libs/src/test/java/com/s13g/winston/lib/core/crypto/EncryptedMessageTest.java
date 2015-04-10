@@ -16,16 +16,19 @@
 
 package com.s13g.winston.lib.core.crypto;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class EncryptedMessageTest extends TestCase {
+import static org.junit.Assert.assertArrayEquals;
+
+public class EncryptedMessageTest {
+  @Test
   public void testBasics() {
     byte[] ivBytes = new byte[]{1, 2, 42};
     byte[] messageBytes = new byte[]{2, 4, 6, 8, 10};
     EncryptedMessage message = new EncryptedMessage(ivBytes, messageBytes);
 
     // These should not be changed.
-    assertEquals(ivBytes, message.iv);
-    assertEquals(messageBytes, message.message);
+    assertArrayEquals(ivBytes, message.iv);
+    assertArrayEquals(messageBytes, message.message);
   }
 }
