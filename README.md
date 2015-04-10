@@ -24,3 +24,4 @@ might make use of existing libraries and wrap them in a way they can be called
 from Winston.
 
 [![Build Status](https://travis-ci.org/shaeberling/winston.svg)](https://travis-ci.org/shaeberling/winston)
+[![Coverage Status](https://coveralls.io/repos/shaeberling/winston/badge.svg?branch=master)](https://coveralls.io/r/shaeberling/winston?branch=master)
