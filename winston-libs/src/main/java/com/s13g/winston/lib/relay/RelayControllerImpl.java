@@ -34,6 +34,10 @@ import java.util.HashMap;
 public class RelayControllerImpl implements RelayController {
   private static final Logger LOG = LogManager.getLogger(RelayControllerImpl.class);
 
+  private static final int DEFAULT_CLICK_DELAY_MILLIS = 500;
+
+  private final int mClickDelay;
+
   /**
    * Maps relay number to GPIO number.
    */
@@ -46,6 +50,14 @@ public class RelayControllerImpl implements RelayController {
     LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
     mMapping = mapping;
     mGpioController = gpioController;
+    mClickDelay = DEFAULT_CLICK_DELAY_MILLIS;
+  }
+
+  public RelayControllerImpl(int[] mapping, GpioController gpioController, int clickDelay) {
+    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
+    mMapping = mapping;
+    mGpioController = gpioController;
+    mClickDelay = clickDelay;
   }
 
   @Override
@@ -95,7 +107,7 @@ public class RelayControllerImpl implements RelayController {
 
     try {
       switchRelay(num, true);
-      Thread.sleep(500);
+      Thread.sleep(mClickDelay);
       switchRelay(num, false);
     } catch (final InterruptedException ex) {
       LOG.error("Interrupted during click event.", ex);
