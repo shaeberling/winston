@@ -28,13 +28,13 @@ import java.util.Arrays;
 public class CryptoTestApp {
   public static void main(String[] args) {
     for (int i = 0; i < 10; ++i) {
-      byte[] key = KeyGenerator.generateKey();
+      byte[] key = KeyGenerator.instance().generateKey();
       System.out.println("Random key of length: " + key.length);
       System.out.println(Arrays.toString(key));
     }
 
     String messageStr = "This is top secret.";
-    byte[] key = KeyGenerator.generateKey();
+    byte[] key = KeyGenerator.instance().generateKey();
 
     Crypto crypto = CryptoImpl.create(key);
     EncryptedMessage encrypted = crypto.encrypt(messageStr);

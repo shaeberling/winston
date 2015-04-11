@@ -16,6 +16,8 @@
 
 package com.s13g.winston.lib.core.crypto;
 
+import com.s13g.winston.lib.core.Provider;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,15 +36,52 @@ import javax.crypto.spec.SecretKeySpec;
  * Used to generates random keys that can be used to encrypt communication using AES.
  */
 public class KeyGenerator {
+  /** For testing. */
+  public static interface SecretKeyFactoryProducer {
+    public SecretKeyFactoryProxy produce() throws NoSuchAlgorithmException;
+  }
+
+  /** For testing. */
+  public static interface BytesToStringConverter {
+    public String convert(byte[] bytes) throws UnsupportedEncodingException;
+  }
+
+  public static final SecretKeyFactoryProducer DEFAULT_SECRECT_KEY_FACTORY = () ->
+      new SecretKeyFactoryProxy(SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1"));
+  public static final BytesToStringConverter DEFAULT_STRING_CONVERTER =
+      (bytes) -> new String(bytes, "UTF-8");
+
   private static Logger LOG = LogManager.getLogger(KeyGenerator.class);
+  private static KeyGenerator sInstance;
+
+  public static KeyGenerator instance() {
+    if (sInstance == null) {
+      sInstance = new KeyGenerator();
+    }
+    return sInstance;
+  }
+
+  private KeyGenerator() {
+  }
 
   /**
    * Generates random keys to use for AES encryption.
    */
-  public static byte[] generateKey() {
-    SecretKeyFactory factory = null;
+  public byte[] generateKey() {
+    return generateKey(DEFAULT_SECRECT_KEY_FACTORY, DEFAULT_STRING_CONVERTER);
+  }
+
+  /**
+   * Visible for testing
+   * <p>
+   * See {@link #generateKey()}}. This can take a custom SecretKeyFactoryProducer. This is probably
+   * not want you want to call.
+   */
+  public byte[] generateKey(SecretKeyFactoryProducer secretKeyFactoryProducer,
+                            BytesToStringConverter bytesToString) {
+    SecretKeyFactoryProxy factory = null;
     try {
-      factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+      factory = secretKeyFactoryProducer.produce();
     } catch (NoSuchAlgorithmException e) {
       LOG.error("Cannot not generate key", e);
       return new byte[0];
@@ -57,7 +96,7 @@ public class KeyGenerator {
 
     String randomPasswordStr;
     try {
-      randomPasswordStr = new String(randomPassword, "UTF-8");
+      randomPasswordStr = bytesToString.convert(randomPassword);
     } catch (UnsupportedEncodingException e) {
       LOG.error("Cannot not generate key", e);
       return new byte[0];

@@ -32,7 +32,7 @@ public class CryptoImplTest {
 
   @Before
   public void initialize() {
-    mKey = KeyGenerator.generateKey();
+    mKey = KeyGenerator.instance().generateKey();
     mCrypto = CryptoImpl.create(mKey);
     mCrypto2 = CryptoImpl.create(mKey);
   }
