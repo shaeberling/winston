@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Winston</string>
+
+  <string name="action_light">Light</string>
+  <string name="action_garage_1">Garage 1</string>
+  <string name="action_garage_2">Garage 2</string>
+</resources>

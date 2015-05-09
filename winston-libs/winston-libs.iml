@@ -8,7 +8,8 @@
     </facet>
     <facet type="java-gradle" name="Java-Gradle">
       <configuration>
-        <option name="BUILD_FOLDER_PATH" />
+        <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/build" />
+        <option name="BUILDABLE" value="true" />
       </configuration>
     </facet>
   </component>
@@ -38,4 +39,3 @@
     <orderEntry type="library" exported="" scope="TEST" name="objenesis-2.1" level="project" />
   </component>
 </module>
-

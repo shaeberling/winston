@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/winston-android/winston-android.iml" filepath="$PROJECT_DIR$/winston-android/winston-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/winston-android-wear/winston-android-wear.iml" filepath="$PROJECT_DIR$/winston-android-wear/winston-android-wear.iml" />
       <module fileurl="file://$PROJECT_DIR$/winston-libs/winston-libs.iml" filepath="$PROJECT_DIR$/winston-libs/winston-libs.iml" />
       <module fileurl="file://$PROJECT_DIR$/winston-server/winston-server.iml" filepath="$PROJECT_DIR$/winston-server/winston-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/ws-winston.iml" filepath="$PROJECT_DIR$/ws-winston.iml" />
     </modules>
   </component>
 </project>
-
