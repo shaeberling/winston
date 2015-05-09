@@ -21,14 +21,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.NodeApi;
+import com.google.android.gms.wearable.Wearable;
 import com.s13g.winston.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
@@ -36,81 +37,103 @@ import java.util.logging.Logger;
 /**
  * Main activity for the Winston Android Wear app.
  */
-public class WinstonWearActivity extends Activity {
+public class WinstonWearActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final Logger LOG = Logger.getLogger("WinstonWearActivity");
-    // TODO: This needs to be configured dynamically.
-    private static final String LIGHT_NODE_URL = "http://192.168.1.201:1984/io/%s";
-    private static final String RELAY_CLICK_PARAM = "relay/%d/2";
-    private static final String REED_STATUS_PARAM = "reed/%d";
-
+    private GoogleApiClient mGoogleApiClient;
     private ExecutorService mPool;
+    private boolean mGmsConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wear_activity_main);
 
-        Button actionLight = (Button) findViewById(R.id.action_light);
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+            .addApi(Wearable.API)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .build();
+
+        setupListener(R.id.action_light, "/light/1");
+        setupListener(R.id.action_garage_1, "/garage/0");
+        setupListener(R.id.action_garage_2, "/garage/1");
+    }
+
+    private void setupListener(int buttonId, final String path) {
+        Button actionLight = (Button) findViewById(buttonId);
         actionLight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickRelay(LIGHT_NODE_URL, 0);
+                sendMessageToAllNodes(path);
             }
         });
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         mPool = Executors.newFixedThreadPool(2);
+        mGmsConnected = false;
+        mGoogleApiClient.connect();
     }
 
     @Override
-    protected void onPause() {
+    protected void onStop() {
+        mGmsConnected = false;
+        mGoogleApiClient.disconnect();
         mPool.shutdown();
-        super.onPause();
+        super.onStop();
     }
 
-    private void clickRelay(String nodeUrl, int num) {
-        String params = String.format(RELAY_CLICK_PARAM, num);
-        final String url = String.format(nodeUrl, params);
-        mPool.execute(new Runnable() {
+    @Override
+    // Google Play Services
+    public void onConnected(Bundle bundle) {
+        LOG.info("Google Play Services connected");
+        mGmsConnected = true;
+    }
+
+    @Override
+    // Google Play Services
+    public void onConnectionSuspended(int i) {
+        LOG.info("Google Play Services connection suspended");
+        mGmsConnected = false;
+    }
+
+    @Override
+    // Google Play Services
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        LOG.warning("Google Play Services connectione failed");
+
+    }
+
+    private void sendMessageToAllNodes(final String path) {
+        LOG.info("About to send message to all nodes: " + path);
+        Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
             @Override
-            public void run() {
-                String result = requestUrl(url);
-                LOG.info("Request Result: result");
+            public void onResult(NodeApi.GetConnectedNodesResult nodes) {
+                for (Node node : nodes.getNodes()) {
+                    sendMessageToNode(path, node);
+                }
             }
         });
     }
 
-    // TODO: All of this needs to be put in common classes since it's shared with the main app.
-    // Maybe think about relaying this through the app to have the code in one place only.
-    private static String requestUrl(String rpcUrl) {
-        LOG.info("rpcUrl: " + rpcUrl);
-        StringBuffer resultStr = new StringBuffer();
-        try {
-            final HttpURLConnection connection = (HttpURLConnection) (new URL(
-                    rpcUrl)).openConnection();
-            connection.setRequestMethod("GET");
-            connection.setUseCaches(false);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
-            String line;
-            boolean first = true;
-            while ((line = reader.readLine()) != null) {
-                if (first == true) {
-                    first = false;
-                } else {
-                    resultStr.append('\n');
+    private void sendMessageToNode(String path, Node node) {
+        LOG.info("Sending to node: " + node.getId() + " (" + node.getDisplayName() + ")");
+        Wearable.MessageApi.sendMessage(
+            mGoogleApiClient, node.getId(), path, null).setResultCallback(
+            new ResultCallback<MessageApi.SendMessageResult>() {
+                @Override
+                public void onResult(MessageApi.SendMessageResult sendMessageResult) {
+                    if (!sendMessageResult.getStatus().isSuccess()) {
+                        LOG.warning("Failed to send message with status code: "
+                            + sendMessageResult.getStatus().getStatusCode());
+                    } else {
+                        LOG.info("Sending message: success");
+                    }
                 }
-                resultStr.append(line);
             }
-            reader.close();
-        } catch (final MalformedURLException e1) {
-            e1.printStackTrace();
-        } catch (final IOException e2) {
-            e2.printStackTrace();
-        }
-        return resultStr.toString();
+        );
     }
+
 }

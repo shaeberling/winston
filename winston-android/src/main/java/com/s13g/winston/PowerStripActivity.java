@@ -16,16 +16,6 @@
 
 package com.s13g.winston;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Logger;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,110 +24,66 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.s13g.winston.requests.NodeRequests;
+
+import java.util.logging.Logger;
+
 public class PowerStripActivity extends Activity {
-	private static final Logger LOG = Logger.getLogger("PowerStripAct");
-  // private static final String SERVER_URL = "http://192.168.1.201:1984/io/%s";
-  private static final String SERVER_URL = "http://192.168.1.202:1984/io/%s";
-	private static final String RELAY_SWITCH_PARAM = "relay/%d/%d";
-	private ExecutorService mPool;
+    private static final Logger LOG = Logger.getLogger("PowerStripAct");
+    private NodeRequests mNodeRequests;
 
-	// TODO: Read switch state!
-	private final boolean[] currentSwitchState = new boolean[4];
+    // TODO: Read switch state!
+    private final boolean[] currentSwitchState = new boolean[4];
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		Button actionGarage1 = (Button) findViewById(R.id.action_garage_1);
-		actionGarage1.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toggleSwitch(0);
-			}
-		});
-		Button actionGarage2 = (Button) findViewById(R.id.action_garage_2);
-		actionGarage2.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toggleSwitch(1);
-			}
-		});
-	}
+        Button actionGarage1 = (Button) findViewById(R.id.action_garage_1);
+        actionGarage1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mNodeRequests.execute("/garage/0");
+            }
+        });
+        Button actionGarage2 = (Button) findViewById(R.id.action_garage_2);
+        actionGarage2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mNodeRequests.execute("/light/1");
+            }
+        });
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		mPool = Executors.newFixedThreadPool(15);
-	}
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mNodeRequests = new NodeRequests();
+    }
 
-	@Override
-	protected void onPause() {
-		mPool.shutdown();
-		super.onPause();
-	}
+    @Override
+    protected void onStop() {
+        mNodeRequests.close();
+        super.onStop();
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	private void toggleSwitch(int num) {
-	  // Toggle.
-	  currentSwitchState[num] = !currentSwitchState[num];
-	  int newState = currentSwitchState[num] ? 1 : 0;
-
-		String params = String.format(RELAY_SWITCH_PARAM, num, newState);
-		final String url = String.format(SERVER_URL, params);
-		mPool.execute(new Runnable() {
-			@Override
-			public void run() {
-				requestUrl(url);
-			}
-		});
-	}
-
-
-	private String requestUrl(String rpcUrl) {
-		LOG.info("rpcUrl: " + rpcUrl);
-		StringBuffer resultStr = new StringBuffer();
-		try {
-			final HttpURLConnection connection = (HttpURLConnection) (new URL(
-					rpcUrl)).openConnection();
-			connection.setRequestMethod("GET");
-			connection.setUseCaches(false);
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
-			String line;
-			boolean first = true;
-			while ((line = reader.readLine()) != null) {
-				if (first == true) {
-					first = false;
-				} else {
-					resultStr.append('\n');
-				}
-				resultStr.append(line);
-			}
-			reader.close();
-		} catch (final MalformedURLException e1) {
-			e1.printStackTrace();
-		} catch (final IOException e2) {
-			e2.printStackTrace();
-		}
-		return resultStr.toString();
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.s13g.winston" versionCode="1" versionName="0.1">
+    package="com.s13g.winston" android:versionCode="1" android:versionName="0.1">
 
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="22" />
 
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".wear.WinstonListenerService" android:exported="true">
+<!--        <service android:name=".wear.WinstonListenerService" android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
             </intent-filter>
-        </service>
+        </service> -->
 
         <meta-data
                 android:name="com.google.android.gms.version"

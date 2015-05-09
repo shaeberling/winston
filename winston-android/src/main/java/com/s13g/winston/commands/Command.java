@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.s13g.winston.wear;
-
-import com.google.android.gms.wearable.WearableListenerService;
+package com.s13g.winston.commands;
 
 /**
- * Service that listens to messages from the Winston handset app.
+ * Simple command interface.
  */
-public class WinstonListenerService extends WearableListenerService {
-    // TODO onDataChanged()
+public interface Command {
+    String RELAY_SWITCH_PARAM = "relay/%d/%d";
+    void execute(int num);
 }
