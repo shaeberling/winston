@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -37,7 +38,7 @@ public class HttpUtil {
      * @return Response received from the request.
      */
     public static String requestUrl(String rpcUrl) {
-        LOG.info("requestUrl: " + rpcUrl);
+        LOG.info("HTTP request to " + rpcUrl);
         StringBuffer resultStr = new StringBuffer();
         try {
             final HttpURLConnection connection = (HttpURLConnection) (new URL(
@@ -57,12 +58,14 @@ public class HttpUtil {
                 resultStr.append(line);
             }
             reader.close();
-        } catch (final MalformedURLException e1) {
-            e1.printStackTrace();
-        } catch (final IOException e2) {
-            e2.printStackTrace();
+        } catch (final MalformedURLException e) {
+            LOG.log(Level.SEVERE, "HTTP request failed. Malformed URL.");
+        } catch (final IOException e) {
+            LOG.log(Level.SEVERE, "HTTP request failed.", e);
         }
-        return resultStr.toString();
+        String response = resultStr.toString();
+        LOG.info("HTTP response: " + response);
+        return response;
     }
 
 }

@@ -28,7 +28,7 @@ import com.s13g.winston.requests.NodeRequests;
 
 import java.util.logging.Logger;
 
-public class PowerStripActivity extends Activity {
+public class WinstonMainActivity extends Activity {
     private static final Logger LOG = Logger.getLogger("PowerStripAct");
     private NodeRequests mNodeRequests;
 
@@ -40,14 +40,14 @@ public class PowerStripActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button actionGarage1 = (Button) findViewById(R.id.action_garage_1);
+        Button actionGarage1 = (Button) findViewById(R.id.action_garage_0);
         actionGarage1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 mNodeRequests.execute("/garage/0");
             }
         });
-        Button actionGarage2 = (Button) findViewById(R.id.action_garage_2);
+        Button actionGarage2 = (Button) findViewById(R.id.action_light);
         actionGarage2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -14,14 +14,14 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/action_garage_1"
+            android:id="@+id/action_garage_0"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:text="@string/action_garage_1" />
 
         <Button
-            android:id="@+id/action_garage_2"
+            android:id="@+id/action_light"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_weight="1"
