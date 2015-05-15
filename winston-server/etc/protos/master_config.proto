@@ -1,0 +1,24 @@
+package com.s13g.winston.master.proto;
+
+option java_package = "com.s13g.winston.master.proto";
+option java_outer_classname = "MasterProtos";
+
+/* Configuration for the master daemon. */
+message Config {
+    /* The port to start the maste daemon on. */
+    required int32 daemon_port = 1;
+    /* Node mapping for forward requests to. */
+    repeated NodeMapping node_mapping = 2;
+
+    /* Mapping from tag to node. */
+    message NodeMapping {
+        /* Name of the node, like "pi-garage". */
+        required string name = 1;
+        /* The IP address of the node. */
+        required string address = 2;
+        /* The port to access the node daemon, typically 1984. */
+        required int32 port = 3;
+        /* Whether the node daemon should accessed through https. */
+        required bool use_ssl = 4;
+    }
+}

@@ -29,6 +29,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="winston-libs" exported="" />
     <orderEntry type="library" exported="" name="simple-http-6.0.1" level="project" />
+    <orderEntry type="library" exported="" name="guava-18.0" level="project" />
     <orderEntry type="library" exported="" name="simple-common-6.0.1" level="project" />
     <orderEntry type="library" exported="" name="simple-transport-6.0.1" level="project" />
     <orderEntry type="library" exported="" name="winston-server.winston-server-0.0.1" level="project" />

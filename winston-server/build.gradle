@@ -6,6 +6,7 @@ version = '0.0.1'
 dependencies {
   compile project(':winston-libs')
   compile 'org.simpleframework:simple-http:6+'
+  compile 'com.google.guava:guava:+'
 }
 
 task nodeDaemon (type: OneJar) {

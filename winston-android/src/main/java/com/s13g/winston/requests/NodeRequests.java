@@ -24,17 +24,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.logging.Logger;
 
 /**
  * Makes requests to the nodes.
  */
 public class NodeRequests implements AutoCloseable {
-
     private static final Logger LOG = Logger.getLogger("NodeRequests");
-
-    private static final String GARAGE_SERVER_URL = "http://192.168.1.201:1984/io/%s";
-    private static final String RELAY_SWITCH_PARAM = "relay/%d/%d";
     private static final Map<String, Command> sCommandClasses = new HashMap<>();
 
     static {
@@ -71,7 +68,7 @@ public class NodeRequests implements AutoCloseable {
         final int argumentNum = Integer.parseInt(argument);
         LOG.info("Argument: " + argumentNum);
 
-        mExecutors.execute(new Runnable() {
+        Future lastTask = mExecutors.submit(new Runnable() {
             @Override
             public void run() {
                 sCommandClasses.get(commandName).execute(argumentNum);
