@@ -16,13 +16,19 @@
 
 package com.s13g.winston.commands;
 
-import com.s13g.winston.HttpUtil;
+import com.s13g.winston.util.HttpUtil;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Command to switch lights on and off.
  */
 public class LightCommand implements Command {
-    private static final String LIGHT_SERVER_URL = "http://192.168.1.202:1984/io/%s";
+    private static final Logger LOG = Logger.getLogger("LightCommand");
+    private static final String NODE_NAME = "pi-power-1";
+    // TODO: This should be pulled from the node before requesting a change.
     private static boolean[] currentSwitchState = new boolean[1024];
 
     @Override
@@ -36,7 +42,11 @@ public class LightCommand implements Command {
         int newState = currentSwitchState[num] ? 1 : 0;
 
         String params = String.format(RELAY_SWITCH_PARAM, num, newState);
-        final String url = String.format(LIGHT_SERVER_URL, params);
-        HttpUtil.requestUrl(url);
+        final String url = String.format(WINSTON_SERVER_URL, NODE_NAME, params);
+        try {
+            HttpUtil.requestUrl(url);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, "Could not make request: " + e.getMessage());
+        }
     }
 }

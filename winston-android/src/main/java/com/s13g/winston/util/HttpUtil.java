@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.s13g.winston;
+package com.s13g.winston.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,31 +22,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * HTTP request utility methods.
  */
 public class HttpUtil {
-    private static final Logger LOG = Logger.getLogger("HttpUtil");
-
     /**
      * Makes a request to the given URL.
      *
      * @param rpcUrl the give HTTP URL
      * @return Response received from the request.
      */
-    public static String requestUrl(String rpcUrl) {
-        LOG.info("HTTP request to " + rpcUrl);
+    public static String requestUrl(String rpcUrl) throws IOException {
         StringBuffer resultStr = new StringBuffer();
         try {
             final HttpURLConnection connection = (HttpURLConnection) (new URL(
-                rpcUrl)).openConnection();
+                    rpcUrl)).openConnection();
             connection.setRequestMethod("GET");
             connection.setUseCaches(false);
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                connection.getInputStream()));
+                    connection.getInputStream()));
             String line;
             boolean first = true;
             while ((line = reader.readLine()) != null) {
@@ -59,13 +54,11 @@ public class HttpUtil {
             }
             reader.close();
         } catch (final MalformedURLException e) {
-            LOG.log(Level.SEVERE, "HTTP request failed. Malformed URL.");
+            throw new IOException("HTTP request failed. Malformed URL.");
         } catch (final IOException e) {
-            LOG.log(Level.SEVERE, "HTTP request failed.", e);
+            throw new IOException("HTTP request failed.", e);
         }
-        String response = resultStr.toString();
-        LOG.info("HTTP response: " + response);
-        return response;
+        return resultStr.toString();
     }
 
 }

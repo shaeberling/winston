@@ -20,6 +20,7 @@ package com.s13g.winston.commands;
  * Simple command interface.
  */
 public interface Command {
+    String WINSTON_SERVER_URL = "http://pi-server:1984/%s/io/%s";
     String RELAY_SWITCH_PARAM = "relay/%d/%d";
     void execute(int num);
 }

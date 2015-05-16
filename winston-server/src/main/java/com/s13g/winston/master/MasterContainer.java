@@ -16,9 +16,9 @@
 
 package com.s13g.winston.master;
 
+import com.s13g.winston.lib.core.util.HttpUtil;
 import com.s13g.winston.master.proto.MasterProtos;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Request;
@@ -54,7 +54,7 @@ public class MasterContainer implements Container {
         }
     }
 
-    private static final Logger LOG = LogManager.getLogger(MasterContainer.class);
+    private static final Logger LOG = LogManager.getLogger("MasterContainer");
     /** Maps node name to URL. */
     private final Map<String, String> mNodeMap;
     private final int mPort;
@@ -115,7 +115,7 @@ public class MasterContainer implements Container {
                 resp.setStatus(Status.BAD_REQUEST);
             }
         } catch (Exception e) {
-            LOG.log(Level.ERROR, "Error handling request", e);
+            LOG.error("Error handling request", e);
             throw e;
         } finally {
             try {
@@ -166,5 +166,13 @@ public class MasterContainer implements Container {
         String nodeRequestPath = requestUrl.substring(nodeName.length());
         String nodeRequestUrl = nodeBaseUrl + nodeRequestPath;
         LOG.info("Node URL: " + nodeRequestUrl);
+
+        // TODO: This should be done on a background thread, with a proper queue, de-duping per
+        // command/node etc.
+        try {
+            HttpUtil.requestUrl(nodeRequestUrl);
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
+        }
     }
 }
