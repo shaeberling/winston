@@ -14,14 +14,23 @@
  * limitations under the License.
  */
 
-package com.s13g.winston.lib.plugin;
+
+package com.s13g.winston.node.plugin;
 
 import com.pi4j.io.gpio.GpioController;
 import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.led.LedControllerImpl;
+import com.s13g.winston.lib.plugin.NodeController;
+import com.s13g.winston.lib.plugin.NodePluginType;
+import com.s13g.winston.lib.plugin.ReedToLedPlugin;
 import com.s13g.winston.lib.reed.ReedController;
 import com.s13g.winston.lib.reed.ReedControllerImpl;
+import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerImpl;
+import com.s13g.winston.node.handler.Handler;
+import com.s13g.winston.node.handler.LedHandler;
+import com.s13g.winston.node.handler.ReedHandler;
+import com.s13g.winston.node.handler.RelayHandler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,17 +39,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Creates node controllers.
+ * Creates NodePlugins.
  */
-public class NodeControllerCreator {
-  private static final Logger LOG = LogManager.getLogger(NodeControllerCreator.class);
+public class NodePluginCreator {
+  private static final Logger LOG = LogManager.getLogger(NodePluginCreator.class);
   private final GpioController mGpioController;
 
   /**
    * We keep a cache of active controllers so that controllers that need others as parameters
    * can access them.
    */
-  private final Map<NodePluginType, NodeController> mActiveControllers = new HashMap<>();
+  private final Map<NodePluginType, NodePlugin> mActiveControllers = new HashMap<>();
 
   /**
    * Constructor for node controller creator.
@@ -48,7 +57,7 @@ public class NodeControllerCreator {
    * @param gpioController the GPIO controller is passed into the controllers that need access to
    *                       the GPIO pins.
    */
-  public NodeControllerCreator(GpioController gpioController) {
+  public NodePluginCreator(GpioController gpioController) {
     mGpioController = gpioController;
   }
 
@@ -61,14 +70,14 @@ public class NodeControllerCreator {
    * @return The controller.
    * @throws RuntimeException if the controller could not be instantiated.
    */
-  public NodeController create(String name, int[] mapping) {
-    NodeController controller = createInternal(name, mapping);
-    mActiveControllers.put(controller.getType(), controller);
-    return controller;
+  public NodePlugin create(String name, int[] mapping) {
+    NodePlugin plugin = createInternal(name, mapping);
+    mActiveControllers.put(plugin.type, plugin);
+    return plugin;
   }
 
   /** Actually creating the controller. */
-  private NodeController createInternal(String name, int[] mapping) {
+  private NodePlugin createInternal(String name, int[] mapping) {
     NodePluginType pluginType = null;
     try {
       pluginType = NodePluginType.valueOf(name.toUpperCase());
@@ -80,18 +89,31 @@ public class NodeControllerCreator {
     // Add new controllers here. If a controller/plugin requires other controllers as its
     // parameters, they need to be later in the configuration file so that the dependencies are
     // created first. We do not (yet?) have dynamic dependency graph resolution ;)
+    NodeController controller;
+    Handler handler;
+
     switch (pluginType) {
       case LED:
-        return new LedControllerImpl(mapping, mGpioController);
+        controller = new LedControllerImpl(mapping, mGpioController);
+        handler = new LedHandler((LedController) controller);
+        break;
       case REED:
-        return new ReedControllerImpl(mapping, mGpioController);
+        controller = new ReedControllerImpl(mapping, mGpioController);
+        handler = new ReedHandler((ReedController) controller);
+        break;
       case RELAY:
-        return new RelayControllerImpl(mapping, mGpioController);
+        controller = new RelayControllerImpl(mapping, mGpioController);
+        handler = new RelayHandler((RelayController) controller);
+        break;
       case _REEDTOLED:
-        return new ReedToLedPlugin(mapping, (ReedController) mActiveControllers.get
-            (NodePluginType.REED), (LedController) mActiveControllers.get(NodePluginType.LED));
+        controller = new ReedToLedPlugin(mapping, (ReedController) mActiveControllers.get
+            (NodePluginType.REED).controller, (LedController) mActiveControllers.get
+            (NodePluginType.LED).controller);
+        handler = null;  // This plugins does not have a handler.
+        break;
       default:
         throw new RuntimeException("No controller defined valid name: " + name);
     }
+    return new NodePlugin(pluginType, controller, handler);
   }
 }

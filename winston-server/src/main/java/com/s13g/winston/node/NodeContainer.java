@@ -22,8 +22,8 @@ import com.s13g.winston.lib.core.Provider;
 import com.s13g.winston.lib.core.SingletonProvider;
 import com.s13g.winston.node.handler.Handler;
 import com.s13g.winston.lib.plugin.NodeController;
-import com.s13g.winston.lib.plugin.NodeControllerCreator;
-import com.s13g.winston.node.handler.HandlerCreator;
+import com.s13g.winston.node.plugin.NodePlugin;
+import com.s13g.winston.node.plugin.NodePluginCreator;
 import com.s13g.winston.node.proto.NodeProtos;
 
 import org.apache.logging.log4j.LogManager;
@@ -68,8 +68,7 @@ public class NodeContainer implements Container {
    */
   public static NodeContainer from(NodeProtos.Config config) {
     final Provider<GpioController> gpioController = SingletonProvider.from(GpioFactory::getInstance);
-    NodeControllerCreator nodeControllerCreator = new NodeControllerCreator(gpioController
-        .provide());
+    NodePluginCreator nodePluginCreator = new NodePluginCreator(gpioController.provide());
     List<Handler> activeHandlers = new ArrayList<>();
 
     // For each configured plugin we instantiate the controller and its handler, if existing.
@@ -79,11 +78,10 @@ public class NodeContainer implements Container {
       String name = activePlugin.getName();
       int[] mapping = activePlugin.getMappingList().stream().mapToInt(i -> i).toArray();
 
-      NodeController controller = nodeControllerCreator.create(name, mapping);
-      Handler handler = HandlerCreator.create(controller);
-      if (handler != null) {
+      NodePlugin plugin = nodePluginCreator.create(name, mapping);
+      if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
-        activeHandlers.add(handler);
+        activeHandlers.add(plugin.handler);
       }
     }
     return new NodeContainer(config.getDaemonPort(), createHandlerMap(activeHandlers));
