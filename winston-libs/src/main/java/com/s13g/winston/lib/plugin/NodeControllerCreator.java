@@ -35,18 +35,39 @@ import java.util.Map;
 public class NodeControllerCreator {
   private static final Logger LOG = LogManager.getLogger(NodeControllerCreator.class);
   private final GpioController mGpioController;
+
+  /**
+   * We keep a cache of active controllers so that controllers that need others as parameters
+   * can access them.
+   */
   private final Map<NodePluginType, NodeController> mActiveControllers = new HashMap<>();
 
+  /**
+   * Constructor for node controller creator.
+   *
+   * @param gpioController the GPIO controller is passed into the controllers that need access to
+   *                       the GPIO pins.
+   */
   public NodeControllerCreator(GpioController gpioController) {
     mGpioController = gpioController;
   }
 
+  /**
+   * Create a node controller.
+   *
+   * @param name    the name of the node controller, must be a valid NodePluginsType.
+   * @param mapping mapping to be used for this controller. Semantics depend on the given
+   *                controller.
+   * @return The controller.
+   * @throws RuntimeException if the controller could not be instantiated.
+   */
   public NodeController create(String name, int[] mapping) {
     NodeController controller = createInternal(name, mapping);
     mActiveControllers.put(controller.getType(), controller);
     return controller;
   }
 
+  /** Actually creating the controller. */
   private NodeController createInternal(String name, int[] mapping) {
     NodePluginType pluginType = null;
     try {
@@ -56,6 +77,9 @@ public class NodeControllerCreator {
       throw new RuntimeException("No controller for name: " + name);
     }
 
+    // Add new controllers here. If a controller/plugin requires other controllers as its
+    // parameters, they need to be later in the configuration file so that the dependencies are
+    // created first. We do not (yet?) have dynamic dependency graph resolution ;)
     switch (pluginType) {
       case LED:
         return new LedControllerImpl(mapping, mGpioController);

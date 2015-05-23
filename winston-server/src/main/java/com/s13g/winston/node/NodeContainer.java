@@ -70,8 +70,11 @@ public class NodeContainer implements Container {
     final Provider<GpioController> gpioController = SingletonProvider.from(GpioFactory::getInstance);
     NodeControllerCreator nodeControllerCreator = new NodeControllerCreator(gpioController
         .provide());
-
     List<Handler> activeHandlers = new ArrayList<>();
+
+    // For each configured plugin we instantiate the controller and its handler, if existing.
+    // NOTE: The order is important since some plugins might depend on other controllers and
+    // therefore need to be instantiated later.
     for (NodeProtos.Config.Plugin activePlugin : config.getActivePluginsList()) {
       String name = activePlugin.getName();
       int[] mapping = activePlugin.getMappingList().stream().mapToInt(i -> i).toArray();
@@ -79,25 +82,11 @@ public class NodeContainer implements Container {
       NodeController controller = nodeControllerCreator.create(name, mapping);
       Handler handler = HandlerCreator.create(controller);
       if (handler != null) {
+        // Add all active handlers so we can forward HTTP requests to it.
         activeHandlers.add(handler);
       }
     }
-
-//    // TODO: Depending on configuration file, different modules need to be
-//    // loaded and configuration needs to be forwarded to them.
-//    final LedController ledController = new LedControllerImpl(new int[]{},
-//        gpioController.provide());
-//    final RelayController relayController = new RelayControllerImpl(new int[]{4, 1, 6, 5},
-//        gpioController.provide());
-//    final ReedController reedController = new ReedControllerImpl(new int[]{},
-//        gpioController.provide());
-
-    HashMap<String, Handler> handlerMap = createHandlerMap(activeHandlers);
-
-//    new ReedToLedPlugin(ReedToLedPlugin.createMapping(new int[]{0, 0, 1, 1}), reedController,
-//        ledController);
-
-    return new NodeContainer(config.getDaemonPort(), handlerMap);
+    return new NodeContainer(config.getDaemonPort(), createHandlerMap(activeHandlers));
   }
 
   private static HashMap<String, Handler> createHandlerMap(List<Handler> handlers) {
