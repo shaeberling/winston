@@ -112,7 +112,7 @@ public class NodePluginCreator {
         handler = null;  // This plugins does not have a handler.
         break;
       default:
-        throw new RuntimeException("No controller defined valid name: " + name);
+        throw new RuntimeException("No controller defined for valid name: " + name);
     }
     return new NodePlugin(pluginType, controller, handler);
   }
