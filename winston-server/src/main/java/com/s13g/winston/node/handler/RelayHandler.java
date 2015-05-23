@@ -21,6 +21,7 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.lib.relay.RelayController;
 
 /**
@@ -71,7 +72,7 @@ public class RelayHandler implements Handler {
   }
 
   @Override
-  public HandlerType getRpcName() {
-    return HandlerType.RELAY;
+  public NodePluginType getRpcName() {
+    return NodePluginType.RELAY;
   }
 }

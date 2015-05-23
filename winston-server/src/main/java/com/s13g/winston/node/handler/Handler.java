@@ -16,11 +16,13 @@
 
 package com.s13g.winston.node.handler;
 
+import com.s13g.winston.lib.plugin.NodePluginType;
+
 /** General request Handler */
 public interface Handler {
   /** Handle the request. */
-  public String handleRequest(String arguments);
+  String handleRequest(String arguments);
 
   /** Gets the RPC method name this handler is listening to. */
-  public HandlerType getRpcName();
+  NodePluginType getRpcName();
 }

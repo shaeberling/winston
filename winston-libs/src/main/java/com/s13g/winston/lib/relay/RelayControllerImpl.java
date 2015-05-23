@@ -21,6 +21,7 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.s13g.winston.lib.core.Pins;
+import com.s13g.winston.lib.plugin.NodePluginType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -123,4 +124,10 @@ public class RelayControllerImpl implements RelayController {
     }
     return mActivePins.get(num).isLow();
   }
+
+  @Override
+  public NodePluginType getType() {
+    return NodePluginType.RELAY;
+  }
+
 }

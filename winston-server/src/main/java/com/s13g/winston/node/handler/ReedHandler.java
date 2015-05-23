@@ -16,6 +16,7 @@
 
 package com.s13g.winston.node.handler;
 
+import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.lib.reed.ReedController;
 
 /**
@@ -36,7 +37,7 @@ public class ReedHandler implements Handler {
   }
 
   @Override
-  public HandlerType getRpcName() {
-    return HandlerType.REED;
+  public NodePluginType getRpcName() {
+    return NodePluginType.REED;
   }
 }

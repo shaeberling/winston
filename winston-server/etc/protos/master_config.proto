@@ -1,24 +1,41 @@
+/*
+ * Copyright 2015 Sascha Haeberling
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.s13g.winston.master.proto;
 
 option java_package = "com.s13g.winston.master.proto";
+
 option java_outer_classname = "MasterProtos";
 
 /* Configuration for the master daemon. */
 message Config {
-    /* The port to start the maste daemon on. */
-    required int32 daemon_port = 1;
-    /* Node mapping for forward requests to. */
-    repeated NodeMapping node_mapping = 2;
+  /* The port to start the master daemon on. */
+  required int32 daemon_port = 1;
+  /* Node mapping for forward requests to. */
+  repeated NodeMapping node_mapping = 2;
 
-    /* Mapping from tag to node. */
-    message NodeMapping {
-        /* Name of the node, like "pi-garage". */
-        required string name = 1;
-        /* The IP address of the node. */
-        required string address = 2;
-        /* The port to access the node daemon, typically 1984. */
-        required int32 port = 3;
-        /* Whether the node daemon should accessed through https. */
-        required bool use_ssl = 4;
-    }
+  /* Mapping from tag to node. */
+  message NodeMapping {
+    /* Name of the node, like "pi-garage". */
+    required string name = 1;
+    /* The IP address of the node. */
+    required string address = 2;
+    /* The port to access the node daemon, typically 1984. */
+    required int32 port = 3;
+    /* Whether the node daemon should accessed through https. */
+    required bool use_ssl = 4;
+  }
 }

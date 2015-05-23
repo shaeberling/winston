@@ -22,10 +22,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.s13g.winston.lib.led.LedController;
+import com.s13g.winston.lib.plugin.NodePluginType;
 
 public class LedHandler implements Handler {
-  private static interface LedCommandRunner {
-    public void runForLed(int num);
+  private interface LedCommandRunner {
+    void runForLed(int num);
   }
 
   private static final Logger LOG = LogManager.getLogger(LedHandler.class);
@@ -63,8 +64,8 @@ public class LedHandler implements Handler {
   }
 
   @Override
-  public HandlerType getRpcName() {
-    return HandlerType.LED;
+  public NodePluginType getRpcName() {
+    return NodePluginType.LED;
   }
 
 }

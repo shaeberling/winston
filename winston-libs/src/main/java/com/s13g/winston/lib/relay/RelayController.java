@@ -16,11 +16,13 @@
 
 package com.s13g.winston.lib.relay;
 
+import com.s13g.winston.lib.plugin.NodeController;
+
 /**
  * The relay controller interface which can be implemented on top of the actual
  * GPIOs using Pi4J or on top of a proxy.
  */
-public interface RelayController {
+public interface RelayController extends NodeController {
 
   /**
    * Switches the relay with the given number.
@@ -28,7 +30,7 @@ public interface RelayController {
    * @param num the relay number, starting with 0.
    * @param on  Whether to switch it on, otherwise off.
    */
-  public void switchRelay(int num, boolean on);
+  void switchRelay(int num, boolean on);
 
   /**
    * Performs a standard click (on/off) with the default delay.
@@ -38,5 +40,5 @@ public interface RelayController {
    *
    * @param num the relay to click.
    */
-  public void clickRelay(int num);
+  void clickRelay(int num);
 }

@@ -17,4 +17,6 @@ logs/
 RemoteSystemsTempFiles/
 
 master.config
+node.config
+
 

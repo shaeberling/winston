@@ -21,6 +21,7 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.s13g.winston.lib.core.Pins;
+import com.s13g.winston.lib.plugin.NodePluginType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,5 +58,10 @@ public class LedControllerImpl implements LedController {
       return;
     }
     mPins[num].setState(on ? PinState.HIGH : PinState.LOW);
+  }
+
+  @Override
+  public NodePluginType getType() {
+    return NodePluginType.LED;
   }
 }

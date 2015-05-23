@@ -22,6 +22,7 @@ import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.s13g.winston.lib.core.Pins;
+import com.s13g.winston.lib.plugin.NodePluginType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -108,5 +109,10 @@ public class ReedControllerImpl implements ReedController {
       }
       mListeners.remove(listener);
     }
+  }
+
+  @Override
+  public NodePluginType getType() {
+    return NodePluginType.REED;
   }
 }

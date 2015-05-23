@@ -16,12 +16,15 @@
 
 package com.s13g.winston.lib.led;
 
+import com.s13g.winston.lib.plugin.NodeController;
+
 /**
  * Controls the high/low state of pins to e.g. switch on/off LEDs.
  */
-public interface LedController {
+public interface LedController extends NodeController {
+
   /**
    * Switched the given LED on or off.
    */
-  public void switchLed(int num, boolean on);
+  void switchLed(int num, boolean on);
 }

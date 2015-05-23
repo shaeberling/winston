@@ -1,0 +1,43 @@
+/*
+ * Copyright 2015 Sascha Haeberling
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.s13g.winston.master.proto;
+
+option java_package = "com.s13g.winston.node.proto";
+
+option java_outer_classname = "NodeProtos";
+
+/* Configuration for the node daemon. */
+message Config {
+  /* The port to start the node daemon on. */
+  required int32 daemon_port = 1;
+
+  /*
+   * Which plugins are active on this node.
+   * Note that the order matters if a plugin requires other plugins as their
+   * dependency. Dependencies have to be available a this point.
+   * Also we assume only one plugin of each type can be present.
+   */
+  repeated Plugin active_plugins = 2;
+
+  /* Defines a plugin that should be active on this node. */
+  message Plugin {
+    /* The name defines which plugin to loads. */
+    required string name = 1;
+    /* Mapping from e.g. GPIO pins. */
+    repeated int32 mapping = 2;
+  }
+}
