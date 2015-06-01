@@ -40,139 +40,139 @@ import java.util.Optional;
  * HTTP Container for serving the master daemon HTTP requests.
  */
 public class MasterContainer implements Container {
-    private static class RequestHandlingException extends Exception {
-        final Optional<Status> errorCode;
+  private static class RequestHandlingException extends Exception {
+    final Optional<Status> errorCode;
 
-        RequestHandlingException(String message) {
-            super(message);
-            errorCode = Optional.empty();
-        }
-
-        RequestHandlingException(String message, Status status) {
-            super(message);
-            errorCode = Optional.ofNullable(status);
-        }
+    RequestHandlingException(String message) {
+      super(message);
+      errorCode = Optional.empty();
     }
 
-    private static final Logger LOG = LogManager.getLogger("MasterContainer");
-    /** Maps node name to URL. */
-    private final Map<String, String> mNodeMap;
-    private final int mPort;
+    RequestHandlingException(String message, Status status) {
+      super(message);
+      errorCode = Optional.ofNullable(status);
+    }
+  }
 
-    MasterContainer(int port, Map<String, String> nodeMap) {
-        mPort = port;
-        mNodeMap = new HashMap<>(nodeMap);
+  private static final Logger LOG = LogManager.getLogger("MasterContainer");
+  /** Maps node name to URL. */
+  private final Map<String, String> mNodeMap;
+  private final int mPort;
+
+  MasterContainer(int port, Map<String, String> nodeMap) {
+    mPort = port;
+    mNodeMap = new HashMap<>(nodeMap);
+  }
+
+  /**
+   * Creates and returns a container based on the given configuration.
+   *
+   * @param config the configuration to be used for this container.
+   * @return The valid container to serve the master requests.
+   */
+  public static MasterContainer from(MasterProtos.Config config) {
+    Map<String, String> nodeMap = new HashMap<>(config.getNodeMappingCount());
+
+    for (MasterProtos.Config.NodeMapping nodeMapping : config.getNodeMappingList()) {
+      StringBuilder nodeUrl = new StringBuilder();
+      nodeUrl.append(nodeMapping.getUseSsl() ? "https://" : "http://");
+      nodeUrl.append(nodeMapping.getAddress());
+      nodeUrl.append(":");
+      nodeUrl.append(nodeMapping.getPort());
+      nodeMap.put(nodeMapping.getName(), nodeUrl.toString());
+    }
+    return new MasterContainer(config.getDaemonPort(), nodeMap);
+  }
+
+  /**
+   * Starts serving from this container.
+   *
+   * @param numThreads the number of threads to handle the HTTP requests.
+   * @throws IOException thrown if HTTP serving could not be started.
+   */
+  public void startServing(int numThreads) throws IOException {
+    final ContainerSocketProcessor processor = new ContainerSocketProcessor(this, numThreads);
+
+    // Since this server will run forever, no need to close connection.
+    @SuppressWarnings("resource")
+    final Connection connection = new SocketConnection(processor);
+    final SocketAddress address = new InetSocketAddress(mPort);
+    LOG.info("Listening to: " + address.toString());
+    connection.connect(address);
+  }
+
+  @Override
+  public void handle(Request req, Response resp) {
+    try {
+      String response = doHandle(req);
+      resp.getPrintStream().append(response);
+      resp.setStatus(Status.OK);
+    } catch (RequestHandlingException e) {
+      LOG.warn(e.getMessage());
+      if (e.errorCode.isPresent()) {
+        resp.setStatus(e.errorCode.get());
+      } else {
+        resp.setStatus(Status.BAD_REQUEST);
+      }
+    } catch (Exception e) {
+      LOG.error("Error handling request", e);
+    } finally {
+      try {
+        resp.close();
+      } catch (IOException e) {
+        LOG.warn("Cannot close response", e);
+      }
+    }
+  }
+
+  /**
+   * Handle the HTTP request
+   *
+   * @param req the HTTP request
+   * @return The response of the HTTP request.
+   * @throws RequestHandlingException thrown if the request could not be handled.
+   */
+  private String doHandle(Request req) throws RequestHandlingException {
+    String requestUrl = req.getAddress().toString();
+    // Ignore this, don't even log it.
+    if (requestUrl.equals("/favicon.ico")) {
+      return "";
+    }
+    LOG.info("Request: " + requestUrl);
+
+    if (!requestUrl.startsWith("/")) {
+      throw new RequestHandlingException("Cannot handle request: " + requestUrl);
     }
 
-    /**
-     * Creates and returns a container based on the given configuration.
-     *
-     * @param config the configuration to be used for this container.
-     * @return The valid container to serve the master requests.
-     */
-    public static MasterContainer from(MasterProtos.Config config) {
-        Map<String, String> nodeMap = new HashMap<>(config.getNodeMappingCount());
+    // Remove slash prefix.
+    requestUrl = requestUrl.substring(1);
 
-        for (MasterProtos.Config.NodeMapping nodeMapping : config.getNodeMappingList()) {
-            StringBuilder nodeUrl = new StringBuilder();
-            nodeUrl.append(nodeMapping.getUseSsl() ? "https://" : "http://");
-            nodeUrl.append(nodeMapping.getAddress());
-            nodeUrl.append(":");
-            nodeUrl.append(nodeMapping.getPort());
-            nodeMap.put(nodeMapping.getName(), nodeUrl.toString());
-        }
-        return new MasterContainer(config.getDaemonPort(), nodeMap);
+    int nextSlash = requestUrl.indexOf('/');
+    if (nextSlash <= 0) {
+      throw new RequestHandlingException("Cannot handle request: " + requestUrl);
     }
 
-    /**
-     * Starts serving from this container.
-     *
-     * @param numThreads the number of threads to handle the HTTP requests.
-     * @throws IOException thrown if HTTP serving could not be started.
-     */
-    public void startServing(int numThreads) throws IOException {
-        final ContainerSocketProcessor processor = new ContainerSocketProcessor(this, numThreads);
-
-        // Since this server will run forever, no need to close connection.
-        @SuppressWarnings("resource")
-        final Connection connection = new SocketConnection(processor);
-        final SocketAddress address = new InetSocketAddress(mPort);
-        LOG.info("Listening to: " + address.toString());
-        connection.connect(address);
+    String nodeName = requestUrl.substring(0, requestUrl.indexOf('/', 1));
+    if (nodeName.isEmpty()) {
+      throw new RequestHandlingException("No node name: " + requestUrl);
     }
 
-    @Override
-    public void handle(Request req, Response resp) {
-        try {
-            doHandle(req);
-            resp.setStatus(Status.OK);
-        } catch (RequestHandlingException e) {
-            LOG.warn(e.getMessage());
-
-            if (e.errorCode.isPresent()) {
-                resp.setStatus(e.errorCode.get());
-            } else {
-                resp.setStatus(Status.BAD_REQUEST);
-            }
-        } catch (Exception e) {
-            LOG.error("Error handling request", e);
-            throw e;
-        } finally {
-            try {
-                resp.close();
-            } catch (IOException e) {
-                LOG.warn("Cannot close response", e);
-            }
-        }
+    LOG.info("Node: " + nodeName);
+    if (!mNodeMap.containsKey(nodeName)) {
+      throw new RequestHandlingException("No mapping for given node: " + nodeName, Status.NOT_FOUND);
     }
+    String nodeBaseUrl = mNodeMap.get(nodeName);
+    String nodeRequestPath = requestUrl.substring(nodeName.length());
+    String nodeRequestUrl = nodeBaseUrl + nodeRequestPath;
+    LOG.info("Node URL: " + nodeRequestUrl);
 
-    /**
-     * Handle the HTTP request
-     *
-     * @param req the HTTP request
-     * @throws RequestHandlingException thrown if the request could not be handled.
-     */
-    private void doHandle(Request req) throws RequestHandlingException {
-        String requestUrl = req.getAddress().toString();
-        // Ignore this, don't even log it.
-        if (requestUrl.equals("/favicon.ico")) {
-            return;
-        }
-
-        LOG.info("Request: " + requestUrl);
-
-        if (!requestUrl.startsWith("/")) {
-            throw new RequestHandlingException("Cannot handle request: " + requestUrl);
-        }
-
-        // Remove slash prefix.
-        requestUrl = requestUrl.substring(1);
-
-        int nextSlash = requestUrl.indexOf('/');
-        if (nextSlash <= 0) {
-            throw new RequestHandlingException("Cannot handle request: " + requestUrl);
-        }
-
-        String nodeName = requestUrl.substring(0, requestUrl.indexOf('/', 1));
-        if (nodeName.isEmpty()) {
-            throw new RequestHandlingException("No node name: " + requestUrl);
-        }
-
-        LOG.info("Node: " + nodeName);
-        if (!mNodeMap.containsKey(nodeName)) {
-            throw new RequestHandlingException("No mapping for given node: " + nodeName, Status.NOT_FOUND);
-        }
-        String nodeBaseUrl = mNodeMap.get(nodeName);
-        String nodeRequestPath = requestUrl.substring(nodeName.length());
-        String nodeRequestUrl = nodeBaseUrl + nodeRequestPath;
-        LOG.info("Node URL: " + nodeRequestUrl);
-
-        // TODO: This should be done on a background thread, with a proper queue, de-duping per
-        // command/node etc.
-        try {
-            HttpUtil.requestUrl(nodeRequestUrl);
-        } catch (IOException e) {
-            LOG.error(e.getMessage());
-        }
+    // TODO: This should be done on a background thread, with a proper queue, de-duping per
+    // command/node etc.
+    try {
+      return HttpUtil.requestUrl(nodeRequestUrl);
+    } catch (IOException e) {
+      LOG.error(e.getMessage());
+      throw new RequestHandlingException("Could not request URL", Status.NO_CONTENT);
     }
+  }
 }
