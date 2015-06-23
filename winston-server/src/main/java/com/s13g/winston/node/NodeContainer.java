@@ -67,6 +67,7 @@ public class NodeContainer implements Container {
    * @return The valid container to serve the master requests.
    */
   public static NodeContainer from(NodeProtos.Config config) {
+
     final Provider<GpioController> gpioController = SingletonProvider.from(GpioFactory::getInstance);
     NodePluginCreator nodePluginCreator = new NodePluginCreator(gpioController.provide());
     List<Handler> activeHandlers = new ArrayList<>();

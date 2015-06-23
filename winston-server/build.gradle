@@ -31,3 +31,14 @@ task masterDaemon (type: OneJar) {
   useStable = false
 }
 
+task sauronDaemon (type: OneJar) {
+  mainClass = 'com.s13g.winston.tools.sauron.SauronDaemon'
+  archiveName 'winston-sauron-daemon.jar'
+  manifest {
+    attributes 'Implementation-Title': 'Winston Sauron Daemon',
+               'Implementation-Version': version,
+               'Timestamp': String.valueOf(System.currentTimeMillis())
+  }
+  useStable = false
+}
+
