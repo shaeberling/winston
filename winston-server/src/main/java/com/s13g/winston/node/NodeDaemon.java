@@ -25,27 +25,30 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * The node daemon is the main executable that is started on a Winston node.
  */
+@ParametersAreNonnullByDefault
 public class NodeDaemon {
-    private static final int NUM_THREADS = 4;
-    private static Logger LOG = LogManager.getLogger(NodeDaemon.class);
+  private static final int NUM_THREADS = 4;
+  private static Logger LOG = LogManager.getLogger(NodeDaemon.class);
 
-    public static void main(final String... args) throws IOException {
-        File configFile = new File("node.config");
-        if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
-            LOG.log(Level.ERROR, "Cannot read config file: " + configFile.getAbsolutePath());
-            return;
-        }
-        LOG.info("Node starting up ...");
-
-        ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
-        configWrapper.printToLog();
-        configWrapper.assertSane();
-
-
-        NodeContainer container = NodeContainer.from(configWrapper.getConfig());
-        container.startServing(NUM_THREADS);
+  public static void main(final String... args) throws IOException {
+    File configFile = new File("node.config");
+    if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
+      LOG.log(Level.ERROR, "Cannot read config file: " + configFile.getAbsolutePath());
+      return;
     }
+    LOG.info("Node starting up ...");
+
+    ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
+    configWrapper.printToLog();
+    configWrapper.assertSane();
+
+
+    NodeContainer container = NodeContainer.from(configWrapper.getConfig());
+    container.startServing(NUM_THREADS);
+  }
 }

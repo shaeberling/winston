@@ -25,9 +25,13 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * Accesses the webcam and produces images using fswebcam.
  */
+@ParametersAreNonnullByDefault
 public class PictureTaker {
   private static Logger LOG = LogManager.getLogger(PictureTaker.class);
   private static final String COMMAND = "/usr/bin/fswebcam --no-banner -r 1920x1080 %s";
@@ -42,6 +46,7 @@ public class PictureTaker {
    *
    * @param fileName the path to which to write the final image file to.
    */
+  @Nonnull
   public ListenableFuture<Boolean> captureImage(String fileName) {
     SettableFuture<Boolean> result = SettableFuture.create();
     try {
@@ -73,6 +78,7 @@ public class PictureTaker {
     });
   }
 
+  @Nonnull
   private String[] createCommandForFileName(String fileName) {
     return String.format(COMMAND, fileName).split("\\s+");
   }

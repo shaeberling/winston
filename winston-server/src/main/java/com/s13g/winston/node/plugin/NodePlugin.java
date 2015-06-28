@@ -20,9 +20,12 @@ import com.s13g.winston.lib.plugin.NodeController;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.node.handler.Handler;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * A node plugin with a unique name, a controller and an optional handler.
  */
+@ParametersAreNonnullByDefault
 public class NodePlugin {
   public final NodePluginType type;
   public final NodeController controller;
@@ -35,6 +38,7 @@ public class NodePlugin {
   }
 
   /**
+   * @return Whether this node plugin has a handler.
    */
   public boolean hasHandler() {
     return handler != null;

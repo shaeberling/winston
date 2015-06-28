@@ -42,10 +42,15 @@ import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Container for serving the node HTTP requests from.
  */
+@ParametersAreNonnullByDefault
 public class NodeContainer implements Container {
   private static final Logger LOG = LogManager.getLogger(NodeContainer.class);
 
@@ -66,6 +71,7 @@ public class NodeContainer implements Container {
    * @param config the configuration to be used for this container.
    * @return The valid container to serve the master requests.
    */
+  @Nonnull
   public static NodeContainer from(NodeProtos.Config config) {
 
     final Provider<GpioController> gpioController = SingletonProvider.from(GpioFactory::getInstance);
@@ -88,6 +94,7 @@ public class NodeContainer implements Container {
     return new NodeContainer(config.getDaemonPort(), createHandlerMap(activeHandlers));
   }
 
+  @Nonnull
   private static HashMap<String, Handler> createHandlerMap(List<Handler> handlers) {
     final HashMap<String, Handler> handlerMap = new HashMap<>();
     for (final Handler handler : handlers) {
@@ -113,14 +120,14 @@ public class NodeContainer implements Container {
     final String requestUrl = req.getAddress().toString();
     LOG.info("Request: " + requestUrl);
 
-    String returnValue = null;
+    Optional<String> returnValue = null;
     if (requestUrl.startsWith(IO_PREFIX)) {
       returnValue = handleIoRequest(requestUrl.substring(IO_PREFIX.length()));
     }
 
     try {
-      resp.setStatus(returnValue != null ? Status.OK : Status.NOT_FOUND);
-      resp.getPrintStream().append(returnValue);
+      resp.setStatus(returnValue.isPresent() ? Status.OK : Status.NOT_FOUND);
+      resp.getPrintStream().append(returnValue.isPresent() ? returnValue.get() : "");
       resp.close();
     } catch (final IOException e) {
       LOG.warn("Could not deliver response");
@@ -132,16 +139,17 @@ public class NodeContainer implements Container {
    * Handles '/io' requests.
    *
    * @return If the request was handled this returns the return values of the
-   * handler, otherwise null is returned.
+   * handler, otherwise empty is returned.
    */
-  private String handleIoRequest(String command) {
+  @Nonnull
+  private Optional<String> handleIoRequest(String command) {
     final String rpcName = command.substring(0, command.indexOf('/'));
     LOG.info("IO RPC: " + rpcName);
     if (mRegisteredHandlers.containsKey(rpcName)) {
-      return mRegisteredHandlers.get(rpcName)
-          .handleRequest(command.substring(rpcName.length() + 1));
+      return Optional.of(mRegisteredHandlers.get(rpcName)
+          .handleRequest(command.substring(rpcName.length() + 1)));
     } else {
-      return null;
+      return Optional.empty();
     }
   }
 }

@@ -29,6 +29,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * Requests, archives and serves webcam images.
  * <ol>
@@ -37,6 +39,7 @@ import java.util.concurrent.Executors;
  * <li>Serves the images to web browsers</li>
  * </ol>
  */
+@ParametersAreNonnullByDefault
 public class SauronDaemon {
   private static Logger LOG = LogManager.getLogger(SauronDaemon.class);
 
