@@ -22,6 +22,7 @@ import com.google.common.util.concurrent.SettableFuture;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
@@ -34,7 +35,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class PictureTaker {
   private static Logger LOG = LogManager.getLogger(PictureTaker.class);
-  private static final String COMMAND = "/usr/bin/fswebcam --no-banner -r 1920x1080 %s";
+  /**
+   * The command to execute to capture an image.
+   * Note: Add '--no-banner' to remove the timestamp banner at the bottom of the image file.
+   */
+  private static final String COMMAND = "/usr/bin/fswebcam -r 1920x1080 %s";
   private final Executor mExecutor;
 
   public PictureTaker(Executor executor) {
@@ -44,13 +49,13 @@ public class PictureTaker {
   /**
    * Captures an image and writes it to the give file.
    *
-   * @param fileName the path to which to write the final image file to.
+   * @param file the path to which to write the final image file to.
    */
   @Nonnull
-  public ListenableFuture<Boolean> captureImage(String fileName) {
+  public ListenableFuture<Boolean> captureImage(File file) {
     SettableFuture<Boolean> result = SettableFuture.create();
     try {
-      Process process = new ProcessBuilder(createCommandForFileName(fileName))
+      Process process = new ProcessBuilder(createCommandForFileName(file.getAbsolutePath()))
           .redirectErrorStream(true).start();
       handleProcess(process, result);
     } catch (IOException e) {

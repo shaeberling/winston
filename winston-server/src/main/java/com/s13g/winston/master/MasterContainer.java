@@ -54,7 +54,7 @@ public class MasterContainer implements Container {
     }
   }
 
-  private static final Logger LOG = LogManager.getLogger("MasterContainer");
+  private static final Logger LOG = LogManager.getLogger(MasterContainer.class);
   /** Maps node name to URL. */
   private final Map<String, String> mNodeMap;
   private final int mPort;
@@ -94,31 +94,29 @@ public class MasterContainer implements Container {
     final ContainerSocketProcessor processor = new ContainerSocketProcessor(this, numThreads);
 
     // Since this server will run forever, no need to close connection.
-    @SuppressWarnings("resource")
     final Connection connection = new SocketConnection(processor);
     final SocketAddress address = new InetSocketAddress(mPort);
-    LOG.info("Listening to: " + address.toString());
     connection.connect(address);
+    LOG.info("Listening to: " + address.toString());
   }
 
   @Override
-  public void handle(Request req, Response resp) {
+  public void handle(Request request, Response response) {
     try {
-      String response = doHandle(req);
-      resp.getPrintStream().append(response);
-      resp.setStatus(Status.OK);
+      response.getPrintStream().append(doHandle(request));
+      response.setStatus(Status.OK);
     } catch (RequestHandlingException e) {
       LOG.warn(e.getMessage());
       if (e.errorCode.isPresent()) {
-        resp.setStatus(e.errorCode.get());
+        response.setStatus(e.errorCode.get());
       } else {
-        resp.setStatus(Status.BAD_REQUEST);
+        response.setStatus(Status.BAD_REQUEST);
       }
     } catch (Exception e) {
       LOG.error("Error handling request", e);
     } finally {
       try {
-        resp.close();
+        response.close();
       } catch (IOException e) {
         LOG.warn("Cannot close response", e);
       }

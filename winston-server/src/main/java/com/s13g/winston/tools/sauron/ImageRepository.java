@@ -23,14 +23,13 @@ import com.google.common.base.Preconditions;
 import java.io.File;
 import java.time.LocalDateTime;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * The image repository is initialize in a certain directory, which can always contain valid
  * repository data or a new directory.
- * <p>
+ * <p/>
  * Based on the current time, the repository is able to store new images into a folder structure
  * that works well for archiving and retrieval.
  */
@@ -63,9 +62,8 @@ public class ImageRepository {
   /**
    * Based on the current time, determines the path and file name for the image to be
    * created.
-   * <p>
-   * If another file with the current timestamp already exists, a suffix is appended to generate a
-   * unique filename.
+   * <p/>
+   * Timestamp will be nano-second precise so avoid duplicates.
    *
    * @return A writable file that an image can be written to.
    */
@@ -78,7 +76,7 @@ public class ImageRepository {
    * Initializes the repository at the given location.
    */
   private void init() {
-    // TODO: Initialize a data structure with all existing files to fast access.
+    // TODO: Initialize a data structure with all existing files for fast access.
   }
 
   /**

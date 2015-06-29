@@ -1,0 +1,24 @@
+<html>
+  <head>
+  	<title>Winston Webcam</title>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  	<style>
+  	  body {
+  	  	background:#222;
+  	  }
+  	  #webcam-image {
+  	  	height:100%;
+  	  	width: 100%;
+  	  	object-fit:contain;
+  	  }
+  	</style>
+  </head>
+  <body>
+  	<img id="webcam-image" src="http://pi-cam-1:1986/now.jpg">
+  	<script>
+  	  window.setInterval(function(){
+          $("#webcam-image").attr("src", "http://pi-cam-1:1986/now.jpg?time=" + (new Date()).getTime());
+      }, 50000);
+  	</script>  	
+  </body>
+</html>

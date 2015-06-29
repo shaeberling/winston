@@ -16,18 +16,13 @@
 
 package com.s13g.winston.tools.sauron;
 
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -42,38 +37,35 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class SauronDaemon {
   private static Logger LOG = LogManager.getLogger(SauronDaemon.class);
+  private static final String sRepositoryRoot = "/home/pi/image_repo";
+  private static final int SHOT_DELAY_MILLIS = 60000; // Once a minute.
+  private static final int HTTP_PORT = 1986;
 
+  private final ImageRepository mImageRepository;
+  private final PictureTaker mPictureTaker;
 
-  public static void main(String[] args) {
-    // The commands have to be executed serially, so use a single-thread executor for fetching
-    // the images from the webcam device.
-    final ExecutorService cameraCommandExecutor = Executors.newSingleThreadExecutor();
-
-    // TODO: Just for testing.
-    final File capturedFile = new File("sauron2.jpg");
-    ListenableFuture<Boolean> captureResult =
-        (new PictureTaker(cameraCommandExecutor)).captureImage(capturedFile.getAbsolutePath());
-    Futures.addCallback(captureResult, new FutureCallback<Boolean>() {
-      @Override
-      public void onSuccess(Boolean result) {
-        if (!result) {
-          LOG.warn("Taking picture not successful");
-          return;
-        }
-        onPictureTaken(capturedFile);
-
-        // TODO: Shutting down after one successful file, just for testing.
-        cameraCommandExecutor.shutdown();
-      }
-
-      @Override
-      public void onFailure(Throwable t) {
-        LOG.warn("Taking picture failed", t);
-      }
-    });
+  public SauronDaemon(ImageRepository imageRepository, PictureTaker pictureTaker) {
+    mImageRepository = imageRepository;
+    mPictureTaker = pictureTaker;
   }
 
-  public static void onPictureTaken(File imageFile) {
-    LOG.info("Image successfully stored: " + imageFile.getAbsolutePath());
+  public static void main(String[] args) {
+    ExecutorService cameraCommandExecutor = Executors.newSingleThreadExecutor();
+    ScheduledExecutorService schedulerExecutor = Executors.newSingleThreadScheduledExecutor();
+    ExecutorService fileReadingExecutor = Executors.newSingleThreadExecutor();
+
+    PictureTaker pictureTaker = new PictureTaker(cameraCommandExecutor);
+    ImageRepository imageRepository = ImageRepository.init(new File(sRepositoryRoot));
+    ImageServer imageServer = new ImageServer(HTTP_PORT, fileReadingExecutor);
+    Scheduler scheduler = new Scheduler(pictureTaker, imageRepository, schedulerExecutor);
+
+    // Start webserver for serving data.
+    imageServer.start();
+
+    // Start the scheduler to take pictures.
+    scheduler.start(SHOT_DELAY_MILLIS, (pictureFile) -> {
+      LOG.debug("New picture available: " + pictureFile.getAbsolutePath());
+      imageServer.setCurrentFile(pictureFile);
+    });
   }
 }
