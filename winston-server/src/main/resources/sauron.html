@@ -14,11 +14,11 @@
   	</style>
   </head>
   <body>
-  	<img id="webcam-image" src="http://pi-cam-1:1986/now.jpg">
+  	<img id="webcam-image" src="/now.jpg">
   	<script>
   	  window.setInterval(function(){
-          $("#webcam-image").attr("src", "http://pi-cam-1:1986/now.jpg?time=" + (new Date()).getTime());
+          $("#webcam-image").attr("src", "/now.jpg?time=" + (new Date()).getTime());
       }, 50000);
-  	</script>  	
+  	</script>
   </body>
 </html>
