@@ -21,16 +21,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.s13g.winston.control.filter.IOperationFilter;
+import com.s13g.winston.control.filter.StringComparisonFilter;
+import com.s13g.winston.control.filter.compare.EditDistancePlugin;
+import com.s13g.winston.control.operation.IOperationProcess;
+import com.s13g.winston.control.operation.OperationBroker;
+import com.s13g.winston.control.type.IOperationFactory;
+import com.s13g.winston.control.type.OperationFactoryImpl;
 import com.s13g.winston.requests.NodeRequests;
 
+import java.util.List;
 import java.util.logging.Logger;
 
-public class WinstonMainActivity extends Activity {
-    private static final Logger LOG = Logger.getLogger("PowerStripAct");
+public class WinstonMainActivity extends Activity implements View.OnClickListener, IOperationProcess {
+    private static final Logger LOG = Logger.getLogger("WinstonMainActivity");
     private NodeRequests mNodeRequests;
+    // control
+    private static final int TOLERANCE = 1;
+    private OperationBroker mCommandBroker;
+    // TODO: currently, commands are only for test purposes
+    private static final String[] KNOWN_WORDS = {"light on", "light off", "open garage", "close garage"};
+
+    private IOperationFilter mOperationFilter;
 
     // TODO: Read switch state!
     private final boolean[] currentSwitchState = new boolean[4];
@@ -40,20 +55,20 @@ public class WinstonMainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button voiceControl = (Button) findViewById(R.id.voice_control);
+        voiceControl.setOnClickListener(this);
         Button actionGarage1 = (Button) findViewById(R.id.action_garage_0);
-        actionGarage1.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mNodeRequests.execute("/garage/0");
-            }
-        });
+        actionGarage1.setOnClickListener(this);
         Button actionGarage2 = (Button) findViewById(R.id.action_light);
-        actionGarage2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mNodeRequests.execute("/light/1");
-            }
-        });
+        actionGarage2.setOnClickListener(this);
+
+        mOperationFilter = new StringComparisonFilter(new EditDistancePlugin(), KNOWN_WORDS, TOLERANCE);
+
+        mCommandBroker = new OperationBroker.Builder(getApplicationContext())
+                .setOperationFactory(new OperationFactoryImpl())
+                .setOperationProcessor(this)
+                .setOperationType(IOperationFactory.OperationType.SPEECH_MANUAL)
+                .build();
     }
 
     @Override
@@ -85,5 +100,68 @@ public class WinstonMainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(final View view) {
+
+        switch (view.getId()) {
+            case R.id.voice_control:
+                onStartVoiceControl();
+                break;
+            case R.id.action_garage_0:
+                onActionCloseGarage();
+                break;
+            case R.id.action_light:
+                onActionLightOn();
+                break;
+        }
+    }
+
+    private void onStartVoiceControl() {
+        Toast.makeText(getApplicationContext(), "Speek now!", Toast.LENGTH_LONG).show();
+        mCommandBroker.onStart();
+    }
+
+
+    private void onActionCloseGarage() {
+        mNodeRequests.execute("/garage/1");
+    }
+
+    private void onActionOpenGarage() {
+        mNodeRequests.execute("/garage/1");
+    }
+
+    private void onActionLightOff() {
+        mNodeRequests.execute("/light/1");
+    }
+
+    private void onActionLightOn() {
+        mNodeRequests.execute("/light/1");
+    }
+
+
+    @Override
+    public void processRecognizedOperationResults(List<String> recognizedOperations, float[] confidenceScore) {
+
+        recognizedOperations = mOperationFilter.filter(recognizedOperations);
+
+        if (recognizedOperations.size() == 1) {
+            final String operation = recognizedOperations.get(0);
+            // TODO: operation only for test purposes and also doubled (see above)
+            if (operation.equals("light on")) {
+                onActionLightOn();
+            } else if (operation.equals("light off")) {
+                onActionLightOff();
+            } else if (operation.equals("open garage")) {
+                onActionOpenGarage();
+            } else if (operation.equals("close garage")) {
+                onActionCloseGarage();
+            } else {
+                LOG.warning("unkown operation");
+            }
+        } else {
+            LOG.info("no command processing");
+        }
     }
 }
