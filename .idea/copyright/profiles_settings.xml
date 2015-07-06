@@ -1,5 +1,8 @@
 <component name="CopyrightManager">
-  <settings default="(c) SH 2015">
+  <settings default="(c) Winston Authors">
+    <module2copyright>
+      <element module="All" copyright="(c) Winston Authors" />
+    </module2copyright>
     <LanguageOptions name="JAVA" />
   </settings>
 </component>
