@@ -29,48 +29,34 @@ task wrapper(type: Wrapper) {
 // Code Coverage and reporting.
 // The coveralls gradle plugin cannot handle multiple projects, so we have to flatten
 // the reports here in order to get coverage for all subprojects.
-
-apply plugin: 'jacoco'
-apply plugin: 'com.github.kt3k.coveralls'
-
-// Exclude the android project from coverage for now.
 def publishedProjects = subprojects.findAll {
-  (it.path != ':winston-android' && it.path != ':winston-android-wear')
+  (it.path == ':winston-libs') || (it.path == ':winston-server')
 }
+evaluationDependsOn(':winston-libs')
+evaluationDependsOn(':winston-server')
 
 
-subprojects { proj ->
-    apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'jacoco'
 
-    task jacocoTestReportFoo(type: JacocoReport, dependsOn: "testDebug") {
-        reports {
-            xml.enabled = true // coveralls plugin depends on xml format report
-            html.enabled = true
-        }
-    }
-}
 
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
-    group = 'Reporting'
-    description = 'Aggregate reports for all Winston projects'
-    dependsOn(publishedProjects.jacocoTestReportFoo)
-
-    additionalSourceDirs = files('winston-server/src/main/java') + files('winston-libs/src/main/java')
-    sourceDirectories = files('winston-server/src/main/java') + files('winston-libs/src/main/java')
-    classDirectories = files('winston-server/build/intermediates/classes/debug') + files('winston-libs/build/intermediates/classes/debug')
-    executionData = files(publishedProjects.jacocoTestReportFoo.executionData)
-
-    reports {
-        html.enabled = true
-        xml.enabled = true
-    }
-
-    doFirst {
-        executionData = files(executionData.findAll { it.exists() })
-    }
+   dependsOn = publishedProjects.jacocoTestReport
+   sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+   classDirectories = files(publishedProjects.sourceSets.main.output)
+   executionData = files(publishedProjects.jacocoTestReport.executionData)
+   reports {
+       xml.enabled true
+       xml.destination ="${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+   }
+   setOnlyIf { true }
 }
 
 coveralls {
-    sourceDirs = files('winston-server/src/main/java').flatten() + files('winston-libs/src/main/java').flatten()
-    jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+    sourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs).files.absolutePath
 }
+
+tasks.coveralls {
+    dependsOn jacocoRootReport
+}
+
