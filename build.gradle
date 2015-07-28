@@ -39,7 +39,7 @@ evaluationDependsOn(':winston-server')
 apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'jacoco'
 
-
+# Collect reports from subprojects to be submitted to coveralls.io.
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
    dependsOn = publishedProjects.jacocoTestReport
    sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
