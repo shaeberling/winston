@@ -18,6 +18,11 @@ allprojects {
   repositories {
     jcenter()
   }
+
+  apply plugin: 'jacoco'
+  jacoco {
+    toolVersion = '0.7.5.201505241946'
+  }
 }
 
 // To create a gradle wrapper.
@@ -37,7 +42,6 @@ evaluationDependsOn(':winston-server')
 
 
 apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: 'jacoco'
 
 // Collect reports from subprojects to be submitted to coveralls.io.
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {

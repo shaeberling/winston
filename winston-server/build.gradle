@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'jacoco'
 apply plugin: 'gradle-one-jar'
 
 version = '0.0.1'
