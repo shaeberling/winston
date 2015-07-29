@@ -16,8 +16,14 @@
 
 package com.s13g.winston.tools.sauron;
 
+import com.s13g.winston.common.ContainerServer;
+import com.s13g.winston.common.io.FileDataLoader;
+import com.s13g.winston.common.io.ResourceLoader;
+import com.s13g.winston.common.io.ResourceLoaderImpl;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.simpleframework.http.core.Container;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -27,12 +33,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Requests, archives and serves webcam images.
- * <ol>
- * <li>Requests webcam images from the devices</li>
- * <li>Archives the images in a folder structure</li>
- * <li>Serves the images to web browsers</li>
- * </ol>
+ * Requests, archives and serves webcam images. <ol> <li>Requests webcam images from the
+ * devices</li> <li>Archives the images in a folder structure</li> <li>Serves the images to web
+ * browsers</li> </ol>
  */
 @ParametersAreNonnullByDefault
 public class SauronDaemon {
@@ -56,7 +59,10 @@ public class SauronDaemon {
 
     PictureTaker pictureTaker = new PictureTaker(cameraCommandExecutor);
     ImageRepository imageRepository = ImageRepository.init(new File(sRepositoryRoot));
-    ImageServer imageServer = new ImageServer(HTTP_PORT, fileReadingExecutor);
+    ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();
+    ResourceLoader resourceLoader = new ResourceLoaderImpl();
+    ImageServer imageServer = new ImageServer(HTTP_PORT, serverCreator,
+        fileReadingExecutor, resourceLoader);
     Scheduler scheduler = new Scheduler(pictureTaker, imageRepository, schedulerExecutor);
 
     // Start webserver for serving data.
@@ -65,7 +71,7 @@ public class SauronDaemon {
     // Start the scheduler to take pictures.
     scheduler.start(SHOT_DELAY_MILLIS, (pictureFile) -> {
       LOG.debug("New picture available: " + pictureFile.getAbsolutePath());
-      imageServer.setCurrentFile(pictureFile);
+      imageServer.setCurrentFile(new FileDataLoader(pictureFile));
     });
   }
 }
