@@ -3,6 +3,7 @@ apply plugin: 'gradle-one-jar'
 
 version = '0.0.1'
 
+
 dependencies {
   compile project(':winston-protos')
   compile project(':winston-libs')

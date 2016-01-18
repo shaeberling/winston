@@ -15,10 +15,10 @@
       <entry name="!?*.aj" />
     </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
+      <profile default="true" name="Default" enabled="true">
+        <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
   </component>
 </project>
-
