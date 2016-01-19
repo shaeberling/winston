@@ -15,6 +15,7 @@ in the future as the different parts are getting fleshed out:
  * **winston-server** contains the master and node servers. The latter is run on the Winston nodes,
  communicates to sensors and actuators directly, and the former is responsible for collecting data
  from the nodes and communicates with the clients.
+   * **sauron webcam** Sauron is a stand-alone daemon that connects to a webcam and shoots pictures at a set interval. Pictures are stored on disk in a configurable path. Sauron also has storage space protection built in: Once the free space within the image repository path falls below a configurable threshold, Sauron will start to remove the oldest files. Sauron's main use case is as a security camera. The newest image taken will be served from within the build-in webserver.
 
 ## Goal
 The goal is to run the nodes on Raspberry Pi devices and to connect various
@@ -42,6 +43,7 @@ Target | Build command
 --- | --- 
 Node Daemon |  `./gradlew nodeDaemon` 
 Master Daemon |  `./gradlew masterDaemon` 
+Sauron Daemon |  `./gradlew sauronDaemon` 
 Android App |  `./gradlew winston-android:assembleDebug` 
 Android Wear App |  `./gradlew winston-android-wear:assembleDebug` 
 Run all tests | `./gradlew test`
@@ -52,6 +54,7 @@ Once you have compiled the daemons, simply copy them to your server or node. You
  
 - `winston-server/build/libs/winston-node-daemon.jar` 
 - `winston-server/build/libs/winston-master-daemon.jar` 
+- - `winston-server/build/libs/winston-sauron-daemon.jar` 
 
 
 ### Configuration and Running
