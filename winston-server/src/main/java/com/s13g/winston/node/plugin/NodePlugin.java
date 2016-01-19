@@ -20,6 +20,7 @@ import com.s13g.winston.lib.plugin.NodeController;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.node.handler.Handler;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
@@ -31,7 +32,7 @@ public class NodePlugin {
   public final NodeController controller;
   public final Handler handler;
 
-  public NodePlugin(NodePluginType type, NodeController controller, Handler handler) {
+  public NodePlugin(NodePluginType type, NodeController controller, @Nullable Handler handler) {
     this.type = type;
     this.controller = controller;
     this.handler = handler;

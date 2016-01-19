@@ -24,6 +24,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 /**
  * Tests for ImageRepository
  */
@@ -64,7 +67,11 @@ public class ImageRepositoryTest {
 
   private void assertFileForDate(File expectedFile, File rootDir, int year, int month,
                                  int day, int hour, int minute, int second, int nanos) {
-    ImageRepository repository = new ImageRepository(rootDir, true /* this is a test */);
+    FreeSpaceReporter mockReporter = mock(FreeSpaceReporter.class);
+    when(mockReporter.isMinSpaceAvailable()).thenReturn(true);
+
+    ImageRepository repository =
+        new ImageRepository(rootDir, mockReporter, true /* this is a test */);
 
     LocalDate date = LocalDate.of(year, month, day);
     LocalTime time = LocalTime.of(hour, minute, second, nanos);
