@@ -54,7 +54,7 @@ Once you have compiled the daemons, simply copy them to your server or node. You
  
 - `winston-server/build/libs/winston-node-daemon.jar` 
 - `winston-server/build/libs/winston-master-daemon.jar` 
-- - `winston-server/build/libs/winston-sauron-daemon.jar` 
+- `winston-server/build/libs/winston-sauron-daemon.jar` 
 
 
 ### Configuration and Running
@@ -84,14 +84,14 @@ winston-node-daemon.jar`.
 A node.config could look like this (subject to change):
 ```
 daemon_port: 1984
-active_plugins: {
+gpio_plugins: {
   name: "relay"
   mapping: 1
   mapping: 3
   mapping: 2
   mapping: 4
 }
-active_plugins: {
+gpio_plugins: {
   name: "reed"
   mapping: 5
   mapping: 6
