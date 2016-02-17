@@ -21,7 +21,6 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.s13g.winston.lib.core.Provider;
 import com.s13g.winston.lib.core.SingletonProvider;
 import com.s13g.winston.node.handler.Handler;
-import com.s13g.winston.lib.plugin.NodeController;
 import com.s13g.winston.node.plugin.NodePlugin;
 import com.s13g.winston.node.plugin.NodePluginCreator;
 import com.s13g.winston.node.proto.NodeProtos;
@@ -74,18 +73,26 @@ public class NodeContainer implements Container {
   @Nonnull
   public static NodeContainer from(NodeProtos.Config config) {
 
-    final Provider<GpioController> gpioController = SingletonProvider.from(GpioFactory::getInstance);
+    final Provider<GpioController> gpioController = SingletonProvider.from
+        (GpioFactory::getInstance);
     NodePluginCreator nodePluginCreator = new NodePluginCreator(gpioController.provide());
     List<Handler> activeHandlers = new ArrayList<>();
 
     // For each configured plugin we instantiate the controller and its handler, if existing.
     // NOTE: The order is important since some plugins might depend on other controllers and
     // therefore need to be instantiated later.
-    for (NodeProtos.Config.Plugin activePlugin : config.getActivePluginsList()) {
-      String name = activePlugin.getName();
-      int[] mapping = activePlugin.getMappingList().stream().mapToInt(i -> i).toArray();
+    // ==== GPIO ====
+    for (NodeProtos.Config.GpioPlugin gpioPlugin : config.getGpioPluginsList()) {
+      NodePlugin plugin = nodePluginCreator.create(gpioPlugin);
+      if (plugin.hasHandler()) {
+        // Add all active handlers so we can forward HTTP requests to it.
+        activeHandlers.add(plugin.handler);
+      }
+    }
 
-      NodePlugin plugin = nodePluginCreator.create(name, mapping);
+    // ==== 1-Wire ====
+    for (NodeProtos.Config.OneWirePlugin oneWirePlugin : config.getOnewirePluginsList()) {
+      NodePlugin plugin = nodePluginCreator.create(oneWirePlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
         activeHandlers.add(plugin.handler);
@@ -98,7 +105,12 @@ public class NodeContainer implements Container {
   private static HashMap<String, Handler> createHandlerMap(List<Handler> handlers) {
     final HashMap<String, Handler> handlerMap = new HashMap<>();
     for (final Handler handler : handlers) {
-      handlerMap.put(handler.getRpcName().name().toLowerCase(), handler);
+      String rpcName = handler.getRpcName().name().toLowerCase();
+      if (handlerMap.containsKey(rpcName)) {
+        // TODO: Consider supporting multiple handlers with the same name.
+        throw new RuntimeException("RPC name already registered: " + rpcName);
+      }
+      handlerMap.put(rpcName, handler);
     }
     return handlerMap;
   }
@@ -118,6 +130,11 @@ public class NodeContainer implements Container {
   @Override
   public void handle(Request req, Response resp) {
     final String requestUrl = req.getAddress().toString();
+    // Ignore favicon requests.
+    if ("/favicon.ico".equals(requestUrl)) {
+      resp.setStatus(Status.NOT_FOUND);
+      return;
+    }
     LOG.info("Request: " + requestUrl);
 
     Optional<String> returnValue = null;
@@ -138,8 +155,8 @@ public class NodeContainer implements Container {
   /**
    * Handles '/io' requests.
    *
-   * @return If the request was handled this returns the return values of the
-   * handler, otherwise empty is returned.
+   * @return If the request was handled this returns the return values of the handler, otherwise
+   * empty is returned.
    */
   @Nonnull
   private Optional<String> handleIoRequest(String command) {

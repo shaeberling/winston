@@ -22,5 +22,5 @@ package com.s13g.winston.lib.plugin;
  * Names must be unique, this is is an enum.
  */
 public enum NodePluginType {
-  LED, REED, RELAY, _REEDTOLED
+  LED, REED, RELAY, _REEDTOLED, DS18B20_TEMP
 }

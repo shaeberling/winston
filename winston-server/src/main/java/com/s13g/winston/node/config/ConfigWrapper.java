@@ -62,22 +62,29 @@ public class ConfigWrapper {
   }
 
   /**
-   * Verifies that the proto is in good shape. If something is not sane, will
-   * throw an AssertionError.
+   * Verifies that the proto is in good shape. If something is not sane, will throw an
+   * AssertionError.
    */
   public void assertSane() {
     if (mConfigProto.getDaemonPort() <= 0) {
       throw new AssertionError("Invalid Port:" + mConfigProto.getDaemonPort());
     }
 
-    List<NodeProtos.Config.Plugin> activePluginsList = mConfigProto.getActivePluginsList();
-    if (activePluginsList.isEmpty()) {
-      throw new AssertionError("Node active plugins found");
+    int numPlugins = mConfigProto.getGpioPluginsList().size() + mConfigProto
+        .getOnewirePluginsList().size();
+    if (numPlugins == 0) {
+      throw new AssertionError("No active plugins found");
     }
 
-    for (NodeProtos.Config.Plugin plugin : activePluginsList) {
-      if (!plugin.hasName() || plugin.getName().isEmpty()) {
-        throw new AssertionError("Missing plugin name");
+    for (NodeProtos.Config.GpioPlugin plugin : mConfigProto.getGpioPluginsList()) {
+      if (!plugin.hasType() || plugin.getType().isEmpty()) {
+        throw new AssertionError("Missing plugin type");
+      }
+    }
+
+    for (NodeProtos.Config.OneWirePlugin plugin : mConfigProto.getOnewirePluginsList()) {
+      if (!plugin.hasType() || plugin.getType().isEmpty()) {
+        throw new AssertionError("Missing plugin type");
       }
     }
   }
@@ -86,13 +93,20 @@ public class ConfigWrapper {
    * Will print out the configuration to LOG.
    */
   public void printToLog() {
-    LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
-    List<NodeProtos.Config.Plugin> activePluginsList = mConfigProto.getActivePluginsList();
-    LOG.info("Active plugins: " + activePluginsList.size());
     LOG.info("---------------------------------");
-    for (NodeProtos.Config.Plugin plugin : activePluginsList) {
-      LOG.info("  Name    : " + plugin.getName());
+    LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
+    List<NodeProtos.Config.GpioPlugin> gpioPluginsList = mConfigProto.getGpioPluginsList();
+    LOG.info("Active GPIO plugins: " + gpioPluginsList.size());
+    for (NodeProtos.Config.GpioPlugin plugin : gpioPluginsList) {
+      LOG.info("  Type    : " + plugin.getType());
       LOG.info("  Mapping : " + plugin.getMappingList());
+    }
+    LOG.info("---------------------------------");
+    List<NodeProtos.Config.OneWirePlugin> oneWirePluginsList = mConfigProto.getOnewirePluginsList();
+    LOG.info("Active 1-Wire plugins: " + oneWirePluginsList.size());
+    for (NodeProtos.Config.OneWirePlugin plugin : oneWirePluginsList) {
+      LOG.info("  Type    : " + plugin.getType());
+      LOG.info("  Name    : " + plugin.getName());
     }
     LOG.info("---------------------------------");
   }

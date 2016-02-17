@@ -26,17 +26,28 @@ message Config {
   required int32 daemon_port = 1;
 
   /*
-   * Which plugins are active on this node.
+   * GPIO plugins to be activated on this node.
    * Note that the order matters if a plugin requires other plugins as their
    * dependency. Dependencies have to be available a this point.
    * Also we assume only one plugin of each type can be present.
    */
-  repeated Plugin active_plugins = 2;
+  repeated GpioPlugin gpio_plugins = 2;
 
-  /* Defines a plugin that should be active on this node. */
-  message Plugin {
-    /* The name defines which plugin to loads. */
-    required string name = 1;
+  /* 1-Wire plugins to be activated on this node.*/
+  repeated OneWirePlugin onewire_plugins = 3;
+
+  /* Defines a 1-Wire plugin that should be active on this node. */
+  message OneWirePlugin {
+    /* The type defines which plugin to load. */
+    required string type = 1;
+    /* The name of the 1-Wire node, e.g. "28-000005abf27d". */
+    required string name = 2;
+  }
+
+  /* Defines a GPIO plugin that should be active on this node. */
+  message GpioPlugin {
+    /* The type defines which plugin to load. */
+    required string type = 1;
     /* Mapping from e.g. GPIO pins. */
     repeated int32 mapping = 2;
   }

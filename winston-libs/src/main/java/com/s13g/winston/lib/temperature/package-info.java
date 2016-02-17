@@ -15,6 +15,6 @@
  */
 
 /**
- * Used to communicate with the DS18B20 1-wire temperature sensor.
+ * Contains functionality for reading temperature sensors.
  */
-package com.s13g.winston.lib.ds18b20;
+package com.s13g.winston.lib.temperature;
