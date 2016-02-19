@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 The Winston Authors
+ * Copyright 2016 The Winston Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,14 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.plugin;
+package com.s13g.winston.lib.photocell;
+
+import com.s13g.winston.lib.plugin.NodeController;
 
 /**
- * Valid node plugin (Controller/Handler) types.
- * <p>
- * Names must be unique, this is is an enum.
+ * Interface for reading values from a photo resistor.
  */
-public enum NodePluginType {
-  LED, REED, RELAY, _REEDTOLED, PHOTOCELL, DS18B20_TEMP
+public interface PhotoCellController extends NodeController {
+  /** Returns the raw light value. The higher, the more light was measured. */
+  int getLightValue();
 }

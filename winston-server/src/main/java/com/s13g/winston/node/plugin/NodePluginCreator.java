@@ -21,6 +21,8 @@ import com.pi4j.io.gpio.GpioController;
 import com.s13g.winston.lib.core.util.file.ReadableFile;
 import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.led.LedControllerImpl;
+import com.s13g.winston.lib.photocell.PhotoCellController;
+import com.s13g.winston.lib.photocell.PhotoCellControllerImpl;
 import com.s13g.winston.lib.plugin.NodeController;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.lib.plugin.ReedToLedPlugin;
@@ -32,6 +34,7 @@ import com.s13g.winston.lib.temperature.DS18B20ControllerImpl;
 import com.s13g.winston.lib.temperature.TemperatureSensorController;
 import com.s13g.winston.node.handler.Handler;
 import com.s13g.winston.node.handler.LedHandler;
+import com.s13g.winston.node.handler.PhotoCellHandler;
 import com.s13g.winston.node.handler.ReedHandler;
 import com.s13g.winston.node.handler.RelayHandler;
 import com.s13g.winston.node.handler.TemperatureHandler;
@@ -135,6 +138,10 @@ public class NodePluginCreator {
             (NodePluginType.REED).controller, (LedController) mActiveControllers.get
             (NodePluginType.LED).controller);
         handler = null;  // This plugins does not have a handler.
+        break;
+      case PHOTOCELL:
+        controller = new PhotoCellControllerImpl(mapping, mGpioController);
+        handler = new PhotoCellHandler((PhotoCellController) controller);
         break;
       default:
         throw new RuntimeException("No GPIO controller defined for valid type: " + type);
