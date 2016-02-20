@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.photocell;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalMultipurpose;
@@ -24,13 +25,13 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.s13g.winston.lib.core.Pins;
+import com.s13g.winston.lib.core.util.concurrent.WinstonScheduledExecutor;
+import com.s13g.winston.lib.core.util.concurrent.WinstonScheduledExecutorImpl;
 import com.s13g.winston.lib.plugin.NodePluginType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -60,6 +61,7 @@ public class PhotoCellControllerImpl implements PhotoCellController {
   private static final int SLEEP_TIMEOUT_MILLIS = 220;
   private static final int MEASUREMENT_INTERVAL_SECONDS = 5;
 
+  private final int mSleepTimeoutMillis;
   private final GpioPinDigitalMultipurpose mPin;
 
   private volatile int mLastValuePercent = 0;
@@ -72,19 +74,19 @@ public class PhotoCellControllerImpl implements PhotoCellController {
   private volatile int mReadValuePercent;
 
   public PhotoCellControllerImpl(int[] mapping, GpioController gpioController) {
-    this(mapping, gpioController, Executors.newScheduledThreadPool(1, r -> {
-      Thread t = new Thread(r, "PCellReader");
-      t.setPriority(Thread.MAX_PRIORITY);
-      return t;
-    }));
+    this(mapping, gpioController, new WinstonScheduledExecutorImpl("PCellReader"),
+        SLEEP_TIMEOUT_MILLIS);
   }
 
+  @VisibleForTesting
   PhotoCellControllerImpl(int[] mapping, GpioController gpioController,
-                          ScheduledExecutorService executor) {
+                          WinstonScheduledExecutor executor, int sleepTimeoutMillis) {
     Preconditions.checkArgument(mapping.length == 1,
         "Only one photo cell supported at this time.");
-    int gpioPin = mapping[0];
+    Preconditions.checkArgument(mapping[0] <= Pins.GPIO_PIN.length, "Illegal GPIO pin.");
 
+    mSleepTimeoutMillis = sleepTimeoutMillis;
+    int gpioPin = mapping[0];
     LOG.info("Initializing on GPIO pin: " + gpioPin);
     mPin = gpioController.provisionDigitalMultipurposePin(
         Pins.GPIO_PIN[gpioPin], PinMode.DIGITAL_INPUT);
@@ -150,7 +152,7 @@ public class PhotoCellControllerImpl implements PhotoCellController {
       mPin.setMode(PinMode.DIGITAL_OUTPUT);
       mPin.setState(PinState.LOW);
       try {
-        Thread.sleep(SLEEP_TIMEOUT_MILLIS);
+        Thread.sleep(mSleepTimeoutMillis);
       } catch (InterruptedException e) {
         LOG.info("Interrupted.");
         return;
