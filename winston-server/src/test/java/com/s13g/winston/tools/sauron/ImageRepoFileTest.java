@@ -22,7 +22,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -33,11 +36,14 @@ import static org.mockito.Mockito.when;
 public class ImageRepoFileTest {
   private FileWrapper mPath;
   private ImageRepoFile mFile;
+  private BasicFileAttributes mAttributes;
 
   @Before
-  public void initialize() {
+  public void initialize() throws IOException {
     mPath = mock(FileWrapper.class);
+    mAttributes = mock(BasicFileAttributes.class);
     mFile = new ImageRepoFile(mPath);
+    when(mPath.readBasicAttributes()).thenReturn(mAttributes);
   }
 
   @Test
@@ -76,5 +82,53 @@ public class ImageRepoFileTest {
     }
   }
 
-  // TODO: Add tests for compareTo.
+  @Test
+  public void testCompareToFailWithNull() {
+    assertEquals(-1, mFile.compareTo(null));
+  }
+
+  @Test
+  public void testCompareToSameCreationTime() throws IOException {
+    ImageRepoFile otherFile = createFileWithCreationTime(424242);
+    when(mAttributes.creationTime()).thenReturn(FileTime.fromMillis(424242));
+    assertEquals(0, mFile.compareTo(otherFile));
+  }
+
+  @Test
+  public void testCompareToDifferentCreationTime1() throws IOException {
+    ImageRepoFile otherFile = createFileWithCreationTime(424243);
+    when(mAttributes.creationTime()).thenReturn(FileTime.fromMillis(424242));
+    assertEquals(-1, mFile.compareTo(otherFile));
+  }
+
+  @Test
+  public void testCompareToDifferentCreationTime2() throws IOException {
+    ImageRepoFile otherFile = createFileWithCreationTime(424241);
+    when(mAttributes.creationTime()).thenReturn(FileTime.fromMillis(424242));
+    assertEquals(1, mFile.compareTo(otherFile));
+  }
+
+  @Test
+  public void testCompareToFailsDueToException() throws IOException {
+    ImageRepoFile otherFile = createFileWithCreationTime(424242);
+    when(mPath.readBasicAttributes()).thenThrow(new IOException("Boom!"));
+
+    try {
+      assertEquals(1, mFile.compareTo(otherFile));
+      fail("Should have thrown due to file level exception.");
+    } catch (RuntimeException expected) {
+      // Expected.
+    }
+  }
+
+  private static ImageRepoFile createFileWithCreationTime(int creationTimeMillis) throws
+      IOException {
+    BasicFileAttributes otherAttributes = mock(BasicFileAttributes.class);
+    when(otherAttributes.creationTime()).thenReturn(FileTime.fromMillis(creationTimeMillis));
+
+    FileWrapper otherPath = mock(FileWrapper.class);
+    when(otherPath.readBasicAttributes()).thenReturn(otherAttributes);
+
+    return new ImageRepoFile(otherPath);
+  }
 }

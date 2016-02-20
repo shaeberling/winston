@@ -25,18 +25,21 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * An image file created by Sauron
  */
+@ParametersAreNonnullByDefault
 public class ImageRepoFile implements Comparable<ImageRepoFile> {
   private final FileWrapper mFile;
 
   public ImageRepoFile(FileWrapper file) {
-    mFile = file;
+    mFile = Preconditions.checkNotNull(file);
   }
 
   ImageRepoFile(Path file) {
-    this(new FileWrapperImpl(file));
+    this(new FileWrapperImpl(Preconditions.checkNotNull(file)));
   }
 
   /**
@@ -60,11 +63,9 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
 
   @Override
   public int compareTo(ImageRepoFile other) {
-    if (other == null || other.mFile == null) {
+    // Note, we don't need null checks here since mFile can never be null.
+    if (other == null) {
       return -1;
-    }
-    if (mFile == null) {
-      return 1;
     }
 
     FileTime otherCreationTime;
