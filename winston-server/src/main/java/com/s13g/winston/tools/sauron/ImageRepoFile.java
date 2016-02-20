@@ -17,9 +17,10 @@
 package com.s13g.winston.tools.sauron;
 
 import com.google.common.base.Preconditions;
+import com.s13g.winston.lib.core.util.file.FileWrapper;
+import com.s13g.winston.lib.core.util.file.FileWrapperImpl;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
@@ -28,10 +29,14 @@ import java.nio.file.attribute.FileTime;
  * An image file created by Sauron
  */
 public class ImageRepoFile implements Comparable<ImageRepoFile> {
-  private final Path mPath;
+  private final FileWrapper mFile;
 
-  public ImageRepoFile(Path path) {
-    mPath = path;
+  public ImageRepoFile(FileWrapper file) {
+    mFile = file;
+  }
+
+  ImageRepoFile(Path file) {
+    this(new FileWrapperImpl(file));
   }
 
   /**
@@ -40,13 +45,13 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
    * @throws IOException thrown if the file could not be deleted.
    */
   public void delete() throws IOException {
-    if (!Files.isRegularFile(mPath)) {
-      throw new IOException("Not a regular file: " + mPath);
+    if (!mFile.isRegularFile()) {
+      throw new IOException("Not a regular file: " + mFile);
     }
 
     try {
-      if (!Files.deleteIfExists(mPath)) {
-        throw new IOException("File does not exist: " + mPath);
+      if (!mFile.deleteIfExists()) {
+        throw new IOException("File does not exist: " + mFile);
       }
     } catch (IOException | SecurityException ex) {
       throw new IOException("Cannot delete image repo file.", ex);
@@ -55,19 +60,19 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
 
   @Override
   public int compareTo(ImageRepoFile other) {
-    if (other == null || other.mPath == null) {
+    if (other == null || other.mFile == null) {
       return -1;
     }
-    if (mPath == null) {
+    if (mFile == null) {
       return 1;
     }
 
     FileTime otherCreationTime;
     FileTime thisCreationTime;
     try {
-      BasicFileAttributes attributes = Files.readAttributes(other.mPath, BasicFileAttributes.class);
+      BasicFileAttributes attributes = other.mFile.readBasicAttributes();
       otherCreationTime = attributes.creationTime();
-      attributes = Files.readAttributes(mPath, BasicFileAttributes.class);
+      attributes = mFile.readBasicAttributes();
       thisCreationTime = attributes.creationTime();
     } catch (IOException ex) {
       throw new RuntimeException("Error getting file attributes for sorting.", ex);
@@ -81,6 +86,6 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
 
   @Override
   public String toString() {
-    return mPath.toString();
+    return mFile.toString();
   }
 }
