@@ -1,5 +1,10 @@
+plugins {
+  id "net.ltgt.errorprone" version "0.0.8"
+}
+
 apply plugin: 'java'
 apply plugin: 'gradle-one-jar'
+
 
 version = '0.0.1'
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -19,6 +24,7 @@ dependencies {
   testCompile 'org.mockito:mockito-core:1.10.19'
   checker 'org.checkerframework:checker:1.9.11'
   checker 'org.checkerframework:jdk8:1.9.11'
+  errorprone 'com.google.errorprone:error_prone_core:2.0.8'
 }
 
 task checkNullServer(type: JavaCompile) {
@@ -59,33 +65,39 @@ jacocoTestReport {
 task nodeDaemon (type: OneJar) {
   mainClass = 'com.s13g.winston.node.NodeDaemon'
   archiveName = 'winston-node-daemon.jar'
-  manifest {
-    attributes 'Implementation-Title': 'Winston Node Daemon',
-               'Implementation-Version': version,
-               'Timestamp': String.valueOf(System.currentTimeMillis())
-  }
+  // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
+  manifestFile = file('etc/MANIFEST.MF')
+  // manifest {
+  //   attributes 'Implementation-Title': 'Winston Node Daemon',
+  //              'Implementation-Version': version,
+  //              'Timestamp': String.valueOf(System.currentTimeMillis())
+  // }
   useStable = false
 }
 
 task masterDaemon (type: OneJar) {
   mainClass = 'com.s13g.winston.master.MasterDaemon'
   archiveName 'winston-master-daemon.jar'
-  manifest {
-    attributes 'Implementation-Title': 'Winston Master Daemon',
-               'Implementation-Version': version,
-               'Timestamp': String.valueOf(System.currentTimeMillis())
-  }
+  // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
+  manifestFile = file('etc/MANIFEST.MF')
+  // manifest {
+  //   attributes 'Implementation-Title': 'Winston Master Daemon',
+  //              'Implementation-Version': version,
+  //              'Timestamp': String.valueOf(System.currentTimeMillis())
+  // }
   useStable = false
 }
 
 task sauronDaemon (type: OneJar) {
   mainClass = 'com.s13g.winston.tools.sauron.SauronDaemon'
   archiveName 'winston-sauron-daemon.jar'
-  manifest {
-    attributes 'Implementation-Title': 'Winston Sauron Daemon',
-               'Implementation-Version': version,
-               'Timestamp': String.valueOf(System.currentTimeMillis())
-  }
+  // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
+  manifestFile = file('etc/MANIFEST.MF')
+  // manifest {
+  //   attributes 'Implementation-Title': 'Winston Sauron Daemon',
+  //              'Implementation-Version': version,
+  //              'Timestamp': String.valueOf(System.currentTimeMillis())
+  // }
   useStable = false
 }
 

@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.android.tools.build:gradle:1.5.0'
         classpath 'com.github.rholder:gradle-one-jar:1.0.4'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
 
@@ -27,9 +27,8 @@ allprojects {
 
 // To create a gradle wrapper.
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '2.11'
 }
-
 
 // Code Coverage and reporting.
 // The coveralls gradle plugin cannot handle multiple projects, so we have to flatten
