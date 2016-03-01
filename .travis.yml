@@ -26,7 +26,7 @@ android:
     # - sys-img-x86-android-17
 
 # TODO: replace 'test' with 'check'.
-script: "./build-server-jar.sh && ./gradlew test"
+script: "./build-server-jar.sh && ./runAllTests.sh"
 
 after_success:
 - ./gradlew coveralls

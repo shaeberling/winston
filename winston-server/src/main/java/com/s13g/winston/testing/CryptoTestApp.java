@@ -23,6 +23,7 @@ import com.s13g.winston.lib.core.crypto.KeyGenerator;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Optional;
 
 /** Application to test Crypto functionality. */
 public class CryptoTestApp {
@@ -37,15 +38,23 @@ public class CryptoTestApp {
     byte[] key = KeyGenerator.instance().generateKey();
 
     Crypto crypto = CryptoImpl.create(key);
-    EncryptedMessage encrypted = crypto.encrypt(messageStr);
-    System.out.println("IV: " + Arrays.toString(encrypted.iv));
-    System.out.println("Encrypted: " + Arrays.toString(encrypted.message));
+    Optional<EncryptedMessage> encrypted = crypto.encrypt(messageStr);
+
+    if (!encrypted.isPresent()) {
+      System.err.println("Could not encrypt.");
+      System.exit(1);
+      return;
+    }
+
+    EncryptedMessage encryptedMessage = encrypted.get();
+    System.out.println("IV: " + Arrays.toString(encryptedMessage.iv));
+    System.out.println("Encrypted: " + Arrays.toString(encryptedMessage.message));
     try {
-      System.out.println("Encrypted as String: " + new String(encrypted.message, "UTF-8"));
+      System.out.println("Encrypted as String: " + new String(encryptedMessage.message, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
     }
 
-    String decrypted = crypto.decryptString(encrypted);
-    System.out.println("Decrypted: " + decrypted);
+    Optional<String> decrypted = crypto.decryptString(encryptedMessage);
+    System.out.println("Decrypted: " + decrypted.get());
   }
 }

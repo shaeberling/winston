@@ -27,6 +27,7 @@ import java.io.File;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
@@ -65,12 +66,12 @@ public class Scheduler {
    */
   public void start(int delayMillis, final Listener listener) {
     mExecutor.scheduleAtFixedRate(() -> {
-      File nextImageFile = mImageRepository.getCurrentFile();
+      final File nextImageFile = mImageRepository.getCurrentFile();
       ListenableFuture<Boolean> captureResult = mPictureTaker.captureImage(nextImageFile);
       Futures.addCallback(captureResult, new FutureCallback<Boolean>() {
         @Override
-        public void onSuccess(Boolean result) {
-          if (!result) {
+        public void onSuccess(@Nullable Boolean result) {
+          if (result == null || !result) {
             LOG.warn("Taking picture not successful");
             return;
           }

@@ -86,7 +86,7 @@ public class NodeContainer implements Container {
       NodePlugin plugin = nodePluginCreator.create(gpioPlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
-        activeHandlers.add(plugin.handler);
+        activeHandlers.add(plugin.handler.get());
       }
     }
 
@@ -95,7 +95,7 @@ public class NodeContainer implements Container {
       NodePlugin plugin = nodePluginCreator.create(oneWirePlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
-        activeHandlers.add(plugin.handler);
+        activeHandlers.add(plugin.handler.get());
       }
     }
     return new NodeContainer(config.getDaemonPort(), createHandlerMap(activeHandlers));
@@ -137,7 +137,7 @@ public class NodeContainer implements Container {
     }
     LOG.info("Request: " + requestUrl);
 
-    Optional<String> returnValue = null;
+    Optional<String> returnValue = Optional.empty();
     if (requestUrl.startsWith(IO_PREFIX)) {
       returnValue = handleIoRequest(requestUrl.substring(IO_PREFIX.length()));
     }

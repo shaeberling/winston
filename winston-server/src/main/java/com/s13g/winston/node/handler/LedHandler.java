@@ -32,7 +32,7 @@ public class LedHandler implements Handler {
   private static final Logger LOG = LogManager.getLogger(LedHandler.class);
   private final LedController mLedController;
 
-  private static enum LedCommand {
+  private enum LedCommand {
     OFF, ON
   }
 
@@ -56,10 +56,15 @@ public class LedHandler implements Handler {
     final int commandNo = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1,
         arguments.length()));
     if (commandNo < 0 || commandNo >= COMMANDS.length) {
-      LOG.warn("Unkown LED command: " + commandNo);
+      LOG.warn("Unknown LED command: " + commandNo);
       return "FAIL";
     }
-    mCommands.get(COMMANDS[commandNo]).runForLed(ledNo);
+    LedCommandRunner commandRunner = mCommands.get(COMMANDS[commandNo]);
+    if (commandRunner == null) {
+      LOG.warn("Unmapped LED command: " + commandNo);
+      return "FAIL";
+    }
+    commandRunner.runForLed(ledNo);
     return "OK";
   }
 

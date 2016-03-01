@@ -106,7 +106,7 @@ public class MasterContainer implements Container {
       response.getPrintStream().append(doHandle(request));
       response.setStatus(Status.OK);
     } catch (RequestHandlingException e) {
-      LOG.warn(e.getMessage());
+      LOG.warn("Cannot handle request", e);
       if (e.errorCode.isPresent()) {
         response.setStatus(e.errorCode.get());
       } else {
@@ -169,8 +169,9 @@ public class MasterContainer implements Container {
     try {
       return HttpUtil.requestUrl(nodeRequestUrl);
     } catch (IOException e) {
-      LOG.error(e.getMessage());
-      throw new RequestHandlingException("Could not request URL", Status.NO_CONTENT);
+      String msg = "Could not request URL";
+      LOG.error(msg, e);
+      throw new RequestHandlingException(msg, Status.NO_CONTENT);
     }
   }
 }

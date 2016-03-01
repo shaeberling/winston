@@ -16,8 +16,6 @@
 
 package com.s13g.winston.lib.core.crypto;
 
-import com.s13g.winston.lib.core.Provider;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +25,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
+import javax.annotation.Nullable;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -37,13 +36,13 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class KeyGenerator {
   /** For testing. */
-  public static interface SecretKeyFactoryProducer {
-    public SecretKeyFactoryProxy produce() throws NoSuchAlgorithmException;
+  public interface SecretKeyFactoryProducer {
+    SecretKeyFactoryProxy produce() throws NoSuchAlgorithmException;
   }
 
   /** For testing. */
-  public static interface BytesToStringConverter {
-    public String convert(byte[] bytes) throws UnsupportedEncodingException;
+  public interface BytesToStringConverter {
+    String convert(byte[] bytes) throws UnsupportedEncodingException;
   }
 
   public static final SecretKeyFactoryProducer DEFAULT_SECRECT_KEY_FACTORY = () ->
@@ -52,7 +51,8 @@ public class KeyGenerator {
       (bytes) -> new String(bytes, "UTF-8");
 
   private static Logger LOG = LogManager.getLogger(KeyGenerator.class);
-  private static KeyGenerator sInstance;
+  @Nullable
+  private static KeyGenerator sInstance = null;
 
   public static KeyGenerator instance() {
     if (sInstance == null) {

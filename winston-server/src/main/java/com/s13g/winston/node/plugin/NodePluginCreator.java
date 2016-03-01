@@ -134,7 +134,11 @@ public class NodePluginCreator {
         handler = new RelayHandler((RelayController) controller);
         break;
       case _REEDTOLED:
-        controller = new ReedToLedPlugin(mapping, (ReedController) mActiveControllers.get
+        if (!mActiveControllers.containsKey(NodePluginType.REED) ||
+          !mActiveControllers.containsKey(NodePluginType.LED)) {
+          throw new RuntimeException(pluginType + " need REED and LED controllers.");
+        }
+        controller = ReedToLedPlugin.create(mapping, (ReedController) mActiveControllers.get
             (NodePluginType.REED).controller, (LedController) mActiveControllers.get
             (NodePluginType.LED).controller);
         handler = null;  // This plugins does not have a handler.
@@ -170,7 +174,7 @@ public class NodePluginCreator {
   private NodePluginType getPluginType(String type) {
     try {
       return NodePluginType.valueOf(type.toUpperCase());
-    } catch (IllegalArgumentException | NullPointerException e) {
+    } catch (IllegalArgumentException e) {
       LOG.error("Illegal plugin name: " + type);
       throw new RuntimeException("No controller for name: " + type);
     }

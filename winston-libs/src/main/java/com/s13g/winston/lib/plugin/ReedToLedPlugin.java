@@ -25,8 +25,8 @@ import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.reed.ReedController;
 
 /**
- * This node plugins listens to the given reed relays and switches the given
- * LEDs on or off depending on the reed relay's status.
+ * This node plugins listens to the given reed relays and switches the given LEDs on or off
+ * depending on the reed relay's status.
  */
 public class ReedToLedPlugin implements NodeController, ReedController.RelayStateChangedListener {
   private static final Logger LOG = LogManager.getLogger(ReedToLedPlugin.class);
@@ -35,28 +35,38 @@ public class ReedToLedPlugin implements NodeController, ReedController.RelayStat
   private final HashMap<Integer, Integer> mMapping;
   private final LedController mLedController;
 
-  public ReedToLedPlugin(int[] mapping, ReedController reedController,
-                         LedController ledController) {
+  /**
+   * Create the plugin with the given mapping, and add the plugin to the reed controller as a
+   * listener.
+   */
+  public static ReedToLedPlugin create(int[] mapping, ReedController reedController,
+                                       LedController ledController) {
+    ReedToLedPlugin plugin = new ReedToLedPlugin(mapping, ledController);
+    reedController.addListener(plugin);
+    return plugin;
+  }
+
+  private ReedToLedPlugin(int[] mapping,
+                          LedController ledController) {
     mMapping = createMapping(mapping);
     mLedController = ledController;
-    reedController.addListener(this);
   }
 
   @Override
   public void onRelayStateChanged(int relayNum, boolean closed) {
     LOG.debug("plugin: relay changed: " + relayNum + " to " + closed);
-    if (!mMapping.containsKey(relayNum)) {
+    Integer ledNum = mMapping.get(relayNum);
+    if (ledNum == null) {
       // Ignore relay change since we don't listen to state changes of this one.
       return;
     }
-    mLedController.switchLed(mMapping.get(relayNum), closed);
+    mLedController.switchLed(ledNum, closed);
   }
 
   /**
    * Creates a mapping for this plugin.
    *
-   * @param mapping an even number of integers, representing pairs of (reed,led)
-   *                numbers.
+   * @param mapping an even number of integers, representing pairs of (reed,led) numbers.
    * @return A map that contains these pairs.
    */
   public static HashMap<Integer, Integer> createMapping(int[] mapping) {

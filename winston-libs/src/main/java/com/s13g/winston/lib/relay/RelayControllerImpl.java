@@ -69,9 +69,10 @@ public class RelayControllerImpl implements RelayController {
     }
 
     LOG.info("Switching relay" + num + " on? " + on);
-    if (mActivePins.containsKey(num)) {
+    GpioPinDigitalOutput gpio = mActivePins.get(num);
+    if (gpio != null) {
       // If we already initialize the pin, simply switch the state.
-      mActivePins.get(num).setState(on ? PinState.LOW : PinState.HIGH);
+      gpio.setState(on ? PinState.LOW : PinState.HIGH);
       return;
     }
 
@@ -119,15 +120,12 @@ public class RelayControllerImpl implements RelayController {
    * @return Whether the relay with the given number is currently on.
    */
   private synchronized boolean isRelayOn(int num) {
-    if (!mActivePins.containsKey(num)) {
-      return false;
-    }
-    return mActivePins.get(num).isLow();
+    GpioPinDigitalOutput gpio = mActivePins.get(num);
+    return gpio != null && gpio.isLow();
   }
 
   @Override
   public NodePluginType getType() {
     return NodePluginType.RELAY;
   }
-
 }

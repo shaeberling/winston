@@ -63,51 +63,36 @@ public class ImageServerTest {
   }
 
   @Test
-  public void testStartLoadsIndexPage() {
+  public void testStartLoadsIndexPage() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
 
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
 
     // Start serving should load the index file into memory once.
     imageServer.start();
-    try {
-      verify(mMockResourceLoader).load(anyString());
-      verify(mMockServer).startServing(anyObject());
-    } catch (IOException e) {
-    }
+    verify(mMockResourceLoader).load(anyString());
+    verify(mMockServer).startServing(anyObject());
   }
 
   @Test
-  public void testIndexPageLoadDoesntStart() {
+  public void testIndexPageLoadDoesntStart() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
 
-    try {
-      when(mMockResourceLoader.load(anyString())).thenThrow(new IOException());
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenThrow(new IOException());
 
     imageServer.start();
-    try {
-      verify(mMockResourceLoader).load(anyString());
-      // Make sure startServing is never called.
-      verify(mMockServer, times(0)).startServing(anyObject());
-    } catch (IOException e) {
-    }
+    verify(mMockResourceLoader).load(anyString());
+    // Make sure startServing is never called.
+    verify(mMockServer, times(0)).startServing(anyObject());
   }
 
   @Test
-  public void testServingUnmappedUrl() {
+  public void testServingUnmappedUrl() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
@@ -120,13 +105,10 @@ public class ImageServerTest {
   }
 
   @Test
-  public void testServingIndexHtml() {
+  public void testServingIndexHtml() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
@@ -134,31 +116,22 @@ public class ImageServerTest {
 
     OutputStream mockOutputStream = mock(OutputStream.class);
     Response mockResponse = mock(Response.class);
-    try {
-      when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
-    } catch (IOException e) {
-    }
+    when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
 
     // Simulate request to unavailable address.
     containerCaptor.getValue().handle(createMockRequestForUrl("/"), mockResponse);
     verify(mockResponse).setStatus(Status.OK);
     verify(mockResponse).setContentType("text/html");
-    try {
-      verify(mockResponse).close();
-      verify(mockOutputStream).write(eq(new byte[]{1, 2, 23, 42}));
-      verify(mockOutputStream).close();
-    } catch (IOException e) {
-    }
+    verify(mockResponse).close();
+    verify(mockOutputStream).write(eq(new byte[]{1, 2, 23, 42}));
+    verify(mockOutputStream).close();
   }
 
   @Test
-  public void testServingImageFileNotSet() {
+  public void testServingImageFileNotSet() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
@@ -166,33 +139,24 @@ public class ImageServerTest {
 
     OutputStream mockOutputStream = mock(OutputStream.class);
     Response mockResponse = mock(Response.class);
-    try {
-      when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
-    } catch (IOException e) {
-    }
+    when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
 
     // Simulate request to image URL..
     containerCaptor.getValue().handle(createMockRequestForUrl("/now.jpg"), mockResponse);
     verify(mockResponse).setStatus(Status.OK);
     verify(mockResponse).setContentType("image/jpeg");
-    try {
-      verify(mockResponse).close();
+    verify(mockResponse).close();
 
-      // We never set the image
-      verify(mockOutputStream).write(eq(null));
-      verify(mockOutputStream).close();
-    } catch (IOException e) {
-    }
+    // We never set the image
+    verify(mockOutputStream).write(eq(new byte[0]));
+    verify(mockOutputStream).close();
   }
 
   @Test
-  public void testServingImageFileSet() {
+  public void testServingImageFileSet() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
     imageServer.setCurrentFile(() -> Optional.of(new byte[]{1, 2, 3, 5, 8, 13, 21}));
 
@@ -201,33 +165,24 @@ public class ImageServerTest {
 
     OutputStream mockOutputStream = mock(OutputStream.class);
     Response mockResponse = mock(Response.class);
-    try {
-      when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
-    } catch (IOException e) {
-    }
+    when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
 
     // Simulate request to image URL..
     containerCaptor.getValue().handle(createMockRequestForUrl("/now.jpg"), mockResponse);
     verify(mockResponse).setStatus(Status.OK);
     verify(mockResponse).setContentType("image/jpeg");
-    try {
-      verify(mockResponse).close();
+    verify(mockResponse).close();
 
-      // We never set the image
-      verify(mockOutputStream).write(eq(new byte[]{1, 2, 3, 5, 8, 13, 21}));
-      verify(mockOutputStream).close();
-    } catch (IOException e) {
-    }
+    // We never set the image
+    verify(mockOutputStream).write(eq(new byte[]{1, 2, 3, 5, 8, 13, 21}));
+    verify(mockOutputStream).close();
   }
 
   @Test
-  public void testServingThrowsException() {
+  public void testServingThrowsException() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
@@ -235,28 +190,19 @@ public class ImageServerTest {
 
     OutputStream mockOutputStream = mock(OutputStream.class);
     Response mockResponse = mock(Response.class);
-    try {
-      doThrow(new IOException()).when(mockOutputStream).write(any());
-      when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
-    } catch (IOException e) {
-    }
+    doThrow(new IOException()).when(mockOutputStream).write(any());
+    when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
 
     containerCaptor.getValue().handle(createMockRequestForUrl("/"), mockResponse);
-    try {
-      // Even though it throws, response should be closed.
-      verify(mockResponse).close();
-    } catch (IOException e) {
-    }
+    // Even though it throws, response should be closed.
+    verify(mockResponse).close();
   }
 
   @Test
-  public void testResponseCloseThrows() {
+  public void testResponseCloseThrows() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
@@ -264,26 +210,20 @@ public class ImageServerTest {
 
     OutputStream mockOutputStream = mock(OutputStream.class);
     Response mockResponse = mock(Response.class);
-    try {
-      doThrow(new IOException()).when(mockResponse).close();
-      when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
-    } catch (IOException e) {
-    }
+    doThrow(new IOException()).when(mockResponse).close();
+    when(mockResponse.getOutputStream()).thenReturn(mockOutputStream);
 
     containerCaptor.getValue().handle(createMockRequestForUrl("/"), mockResponse);
     // Nothing horrible should happen if response.close throws.
   }
 
   @Test
-  public void testErrorWhenSettingCurrentFile() {
+  public void testErrorWhenSettingCurrentFile() throws IOException {
     ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
         mMockResourceLoader);
-    try {
-      when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    } catch (IOException e) {
-    }
+    when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
     imageServer.start();
-    imageServer.setCurrentFile(() -> Optional.empty());
+    imageServer.setCurrentFile(Optional::empty);
   }
 
   private static Request createMockRequestForUrl(String url) {

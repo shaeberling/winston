@@ -51,11 +51,11 @@ public class SauronDaemon {
     ExecutorService fileReadingExecutor = Executors.newSingleThreadExecutor();
 
     PictureTaker pictureTaker = new PictureTaker(cameraCommandExecutor);
-    ImageRepository imageRepository =
+    final ImageRepository imageRepository =
         ImageRepository.init(MIN_BYTES_AVAILABLE, new File(sRepositoryRoot));
     ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();
     ResourceLoader resourceLoader = new ResourceLoaderImpl();
-    ImageServer imageServer = new ImageServer(HTTP_PORT, serverCreator,
+    final ImageServer imageServer = new ImageServer(HTTP_PORT, serverCreator,
         fileReadingExecutor, resourceLoader);
     Scheduler scheduler = new Scheduler(pictureTaker, imageRepository, schedulerExecutor);
 

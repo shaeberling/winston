@@ -16,46 +16,51 @@
 
 package com.s13g.winston.lib.core.crypto;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Optional;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CryptoImplTest {
-  private byte[] mKey;
   private Crypto mCrypto;
   private Crypto mCrypto2;
 
   @Before
   public void initialize() {
-    mKey = KeyGenerator.instance().generateKey();
-    mCrypto = CryptoImpl.create(mKey);
-    mCrypto2 = CryptoImpl.create(mKey);
+    byte[] key = KeyGenerator.instance().generateKey();
+    mCrypto = CryptoImpl.create(key);
+    mCrypto2 = CryptoImpl.create(key);
   }
 
   @Test
   public void testStringEncryption() {
     String messageIn = "This is top secret";
-    EncryptedMessage encrypted = mCrypto.encrypt(messageIn);
+    Optional<EncryptedMessage> encrypted = mCrypto.encrypt(messageIn);
+
+    assertTrue(encrypted.isPresent());
 
     // Any crypto with the same key should be able to decrypt the messageIn.
-    String messageOut = mCrypto2.decryptString(encrypted);
-    assertEquals(messageIn, messageOut);
+    Optional<String> messageOut = mCrypto2.decryptString(encrypted.get());
+    assertEquals(messageIn, messageOut.get());
   }
 
   @Test
   public void testRawByteEncryption() {
     byte[] messageIn = new byte[]{1, 2, 3, 5, 7, 10, 42};
-    EncryptedMessage encrypted = mCrypto.encrypt(messageIn);
+    Optional<EncryptedMessage> encrypted = mCrypto.encrypt(messageIn);
+
+    assertTrue(encrypted.isPresent());
 
     // Any crypto with the same key should be able to decrypt the messageIn.
-    byte[] messageOut = mCrypto2.decrypt(encrypted);
-    assertArrayEquals(messageIn, messageOut);
+    Optional<byte[]> messageOut = mCrypto2.decrypt(encrypted.get());
+    assertArrayEquals(messageIn, messageOut.get());
     assertFalse("Encrypted message is equals to clear text",
-        Arrays.equals(messageIn, encrypted.message));
+        Arrays.equals(messageIn, encrypted.get().message));
   }
 }

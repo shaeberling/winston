@@ -16,19 +16,21 @@
 
 package com.s13g.winston.lib.core.crypto;
 
+import java.util.Optional;
+
 /**
  * Interface for the cryptographic functions.
  */
 public interface Crypto {
   /** Encrypts the given string. */
-  public EncryptedMessage encrypt(String input);
+  Optional<EncryptedMessage> encrypt(String input);
 
   /** Encrypts the given data. */
-  public EncryptedMessage encrypt(byte[] input);
+  Optional<EncryptedMessage> encrypt(byte[] input);
 
   /** Decrypts the given message and returns the raw data. */
-  public byte[] decrypt(EncryptedMessage message);
+  Optional<byte[]> decrypt(EncryptedMessage message);
 
   /** Decrypts the given message and returns it as a UTF-8 string. */
-  public String decryptString(EncryptedMessage message);
+  Optional<String> decryptString(EncryptedMessage message);
 }

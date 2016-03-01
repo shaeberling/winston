@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
@@ -57,10 +58,7 @@ public class FileWrapperImpl implements FileWrapper {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (!(obj instanceof FileWrapperImpl)) {
-      return false;
-    }
-    return mPath.equals(((FileWrapperImpl) obj).mPath);
+  public boolean equals(@Nullable Object obj) {
+    return obj instanceof FileWrapperImpl && mPath.equals(((FileWrapperImpl) obj).mPath);
   }
 }

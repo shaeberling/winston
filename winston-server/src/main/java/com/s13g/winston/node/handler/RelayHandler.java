@@ -67,7 +67,12 @@ public class RelayHandler implements Handler {
       LOG.warn("Unknown relay command: " + commandNo);
       return "FAIL";
     }
-    mCommands.get(COMMANDS[commandNo]).runForRelay(relayNo);
+    RelayCommandRunner commandRunner = mCommands.get(COMMANDS[commandNo]);
+    if (commandRunner == null) {
+      LOG.warn("Unmapped relay command: " + commandNo);
+      return "FAIL";
+    }
+    commandRunner.runForRelay(relayNo);
     return "OK";
   }
 

@@ -93,7 +93,9 @@ public class ImageServer {
     mContainerServer = serverCreator.create(port, NUM_SERVER_THREADS);
     mFileReadExecutor = fileReadExecutor;
     mResourceLoader = resourceLoader;
+    mCurrentImageBytes = new byte[0];
     mBytesLock = new Object();
+    mIndexPageBytes = new byte[0];
   }
 
   /**

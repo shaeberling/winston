@@ -2,7 +2,12 @@ apply plugin: 'java'
 apply plugin: 'gradle-one-jar'
 
 version = '0.0.1'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
+configurations {
+  checker
+}
 
 dependencies {
   compile project(':winston-protos')
@@ -12,6 +17,34 @@ dependencies {
   compile 'com.google.code.findbugs:jsr305:3+'
   testCompile 'junit:junit:4.12'
   testCompile 'org.mockito:mockito-core:1.10.19'
+  checker 'org.checkerframework:checker:1.9.11'
+  checker 'org.checkerframework:jdk8:1.9.11'
+}
+
+task checkNullServer(type: JavaCompile) {
+   source = fileTree(dir: 'src/main/java', include: '**/*.java')
+   destinationDir = file('build/checker-classes-ignore')
+   classpath = sourceSets.main.compileClasspath + configurations.checker
+   options.debug = true
+   options.compilerArgs = [
+      "-Xbootclasspath/p:${configurations.checker.asPath}",
+      '-processor', 'org.checkerframework.checker.nullness.NullnessChecker',
+      '-implicit:class',
+      '-AprintErrorStack'
+   ]
+}
+
+task checkLocksServer(type: JavaCompile) {
+   source = fileTree(dir: 'src/main/java', include: '**/*.java')
+   destinationDir = file('build/checker-classes-ignore')
+   classpath = sourceSets.main.compileClasspath + configurations.checker
+   options.debug = true
+   options.compilerArgs = [
+      "-Xbootclasspath/p:${configurations.checker.asPath}",
+      '-processor', 'org.checkerframework.checker.lock.LockChecker',
+      '-implicit:class',
+      '-AprintErrorStack'
+   ]
 }
 
 jacocoTestReport {
