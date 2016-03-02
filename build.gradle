@@ -13,6 +13,13 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+apply plugin: 'idea'
+
+idea {
+  project {
+    languageLevel = '1.8'
+  }
+}
 
 allprojects {
   repositories {
