@@ -39,7 +39,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * The image repository is initialize in a certain directory, which can always contain valid
  * repository data or a new directory.
- * <p>
+ * <p/>
  * Based on the current time, the repository is able to store new images into a folder structure
  * that works well for archiving and retrieval.
  */
@@ -49,7 +49,6 @@ public class ImageRepository {
   private static final String FILE_EXTENSION = ".jpg";
   private final File mRootDirectory;
   private final FreeSpaceReporter mFreeSpaceReporter;
-  private final boolean mDoNotCreateDirs;
 
   /** All image files are stored as a reference. */
   private final LinkedList<ImageRepoFile> mImageFiles;
@@ -58,30 +57,26 @@ public class ImageRepository {
    * Creates a new image repository.
    *
    * @param rootDirectory the root directory of the image repository
-   * @param doNotCreateDirs set this to 'true' in tests to avoid it creating directories.
    */
   @VisibleForTesting
-  ImageRepository(File rootDirectory, FreeSpaceReporter freeSpaceReporter,
-                  boolean doNotCreateDirs) {
+  ImageRepository(File rootDirectory, FreeSpaceReporter freeSpaceReporter) {
     mRootDirectory = rootDirectory;
     mFreeSpaceReporter = freeSpaceReporter;
-    mDoNotCreateDirs = doNotCreateDirs;
     mImageFiles = new LinkedList<>();
   }
 
   @Nonnull
   public static ImageRepository init(long minFreeSpaceBytes, File rootDirectory)
       throws IOException {
-    FreeSpaceReporter reporter = FreeSpaceReporter.from(minFreeSpaceBytes, rootDirectory.toPath());
-    ImageRepository repository =
-        new ImageRepository(rootDirectory, reporter, false /** this is not a test */);
+    FreeSpaceReporterImpl reporter = FreeSpaceReporterImpl.from(minFreeSpaceBytes, rootDirectory.toPath());
+    ImageRepository repository = new ImageRepository(rootDirectory, reporter);
     repository.init();
     return repository;
   }
 
   /**
    * Based on the current time, determines the path and file name for the image to be created.
-   * <p>
+   * <p/>
    * Timestamp will be nano-second precise so avoid duplicates.
    *
    * @return A writable file that an image can be written to.
@@ -93,10 +88,10 @@ public class ImageRepository {
 
   /**
    * Call this when a new image file was written to disk.
-   * <p>
+   * <p/>
    * We append the new file to the list of existing files so we can access is later for e.g
    * deletion.
-   * <p>
+   * <p/>
    * We also check if the number of bytes left on disk is higher or equal to the number of minimum
    * bytes allowed to be left (see constructor parameter). If the available space is too low, we
    * delete the oldest image in the list. NOTE: We do not delete images until enough space is
@@ -120,7 +115,8 @@ public class ImageRepository {
    * Initializes the repository at the given location. Builds the list of file reference for fast
    * access and ability to delete LRU.
    */
-  private void init() {
+  @VisibleForTesting
+  void init() {
     Preconditions.checkState(mImageFiles.isEmpty(), "ImageRepo already initialized.");
     LOG.info("Initializing ImageRepository");
 
@@ -148,7 +144,6 @@ public class ImageRepository {
       LOG.info("Sorting Done.");
     } catch (IOException | RuntimeException ex) {
       LOG.error("Cannot scan existing image repo.", ex);
-      return;
     }
   }
 
@@ -163,14 +158,11 @@ public class ImageRepository {
   File getFileForTime(LocalDateTime time) {
     File directory = getDirectory(time);
 
-    // We don't want to run these checks in fast running tests.
-    if (!mDoNotCreateDirs) {
-      if (directory.exists() && !directory.isDirectory()) {
-        throw new RuntimeException("Location is not a directory: " + directory.getAbsolutePath());
-      }
-      if (!directory.exists() && !directory.mkdirs()) {
-        throw new RuntimeException("Cannot not create directory: " + directory.getAbsolutePath());
-      }
+    if (directory.exists() && !directory.isDirectory()) {
+      throw new RuntimeException("Location is not a directory: " + directory.getAbsolutePath());
+    }
+    if (!directory.exists() && !directory.mkdirs()) {
+      throw new RuntimeException("Cannot not create directory: " + directory.getAbsolutePath());
     }
     return new File(directory, getFilename(time));
   }

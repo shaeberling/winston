@@ -63,7 +63,6 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
 
   @Override
   public int compareTo(ImageRepoFile other) {
-    // Note, we don't need null checks here since mFile can never be null.
     if (other == null) {
       return -1;
     }
