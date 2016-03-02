@@ -106,25 +106,50 @@ public class ImageRepositoryTest {
     assertThat(subDir2.listFiles()).hasLength(42);
 
     // If enough space is free, no files should be deleted when a new file was added.
-    mFakeFreeSpaceReporter.setFreeSpaceAvailable(true);
+    mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(0);
 
-    File newFile = new File(subDir1, "NewFile1.jpg");
+    createNewFileAndAddToRep("NewFile1.jpg", subDir1, repository);
+    assertThat(subDir1.listFiles()).hasLength(24);
+    assertThat(subDir2.listFiles()).hasLength(42);
+
+    // Now lets pretend we ran out of space and need to delete a single file.
+    mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(1);
+
+    createNewFileAndAddToRep("NewFile2.jpg", subDir1, repository);
+    // The amount of files should not have changed.
+    assertThat(subDir1.listFiles()).hasLength(24);
+    assertThat(subDir2.listFiles()).hasLength(42);
+
+    createNewFileAndAddToRep("NewFile3.jpg", subDir1, repository);
+    // Since the second call to to check available space showed spaces is available, the file can
+    // be added and the list of files should grow with the new file.
+    assertThat(subDir1.listFiles()).hasLength(25);
+    assertThat(subDir2.listFiles()).hasLength(42);
+
+    // Now let's say something else wrote data onto the disk and there is now less space available.
+    // This should make the image repo delete ten files until it starts growing the list again.
+    mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(10);
+
+    // Let's add these to subDir2. Since the files in subDir1 we initially added are older than
+    // subDir2, we should be seeing those deleted first.
+    createNewFileAndAddToRep("NewFile4.jpg", subDir2, repository);
+    assertThat(subDir1.listFiles()).hasLength(15);
+    assertThat(subDir2.listFiles()).hasLength(43);
+
+    createNewFileAndAddToRep("NewFile5.jpg", subDir2, repository);
+    assertThat(subDir1.listFiles()).hasLength(15);
+    assertThat(subDir2.listFiles()).hasLength(44);
+  }
+
+  private static void createNewFileAndAddToRep(String name, File dir, ImageRepository repository)
+      throws IOException {
+    File newFile = new File(dir, name);
     assertTrue(newFile.createNewFile());
     repository.onFileWritten(newFile);
-    assertThat(subDir1.listFiles()).hasLength(24);
-    assertThat(subDir2.listFiles()).hasLength(42);
-
-    // Now lets pretend we ran out of space.
-    mFakeFreeSpaceReporter.setFreeSpaceAvailable(false);
-
-    File newFile2 = new File(subDir1, "NewFile2.jpg");
-    assertTrue(newFile2.createNewFile());
-    repository.onFileWritten(newFile);
-    // The amount of files should not have changed. And our new file should still be there, since
-    // it's the newest.
-    assertThat(newFile2.exists()).isTrue();
-    assertThat(subDir1.listFiles()).hasLength(24);
-    assertThat(subDir2.listFiles()).hasLength(42);
+    // Our new file should still be there, since it's the newest. No matter whether othe files
+    // had to be removed. The only case where this could happen if the disk ran out of memory
+    // completely.
+    assertThat(newFile.exists()).isTrue();
   }
 
   private void assertFileForDate(File expectedFile, File rootDir, int year, int month,
@@ -152,15 +177,20 @@ public class ImageRepositoryTest {
 
   /** Enables us to fake the state of the file system. */
   private static class FakeFreeSpaceReporter implements FreeSpaceReporter {
-    private boolean mFreeSpaceAvailable = false;
+    // How many times isMinSpaceAvailable needs to be called to report 'true'.
+    private int mCountdownToSpace = 0;
 
     @Override
     public boolean isMinSpaceAvailable() {
-      return mFreeSpaceAvailable;
+      mCountdownToSpace--;
+      if (mCountdownToSpace < 0) {
+        mCountdownToSpace = 0;
+      }
+      return mCountdownToSpace == 0;
     }
 
-    public void setFreeSpaceAvailable(boolean freeSpaceAvailable) {
-      mFreeSpaceAvailable = freeSpaceAvailable;
+    public void setFreeSpaceAvailableCountDown(int countdownToSpace) {
+      mCountdownToSpace = countdownToSpace + 1;
     }
   }
 }

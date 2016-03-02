@@ -104,7 +104,7 @@ public class ImageRepository {
   public void onFileWritten(File file) throws IOException {
     mImageFiles.add(new ImageRepoFile(file.toPath()));
 
-    if (!mFreeSpaceReporter.isMinSpaceAvailable()) {
+    while (!mFreeSpaceReporter.isMinSpaceAvailable()) {
       ImageRepoFile oldestImage = mImageFiles.removeFirst();
       LOG.info("Not enough space. Deleting: " + oldestImage);
       oldestImage.delete();
