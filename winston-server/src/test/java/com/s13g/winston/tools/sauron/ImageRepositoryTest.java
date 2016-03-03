@@ -23,10 +23,13 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.RandomAccess;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -145,6 +148,14 @@ public class ImageRepositoryTest {
       throws IOException {
     File newFile = new File(dir, name);
     assertTrue(newFile.createNewFile());
+
+    // We do the following to ensure the file exists. Before this we had issues on travis where a
+    // file was written but not immediately in the list of files present.
+    RandomAccessFile raFile = new RandomAccessFile(newFile, "rw");
+    raFile.writeShort(42);
+    FileDescriptor fd = raFile.getFD();
+    raFile.close();
+
     repository.onFileWritten(newFile);
     // Our new file should still be there, since it's the newest. No matter whether othe files
     // had to be removed. The only case where this could happen if the disk ran out of memory
