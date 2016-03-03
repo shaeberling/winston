@@ -32,6 +32,7 @@ import java.time.LocalTime;
 import java.util.RandomAccess;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -120,8 +121,8 @@ public class ImageRepositoryTest {
 
     createNewFileAndAddToRep("NewFile2.jpg", subDir1, repository);
     // The amount of files should not have changed.
-    assertThat(subDir1.list()).hasLength(24);
-    assertThat(subDir2.list()).hasLength(42);
+    assertEquals(24, subDir1.list().length);
+    assertEquals(42, subDir2.list().length);
 
     createNewFileAndAddToRep("NewFile3.jpg", subDir1, repository);
     // Since the second call to to check available space showed spaces is available, the file can
@@ -167,7 +168,7 @@ public class ImageRepositoryTest {
     LocalTime time = LocalTime.of(hour, minute, second, nanos);
     LocalDateTime dateTime = LocalDateTime.of(date, time);
     File file = repository.getFileForTime(dateTime);
-    Assert.assertEquals(expectedFile.getAbsolutePath(), file.getAbsolutePath());
+    assertEquals(expectedFile.getAbsolutePath(), file.getAbsolutePath());
   }
 
   /** Create an absolute file with the given path, relative to mRoot. */
