@@ -20,6 +20,8 @@ import com.s13g.winston.common.ContainerServer;
 import com.s13g.winston.common.io.FileDataLoader;
 import com.s13g.winston.common.io.ResourceLoader;
 import com.s13g.winston.common.io.ResourceLoaderImpl;
+import com.s13g.winston.lib.core.file.DirectoryImpl;
+import com.s13g.winston.lib.core.file.FileWrapperImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,7 +54,7 @@ public class SauronDaemon {
 
     PictureTaker pictureTaker = new PictureTaker(cameraCommandExecutor);
     final ImageRepository imageRepository =
-        ImageRepository.init(MIN_BYTES_AVAILABLE, new File(sRepositoryRoot));
+        ImageRepository.init(MIN_BYTES_AVAILABLE, DirectoryImpl.create(sRepositoryRoot));
     ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();
     ResourceLoader resourceLoader = new ResourceLoaderImpl();
     final ImageServer imageServer = new ImageServer(HTTP_PORT, serverCreator,
@@ -66,7 +68,7 @@ public class SauronDaemon {
     scheduler.start(SHOT_DELAY_MILLIS, (pictureFile) -> {
       LOG.debug("New picture available: " + pictureFile.getAbsolutePath());
       try {
-        imageRepository.onFileWritten(pictureFile);
+        imageRepository.onFileWritten(new FileWrapperImpl(pictureFile.toPath()));
       } catch (IOException ex) {
         // TODO: We should probably kill the daemon to prevent a system out of memory condition.
         LOG.error("Cannot delete oldest file. System might run out of memory soon.", ex);

@@ -83,11 +83,6 @@ public class ImageRepoFileTest {
   }
 
   @Test
-  public void testCompareToFailWithNull() {
-    assertEquals(-1, mFile.compareTo(null));
-  }
-
-  @Test
   public void testCompareToSameCreationTime() throws IOException {
     ImageRepoFile otherFile = createFileWithCreationTime(424242);
     when(mAttributes.creationTime()).thenReturn(FileTime.fromMillis(424242));

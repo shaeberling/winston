@@ -38,10 +38,6 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
     mFile = Preconditions.checkNotNull(file);
   }
 
-  ImageRepoFile(Path file) {
-    this(new FileWrapperImpl(Preconditions.checkNotNull(file)));
-  }
-
   /**
    * Deletes the given file.
    *
@@ -63,9 +59,7 @@ public class ImageRepoFile implements Comparable<ImageRepoFile> {
 
   @Override
   public int compareTo(ImageRepoFile other) {
-    if (other == null) {
-      return -1;
-    }
+    Preconditions.checkNotNull(other);
 
     FileTime otherCreationTime;
     FileTime thisCreationTime;
