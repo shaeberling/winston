@@ -16,7 +16,7 @@
 
 package com.s13g.winston.lib.temperature;
 
-import com.s13g.winston.lib.core.util.file.ReadableFile;
+import com.s13g.winston.lib.core.file.ReadableFile;
 import com.s13g.winston.lib.plugin.NodePluginType;
 
 import org.apache.logging.log4j.LogManager;

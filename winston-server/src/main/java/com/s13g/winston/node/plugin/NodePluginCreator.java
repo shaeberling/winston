@@ -18,7 +18,7 @@
 package com.s13g.winston.node.plugin;
 
 import com.pi4j.io.gpio.GpioController;
-import com.s13g.winston.lib.core.util.file.ReadableFile;
+import com.s13g.winston.lib.core.file.ReadableFile;
 import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.led.LedControllerImpl;
 import com.s13g.winston.lib.photocell.PhotoCellController;

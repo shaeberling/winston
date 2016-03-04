@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.core.util.file;
+package com.s13g.winston.lib.core.file;
 
 import java.io.IOException;
 import java.nio.file.attribute.BasicFileAttributes;

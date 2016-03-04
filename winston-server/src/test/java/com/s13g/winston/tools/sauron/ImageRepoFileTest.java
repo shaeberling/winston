@@ -16,7 +16,7 @@
 
 package com.s13g.winston.tools.sauron;
 
-import com.s13g.winston.lib.core.util.file.FileWrapper;
+import com.s13g.winston.lib.core.file.FileWrapper;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -17,8 +17,8 @@
 package com.s13g.winston.tools.sauron;
 
 import com.google.common.base.Preconditions;
-import com.s13g.winston.lib.core.util.file.FileWrapper;
-import com.s13g.winston.lib.core.util.file.FileWrapperImpl;
+import com.s13g.winston.lib.core.file.FileWrapper;
+import com.s13g.winston.lib.core.file.FileWrapperImpl;
 
 import java.io.IOException;
 import java.nio.file.Path;
