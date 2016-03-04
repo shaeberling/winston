@@ -1,6 +1,6 @@
 #!/bin/sh
 
-./gradlew test --stacktrace && \
+./gradlew test -i && \
 ./gradlew checkNullLibs && \
 ./gradlew checkLocksLibs && \
 ./gradlew checkNullServer && \
