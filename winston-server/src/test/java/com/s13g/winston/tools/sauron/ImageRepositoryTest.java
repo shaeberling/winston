@@ -16,24 +16,19 @@
 
 package com.s13g.winston.tools.sauron;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.RandomAccess;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -91,7 +86,7 @@ public class ImageRepositoryTest {
   }
 
   @Test
-  public void ensureDiskSpaceStaysSane() throws IOException {
+  public void ensureDiskSpaceStaysSane() throws IOException, InterruptedException {
     // First, let's create a temporary tree of jpeg files which the repo can use to initialize
     // itself.
     File subDir1 = new File(new File(new File(mRoot, "2016"), "03"), "01");
@@ -116,19 +111,19 @@ public class ImageRepositoryTest {
     // If enough space is free, no files should be deleted when a new file was added.
     mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(0);
 
-    createNewFileAndAddToRep("NewFile1.jpg", subDir1, repository);
+    createNewFileAndAddToRep("FileNew_1.jpg", subDir1, repository);
     assertThat(getFileCount(subDir1)).isEqualTo(24);
     assertThat(getFileCount(subDir2)).isEqualTo(7);
 
     // Now lets pretend we ran out of space and need to delete a single file.
     mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(1);
 
-    createNewFileAndAddToRep("NewFile2.jpg", subDir1, repository);
+    createNewFileAndAddToRep("FileNew_2.jpg", subDir1, repository);
     // The amount of files should not have changed.
     assertThat(getFileCount(subDir1)).isEqualTo(24);
     assertThat(getFileCount(subDir2)).isEqualTo(7);
 
-    createNewFileAndAddToRep("NewFile3.jpg", subDir1, repository);
+    createNewFileAndAddToRep("FileNew_3.jpg", subDir1, repository);
     // Since the second call to to check available space showed spaces is available, the file can
     // be added and the list of files should grow with the new file.
     assertThat(getFileCount(subDir1)).isEqualTo(25);
@@ -140,11 +135,11 @@ public class ImageRepositoryTest {
 
     // Let's add these to subDir2. Since the files in subDir1 we initially added are older than
     // subDir2, we should be seeing those deleted first.
-    createNewFileAndAddToRep("NewFile4.jpg", subDir2, repository);
+    createNewFileAndAddToRep("FileNew_4.jpg", subDir2, repository);
     assertThat(getFileCount(subDir1)).isEqualTo(10);
     assertThat(getFileCount(subDir2)).isEqualTo(8);
 
-    createNewFileAndAddToRep("NewFile5.jpg", subDir2, repository);
+    createNewFileAndAddToRep("FileNew_5.jpg", subDir2, repository);
     assertThat(getFileCount(subDir1)).isEqualTo(10);
     assertThat(getFileCount(subDir2)).isEqualTo(9);
   }
@@ -154,7 +149,8 @@ public class ImageRepositoryTest {
     DirectoryStream<Path> fileStream = Files.newDirectoryStream(directory.toPath());
 
     for (Path file : fileStream) {
-      if (Files.isRegularFile(file)) {
+      String name = file.getFileName().toString();
+      if (Files.isRegularFile(file) && name.startsWith("File") && name.endsWith(".jpg")) {
         count++;
       }
     }
@@ -162,7 +158,7 @@ public class ImageRepositoryTest {
   }
 
   private static void createNewFileAndAddToRep(String name, File dir, ImageRepository repository)
-      throws IOException {
+      throws IOException, InterruptedException {
     File newFile = new File(dir, name);
     assertTrue(newFile.createNewFile());
 
@@ -171,6 +167,7 @@ public class ImageRepositoryTest {
     // had to be removed. The only case where this could happen if the disk ran out of memory
     // completely.
     assertThat(newFile.exists()).isTrue();
+    Thread.sleep(500);
   }
 
   private void assertFileForDate(File expectedFile, File rootDir, int year, int month,

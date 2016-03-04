@@ -1,2 +1,2 @@
 #!/bin/sh
-./gradlew :winston-server:jar --stacktrace
+./gradlew :winston-server:jar
