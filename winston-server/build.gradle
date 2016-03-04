@@ -62,7 +62,7 @@ task nodeDaemon (type: OneJar) {
   mainClass = 'com.s13g.winston.node.NodeDaemon'
   archiveName = 'winston-node-daemon.jar'
   // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-  manifestFile = file('etc/MANIFEST.MF')
+  manifestFile = file('etc/MANIFEST-node.MF')
   // manifest {
   //   attributes 'Implementation-Title': 'Winston Node Daemon',
   //              'Implementation-Version': version,
@@ -75,7 +75,7 @@ task masterDaemon (type: OneJar) {
   mainClass = 'com.s13g.winston.master.MasterDaemon'
   archiveName 'winston-master-daemon.jar'
   // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-  manifestFile = file('etc/MANIFEST.MF')
+  manifestFile = file('etc/MANIFEST-master.MF')
   // manifest {
   //   attributes 'Implementation-Title': 'Winston Master Daemon',
   //              'Implementation-Version': version,
@@ -88,7 +88,7 @@ task sauronDaemon (type: OneJar) {
   mainClass = 'com.s13g.winston.tools.sauron.SauronDaemon'
   archiveName 'winston-sauron-daemon.jar'
   // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-  manifestFile = file('etc/MANIFEST.MF')
+  manifestFile = file('etc/MANIFEST-sauron.MF')
   // manifest {
   //   attributes 'Implementation-Title': 'Winston Sauron Daemon',
   //              'Implementation-Version': version,

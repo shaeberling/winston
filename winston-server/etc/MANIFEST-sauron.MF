@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.3
+Created-By: 1.8.0_60-b27 (Oracle Corporation)
+Implementation-Title: Winston Sauron Daemon
+Implementation-Version: 0.0.1
+Timestamp: 1456862940575
+Main-Class: com.simontuffs.onejar.Boot
+One-Jar-Main-Class: com.s13g.winston.tools.sauron.SauronDaemon
+One-Jar-Show-Expand: false
+One-Jar-Confirm-Expand: false
