@@ -26,6 +26,10 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -98,7 +102,7 @@ public class ImageRepositoryTest {
     for (int i = 0; i < 23; ++i) {
       assertTrue((new File(subDir1, "File_" + i + ".jpg")).createNewFile());
     }
-    for (int i = 0; i < 42; ++i) {
+    for (int i = 0; i < 7; ++i) {
       assertTrue((new File(subDir2, "File_" + i + ".jpg")).createNewFile());
     }
 
@@ -106,43 +110,55 @@ public class ImageRepositoryTest {
     repository.init();
 
     // Let's sanity check where we're starting from.
-    assertThat(subDir1.list()).hasLength(23);
-    assertThat(subDir2.list()).hasLength(42);
+    assertThat(getFileCount(subDir1)).isEqualTo(23);
+    assertThat(getFileCount(subDir2)).isEqualTo(7);
 
     // If enough space is free, no files should be deleted when a new file was added.
     mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(0);
 
     createNewFileAndAddToRep("NewFile1.jpg", subDir1, repository);
-    assertThat(subDir1.list()).hasLength(24);
-    assertThat(subDir2.list()).hasLength(42);
+    assertThat(getFileCount(subDir1)).isEqualTo(24);
+    assertThat(getFileCount(subDir2)).isEqualTo(7);
 
     // Now lets pretend we ran out of space and need to delete a single file.
     mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(1);
 
     createNewFileAndAddToRep("NewFile2.jpg", subDir1, repository);
     // The amount of files should not have changed.
-    assertEquals(24, subDir1.list().length);
-    assertEquals(42, subDir2.list().length);
+    assertThat(getFileCount(subDir1)).isEqualTo(24);
+    assertThat(getFileCount(subDir2)).isEqualTo(7);
 
     createNewFileAndAddToRep("NewFile3.jpg", subDir1, repository);
     // Since the second call to to check available space showed spaces is available, the file can
     // be added and the list of files should grow with the new file.
-    assertThat(subDir1.list()).hasLength(25);
-    assertThat(subDir2.list()).hasLength(42);
+    assertThat(getFileCount(subDir1)).isEqualTo(25);
+    assertThat(getFileCount(subDir2)).isEqualTo(7);
 
     // Now let's say something else wrote data onto the disk and there is now less space available.
     // This should make the image repo delete ten files until it starts growing the list again.
-    mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(10);
+    mFakeFreeSpaceReporter.setFreeSpaceAvailableCountDown(15);
 
     // Let's add these to subDir2. Since the files in subDir1 we initially added are older than
     // subDir2, we should be seeing those deleted first.
     createNewFileAndAddToRep("NewFile4.jpg", subDir2, repository);
-    assertThat(subDir1.list()).hasLength(15);
-    assertThat(subDir2.list()).hasLength(43);
+    assertThat(getFileCount(subDir1)).isEqualTo(10);
+    assertThat(getFileCount(subDir2)).isEqualTo(8);
 
     createNewFileAndAddToRep("NewFile5.jpg", subDir2, repository);
-    assertThat(subDir1.list()).hasLength(15);
-    assertThat(subDir2.list()).hasLength(44);
+    assertThat(getFileCount(subDir1)).isEqualTo(10);
+    assertThat(getFileCount(subDir2)).isEqualTo(9);
+  }
+
+  private static int getFileCount(File directory) throws IOException {
+    int count = 0;
+    DirectoryStream<Path> fileStream = Files.newDirectoryStream(directory.toPath());
+
+    for (Path file : fileStream) {
+      if (Files.isRegularFile(file)) {
+        count++;
+      }
+    }
+    return count;
   }
 
   private static void createNewFileAndAddToRep(String name, File dir, ImageRepository repository)
