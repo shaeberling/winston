@@ -16,7 +16,8 @@
 
 package com.s13g.winston.master;
 
-import com.s13g.winston.lib.core.util.HttpUtil;
+import com.s13g.winston.lib.core.util.HttpRequesterImpl;
+import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 import com.s13g.winston.master.proto.MasterProtos;
 
 import org.apache.logging.log4j.LogManager;
@@ -55,12 +56,14 @@ public class MasterContainer implements Container {
   }
 
   private static final Logger LOG = LogManager.getLogger(MasterContainer.class);
+  private final int mPort;
+  private final HttpRequester mHttpRequester;
   /** Maps node name to URL. */
   private final Map<String, String> mNodeMap;
-  private final int mPort;
 
-  MasterContainer(int port, Map<String, String> nodeMap) {
+  MasterContainer(int port, Map<String, String> nodeMap, HttpRequester httpRequester) {
     mPort = port;
+    mHttpRequester = httpRequester;
     mNodeMap = new HashMap<>(nodeMap);
   }
 
@@ -70,7 +73,7 @@ public class MasterContainer implements Container {
    * @param config the configuration to be used for this container.
    * @return The valid container to serve the master requests.
    */
-  public static MasterContainer from(MasterProtos.Config config) {
+  public static MasterContainer from(MasterProtos.Config config, HttpRequester httpRequester) {
     Map<String, String> nodeMap = new HashMap<>(config.getNodeMappingCount());
 
     for (MasterProtos.Config.NodeMapping nodeMapping : config.getNodeMappingList()) {
@@ -81,7 +84,7 @@ public class MasterContainer implements Container {
       nodeUrl.append(nodeMapping.getPort());
       nodeMap.put(nodeMapping.getName(), nodeUrl.toString());
     }
-    return new MasterContainer(config.getDaemonPort(), nodeMap);
+    return new MasterContainer(config.getDaemonPort(), nodeMap, httpRequester);
   }
 
   /**
@@ -157,7 +160,8 @@ public class MasterContainer implements Container {
 
     LOG.info("Node: " + nodeName);
     if (!mNodeMap.containsKey(nodeName)) {
-      throw new RequestHandlingException("No mapping for given node: " + nodeName, Status.NOT_FOUND);
+      throw new RequestHandlingException("No mapping for given node: " + nodeName, Status
+          .NOT_FOUND);
     }
     String nodeBaseUrl = mNodeMap.get(nodeName);
     String nodeRequestPath = requestUrl.substring(nodeName.length());
@@ -167,7 +171,7 @@ public class MasterContainer implements Container {
     // TODO: This should be done on a background thread, with a proper queue, de-duping per
     // command/node etc.
     try {
-      return HttpUtil.requestUrl(nodeRequestUrl);
+      return mHttpRequester.requestUrl(nodeRequestUrl);
     } catch (IOException e) {
       String msg = "Could not request URL";
       LOG.error(msg, e);

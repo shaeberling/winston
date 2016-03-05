@@ -16,6 +16,8 @@
 
 package com.s13g.winston.master;
 
+import com.s13g.winston.lib.core.util.HttpRequesterImpl;
+import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 import com.s13g.winston.master.config.ConfigWrapper;
 
 import org.apache.logging.log4j.Level;
@@ -29,23 +31,24 @@ import java.io.IOException;
  * The master daemon executable of the Winston home automation system.
  */
 public class MasterDaemon {
-    private static final Logger LOG = LogManager.getLogger(MasterDaemon.class);
-    private static int NUM_HTTP_THREADS = 8;
+  private static final Logger LOG = LogManager.getLogger(MasterDaemon.class);
+  private static int NUM_HTTP_THREADS = 8;
 
 
-    public static void main(final String... args) throws IOException {
-        File configFile = new File("master.config");
-        if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
-            LOG.log(Level.ERROR, "Cannot read config file: " + configFile.getAbsolutePath());
-            return;
-        }
-
-        // Load and print out configuration.
-        ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
-        configWrapper.printToLog();
-        configWrapper.assertSane();
-
-        MasterContainer httpContainer = MasterContainer.from(configWrapper.getConfig());
-        httpContainer.startServing(NUM_HTTP_THREADS);
+  public static void main(final String... args) throws IOException {
+    File configFile = new File("master.config");
+    if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
+      LOG.log(Level.ERROR, "Cannot read config file: " + configFile.getAbsolutePath());
+      return;
     }
+
+    // Load and print out configuration.
+    ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
+    configWrapper.printToLog();
+    configWrapper.assertSane();
+
+    HttpRequester httpRequester = new HttpRequesterImpl();
+    MasterContainer httpContainer = MasterContainer.from(configWrapper.getConfig(), httpRequester);
+    httpContainer.startServing(NUM_HTTP_THREADS);
+  }
 }
