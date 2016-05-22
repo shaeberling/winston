@@ -25,8 +25,8 @@ import java.util.Locale;
  */
 public interface TemperatureSensorController extends NodeController {
 
-  public static class Temperature {
-    public static enum Unit {
+  class Temperature {
+    public enum Unit {
       CELSIUS("%s C"), FAHRENHEIT("%s F");
 
       final String mPattern;
