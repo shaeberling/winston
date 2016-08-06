@@ -77,13 +77,13 @@ public class ConfigWrapper {
     }
 
     for (NodeProtos.Config.GpioPlugin plugin : mConfigProto.getGpioPluginsList()) {
-      if (!plugin.hasType() || plugin.getType().isEmpty()) {
+      if (plugin.getType() == null || plugin.getType().isEmpty()) {
         throw new AssertionError("Missing plugin type");
       }
     }
 
     for (NodeProtos.Config.OneWirePlugin plugin : mConfigProto.getOnewirePluginsList()) {
-      if (!plugin.hasType() || plugin.getType().isEmpty()) {
+      if (plugin.getType() == null || plugin.getType().isEmpty()) {
         throw new AssertionError("Missing plugin type");
       }
     }

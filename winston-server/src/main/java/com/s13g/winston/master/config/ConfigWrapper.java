@@ -31,77 +31,77 @@ import java.util.List;
  * Wrapper around the configuration proto with some helper methods.
  */
 public class ConfigWrapper {
-    private static Logger LOG = LogManager.getLogger(ConfigWrapper.class);
+  private static Logger LOG = LogManager.getLogger(ConfigWrapper.class);
 
-    private final MasterProtos.Config mConfigProto;
+  private final MasterProtos.Config mConfigProto;
 
-    private ConfigWrapper(MasterProtos.Config configProto) {
-        mConfigProto = configProto;
+  private ConfigWrapper(MasterProtos.Config configProto) {
+    mConfigProto = configProto;
+  }
+
+  /**
+   * Parses the configuration from the given file.
+   *
+   * @param configFile the configuration file - must be a valid text format protocol buffer.
+   * @return A config wrapper containing the new configuration.
+   * @throws IOException Thrown if the configuration could not be parsed.
+   */
+  public static ConfigWrapper fromFile(File configFile) throws IOException {
+    LOG.info("Reading master configuration: " + configFile.getAbsolutePath());
+    MasterProtos.Config.Builder builder = MasterProtos.Config.newBuilder();
+    String configStr = new String(Files.readAllBytes(configFile.toPath()));
+    TextFormat.getParser().merge(configStr, builder);
+    return new ConfigWrapper(builder.build());
+  }
+
+  /**
+   * @return The parses config proto.
+   */
+  public MasterProtos.Config getConfig() {
+    return mConfigProto;
+  }
+
+  /**
+   * Verifies that the proto is in good shape. If something is not sane, will
+   * throw an AssertionError.
+   */
+  public void assertSane() {
+    if (mConfigProto.getDaemonPort() <= 0) {
+      throw new AssertionError("Invalid Port:" + mConfigProto.getDaemonPort());
     }
 
-    /**
-     * Parses the configuration from the given file.
-     *
-     * @param configFile the configuration file - must be a valid text format protocol buffer.
-     * @return A config wrapper containing the new configuration.
-     * @throws IOException Thrown if the configuration could not be parsed.
-     */
-    public static ConfigWrapper fromFile(File configFile) throws IOException {
-        LOG.info("Reading master configuration: " + configFile.getAbsolutePath());
-        MasterProtos.Config.Builder builder = MasterProtos.Config.newBuilder();
-        String configStr = new String(Files.readAllBytes(configFile.toPath()));
-        TextFormat.getParser().merge(configStr, builder);
-        return new ConfigWrapper(builder.build());
+    List<MasterProtos.Config.NodeMapping> nodeMappings = mConfigProto.getNodeMappingList();
+    if (nodeMappings.isEmpty()) {
+      throw new AssertionError("Node node mappings found");
     }
 
-    /**
-     * @return The parses config proto.
-     */
-    public MasterProtos.Config getConfig() {
-        return mConfigProto;
+    for (MasterProtos.Config.NodeMapping nodeMapping : nodeMappings) {
+      if (nodeMapping.getName() == null || nodeMapping.getName().isEmpty()) {
+        throw new AssertionError("Missing node name");
+      }
+      if (nodeMapping.getAddress() == null || nodeMapping.getAddress().isEmpty()) {
+        throw new AssertionError("Missing node address");
+      }
+      if (nodeMapping.getPort() <= 0) {
+        throw new AssertionError("Invalid node port");
+      }
     }
+  }
 
-    /**
-     * Verifies that the proto is in good shape. If something is not sane, will
-     * throw an AssertionError.
-     */
-    public void assertSane() {
-        if (mConfigProto.getDaemonPort() <= 0) {
-            throw new AssertionError("Invalid Port:" + mConfigProto.getDaemonPort());
-        }
-
-        List<MasterProtos.Config.NodeMapping> nodeMappings = mConfigProto.getNodeMappingList();
-        if (nodeMappings.isEmpty()) {
-            throw new AssertionError("Node node mappings found");
-        }
-
-        for (MasterProtos.Config.NodeMapping nodeMapping : nodeMappings) {
-            if (!nodeMapping.hasName() || nodeMapping.getName().isEmpty()) {
-                throw new AssertionError("Missing node name");
-            }
-            if (!nodeMapping.hasAddress() || nodeMapping.getAddress().isEmpty()) {
-                throw new AssertionError("Missing node address");
-            }
-            if (!nodeMapping.hasPort() || nodeMapping.getPort() <= 0) {
-                throw new AssertionError("Invalid node port");
-            }
-        }
+  /**
+   * Will print out the configuration to LOG.
+   */
+  public void printToLog() {
+    LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
+    List<MasterProtos.Config.NodeMapping> nodeMappings = mConfigProto.getNodeMappingList();
+    LOG.info("Node mappings: " + nodeMappings.size());
+    LOG.info("---------------------------------");
+    for (MasterProtos.Config.NodeMapping nodeMapping : nodeMappings) {
+      LOG.info("  Name    : " + nodeMapping.getName());
+      LOG.info("  Address : " + nodeMapping.getAddress());
+      LOG.info("  Port    : " + nodeMapping.getPort());
+      LOG.info("  Use SSL : " + nodeMapping.getUseSsl());
+      LOG.info("---------------------------------");
     }
-
-    /**
-     * Will print out the configuration to LOG.
-     */
-    public void printToLog() {
-        LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
-        List<MasterProtos.Config.NodeMapping> nodeMappings = mConfigProto.getNodeMappingList();
-        LOG.info("Node mappings: " + nodeMappings.size());
-        LOG.info("---------------------------------");
-        for (MasterProtos.Config.NodeMapping nodeMapping : nodeMappings) {
-            LOG.info("  Name    : " + nodeMapping.getName());
-            LOG.info("  Address : " + nodeMapping.getAddress());
-            LOG.info("  Port    : " + nodeMapping.getPort());
-            LOG.info("  Use SSL : " + nodeMapping.getUseSsl());
-            LOG.info("---------------------------------");
-        }
-    }
+  }
 }

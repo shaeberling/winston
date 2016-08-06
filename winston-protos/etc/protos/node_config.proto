@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+syntax = "proto3";
 
 package com.s13g.winston.master.proto;
 
 option java_package = "com.s13g.winston.node.proto";
-
 option java_outer_classname = "NodeProtos";
 
 /* Configuration for the node daemon. */
 message Config {
   /* The port to start the node daemon on. */
-  required int32 daemon_port = 1;
+  int32 daemon_port = 1;
 
   /*
    * GPIO plugins to be activated on this node.
@@ -39,15 +39,15 @@ message Config {
   /* Defines a 1-Wire plugin that should be active on this node. */
   message OneWirePlugin {
     /* The type defines which plugin to load. */
-    required string type = 1;
+    string type = 1;
     /* The name of the 1-Wire node, e.g. "28-000005abf27d". */
-    required string name = 2;
+    string name = 2;
   }
 
   /* Defines a GPIO plugin that should be active on this node. */
   message GpioPlugin {
     /* The type defines which plugin to load. */
-    required string type = 1;
+    string type = 1;
     /* Mapping from e.g. GPIO pins. */
     repeated int32 mapping = 2;
   }

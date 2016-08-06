@@ -16,7 +16,6 @@
 
 package com.s13g.winston.master;
 
-import com.s13g.winston.lib.core.util.HttpRequesterImpl;
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 import com.s13g.winston.master.proto.MasterProtos;
 

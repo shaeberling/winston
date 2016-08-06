@@ -135,7 +135,7 @@ public class NodePluginCreator {
         break;
       case _REEDTOLED:
         if (!mActiveControllers.containsKey(NodePluginType.REED) ||
-          !mActiveControllers.containsKey(NodePluginType.LED)) {
+            !mActiveControllers.containsKey(NodePluginType.LED)) {
           throw new RuntimeException(pluginType + " need REED and LED controllers.");
         }
         controller = ReedToLedPlugin.create(mapping, (ReedController) mActiveControllers.get
