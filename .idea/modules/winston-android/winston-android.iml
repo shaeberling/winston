@@ -18,6 +18,7 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../winston-android/src/main/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
@@ -60,13 +61,6 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/main/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/androidTest/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/androidTest/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/androidTest/assets" type="java-test-resource" />
@@ -74,6 +68,13 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/androidTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../winston-android/src/test/rs" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/bundles" />
@@ -90,15 +91,11 @@
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/incremental-safeguard" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/instant-run-support" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android/build/tmp" />
     </content>

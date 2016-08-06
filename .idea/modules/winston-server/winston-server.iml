@@ -23,6 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-server/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../winston-server/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-server/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../winston-server/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
