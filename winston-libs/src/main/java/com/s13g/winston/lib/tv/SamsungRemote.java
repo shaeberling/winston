@@ -25,6 +25,9 @@
  */
 package com.s13g.winston.lib.tv;
 
+import com.s13g.winston.lib.core.io.NoOpReader;
+import com.s13g.winston.lib.core.io.NoOpWriter;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -39,9 +42,6 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * This class has been forked from Maarten Visscher's SamsungRemote project at:
@@ -71,10 +71,8 @@ public class SamsungRemote {
   private final Base64.Encoder mEncoder;
   private final String mRemoteName;
 
-  @Nullable
-  private BufferedWriter mOut;
-  @Nullable
-  private BufferedReader mIn;
+  private Writer mOut;
+  private Reader mIn;
 
   /**
    * Opens a mSocket connection to the television and keeps a simple mLog when
@@ -89,6 +87,8 @@ public class SamsungRemote {
   public SamsungRemote(String remoteName, String host, Base64.Encoder encoder) {
     mRemoteName = remoteName;
     mEncoder = encoder;
+    mOut = new NoOpWriter();
+    mIn = new NoOpReader();
     mSocket = new Socket();
     mInetSocketAddress = new InetSocketAddress(host, PORT);
   }
@@ -210,16 +210,18 @@ public class SamsungRemote {
     sendPayload(getKeycodePayload(keycode), false);
   }
 
-
   private void sendPayload(String payload) throws IOException {
     sendPayload(payload, true);
   }
 
   private void sendPayload(String payload, boolean emptyReaderBuffer) throws IOException {
-    if (mIn == null || mOut == null) {
+    if (!mSocket.isConnected()) {
       throw new IOException("TV not connected");
     }
-    emptyReaderBuffer(mIn);
+
+    if (emptyReaderBuffer) {
+      emptyReaderBuffer(mIn);
+    }
     mOut.write(0x00);
     writeString(mOut, APP_STRING);
     writeString(mOut, payload);
@@ -414,7 +416,7 @@ public class SamsungRemote {
    *
    * @return Whether the connection was successful.
    */
-  /*package*/ boolean connect() {
+  private boolean connect() {
     try {
       mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
       mSocket.setSoTimeout(SO_TIMEOUT);
@@ -434,8 +436,8 @@ public class SamsungRemote {
   public void close() {
     LOG.info("Closing mSocket connection.");
     try {
-      mOut = null;
-      mIn = null;
+      mOut = new NoOpWriter();
+      mIn = new NoOpReader();
       mSocket.close();
     } catch (IOException ex) {
       LOG.log(Level.WARNING, "Error while closing connection", ex);
@@ -443,7 +445,7 @@ public class SamsungRemote {
   }
 
   /** TV response after authentication. */
-  enum TVReply {
+  private enum TVReply {
     /** Authenticated, TV will respond to key codes. */
     ALLOWED,
     /** We are not allowed to send key codes (TV user denied this controller). */
