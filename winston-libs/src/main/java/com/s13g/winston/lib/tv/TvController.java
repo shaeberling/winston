@@ -20,5 +20,6 @@ package com.s13g.winston.lib.tv;
  * Interface for classes that allow TVs to be remote controlled.
  */
 public interface TvController {
+  /** Switches off the TV, if a connection can be established. */
   void switchOff();
 }
