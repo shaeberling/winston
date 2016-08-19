@@ -40,6 +40,7 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -102,7 +103,7 @@ public class SamsungRemote {
    * @see SamsungRemote#authenticate(java.lang.String, java.lang.String, java.lang.String)
    * authenticate
    */
-  public TVReply authenticate(String name) throws IOException {
+  private TVReply authenticate(String name) throws IOException {
     String hostAddress = mSocket.getLocalAddress().getHostAddress();
     return authenticate(hostAddress, hostAddress, name);
   }
@@ -118,7 +119,7 @@ public class SamsungRemote {
    * @see SamsungRemote#authenticate(java.lang.String, java.lang.String, java.lang.String)
    * authenticate
    */
-  public TVReply authenticate(String id, String name) throws IOException {
+  private TVReply authenticate(String id, String name) throws IOException {
     String hostAddress = mSocket.getLocalAddress().getHostAddress();
     return authenticate(hostAddress, id, name);
   }
@@ -134,8 +135,11 @@ public class SamsungRemote {
    * @return the response from the television.
    * @throws IOException if an I/O error occurs.
    */
-  public TVReply authenticate(String ip, String id, String name)
+  private TVReply authenticate(String ip, String id, String name)
       throws IOException {
+    if (mIn == null) {
+      throw new IllegalStateException("Connection not initialized.");
+    }
     LOG.info("Authenticating with ip: " + ip + ", id: " + id + ", name: " + name + ".");
     sendPayload(getAuthenticationPayload(ip, id, name));
 
