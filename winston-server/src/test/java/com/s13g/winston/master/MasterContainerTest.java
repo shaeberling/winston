@@ -48,7 +48,7 @@ public class MasterContainerTest {
 
   HttpRequester mHttpRequester;
   MasterContainer masterContainer;
-  public TemporaryFolder folder
+  public TemporaryFolder folder;
 
   @Before
   public void initialize() {
