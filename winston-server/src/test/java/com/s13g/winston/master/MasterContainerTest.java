@@ -17,9 +17,7 @@
 package com.s13g.winston.master;
 
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
-import com.s13g.winston.master.config.ConfigWrapper;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -46,8 +44,8 @@ import static org.mockito.Mockito.when;
  */
 public class MasterContainerTest {
 
-  HttpRequester mHttpRequester;
-  MasterContainer masterContainer;
+  private HttpRequester mHttpRequester;
+  private MasterContainer masterContainer;
   public TemporaryFolder folder;
 
   @Before
@@ -55,14 +53,7 @@ public class MasterContainerTest {
     mHttpRequester = mock(HttpRequester.class);
   }
 
-  public void initiazlieWithFile() {
-
-
-
-    ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
-  }
-
-  public void initializeWithMap() throws IOException {
+  private void initializeWithMap() throws IOException {
     Map<String, String> nodeMap = new HashMap<>();
     nodeMap.put("node1", "http://node1.s13g.com:1234");
     nodeMap.put("foobar", "http://anothernode.s13g.com:4321");
