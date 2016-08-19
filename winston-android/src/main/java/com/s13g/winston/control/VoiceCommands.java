@@ -27,11 +27,16 @@ import com.s13g.winston.control.type.IOperationFactory;
 import com.s13g.winston.control.type.OperationFactoryImpl;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Handles voice commands.
+ * <p>
+ * Needs to be refactored. Currently not working.
  */
-public class VoiceCommands implements IOperationProcess {
+public class VoiceCommands {
+  private static final Logger LOG = Logger.getLogger("VoiceCommands");
+
   // control
   private static final int TOLERANCE = 1;
   // TODO: currently, commands are only for test purposes
@@ -51,7 +56,25 @@ public class VoiceCommands implements IOperationProcess {
           @Override
           public void processRecognizedOperationResults(List<String> recognizedOperations,
                                                         float[] confidenceScore) {
-
+//            recognizedOperations = filter(recognizedOperations);
+//
+//            if (recognizedOperations.size() == 1) {
+//              final String operation = recognizedOperations.get(0);
+//              // TODO: operation only for test purposes and also doubled (see above)
+//              if (operation.equals("light on")) {
+//                // TODO
+//              } else if (operation.equals("light off")) {
+//                // TODO
+//              } else if (operation.equals("open garage")) {
+//                // TODO
+//              } else if (operation.equals("close garage")) {
+//                // TODO
+//              } else {
+//                // TODO
+//              }
+//            } else {
+//              LOG.info("no command processing");
+//            }
           }
         })
         .setOperationType(IOperationFactory.OperationType.SPEECH_MANUAL)
@@ -72,9 +95,27 @@ public class VoiceCommands implements IOperationProcess {
     return mOperationFilter.filter(recognizedOperations);
   }
 
-  @Override
-  public void processRecognizedOperationResults(List<String> recognizedOperations, float[]
-      confidenceScore) {
-
-  }
+//  @Override
+//  public void processRecognizedOperationResults(List<String> recognizedOperations, float[]
+//      confidenceScore) {
+//    recognizedOperations = mVoiceCommands.filter(recognizedOperations);
+//
+//    if (recognizedOperations.size() == 1) {
+//      final String operation = recognizedOperations.get(0);
+//      // TODO: operation only for test purposes and also doubled (see above)
+//      if (operation.equals("light on")) {
+//        onActionLightOn();
+//      } else if (operation.equals("light off")) {
+//        onActionLightOff();
+//      } else if (operation.equals("open garage")) {
+//        onActionOpenGarage();
+//      } else if (operation.equals("close garage")) {
+//        onActionCloseGarage();
+//      } else {
+//        LOG.warning("unkown operation");
+//      }
+//    } else {
+//      LOG.info("no command processing");
+//    }
+//  }
 }

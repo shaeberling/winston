@@ -14,11 +14,14 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston;
+package com.s13g.winston.net;
+
+import com.google.common.util.concurrent.ListenableFuture;
+import com.s13g.winston.node.proto.nano.WinstonProtos;
 
 /**
- * Handles the master-server communication.
+ * Loads the data about nodes in the current system from the master.
  */
-public class ServerCommunication {
-
+public interface SystemDataLoader extends AutoCloseable {
+  ListenableFuture<WinstonProtos.SystemDataForClient> loadSystemData();
 }

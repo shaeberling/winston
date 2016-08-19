@@ -21,44 +21,80 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.s13g.winston.async.Executors;
+import com.s13g.winston.async.Scope;
 import com.s13g.winston.control.VoiceCommands;
-import com.s13g.winston.control.operation.IOperationProcess;
+import com.s13g.winston.net.SystemDataLoader;
+import com.s13g.winston.net.SystemDataLoaderForTesting;
+import com.s13g.winston.net.SystemDataLoaderImpl;
+import com.s13g.winston.node.proto.nano.WinstonProtos.SystemDataForClient;
 import com.s13g.winston.requests.NodeRequests;
+import com.s13g.winston.views.TiledViewCreator;
 
-import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class WinstonMainActivity extends Activity implements View.OnClickListener
-     {
+public class WinstonMainActivity extends Activity implements View.OnClickListener {
   private static final Logger LOG = Logger.getLogger("WinstonMainActivity");
+  private static final boolean TEST_MODE_ENABLED = true;
+
+  private Scope mActivityScope;
   private NodeRequests mNodeRequests;
   private VoiceCommands mVoiceCommands;
+  private Executors mExecutors;
+  private SystemDataLoader mSystemDataLoader;
+  private TiledViewCreator mTiledViewCreator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Button actionGarage1 = (Button) findViewById(R.id.action_garage_0);
-    actionGarage1.setOnClickListener(this);
-    Button actionGarage2 = (Button) findViewById(R.id.action_light);
-    actionGarage2.setOnClickListener(this);
-
+    mActivityScope = new Scope();
+    mExecutors = new Executors();
     mVoiceCommands = VoiceCommands.create(getApplicationContext());
+    if (TEST_MODE_ENABLED) {
+      mSystemDataLoader = new SystemDataLoaderForTesting(mExecutors.getNetworkExecutor());
+    } else {
+      mSystemDataLoader = new SystemDataLoaderImpl(mExecutors.getNetworkExecutor());
+    }
+    mActivityScope.add(mSystemDataLoader);
+    mTiledViewCreator = new TiledViewCreator((ViewGroup) findViewById(R.id.tile_container));
   }
 
   @Override
   protected void onStart() {
     super.onStart();
     mNodeRequests = new NodeRequests();
+    mActivityScope.add(mNodeRequests);
+
+    ListenableFuture<SystemDataForClient> systemData = mSystemDataLoader.loadSystemData();
+    Futures.addCallback(systemData, new FutureCallback<SystemDataForClient>() {
+      @Override
+      public void onSuccess(SystemDataForClient result) {
+        onSystemDataLoaded(result);
+      }
+
+      @Override
+      public void onFailure(Throwable t) {
+        // TODO: Show an error message.
+      }
+    });
   }
 
   @Override
   protected void onStop() {
-    mNodeRequests.close();
+    try {
+      mActivityScope.close();
+    } catch (Exception e) {
+      LOG.log(Level.WARNING, "Error while closing scope.", e);
+    }
     super.onStop();
   }
 
@@ -97,11 +133,15 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
     }
   }
 
-  private void onStartVoiceControl() {
-    Toast.makeText(getApplicationContext(), "Speak now!", Toast.LENGTH_LONG).show();
-    mVoiceCommands.onStart();
+  private void onSystemDataLoaded(SystemDataForClient systemData) {
+    mTiledViewCreator.addTiles(systemData.ioChannel);
   }
 
+  private void onStartVoiceControl() {
+    Toast.makeText(
+        getApplicationContext(), getString(R.string.speak_now), Toast.LENGTH_LONG).show();
+    mVoiceCommands.onStart();
+  }
 
   private void onActionCloseGarage() {
     mNodeRequests.execute("/garage/1");
@@ -118,29 +158,4 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
   private void onActionLightOn() {
     mNodeRequests.execute("/light/1");
   }
-
-
-//  @Override
-//  public void processRecognizedOperationResults(List<String> recognizedOperations, float[]
-//      confidenceScore) {
-//    recognizedOperations = mVoiceCommands.filter(recognizedOperations);
-//
-//    if (recognizedOperations.size() == 1) {
-//      final String operation = recognizedOperations.get(0);
-//      // TODO: operation only for test purposes and also doubled (see above)
-//      if (operation.equals("light on")) {
-//        onActionLightOn();
-//      } else if (operation.equals("light off")) {
-//        onActionLightOff();
-//      } else if (operation.equals("open garage")) {
-//        onActionOpenGarage();
-//      } else if (operation.equals("close garage")) {
-//        onActionCloseGarage();
-//      } else {
-//        LOG.warning("unkown operation");
-//      }
-//    } else {
-//      LOG.info("no command processing");
-//    }
-//  }
 }

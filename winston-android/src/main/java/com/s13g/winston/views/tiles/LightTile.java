@@ -84,7 +84,6 @@ public class LightTile extends View {
   @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
-    canvas.drawRect(mArea, mBackgroundPaint);
 
     // Draw a light consisting of  a circle in the middle and rays being emitted.
     canvas.drawCircle(mArea.centerX(), mArea.centerY(), bulbWidthPx, mLightOnPaint);
@@ -100,13 +99,13 @@ public class LightTile extends View {
   protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
     super.onSizeChanged(width, height, oldWidth, oldHeight);
     mArea.set(0, 0, width, height);
-    bulbWidthPx = width / 8;
-    int bulbRayPaddingPx = width / 8;
-    int rayLengthPx = bulbWidthPx / 10;
+    bulbWidthPx = width / 12;
+    int bulbRayPaddingPx = width / 10;
+    int rayLengthPx = bulbWidthPx * 2;
 
     Point center = new Point(mArea.centerX(), mArea.centerY());
     mRayPoints[0] = new Point(center.x, center.y - (bulbWidthPx / 2) - bulbRayPaddingPx);
-    mRayPoints[1] = new Point(center.x, center.y - mRayPoints[0].y - rayLengthPx);
+    mRayPoints[1] = new Point(center.x, mRayPoints[0].y - rayLengthPx);
 
     for (int i = 2; i < mRayPoints.length; i = i + 2) {
       mRayPoints[i] = rotate(mRayPoints[i - 2], center, 60);
@@ -117,7 +116,7 @@ public class LightTile extends View {
   @Override
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     // Make the tile a square, based on width.
-    int size = (int)(MeasureSpec.getSize(widthMeasureSpec) * 0.8);
+    int size = MeasureSpec.getSize(widthMeasureSpec);
     setMeasuredDimension(size, size);
   }
 

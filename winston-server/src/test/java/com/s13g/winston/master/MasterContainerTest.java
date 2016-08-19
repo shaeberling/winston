@@ -17,10 +17,12 @@
 package com.s13g.winston.master;
 
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
+import com.s13g.winston.master.config.ConfigWrapper;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -31,7 +33,6 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -47,10 +48,18 @@ public class MasterContainerTest {
 
   HttpRequester mHttpRequester;
   MasterContainer masterContainer;
+  public TemporaryFolder folder
 
   @Before
   public void initialize() {
     mHttpRequester = mock(HttpRequester.class);
+  }
+
+  public void initiazlieWithFile() {
+
+
+
+    ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
   }
 
   public void initializeWithMap() throws IOException {

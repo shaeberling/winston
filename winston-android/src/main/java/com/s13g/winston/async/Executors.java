@@ -14,11 +14,24 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston;
+package com.s13g.winston.async;
+
+import java.util.concurrent.Executor;
 
 /**
- * Handles the master-server communication.
+ * Executors that are used in the winston android app.
  */
-public class ServerCommunication {
+public class Executors {
+  private final Executor mNetworkExecutor;
 
+  public Executors() {
+    mNetworkExecutor = java.util.concurrent.Executors.newFixedThreadPool(2);
+  }
+
+  /**
+   * @return Executor to be used for network access.
+   */
+  public Executor getNetworkExecutor() {
+    return mNetworkExecutor;
+  }
 }

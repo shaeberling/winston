@@ -18,7 +18,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
+            android:fillViewport="false"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -26,83 +26,10 @@
             tools:context="com.s13g.winston.WinstonMainActivity">
 
     <LinearLayout
+        android:id="@+id/tile_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.s13g.winston.views.tiles.LightTile
-                android:id="@+id/light_tile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <com.s13g.winston.views.tiles.TemperatureTile
-                android:id="@+id/temperature_tile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.s13g.winston.views.tiles.TileWrapper
-                android:id="@+id/light_tile_wrapped"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <com.s13g.winston.views.tiles.TileWrapper
-                android:id="@+id/temperature_tile_wrapped"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/action_garage_0"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:text="@string/action_garage_1"/>
-
-            <Button
-                android:id="@+id/action_light"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:text="@string/action_light"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/status_garage_1"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/status_unknown"/>
-
-            <TextView
-                android:id="@+id/status_garage_2"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="@string/status_unknown"/>
-        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

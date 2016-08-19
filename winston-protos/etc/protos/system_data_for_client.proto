@@ -1,0 +1,40 @@
+/*
+ * Copyright 2016 Sascha Haeberling
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+syntax = "proto3";
+
+package com.s13g.winston.master.proto;
+
+option java_package = "com.s13g.winston.node.proto";
+option java_outer_classname = "WinstonProtos";
+
+/* Contains whole system data loaded by a client. */
+message SystemDataForClient {
+    /* Whether the request for this data was successful. */
+    bool success = 1;
+
+    /* All the I/Os that are known to the system. */
+    repeated IoChannel io_channel = 2;
+
+    /* Defines a single IoChannel. */
+    message IoChannel {
+        /* System-wide unique ID, e.g. '/pi-power-1/io/relay/0'. */
+        string id = 1;
+        /* The type of the channel, like 'temperature' etc. */
+        string type = 2;
+        /* Human readable name, to be used as a label. */
+        string name = 3;
+    }
+}

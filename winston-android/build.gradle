@@ -23,6 +23,8 @@ android {
 }
 
 dependencies {
+    compile 'com.google.guava:guava:19.0'
+    compile 'com.google.protobuf.nano:protobuf-javanano:3.0+'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'org.apache.commons:commons-io:1.3.2'
     compile 'com.google.android.gms:play-services-wearable:9.0.0'

@@ -18,54 +18,46 @@ package com.s13g.winston.views.tiles;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.s13g.winston.R;
 
 /**
- * Wraps a tile and adds common information, such as indicators for when new data was received and
- * when data could be outdated.
- * <p>
- * Also enables us to show some debug data when required.
+ * A tile that is displayed if an actual tile cannot be created. E.g. used for unknown types.
  */
-public class TileWrapper extends LinearLayout {
-
-  public TileWrapper(Context context) {
+public class ErrorTile extends View {
+  public ErrorTile(Context context) {
     super(context);
     initialize();
   }
 
-  public TileWrapper(Context context, AttributeSet attrs) {
+  public ErrorTile(Context context, AttributeSet attrs) {
     super(context, attrs);
     initialize();
   }
 
-  public TileWrapper(Context context, AttributeSet attrs, int defStyleAttr) {
+  public ErrorTile(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     initialize();
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public TileWrapper(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public ErrorTile(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     initialize();
   }
 
-  public void setTileView(String title, View view) {
-    TextView titleView = (TextView) findViewById(R.id.title);
-    titleView.setText(title);
-    ((ViewGroup) findViewById(R.id.placeholder)).addView(view);
+  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    // Make the tile a square, based on width.
+    int size = MeasureSpec.getSize(widthMeasureSpec);
+    setMeasuredDimension(size, size);
   }
 
   private void initialize() {
-    inflate(getContext(), R.layout.tile_wrapper, this);
-    LayoutParams layoutParams = new LayoutParams(
-        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1);
-    this.setLayoutParams(layoutParams);
+    // TODO: Show a nice error icon.
+    this.setBackgroundColor(Color.RED);
   }
+
 }
