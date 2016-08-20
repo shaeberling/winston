@@ -42,6 +42,6 @@ public class NestControllerImpl implements NestController {
 
   @Override
   public TemperatureSensorController.Temperature getTemperature() {
-    return null;
+    throw new RuntimeException("Not implemented yet.");
   }
 }
