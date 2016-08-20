@@ -45,7 +45,7 @@ public class HttpUtil {
             String line;
             boolean first = true;
             while ((line = reader.readLine()) != null) {
-                if (first == true) {
+                if (first) {
                     first = false;
                 } else {
                     resultStr.append('\n');
