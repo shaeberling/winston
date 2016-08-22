@@ -17,10 +17,10 @@
 package com.s13g.winston.lib.clitests;
 
 import com.google.common.io.Files;
-import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.lib.nest.NestAuthenticator;
 import com.s13g.winston.lib.nest.NestController;
 import com.s13g.winston.lib.nest.NestControllerImpl;
+import com.s13g.winston.lib.nest.data.NestResponseParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,8 +35,9 @@ public class NestTestCli {
     String accessToken = readFile("/Users/haeberling/nest-data/access-token");
     System.out.println("Access token: '" + accessToken + "'.");
 
-    NestController controller = new NestControllerImpl("Bearer " + accessToken);
-    controller.getAllDevices();
+    NestResponseParser parser = new NestResponseParser();
+    NestController controller = new NestControllerImpl("Bearer " + accessToken, parser);
+    controller.getAllThermostats();
   }
 
   /** Call this to get the access token that is then used in successive requests to the Nest API. */

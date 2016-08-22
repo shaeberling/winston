@@ -16,15 +16,15 @@
 
 package com.s13g.winston.lib.nest;
 
-import com.s13g.winston.lib.temperature.TemperatureSensorController;
+import com.s13g.winston.lib.temperature.Temperature;
 
 /**
  * Default implementation for the Nest thermostat.
  */
-public class NestThermostatImpl implements NestThermostat {
+public class NestThermostatImpl implements NestThermostatController {
 
   @Override
-  public TemperatureSensorController.Temperature getTemperature() {
+  public Temperature getTemperature() {
     throw new RuntimeException("Not implemented yet.");
   }
 }

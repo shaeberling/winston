@@ -1,7 +1,7 @@
 /*
  * Copyright 2016 The Winston Authors
  *
- * Licensed under the Apache License, Version 2.0 (the "License")
+ * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,9 +16,11 @@
 
 package com.s13g.winston.lib.nest;
 
+import com.s13g.winston.lib.temperature.Temperature;
+
 /**
- * Interface for interacting with the Nest API.
+ * A nest thermostat
  */
-public interface NestController {
-  NestThermostatController[] getAllThermostats();
+public interface NestThermostatController {
+  Temperature getTemperature();
 }

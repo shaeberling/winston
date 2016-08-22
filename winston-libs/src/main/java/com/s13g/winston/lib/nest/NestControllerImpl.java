@@ -17,9 +17,11 @@
 package com.s13g.winston.lib.nest;
 
 import com.s13g.winston.lib.core.net.HttpUtil;
-import com.s13g.winston.lib.temperature.TemperatureSensorController;
+import com.s13g.winston.lib.nest.data.NestResponseParser;
+import com.s13g.winston.lib.nest.data.StructuresAndDevices;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -29,19 +31,27 @@ public class NestControllerImpl implements NestController {
   private static final Logger LOG = Logger.getLogger("NestControllerImpl");
   private static final String ROOT_URL = "https://developer-api.nest.com/";
   private final String mAuthHeader;
+  private final NestResponseParser mResponseParser;
 
-  public NestControllerImpl(String authHeader) {
+  public NestControllerImpl(String authHeader, NestResponseParser responseParser) {
     mAuthHeader = authHeader;
+    mResponseParser = responseParser;
   }
 
-  public void getAllDevices() throws IOException {
-    String result =
-        HttpUtil.requestUrl(ROOT_URL, HttpUtil.Method.GET, HttpUtil.ContentType.JSON, mAuthHeader);
+  public NestThermostatController[] getAllThermostats() {
+    String result;
+    try {
+      result = HttpUtil.requestUrl(ROOT_URL, HttpUtil.Method.GET, HttpUtil.ContentType.JSON,
+          mAuthHeader);
+    } catch (IOException ex) {
+      LOG.log(Level.WARNING, "Cannot load data", ex);
+      return new NestThermostatController[0];
+    }
     LOG.info("Get all devices response:\n" + result);
-  }
 
-  @Override
-  public TemperatureSensorController.Temperature getTemperature() {
-    throw new RuntimeException("Not implemented yet.");
+    StructuresAndDevices structuresAndDevices =
+        mResponseParser.parseStructureAndDevicesResponse(result);
+    //return structuresAndDevices.thermostats;
+    throw new RuntimeException("...");
   }
 }

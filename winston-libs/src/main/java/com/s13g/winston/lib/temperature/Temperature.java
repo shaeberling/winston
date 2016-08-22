@@ -14,13 +14,34 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.nest;
+package com.s13g.winston.lib.temperature;
 
-import com.s13g.winston.lib.temperature.TemperatureSensorController;
+import java.util.Locale;
 
 /**
- * A nest thermostat
+ * Represents a temperature.
  */
-public interface NestThermostat {
-  TemperatureSensorController.Temperature getTemperature();
+public class Temperature {
+  public enum Unit {
+    CELSIUS("%s C"), FAHRENHEIT("%s F");
+
+    final String mPattern;
+
+    Unit(String pattern) {
+      mPattern = pattern;
+    }
+  }
+
+  private final float mValue;
+  private final Unit mUnit;
+
+  public Temperature(float value, Unit unit) {
+    mValue = value;
+    mUnit = unit;
+  }
+
+  @Override
+  public String toString() {
+    return String.format(Locale.getDefault(), mUnit.mPattern, mValue);
+  }
 }

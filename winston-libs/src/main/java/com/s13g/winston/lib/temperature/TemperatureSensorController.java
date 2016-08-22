@@ -24,31 +24,5 @@ import java.util.Locale;
  * Common temperature sensor interface.
  */
 public interface TemperatureSensorController extends NodeController {
-
-  class Temperature {
-    public enum Unit {
-      CELSIUS("%s C"), FAHRENHEIT("%s F");
-
-      final String mPattern;
-
-      Unit(String pattern) {
-        mPattern = pattern;
-      }
-    }
-
-    private final float mValue;
-    private final Unit mUnit;
-
-    public Temperature(float value, Unit unit) {
-      mValue = value;
-      mUnit = unit;
-    }
-
-    @Override
-    public String toString() {
-      return String.format(Locale.getDefault(), mUnit.mPattern, mValue);
-    }
-  }
-
   Temperature getTemperature();
 }

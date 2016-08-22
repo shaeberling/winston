@@ -103,7 +103,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
@@ -128,7 +128,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
@@ -138,7 +138,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("20.912 C", temperature.toString());
   }
 
@@ -148,7 +148,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
@@ -158,7 +158,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
@@ -168,7 +168,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
@@ -178,7 +178,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
@@ -188,7 +188,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    TemperatureSensorController.Temperature temperature = controller.getTemperature();
+    Temperature temperature = controller.getTemperature();
     assertEquals("-42.0 C", temperature.toString());
   }
 
