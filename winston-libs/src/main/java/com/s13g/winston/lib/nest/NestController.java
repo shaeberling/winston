@@ -16,9 +16,27 @@
 
 package com.s13g.winston.lib.nest;
 
+import com.s13g.winston.lib.nest.data.AwayMode;
+import com.s13g.winston.lib.nest.data.Thermostat;
+import com.s13g.winston.lib.temperature.Temperature;
+
 /**
  * Interface for interacting with the Nest API.
  */
 public interface NestController {
-  NestThermostatController[] getAllThermostats();
+  /**
+   * Refreshes the current data.
+   *
+   * @return Whether the refresh was successful.
+   */
+  boolean refresh();
+
+  /**
+   * @return A list of all thermostats, containing read-only data.
+   */
+  Thermostat[] getThermostats();
+
+  boolean setTemperature(String thermostatId, Temperature temperature);
+
+  boolean setAwayMode(String thermostatId, AwayMode awayMode);
 }

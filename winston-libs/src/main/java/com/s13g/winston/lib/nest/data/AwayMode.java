@@ -14,17 +14,30 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.nest;
+package com.s13g.winston.lib.nest.data;
 
-import com.s13g.winston.lib.temperature.Temperature;
+import java.util.Optional;
 
 /**
- * Default implementation for the Nest thermostat.
+ * Away-mode enum.
  */
-public class NestThermostatImpl implements NestThermostatController {
+public enum AwayMode {
+  HOME("home"), AWAY("away"), AUTO_AWAY("auto-away");
+  public final String str;
 
-  @Override
-  public Temperature getTemperature() {
-    throw new RuntimeException("Not implemented yet.");
+  AwayMode(String str) {
+    this.str = str;
+  }
+
+  /**
+   * Gets the mode enum from the given value string.
+   */
+  public static Optional<AwayMode> fromString(String modeStr) {
+    for (AwayMode mode : AwayMode.values()) {
+      if (mode.str.equals(modeStr)) {
+        return Optional.of(mode);
+      }
+    }
+    return Optional.empty();
   }
 }

@@ -17,11 +17,14 @@
 package com.s13g.winston.lib.core.net;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 /**
  * HTTP request utility methods.
@@ -58,10 +61,26 @@ public class HttpUtil {
    * @return Response received from the request.
    */
   public static String requestUrl(String rpcUrl,
+                                  HttpUtil.Method method,
+                                  HttpUtil.ContentType contentType,
+                                  String authorization) throws IOException {
+    return requestUrl(rpcUrl, method, contentType, authorization, Optional.empty());
+  }
+
+  /**
+   * Makes a request to the given URL.
+   *
+   * @param rpcUrl the give HTTP URL
+   * @param method which method to use for the request.
+   * @param contentType sets the content type header.
+   * @return Response received from the request.
+   */
+  public static String requestUrl(String rpcUrl,
                                   Method method,
                                   ContentType contentType,
-                                  String authorization) throws IOException {
-    StringBuffer resultStr = new StringBuffer();
+                                  String authorization,
+                                  Optional<String> data) throws IOException {
+    StringBuilder resultStr = new StringBuilder();
     try {
       final HttpURLConnection connection = (HttpURLConnection) (new URL(
           rpcUrl)).openConnection();
@@ -74,6 +93,16 @@ public class HttpUtil {
       }
 
       connection.setUseCaches(false);
+      connection.setDoOutput(true);
+      if (data.isPresent()) {
+        connection.setDoInput(true);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection
+            .getOutputStream()));
+        writer.append(data.get());
+        writer.flush();
+        writer.close();
+      }
+
       BufferedReader reader = new BufferedReader(new InputStreamReader(
           connection.getInputStream()));
       String line;
@@ -96,7 +125,7 @@ public class HttpUtil {
   }
 
   public enum Method {
-    POST("POST"), GET("GET");
+    POST("POST"), GET("GET"), PUT("PUT");
 
     final String methodStr;
 

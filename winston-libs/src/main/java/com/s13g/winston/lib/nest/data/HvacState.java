@@ -14,13 +14,30 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.nest;
+package com.s13g.winston.lib.nest.data;
 
-import com.s13g.winston.lib.temperature.Temperature;
+import java.util.Optional;
 
 /**
- * A nest thermostat
+ * HVAC state enum.
  */
-public interface NestThermostatController {
-  Temperature getTemperature();
+public enum HvacState {
+  HEATING("heating"), COOLING("cooling"), OFF("off");
+  public final String str;
+
+  HvacState(String str) {
+    this.str = str;
+  }
+
+  /**
+   * Gets the state enum from the given value string.
+   */
+  public static Optional<HvacState> fromString(String stateStr) {
+    for (HvacState state : HvacState.values()) {
+      if (state.str.equals(stateStr)) {
+        return Optional.of(state);
+      }
+    }
+    return Optional.empty();
+  }
 }

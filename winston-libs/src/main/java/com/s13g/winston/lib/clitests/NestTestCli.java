@@ -20,7 +20,10 @@ import com.google.common.io.Files;
 import com.s13g.winston.lib.nest.NestAuthenticator;
 import com.s13g.winston.lib.nest.NestController;
 import com.s13g.winston.lib.nest.NestControllerImpl;
+import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
+import com.s13g.winston.lib.nest.data.Thermostat;
+import com.s13g.winston.lib.temperature.Temperature;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +40,21 @@ public class NestTestCli {
 
     NestResponseParser parser = new NestResponseParser();
     NestController controller = new NestControllerImpl("Bearer " + accessToken, parser);
-    controller.getAllThermostats();
+    if (!controller.refresh()) {
+      System.err.println("Error trying to refresh data.");
+      return;
+    }
+
+    for (Thermostat thermostat : controller.getThermostats()) {
+      System.out.println(thermostat.toString());
+    }
+
+    Thermostat thermostat = controller.getThermostats()[0];
+    // Set temperature to 17.5 C
+    controller.setTemperature(thermostat.id, new Temperature(17.8f, Temperature.Unit.CELSIUS));
+
+    // Set away mode.
+    //controller.setAwayMode(thermostat.id, AwayMode.HOME);
   }
 
   /** Call this to get the access token that is then used in successive requests to the Nest API. */

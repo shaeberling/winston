@@ -17,6 +17,7 @@
 package com.s13g.winston.lib.temperature;
 
 import java.util.Locale;
+import java.util.function.Function;
 
 /**
  * Represents a temperature.
@@ -38,6 +39,20 @@ public class Temperature {
   public Temperature(float value, Unit unit) {
     mValue = value;
     mUnit = unit;
+  }
+
+  /** Returns the temperature value in the given unit. */
+  public float get(Unit unit) {
+    if (mUnit == unit) {
+      return mValue;
+    }
+
+    if (unit == Unit.CELSIUS && mUnit == Unit.FAHRENHEIT) {
+      return mValue * 1.8f + 32;
+    } else if (unit == Unit.FAHRENHEIT && mUnit == Unit.CELSIUS) {
+      return (mValue - 32) / 1.8f;
+    }
+    throw new RuntimeException("Unsupported temperature conversion");
   }
 
   @Override

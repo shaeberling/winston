@@ -43,7 +43,7 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
   private final ReadableFile mDevicePath;
 
   /**
-   * Last good known temperature reading.
+   * getLastTemperature good known temperature reading.
    * <p>
    * TODO: Add timestamp so we know when it becomes too old.
    */

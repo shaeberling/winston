@@ -16,11 +16,7 @@
 
 package com.s13g.winston.lib.nest.data;
 
-import com.google.common.base.Optional;
-import com.s13g.winston.lib.nest.data.StructuresAndDevices.AwayMode;
-import com.s13g.winston.lib.nest.data.StructuresAndDevices.HvacState;
-import com.s13g.winston.lib.nest.data.StructuresAndDevices.Structure;
-import com.s13g.winston.lib.nest.data.StructuresAndDevices.Thermostat;
+import com.s13g.winston.lib.core.util.Pair;
 import com.s13g.winston.lib.temperature.Temperature;
 
 import org.json.JSONArray;
@@ -31,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -39,7 +36,7 @@ import java.util.logging.Logger;
 public class NestResponseParser {
   private static final Logger LOG = Logger.getLogger("NestResponseParser");
 
-  public StructuresAndDevices parseStructureAndDevicesResponse(String json) {
+  public Structure[] parseStructureAndDevicesResponse(String json) {
     JSONObject root = new JSONObject(json);
 
     try {
@@ -60,21 +57,23 @@ public class NestResponseParser {
         thermostatMap.put(thermostat.id, thermostat);
       }
 
-      List<JSONObject> jsonStructures = new ArrayList<>();
+      List<Pair<String, JSONObject>> jsonStructures = new ArrayList<>();
       JSONObject structures = root.getJSONObject("structures");
       structures.keys().forEachRemaining(
-          (key) -> jsonStructures.add(structures.getJSONObject(key)));
+          (key) -> jsonStructures.add(new Pair<>(key, structures.getJSONObject(key))));
       Structure[] structureResult = new Structure[jsonStructures.size()];
       for (int i = 0; i < jsonStructures.size(); ++i) {
-        structureResult[i] = parseStructure(jsonStructures.get(i), thermostatMap);
+        structureResult[i] = parseStructure(jsonStructures.get(i).first,
+            jsonStructures.get(i).second, thermostatMap);
       }
-      return new StructuresAndDevices(structureResult);
+      return structureResult;
     } catch (JSONException ex) {
-      return new StructuresAndDevices(new Structure[0]);
+      return new Structure[0];
     }
   }
 
-  private Structure parseStructure(JSONObject jsonStructure,
+  private Structure parseStructure(String structureId,
+                                   JSONObject jsonStructure,
                                    Map<String, Thermostat> thermostatMap) {
     String name = jsonStructure.getString("name");
     JSONArray jsonThermostats = jsonStructure.getJSONArray("thermostats");
@@ -92,7 +91,7 @@ public class NestResponseParser {
       }
       thermostats[i] = thermostatMap.get(thermostatId);
     }
-    return new Structure(name, awayMode.get(), thermostats);
+    return new Structure(structureId, name, awayMode.get(), thermostats);
   }
 
   private Thermostat parseThermostat(JSONObject jsonThermostat) {
@@ -105,7 +104,8 @@ public class NestResponseParser {
     Temperature targetTemp = new Temperature((float) jsonThermostat.getDouble
         ("target_temperature_c"), Temperature.Unit.CELSIUS);
     boolean isOnline = jsonThermostat.getBoolean("is_online");
-    Optional<HvacState> hvacState = HvacState.fromString(jsonThermostat.getString("hvac_state"));
+    java.util.Optional<HvacState> hvacState = HvacState.fromString(jsonThermostat.getString
+        ("hvac_state"));
 
     if (!hvacState.isPresent()) {
       throw new RuntimeException("Unable to obtain HVAC state");
