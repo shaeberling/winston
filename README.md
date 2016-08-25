@@ -33,7 +33,7 @@ from Winston.
 
 ## Building, Installing, Configuration and Running
 ### Build
-To build Winston you need a Java 8 JDK since the code makes use of the latest language features 
+To build Winston you need a Java 8 JDK since the code makes use of language features 
 such as lambdas and streams. 
 To build the different components, use the following commands from the 
 project root directory:
@@ -46,7 +46,7 @@ Master Daemon |  `./gradlew masterDaemon`
 Sauron Daemon |  `./gradlew sauronDaemon` 
 Android App |  `./gradlew winston-android:assembleDebug` 
 Android Wear App |  `./gradlew winston-android-wear:assembleDebug` 
-Run all tests | `./gradlew test`
+Run all tests | `./runAllTests.sh`
 
 ### Installation
 Once you have compiled the daemons, simply copy them to your server or node. You can find them in
