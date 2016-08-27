@@ -17,7 +17,6 @@
 package com.s13g.winston.lib.temperature;
 
 import java.util.Locale;
-import java.util.function.Function;
 
 /**
  * Represents a temperature.
@@ -48,9 +47,9 @@ public class Temperature {
     }
 
     if (unit == Unit.CELSIUS && mUnit == Unit.FAHRENHEIT) {
-      return mValue * 1.8f + 32;
-    } else if (unit == Unit.FAHRENHEIT && mUnit == Unit.CELSIUS) {
       return (mValue - 32) / 1.8f;
+    } else if (unit == Unit.FAHRENHEIT && mUnit == Unit.CELSIUS) {
+      return mValue * 1.8f + 32;
     }
     throw new RuntimeException("Unsupported temperature conversion");
   }

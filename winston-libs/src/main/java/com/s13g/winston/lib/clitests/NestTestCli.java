@@ -20,7 +20,6 @@ import com.google.common.io.Files;
 import com.s13g.winston.lib.nest.NestAuthenticator;
 import com.s13g.winston.lib.nest.NestController;
 import com.s13g.winston.lib.nest.NestControllerImpl;
-import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
 import com.s13g.winston.lib.nest.data.Thermostat;
 import com.s13g.winston.lib.temperature.Temperature;
@@ -50,8 +49,8 @@ public class NestTestCli {
     }
 
     Thermostat thermostat = controller.getThermostats()[0];
-    // Set temperature to 17.5 C
-    controller.setTemperature(thermostat.id, new Temperature(17.8f, Temperature.Unit.CELSIUS));
+    // Set temperature.
+    controller.setTemperature(thermostat.id, new Temperature(19f, Temperature.Unit.CELSIUS));
 
     // Set away mode.
     //controller.setAwayMode(thermostat.id, AwayMode.HOME);
