@@ -78,8 +78,8 @@ node_mapping: {
 }
 ```
 
-For the **nodes**, have a file `node.config` in the path and then launch via `java -jar 
-winston-node-daemon.jar`.
+For the **nodes**, have a file `node.config` in the path and then launch via `sudo java -jar 
+winston-node-daemon.jar`. It is necessary to launch the node daemon with `sudo` so that it can access the GPIO pins.
 
 A node.config could look like this (subject to change):
 ```
