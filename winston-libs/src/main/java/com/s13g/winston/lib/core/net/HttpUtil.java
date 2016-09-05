@@ -24,6 +24,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -76,20 +78,41 @@ public class HttpUtil {
    * @return Response received from the request.
    */
   public static String requestUrl(String rpcUrl,
-                                  Method method,
-                                  ContentType contentType,
+                                  HttpUtil.Method method,
+                                  HttpUtil.ContentType contentType,
                                   String authorization,
+                                  Optional<String> data) throws IOException {
+    Map<String, String> headers = new HashMap<>();
+
+    if (contentType != ContentType.NONE) {
+      headers.put("Content-Type", contentType.str);
+    }
+    if (authorization != null && !authorization.isEmpty()) {
+      headers.put("Authorization", authorization);
+    }
+    return requestUrl(rpcUrl, method, headers, data);
+  }
+
+  /**
+   * Makes a request to the given URL.
+   *
+   * @param rpcUrl the give HTTP URL
+   * @param method which method to use for the request.
+   * @param header sets the headers for this request.
+   * @return Response received from the request.
+   */
+  public static String requestUrl(String rpcUrl,
+                                  Method method,
+                                  Map<String, String> header,
                                   Optional<String> data) throws IOException {
     StringBuilder resultStr = new StringBuilder();
     try {
       final HttpURLConnection connection = (HttpURLConnection) (new URL(
           rpcUrl)).openConnection();
       connection.setRequestMethod(method.methodStr);
-      if (contentType != ContentType.NONE) {
-        connection.setRequestProperty("Content-Type", contentType.str);
-      }
-      if (authorization != null && !authorization.isEmpty()) {
-        connection.setRequestProperty("Authorization", authorization);
+      for (String key : header.keySet()) {
+        String value = header.get(key);
+        connection.setRequestProperty(key, value);
       }
 
       connection.setUseCaches(false);
