@@ -17,7 +17,7 @@
 package com.s13g.winston.node.config;
 
 import com.google.protobuf.TextFormat;
-import com.s13g.winston.node.proto.NodeProtos;
+import com.s13g.winston.proto.Node.NodeConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,9 +33,9 @@ import java.util.List;
 public class ConfigWrapper {
   private static final Logger LOG = LogManager.getLogger(ConfigWrapper.class);
 
-  private final NodeProtos.Config mConfigProto;
+  private final NodeConfig mConfigProto;
 
-  public ConfigWrapper(NodeProtos.Config nodeConfigProto) {
+  private ConfigWrapper(NodeConfig nodeConfigProto) {
     mConfigProto = nodeConfigProto;
   }
 
@@ -48,7 +48,7 @@ public class ConfigWrapper {
    */
   public static ConfigWrapper fromFile(File configFile) throws IOException {
     LOG.info("Reading node configuration: " + configFile.getAbsolutePath());
-    NodeProtos.Config.Builder builder = NodeProtos.Config.newBuilder();
+    NodeConfig.Builder builder = NodeConfig.newBuilder();
     String configStr = new String(Files.readAllBytes(configFile.toPath()));
     TextFormat.getParser().merge(configStr, builder);
     return new ConfigWrapper(builder.build());
@@ -57,7 +57,7 @@ public class ConfigWrapper {
   /**
    * @return The configuration protocol buffer.
    */
-  public NodeProtos.Config getConfig() {
+  public NodeConfig getConfig() {
     return mConfigProto;
   }
 
@@ -76,13 +76,13 @@ public class ConfigWrapper {
       throw new AssertionError("No active plugins found");
     }
 
-    for (NodeProtos.Config.GpioPlugin plugin : mConfigProto.getGpioPluginsList()) {
+    for (NodeConfig.GpioPlugin plugin : mConfigProto.getGpioPluginsList()) {
       if (plugin.getType() == null || plugin.getType().isEmpty()) {
         throw new AssertionError("Missing plugin type");
       }
     }
 
-    for (NodeProtos.Config.OneWirePlugin plugin : mConfigProto.getOnewirePluginsList()) {
+    for (NodeConfig.OneWirePlugin plugin : mConfigProto.getOnewirePluginsList()) {
       if (plugin.getType() == null || plugin.getType().isEmpty()) {
         throw new AssertionError("Missing plugin type");
       }
@@ -95,16 +95,16 @@ public class ConfigWrapper {
   public void printToLog() {
     LOG.info("---------------------------------");
     LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
-    List<NodeProtos.Config.GpioPlugin> gpioPluginsList = mConfigProto.getGpioPluginsList();
+    List<NodeConfig.GpioPlugin> gpioPluginsList = mConfigProto.getGpioPluginsList();
     LOG.info("Active GPIO plugins: " + gpioPluginsList.size());
-    for (NodeProtos.Config.GpioPlugin plugin : gpioPluginsList) {
+    for (NodeConfig.GpioPlugin plugin : gpioPluginsList) {
       LOG.info("  Type    : " + plugin.getType());
       LOG.info("  Mapping : " + plugin.getMappingList());
     }
     LOG.info("---------------------------------");
-    List<NodeProtos.Config.OneWirePlugin> oneWirePluginsList = mConfigProto.getOnewirePluginsList();
+    List<NodeConfig.OneWirePlugin> oneWirePluginsList = mConfigProto.getOnewirePluginsList();
     LOG.info("Active 1-Wire plugins: " + oneWirePluginsList.size());
-    for (NodeProtos.Config.OneWirePlugin plugin : oneWirePluginsList) {
+    for (NodeConfig.OneWirePlugin plugin : oneWirePluginsList) {
       LOG.info("  Type    : " + plugin.getType());
       LOG.info("  Name    : " + plugin.getName());
     }

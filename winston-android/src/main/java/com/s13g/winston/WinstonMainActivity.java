@@ -33,7 +33,7 @@ import com.s13g.winston.control.VoiceCommands;
 import com.s13g.winston.net.SystemDataLoader;
 import com.s13g.winston.net.SystemDataLoaderForTesting;
 import com.s13g.winston.net.SystemDataLoaderImpl;
-import com.s13g.winston.node.proto.nano.WinstonProtos.SystemDataForClient;
+import com.s13g.winston.proto.nano.ForClients;
 import com.s13g.winston.requests.NodeRequests;
 import com.s13g.winston.views.TiledViewCreator;
 
@@ -74,10 +74,10 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
     mNodeRequests = new NodeRequests();
     mActivityScope.add(mNodeRequests);
 
-    ListenableFuture<SystemDataForClient> systemData = mSystemDataLoader.loadSystemData();
-    Futures.addCallback(systemData, new FutureCallback<SystemDataForClient>() {
+    ListenableFuture<ForClients.SystemData> systemData = mSystemDataLoader.loadSystemData();
+    Futures.addCallback(systemData, new FutureCallback<ForClients.SystemData>() {
       @Override
-      public void onSuccess(SystemDataForClient result) {
+      public void onSuccess(ForClients.SystemData result) {
         onSystemDataLoaded(result);
       }
 
@@ -133,7 +133,7 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
     }
   }
 
-  private void onSystemDataLoaded(SystemDataForClient systemData) {
+  private void onSystemDataLoaded(ForClients.SystemData systemData) {
     mTiledViewCreator.addTiles(systemData.ioChannel);
   }
 

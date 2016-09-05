@@ -23,7 +23,7 @@ import com.s13g.winston.lib.core.SingletonProvider;
 import com.s13g.winston.node.handler.Handler;
 import com.s13g.winston.node.plugin.NodePlugin;
 import com.s13g.winston.node.plugin.NodePluginCreator;
-import com.s13g.winston.node.proto.NodeProtos;
+import com.s13g.winston.proto.Node.NodeConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +71,7 @@ public class NodeContainer implements Container {
    * @return The valid container to serve the master requests.
    */
   @Nonnull
-  public static NodeContainer from(NodeProtos.Config config) {
+  public static NodeContainer from(NodeConfig config) {
 
     final Provider<GpioController> gpioController = SingletonProvider.from
         (GpioFactory::getInstance);
@@ -82,7 +82,7 @@ public class NodeContainer implements Container {
     // NOTE: The order is important since some plugins might depend on other controllers and
     // therefore need to be instantiated later.
     // ==== GPIO ====
-    for (NodeProtos.Config.GpioPlugin gpioPlugin : config.getGpioPluginsList()) {
+    for (NodeConfig.GpioPlugin gpioPlugin : config.getGpioPluginsList()) {
       NodePlugin plugin = nodePluginCreator.create(gpioPlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
@@ -91,7 +91,7 @@ public class NodeContainer implements Container {
     }
 
     // ==== 1-Wire ====
-    for (NodeProtos.Config.OneWirePlugin oneWirePlugin : config.getOnewirePluginsList()) {
+    for (NodeConfig.OneWirePlugin oneWirePlugin : config.getOnewirePluginsList()) {
       NodePlugin plugin = nodePluginCreator.create(oneWirePlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.

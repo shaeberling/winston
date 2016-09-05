@@ -38,7 +38,7 @@ import com.s13g.winston.node.handler.PhotoCellHandler;
 import com.s13g.winston.node.handler.ReedHandler;
 import com.s13g.winston.node.handler.RelayHandler;
 import com.s13g.winston.node.handler.TemperatureHandler;
-import com.s13g.winston.node.proto.NodeProtos;
+import com.s13g.winston.proto.Node.NodeConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -77,7 +77,7 @@ public class NodePluginCreator {
    * @param gpioPlugin the GPIO plugin config.
    * @return The plugin.
    */
-  public NodePlugin create(NodeProtos.Config.GpioPlugin gpioPlugin) {
+  public NodePlugin create(NodeConfig.GpioPlugin gpioPlugin) {
     String type = gpioPlugin.getType();
     int[] mapping = gpioPlugin.getMappingList().stream().mapToInt(i -> i).toArray();
     return createGpio(type, mapping);
@@ -89,7 +89,7 @@ public class NodePluginCreator {
    * @param oneWirePlugin the 1-Wire plugin config.
    * @return The plugin.
    */
-  public NodePlugin create(NodeProtos.Config.OneWirePlugin oneWirePlugin) {
+  public NodePlugin create(NodeConfig.OneWirePlugin oneWirePlugin) {
     String type = oneWirePlugin.getType();
     String name = oneWirePlugin.getName();
     return createOneWire(type, name);

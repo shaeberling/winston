@@ -15,13 +15,16 @@
  */
 syntax = "proto3";
 
-package com.s13g.winston.master.proto;
+package com.s13g.winston.proto;
 
-option java_package = "com.s13g.winston.node.proto";
-option java_outer_classname = "NodeProtos";
+option java_package = "com.s13g.winston.proto";
+option java_outer_classname = "Node";
 
-/* Configuration for the node daemon. */
-message Config {
+/*
+ * Holds configurations for a node.
+ * Needs to be made available to the client at start-up.
+ */
+message NodeConfig {
   /* The port to start the node daemon on. */
   int32 daemon_port = 1;
 

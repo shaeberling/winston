@@ -14,14 +14,25 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.net;
+package com.s13g.winston.common;
 
-import com.google.common.util.concurrent.ListenableFuture;
-import com.s13g.winston.proto.nano.ForClients;
+import org.simpleframework.http.Status;
+
+import java.util.Optional;
 
 /**
- * Loads the data about nodes in the current system from the master.
+ * Thrown when there was an error during an HTTP request.
  */
-public interface SystemDataLoader extends AutoCloseable {
-  ListenableFuture<ForClients.SystemData> loadSystemData();
+public class RequestHandlingException extends Exception {
+  public final Optional<Status> errorCode;
+
+  public RequestHandlingException(String message) {
+    super(message);
+    errorCode = Optional.empty();
+  }
+
+  public RequestHandlingException(String message, Status status) {
+    super(message);
+    errorCode = Optional.ofNullable(status);
+  }
 }

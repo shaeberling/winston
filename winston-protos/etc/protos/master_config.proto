@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Sascha Haeberling
+ * Copyright 2016 Sascha Haeberling
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,47 @@
  * limitations under the License.
  */
 
+/*********************************************/
+/* Structures to configure a winston system. */
+/*********************************************/
+
 syntax = "proto3";
 
-package com.s13g.winston.master.proto;
+package com.s13g.winston.proto;
 
-option java_package = "com.s13g.winston.master.proto";
-option java_outer_classname = "MasterProtos";
+option java_package = "com.s13g.winston.proto";
+option java_outer_classname = "Master";
 
-/* Configuration for the master daemon. */
-message Config {
-  /* The port to start the master daemon on. */
-  int32 daemon_port = 1;
-  /* Node mapping for forward requests to. */
-  repeated NodeMapping node_mapping = 2;
+message MasterConfig {
+  int32 daemonPort = 1;
+  repeated Module module = 2;
+  repeated KnownNode known_client = 3;
+}
 
-  /* Mapping from tag to node. */
-  message NodeMapping {
-    /* Name of the node, like "pi-garage". */
-    string name = 1;
-    /* The IP address of the node. */
-    string address = 2;
-    /* The port to access the node daemon, typically 1984. */
-    int32 port = 3;
-    /* Whether the node daemon should accessed through https. */
-    bool use_ssl = 4;
-  }
+/* A module that runs on the master. E.g. a Nest or TV controller. */
+message Module {
+  /** The type of the module, such as "nest". */
+  string type = 1;
+  /** A number of parameters required to configure the module. */
+  repeated Parameter param = 2;
+}
+
+/* A known client/node. */
+message KnownNode {
+  /* MAC address uniquly addresses a client. */
+  string mac_address = 1;
+  /* Human-readable unique alias for the node, e.g. 'pi-power-1'. */
+  string name = 2;
+  /* The port to access the node daemon, typically 1984. */
+  int32 port = 3;
+  /* Whether the node daemon should accessed through https. */
+  bool use_ssl = 4;
+  /* The config to send to the client, which defines its active plugins. */
+  string config_file = 5;
+}
+
+/* Parameters that can be passed to modules. */
+message Parameter {
+  string name = 1;
+  string value = 2;
 }

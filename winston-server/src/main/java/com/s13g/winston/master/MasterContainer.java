@@ -16,8 +16,10 @@
 
 package com.s13g.winston.master;
 
+import com.s13g.winston.common.RequestHandler;
+import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
-import com.s13g.winston.master.proto.MasterProtos;
+import com.s13g.winston.proto.Master.MasterConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,58 +34,26 @@ import org.simpleframework.transport.connect.SocketConnection;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
 /**
  * HTTP Container for serving the master daemon HTTP requests.
  */
 public class MasterContainer implements Container {
-  private static class RequestHandlingException extends Exception {
-    final Optional<Status> errorCode;
-
-    RequestHandlingException(String message) {
-      super(message);
-      errorCode = Optional.empty();
-    }
-
-    RequestHandlingException(String message, Status status) {
-      super(message);
-      errorCode = Optional.ofNullable(status);
-    }
-  }
 
   private static final Logger LOG = LogManager.getLogger(MasterContainer.class);
   private final int mPort;
   private final HttpRequester mHttpRequester;
-  /** Maps node name to URL. */
-  private final Map<String, String> mNodeMap;
+  private final List<RequestHandler> mRequestHandlers;
 
-  MasterContainer(int port, Map<String, String> nodeMap, HttpRequester httpRequester) {
+  MasterContainer(int port, List<RequestHandler> requestHandlers, HttpRequester httpRequester) {
     mPort = port;
     mHttpRequester = httpRequester;
-    mNodeMap = new HashMap<>(nodeMap);
+    mRequestHandlers = requestHandlers;
   }
 
-  /**
-   * Creates and returns a container based on the given configuration.
-   *
-   * @param config the configuration to be used for this container.
-   * @return The valid container to serve the master requests.
-   */
-  public static MasterContainer from(MasterProtos.Config config, HttpRequester httpRequester) {
-    Map<String, String> nodeMap = new HashMap<>(config.getNodeMappingCount());
-
-    for (MasterProtos.Config.NodeMapping nodeMapping : config.getNodeMappingList()) {
-      StringBuilder nodeUrl = new StringBuilder();
-      nodeUrl.append(nodeMapping.getUseSsl() ? "https://" : "http://");
-      nodeUrl.append(nodeMapping.getAddress());
-      nodeUrl.append(":");
-      nodeUrl.append(nodeMapping.getPort());
-      nodeMap.put(nodeMapping.getName(), nodeUrl.toString());
-    }
-    return new MasterContainer(config.getDaemonPort(), nodeMap, httpRequester);
+  public static MasterContainer from(MasterConfig config, HttpRequester httpRequester) {
+    throw new RuntimeException("Not implemented yet");
   }
 
   /**
@@ -92,7 +62,7 @@ public class MasterContainer implements Container {
    * @param numThreads the number of threads to handle the HTTP requests.
    * @throws IOException thrown if HTTP serving could not be started.
    */
-  public void startServing(int numThreads) throws IOException {
+  void startServing(int numThreads) throws IOException {
     final ContainerSocketProcessor processor = new ContainerSocketProcessor(this, numThreads);
 
     // Since this server will run forever, no need to close connection.
@@ -152,29 +122,13 @@ public class MasterContainer implements Container {
       throw new RequestHandlingException("Cannot handle request: " + requestUrl);
     }
 
-    String nodeName = requestUrl.substring(0, requestUrl.indexOf('/', 1));
-    if (nodeName.isEmpty()) {
-      throw new RequestHandlingException("No node name: " + requestUrl);
-    }
-
-    LOG.info("Node: " + nodeName);
-    if (!mNodeMap.containsKey(nodeName)) {
-      throw new RequestHandlingException("No mapping for given node: " + nodeName, Status
-          .NOT_FOUND);
-    }
-    String nodeBaseUrl = mNodeMap.get(nodeName);
-    String nodeRequestPath = requestUrl.substring(nodeName.length());
-    String nodeRequestUrl = nodeBaseUrl + nodeRequestPath;
-    LOG.info("Node URL: " + nodeRequestUrl);
-
     // TODO: This should be done on a background thread, with a proper queue, de-duping per
     // command/node etc.
-    try {
-      return mHttpRequester.requestUrl(nodeRequestUrl);
-    } catch (IOException e) {
-      String msg = "Could not request URL";
-      LOG.error(msg, e);
-      throw new RequestHandlingException(msg, Status.NO_CONTENT);
+    for (RequestHandler handler : mRequestHandlers) {
+      if (handler.canHandle(requestUrl)) {
+        return handler.doHandle(requestUrl);
+      }
     }
+    throw new RequestHandlingException("No request handler found. " + requestUrl, Status.NOT_FOUND);
   }
 }

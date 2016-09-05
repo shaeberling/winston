@@ -48,7 +48,8 @@ public class MasterDaemon {
     configWrapper.assertSane();
 
     HttpRequester httpRequester = new HttpRequesterImpl();
-    MasterContainer httpContainer = MasterContainer.from(configWrapper.getConfig(), httpRequester);
-    httpContainer.startServing(NUM_HTTP_THREADS);
+//    MasterContainer httpContainer =
+//        new MasterContainer(configWrapper.getConfig(), httpRequester);
+//    httpContainer.startServing(NUM_HTTP_THREADS);
   }
 }

@@ -17,7 +17,7 @@
 package com.s13g.winston.net;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.s13g.winston.node.proto.nano.WinstonProtos;
+import com.s13g.winston.proto.nano.ForClients.SystemData;
 
 import java.util.concurrent.Executor;
 
@@ -38,7 +38,7 @@ public class SystemDataLoaderImpl implements SystemDataLoader {
   }
 
   @Override
-  public ListenableFuture<WinstonProtos.SystemDataForClient> loadSystemData() {
+  public ListenableFuture<SystemData> loadSystemData() {
     throw new RuntimeException("Not implemented yet");
   }
 

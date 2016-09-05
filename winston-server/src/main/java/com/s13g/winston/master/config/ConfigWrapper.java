@@ -16,8 +16,12 @@
 
 package com.s13g.winston.master.config;
 
+import com.google.common.base.Strings;
 import com.google.protobuf.TextFormat;
-import com.s13g.winston.master.proto.MasterProtos;
+import com.s13g.winston.proto.Master.KnownNode;
+import com.s13g.winston.proto.Master.MasterConfig;
+import com.s13g.winston.proto.Master.Module;
+import com.s13g.winston.proto.Master.Parameter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,9 +37,9 @@ import java.util.List;
 public class ConfigWrapper {
   private static Logger LOG = LogManager.getLogger(ConfigWrapper.class);
 
-  private final MasterProtos.Config mConfigProto;
+  private final MasterConfig mConfigProto;
 
-  private ConfigWrapper(MasterProtos.Config configProto) {
+  private ConfigWrapper(MasterConfig configProto) {
     mConfigProto = configProto;
   }
 
@@ -48,7 +52,7 @@ public class ConfigWrapper {
    */
   public static ConfigWrapper fromFile(File configFile) throws IOException {
     LOG.info("Reading master configuration: " + configFile.getAbsolutePath());
-    MasterProtos.Config.Builder builder = MasterProtos.Config.newBuilder();
+    MasterConfig.Builder builder = MasterConfig.newBuilder();
     String configStr = new String(Files.readAllBytes(configFile.toPath()));
     TextFormat.getParser().merge(configStr, builder);
     return new ConfigWrapper(builder.build());
@@ -57,7 +61,7 @@ public class ConfigWrapper {
   /**
    * @return The parses config proto.
    */
-  public MasterProtos.Config getConfig() {
+  public MasterConfig getConfig() {
     return mConfigProto;
   }
 
@@ -70,20 +74,33 @@ public class ConfigWrapper {
       throw new AssertionError("Invalid Port:" + mConfigProto.getDaemonPort());
     }
 
-    List<MasterProtos.Config.NodeMapping> nodeMappings = mConfigProto.getNodeMappingList();
-    if (nodeMappings.isEmpty()) {
-      throw new AssertionError("Node node mappings found");
+    List<Module> modules = mConfigProto.getModuleList();
+    for (Module module : modules) {
+      if (Strings.isNullOrEmpty(module.getType())) {
+        throw new AssertionError("Module type must be set.");
+      }
+
+      for (Parameter parameter : module.getParamList()) {
+        if (Strings.isNullOrEmpty(parameter.getName())) {
+          throw new AssertionError("Parameter name must not be empty.");
+        }
+      }
     }
 
-    for (MasterProtos.Config.NodeMapping nodeMapping : nodeMappings) {
-      if (nodeMapping.getName() == null || nodeMapping.getName().isEmpty()) {
-        throw new AssertionError("Missing node name");
+    for (KnownNode knownNode : mConfigProto.getKnownClientList()) {
+      // TODO: Parse MAC address, check if it is valid.
+      if (Strings.isNullOrEmpty(knownNode.getMacAddress())) {
+        throw new AssertionError("KnownClient MAC address must be set");
       }
-      if (nodeMapping.getAddress() == null || nodeMapping.getAddress().isEmpty()) {
-        throw new AssertionError("Missing node address");
+      if (Strings.isNullOrEmpty(knownNode.getName())) {
+        throw new AssertionError("KnownClient name must be set");
       }
-      if (nodeMapping.getPort() <= 0) {
-        throw new AssertionError("Invalid node port");
+      if (knownNode.getPort() <= 0) {
+        throw new AssertionError("KnownClient port must be > 0");
+      }
+      // TODO: Check if file exists and that it can be parsed.
+      if (Strings.isNullOrEmpty(knownNode.getConfigFile())) {
+        throw new AssertionError("KnownClient config_file must be set");
       }
     }
   }
@@ -93,14 +110,26 @@ public class ConfigWrapper {
    */
   public void printToLog() {
     LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
-    List<MasterProtos.Config.NodeMapping> nodeMappings = mConfigProto.getNodeMappingList();
-    LOG.info("Node mappings: " + nodeMappings.size());
+    List<Module> modules = mConfigProto.getModuleList();
+    LOG.info("Modules: " + modules.size());
     LOG.info("---------------------------------");
-    for (MasterProtos.Config.NodeMapping nodeMapping : nodeMappings) {
-      LOG.info("  Name    : " + nodeMapping.getName());
-      LOG.info("  Address : " + nodeMapping.getAddress());
-      LOG.info("  Port    : " + nodeMapping.getPort());
-      LOG.info("  Use SSL : " + nodeMapping.getUseSsl());
+    for (Module module : modules) {
+      LOG.info("  Type : " + module.getType());
+      for (Parameter param : module.getParamList()) {
+        LOG.info("  Param : " + param.getName() + " -> " + param.getValue());
+      }
+      LOG.info("---------------------------------");
+    }
+
+    List<KnownNode> knownNodes = mConfigProto.getKnownClientList();
+    LOG.info("\nKnown nodes: " + knownNodes.size());
+    LOG.info("---------------------------------");
+    for (KnownNode knownNode : knownNodes) {
+      LOG.info("  MAC Addr : " + knownNode.getMacAddress());
+      LOG.info("  Name     : " + knownNode.getName());
+      LOG.info("  Port     : " + knownNode.getPort());
+      LOG.info("  Use SSL  : " + knownNode.getUseSsl());
+      LOG.info("  Config   : " + knownNode.getConfigFile());
       LOG.info("---------------------------------");
     }
   }

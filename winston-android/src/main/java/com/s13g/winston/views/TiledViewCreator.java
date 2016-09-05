@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.s13g.winston.node.proto.nano.WinstonProtos;
+import com.s13g.winston.proto.nano.ForClients;
 import com.s13g.winston.views.tiles.ErrorTile;
 import com.s13g.winston.views.tiles.LightTile;
 import com.s13g.winston.views.tiles.TemperatureTile;
@@ -44,14 +44,14 @@ public class TiledViewCreator {
     mContext = checkNotNull(mTileContainer.getContext());
   }
 
-  public void addTiles(WinstonProtos.SystemDataForClient.IoChannel[] channels) {
+  public void addTiles(ForClients.SystemData.IoChannel[] channels) {
     ViewGroup newRow = null;
     for (int i = 0; i < channels.length; ++i) {
       if (i % 2 == 0) {
         newRow = createRow();
         mTileContainer.addView(newRow);
       }
-      WinstonProtos.SystemDataForClient.IoChannel channel = channels[i];
+      ForClients.SystemData.IoChannel channel = channels[i];
       LOG.info("Adding view for channel: " + channel.id);
       newRow.addView(wrapTile(createTile(channels[i]), channels[i].name));
     }
@@ -59,7 +59,7 @@ public class TiledViewCreator {
     mTileContainer.requestLayout();
   }
 
-  private View createTile(WinstonProtos.SystemDataForClient.IoChannel channel) {
+  private View createTile(ForClients.SystemData.IoChannel channel) {
     switch (channel.type) {
       case "temperature":
         return new TemperatureTile(mContext);

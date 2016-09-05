@@ -15,13 +15,13 @@
  */
 syntax = "proto3";
 
-package com.s13g.winston.master.proto;
+package com.s13g.winston.proto;
 
-option java_package = "com.s13g.winston.node.proto";
-option java_outer_classname = "WinstonProtos";
+option java_package = "com.s13g.winston.proto";
+option java_outer_classname = "ForClients";
 
 /* Contains whole system data loaded by a client. */
-message SystemDataForClient {
+message SystemData {
     /* Whether the request for this data was successful. */
     bool success = 1;
 

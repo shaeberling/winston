@@ -14,14 +14,24 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.net;
+package com.s13g.winston.master.handlers;
 
-import com.google.common.util.concurrent.ListenableFuture;
-import com.s13g.winston.proto.nano.ForClients;
+import com.s13g.winston.common.RequestHandler;
+import com.s13g.winston.common.RequestHandlingException;
+
+import org.simpleframework.http.Status;
 
 /**
- * Loads the data about nodes in the current system from the master.
+ * Handles requests that are meant to be responded to by nodes.
  */
-public interface SystemDataLoader extends AutoCloseable {
-  ListenableFuture<ForClients.SystemData> loadSystemData();
+public class NodeRequestHandler implements RequestHandler {
+  @Override
+  public String doHandle(String request) throws RequestHandlingException {
+    throw new RequestHandlingException("Not implemented yet", Status.NOT_IMPLEMENTED);
+  }
+
+  @Override
+  public boolean canHandle(String request) {
+    return request.startsWith("node-io/");
+  }
 }

@@ -14,14 +14,24 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.net;
-
-import com.google.common.util.concurrent.ListenableFuture;
-import com.s13g.winston.proto.nano.ForClients;
+package com.s13g.winston.common;
 
 /**
- * Loads the data about nodes in the current system from the master.
+ * Classes implementing this interface can respond to HTTP requests.
  */
-public interface SystemDataLoader extends AutoCloseable {
-  ListenableFuture<ForClients.SystemData> loadSystemData();
+public interface RequestHandler {
+  /**
+   * Handle the HTTP request
+   *
+   * @param request the request
+   * @return The response for the request.
+   * @throws RequestHandlingException Thrown is there was an error handling the request.
+   */
+  String doHandle(String request) throws RequestHandlingException;
+
+  /**
+   * @param request the request
+   * @return Whether this handler is able to handle this request.
+   */
+  boolean canHandle(String request);
 }

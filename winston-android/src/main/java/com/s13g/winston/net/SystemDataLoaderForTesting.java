@@ -18,7 +18,7 @@ package com.s13g.winston.net;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
-import com.s13g.winston.node.proto.nano.WinstonProtos.SystemDataForClient;
+import com.s13g.winston.proto.nano.ForClients.SystemData;
 
 import java.util.concurrent.Executor;
 
@@ -33,33 +33,33 @@ public class SystemDataLoaderForTesting implements SystemDataLoader {
   }
 
   @Override
-  public ListenableFuture<SystemDataForClient> loadSystemData() {
+  public ListenableFuture<SystemData> loadSystemData() {
 
-    final SettableFuture<SystemDataForClient> future = SettableFuture.create();
+    final SettableFuture<SystemData> future = SettableFuture.create();
     mExecutor.execute(new Runnable() {
       @Override
       public void run() {
         // Creating test data instead of making a real request.
-        SystemDataForClient data = new SystemDataForClient();
+        SystemData data = new SystemData();
         data.success = true;
-        data.ioChannel = new SystemDataForClient.IoChannel[4];
+        data.ioChannel = new SystemData.IoChannel[4];
 
-        data.ioChannel[0] = new SystemDataForClient.IoChannel();
+        data.ioChannel[0] = new SystemData.IoChannel();
         data.ioChannel[0].id = "/pi-power-1/io/relay/1";
         data.ioChannel[0].type = "switch/light";
         data.ioChannel[0].name = "Living room light (front)";
 
-        data.ioChannel[1] = new SystemDataForClient.IoChannel();
+        data.ioChannel[1] = new SystemData.IoChannel();
         data.ioChannel[1].id = "/pi-cam-1/io/ds18b20_temp/0";
         data.ioChannel[1].type = "temperature";
         data.ioChannel[1].name = "Living room temperature";
 
-        data.ioChannel[2] = new SystemDataForClient.IoChannel();
+        data.ioChannel[2] = new SystemData.IoChannel();
         data.ioChannel[2].id = "/pi-garage/io/relay/0";
         data.ioChannel[2].type = "tapswitch/garage";
         data.ioChannel[2].name = "Garage 1";
 
-        data.ioChannel[3] = new SystemDataForClient.IoChannel();
+        data.ioChannel[3] = new SystemData.IoChannel();
         data.ioChannel[3].id = "/pi-garage/io/relay/1";
         data.ioChannel[3].type = "tapswitch/garage";
         data.ioChannel[3].name = "Garage 2";
