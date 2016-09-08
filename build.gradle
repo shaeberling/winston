@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.1.3'
         classpath 'com.github.rholder:gradle-one-jar:1.0.4'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
 
@@ -34,7 +34,7 @@ allprojects {
 
 // To create a gradle wrapper.
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+    gradleVersion = '2.14.1'
 }
 
 // Code Coverage and reporting.

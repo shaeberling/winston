@@ -35,6 +35,8 @@
     <orderEntry type="library" exported="" name="protobuf-java-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="log4j-core-2.1" level="project" />
     <orderEntry type="library" exported="" name="log4j-api-2.1" level="project" />
+    <orderEntry type="library" exported="" name="json-20160810" level="project" />
+    <orderEntry type="library" exported="" name="jdom-2.0.2" level="project" />
     <orderEntry type="library" exported="" name="simple-common-6.0.1" level="project" />
     <orderEntry type="library" exported="" name="simple-transport-6.0.1" level="project" />
     <orderEntry type="library" exported="" name="pi4j-core-javadoc" level="project" />
