@@ -32,6 +32,7 @@
     <orderEntry type="library" exported="" name="simple-http-6.0.1" level="project" />
     <orderEntry type="library" exported="" name="guava-19.0" level="project" />
     <orderEntry type="library" exported="" name="jsr305-3.0.1" level="project" />
+    <orderEntry type="library" exported="" name="checker-qual-1.9.13" level="project" />
     <orderEntry type="library" exported="" name="protobuf-java-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="log4j-core-2.1" level="project" />
     <orderEntry type="library" exported="" name="log4j-api-2.1" level="project" />
