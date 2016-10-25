@@ -57,12 +57,13 @@ public class SauronDaemon {
         ImageRepository.init(MIN_BYTES_AVAILABLE, DirectoryImpl.create(sRepositoryRoot));
     ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();
     ResourceLoader resourceLoader = new ResourceLoaderImpl();
-    final ImageServer imageServer = new ImageServer(HTTP_PORT, serverCreator,
-        fileReadingExecutor, resourceLoader);
+    final ImageServer imageServer = new ImageServer(fileReadingExecutor);
+    final WebRequestContainer requestContainer = new WebRequestContainer(HTTP_PORT,
+        serverCreator, imageServer, resourceLoader);
     Scheduler scheduler = new Scheduler(pictureTaker, imageRepository, schedulerExecutor);
 
     // Start web server for serving data.
-    imageServer.start();
+    requestContainer.start();
 
     // Start the scheduler to take pictures.
     scheduler.start(SHOT_DELAY_MILLIS, (pictureFile) -> {
