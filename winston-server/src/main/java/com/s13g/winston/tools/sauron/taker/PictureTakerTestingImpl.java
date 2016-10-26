@@ -59,6 +59,9 @@ public class PictureTakerTestingImpl implements PictureTaker {
       LOG.error("Cannot write file.", e);
       future.set(false);
     }
+    if (++mCounter >= mTestImages.size()) {
+      mCounter = 0;
+    }
     return future;
   }
 

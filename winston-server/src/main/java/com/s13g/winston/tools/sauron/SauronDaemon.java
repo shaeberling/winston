@@ -24,10 +24,12 @@ import com.s13g.winston.lib.core.file.DirectoryImpl;
 import com.s13g.winston.lib.core.file.FileWrapperImpl;
 import com.s13g.winston.tools.sauron.taker.PictureTaker;
 import com.s13g.winston.tools.sauron.taker.PictureTakerImpl;
+import com.s13g.winston.tools.sauron.taker.PictureTakerTestingImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -43,8 +45,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class SauronDaemon {
   private static Logger LOG = LogManager.getLogger(SauronDaemon.class);
-  // private static final String sRepositoryRoot = "/home/pi/image_repo";
-  private static final String sRepositoryRoot = "/Users/haeberling/Desktop/2del/image_repo";
+  private static final boolean EMULATE_CAMERA = true;
+
+  private static final String REPOSITORY_ROOT = "/home/pi/image_repo";
+  private static final String TEST_PICTURES_ROOT =
+      "/Users/haeberling/Desktop/2del/sauron_test_pics";
 
   private static final int SHOT_DELAY_MILLIS = 60000; // Once a minute.
   private static final int HTTP_PORT = 1986;
@@ -55,9 +60,11 @@ public class SauronDaemon {
     ScheduledExecutorService schedulerExecutor = Executors.newSingleThreadScheduledExecutor();
     ExecutorService fileReadingExecutor = Executors.newSingleThreadExecutor();
 
-    PictureTaker pictureTaker = new PictureTakerImpl(cameraCommandExecutor);
+    PictureTaker pictureTaker = EMULATE_CAMERA ?
+        PictureTakerTestingImpl.from(new File(TEST_PICTURES_ROOT))
+        : new PictureTakerImpl(cameraCommandExecutor);
     final ImageRepository imageRepository =
-        ImageRepository.init(MIN_BYTES_AVAILABLE, DirectoryImpl.create(sRepositoryRoot));
+        ImageRepository.init(MIN_BYTES_AVAILABLE, DirectoryImpl.create(REPOSITORY_ROOT));
     ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();
     ResourceLoader resourceLoader = new ResourceLoaderImpl();
     final ImageServer imageServer = new ImageServer(fileReadingExecutor);
