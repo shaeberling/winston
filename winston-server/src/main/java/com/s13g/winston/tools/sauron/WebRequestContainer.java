@@ -74,6 +74,7 @@ class WebRequestContainer implements Container {
   @Override
   public void handle(Request request, Response response) {
     String requestUrl = request.getAddress().toString();
+    boolean closeResponse = true;
     try {
       if ("/".equals(requestUrl)) {
         serveData("text/html", mIndexPageBytes, response);
@@ -81,16 +82,19 @@ class WebRequestContainer implements Container {
         mImageServer.serveCurrentFile(response);
       } else if (requestUrl.startsWith(FOSCAM_VIDEO_STREAM)) {
         mImageServer.serveMotionJpegAsync(response);
+        closeResponse = false;
       } else {
         response.setStatus(Status.NOT_FOUND);
       }
     } catch (IOException e) {
       LOG.error("Error while serving [" + requestUrl + "]: " + e.getMessage());
     } finally {
-      try {
-        response.close();
-      } catch (IOException e) {
-        LOG.warn("Cannot close response: " + e.getMessage());
+      if (closeResponse) {
+        try {
+          response.close();
+        } catch (IOException e) {
+          LOG.warn("Cannot close response: " + e.getMessage());
+        }
       }
     }
   }

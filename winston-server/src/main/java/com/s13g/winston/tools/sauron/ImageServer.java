@@ -91,13 +91,13 @@ public class ImageServer {
   }
 
   void serveMotionJpegAsync(final Response response) throws IOException {
+    LOG.info("Serving MJPEG...");
     response.setContentType("multipart/x-mixed-replace;boundary=ipcamera");
     response.setStatus(Status.OK);
 
     OutputStream outputStream = response.getOutputStream();
     Executor mMjpegExecutor = Executors.newSingleThreadExecutor();
     mMjpegExecutor.execute(() -> {
-
       byte[] jpegData = null;
       try {
         while ((jpegData = mmJpegQueue.take()) != null) {
@@ -108,7 +108,11 @@ public class ImageServer {
           LOG.debug("Write mJpeg frame");
         }
       } catch (IOException | InterruptedException e) {
-        LOG.warn("Interrupted while serving MJPEG data.", e);
+        LOG.warn("Interrupted while serving MJPEG data. Exiting MJPEG loop.");
+        try {
+          response.close();
+        } catch (IOException ignore) {
+        }
       }
     });
   }

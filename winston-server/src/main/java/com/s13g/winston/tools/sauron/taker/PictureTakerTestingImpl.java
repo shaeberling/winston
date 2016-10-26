@@ -73,7 +73,11 @@ public class PictureTakerTestingImpl implements PictureTaker {
       throw new RuntimeException("Directory does not exist: " + directory.getAbsolutePath());
     }
 
-    File[] jpegFiles = directory.listFiles((dir, name) -> name.toLowerCase().endsWith("jpg"));
+    File[] jpegFiles = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg"));
+    if (jpegFiles.length == 0) {
+      throw new RuntimeException("No JPEG files in directory " + directory.getAbsolutePath());
+    }
+
     List<byte[]> files = new ArrayList<>(jpegFiles.length);
     for (File jpegFile : jpegFiles) {
       files.add(readFile(jpegFile));
