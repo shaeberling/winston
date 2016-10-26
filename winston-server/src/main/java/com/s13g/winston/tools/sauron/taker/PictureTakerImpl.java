@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 The Winston Authors
+ * Copyright 2016 The Winston Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.tools.sauron;
+package com.s13g.winston.tools.sauron.taker;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
@@ -33,8 +33,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * Accesses the webcam and produces images using fswebcam.
  */
 @ParametersAreNonnullByDefault
-public class PictureTaker {
-  private static Logger LOG = LogManager.getLogger(PictureTaker.class);
+public class PictureTakerImpl implements PictureTaker {
+  private static Logger LOG = LogManager.getLogger(PictureTakerImpl.class);
   /**
    * The command to execute to capture an image.
    * Note: Add '--no-banner' to remove the timestamp banner at the bottom of the image file.
@@ -42,15 +42,11 @@ public class PictureTaker {
   private static final String COMMAND = "/usr/bin/fswebcam -r 1920x1080 %s";
   private final Executor mExecutor;
 
-  public PictureTaker(Executor executor) {
+  public PictureTakerImpl(Executor executor) {
     mExecutor = executor;
   }
 
-  /**
-   * Captures an image and writes it to the give file.
-   *
-   * @param file the path to which to write the final image file to.
-   */
+  @Override
   @Nonnull
   public ListenableFuture<Boolean> captureImage(File file) {
     SettableFuture<Boolean> result = SettableFuture.create();

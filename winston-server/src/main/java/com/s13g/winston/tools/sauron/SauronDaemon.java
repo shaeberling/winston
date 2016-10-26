@@ -22,11 +22,12 @@ import com.s13g.winston.common.io.ResourceLoader;
 import com.s13g.winston.common.io.ResourceLoaderImpl;
 import com.s13g.winston.lib.core.file.DirectoryImpl;
 import com.s13g.winston.lib.core.file.FileWrapperImpl;
+import com.s13g.winston.tools.sauron.taker.PictureTaker;
+import com.s13g.winston.tools.sauron.taker.PictureTakerImpl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -42,7 +43,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class SauronDaemon {
   private static Logger LOG = LogManager.getLogger(SauronDaemon.class);
-  private static final String sRepositoryRoot = "/home/pi/image_repo";
+  // private static final String sRepositoryRoot = "/home/pi/image_repo";
+  private static final String sRepositoryRoot = "/Users/haeberling/Desktop/2del/image_repo";
+
   private static final int SHOT_DELAY_MILLIS = 60000; // Once a minute.
   private static final int HTTP_PORT = 1986;
   private static final long MIN_BYTES_AVAILABLE = 500L * 1000L * 1000L; // 100 MB
@@ -52,7 +55,7 @@ public class SauronDaemon {
     ScheduledExecutorService schedulerExecutor = Executors.newSingleThreadScheduledExecutor();
     ExecutorService fileReadingExecutor = Executors.newSingleThreadExecutor();
 
-    PictureTaker pictureTaker = new PictureTaker(cameraCommandExecutor);
+    PictureTaker pictureTaker = new PictureTakerImpl(cameraCommandExecutor);
     final ImageRepository imageRepository =
         ImageRepository.init(MIN_BYTES_AVAILABLE, DirectoryImpl.create(sRepositoryRoot));
     ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();
@@ -74,7 +77,7 @@ public class SauronDaemon {
         // TODO: We should probably kill the daemon to prevent a system out of memory condition.
         LOG.error("Cannot delete oldest file. System might run out of memory soon.", ex);
       }
-      imageServer.setCurrentFile(new FileDataLoader(pictureFile));
+      imageServer.updateCurrentFile(new FileDataLoader(pictureFile));
     });
   }
 }

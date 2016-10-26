@@ -19,6 +19,7 @@ package com.s13g.winston.tools.sauron;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.s13g.winston.tools.sauron.taker.PictureTaker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +37,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class Scheduler {
   /** Classes implementing this interface can be informed when a new picture is ready. */
-  public interface Listener {
+  interface Listener {
     /**
      * Called when a new picture is available.
      *
@@ -50,8 +51,8 @@ public class Scheduler {
   private final ImageRepository mImageRepository;
   private ScheduledExecutorService mExecutor;
 
-  public Scheduler(PictureTaker pictureTaker, ImageRepository imageRepository,
-                   ScheduledExecutorService executor) {
+  Scheduler(PictureTaker pictureTaker, ImageRepository imageRepository,
+            ScheduledExecutorService executor) {
     mPictureTaker = pictureTaker;
     mImageRepository = imageRepository;
     mExecutor = executor;
@@ -61,10 +62,10 @@ public class Scheduler {
    * Start the picture taking scheduler.
    *
    * @param delayMillis how much time should pass in between shots (in milliseconds).
-   * @param listener    this listener is called when a new image has been captured. Don't do a
-   *                    lot of work here since it might delay the next shot.
+   * @param listener this listener is called when a new image has been captured. Don't do a lot of
+   * work here since it might delay the next shot.
    */
-  public void start(int delayMillis, final Listener listener) {
+  void start(int delayMillis, final Listener listener) {
     mExecutor.scheduleAtFixedRate(() -> {
       final File nextImageFile = mImageRepository.getCurrentFile();
       ListenableFuture<Boolean> captureResult = mPictureTaker.captureImage(nextImageFile);

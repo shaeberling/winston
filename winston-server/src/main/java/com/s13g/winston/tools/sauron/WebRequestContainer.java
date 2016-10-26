@@ -37,6 +37,7 @@ class WebRequestContainer implements Container {
   private static final int NUM_SERVER_THREADS = 10;
   private static final String CURRENT_IMAGE_PATH = "/now.jpg";
   private static final String HTML_TEMPLATE_FILE = "/sauron.html";
+  private static final String FOSCAM_VIDEO_STREAM = "/videostream.cgi";
 
   private final ImageServer mImageServer;
 
@@ -78,6 +79,8 @@ class WebRequestContainer implements Container {
         serveData("text/html", mIndexPageBytes, response);
       } else if (requestUrl.startsWith(CURRENT_IMAGE_PATH)) {
         mImageServer.serveCurrentFile(response);
+      } else if (requestUrl.startsWith(FOSCAM_VIDEO_STREAM)) {
+        mImageServer.serveMotionJpegAsync(response);
       } else {
         response.setStatus(Status.NOT_FOUND);
       }
