@@ -51,7 +51,7 @@ public class SauronDaemon {
 
   private static final String REPOSITORY_ROOT = "/home/pi/image_repo";
 
-  private static final int SHOT_DELAY_MILLIS = 10000; // Once every 10 seconds.
+  private static final int SHOT_DELAY_MILLIS = 6000; // Once every 4 seconds.
   private static final int HTTP_PORT = 1986;
   private static final long MIN_BYTES_AVAILABLE = 500L * 1000L * 1000L; // 100 MB
 
