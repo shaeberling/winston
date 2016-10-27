@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 The Winston Authors
+ * Copyright 2016 The Winston Authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@
 package com.s13g.winston.tools.sauron;
 
 import com.s13g.winston.common.ContainerServer;
-import com.s13g.winston.common.io.DataLoader;
 import com.s13g.winston.common.io.ResourceLoader;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -41,48 +39,49 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Tests for ImageServer
+ * Tests for {@link WebRequestContainer}.
  */
-public class ImageServerTest {
+public class WebRequestContainerTest {
   private ContainerServer mMockServer;
   private ContainerServer.Creator mMockServerCreator;
-  private Executor mImmediateExecutor;
   private ResourceLoader mMockResourceLoader;
+  private ImageServer mImageServer;
 
   @Before
   public void initialize() {
+    Executor immediateExecutor = Runnable::run;
     mMockServerCreator = (port, numThreads) -> mMockServer = mock(ContainerServer.class);
-    mImmediateExecutor = Runnable::run;
     mMockResourceLoader = mock(ResourceLoader.class);
+    mImageServer = new ImageServer(immediateExecutor);
   }
 
   @Test
   public void testStartLoadsIndexPage() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
 
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
 
     // Start serving should load the index file into memory once.
-    imageServer.start();
+    container.start();
     verify(mMockResourceLoader).load(anyString());
     verify(mMockServer).startServing(anyObject());
   }
 
+
   @Test
   public void testIndexPageLoadDoesntStart() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
 
     when(mMockResourceLoader.load(anyString())).thenThrow(new IOException());
 
-    imageServer.start();
+    container.start();
     verify(mMockResourceLoader).load(anyString());
     // Make sure startServing is never called.
     verify(mMockServer, times(0)).startServing(anyObject());
@@ -90,10 +89,10 @@ public class ImageServerTest {
 
   @Test
   public void testServingUnmappedUrl() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
+    container.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
     verify(mMockServer).startServing(containerCaptor.capture());
@@ -106,10 +105,10 @@ public class ImageServerTest {
 
   @Test
   public void testServingIndexHtml() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
+    container.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
     verify(mMockServer).startServing(containerCaptor.capture());
@@ -129,10 +128,10 @@ public class ImageServerTest {
 
   @Test
   public void testServingImageFileNotSet() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
+    container.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
     verify(mMockServer).startServing(containerCaptor.capture());
@@ -152,13 +151,14 @@ public class ImageServerTest {
     verify(mockOutputStream).close();
   }
 
+
   @Test
   public void testServingImageFileSet() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
-    imageServer.setCurrentFile(() -> Optional.of(new byte[]{1, 2, 3, 5, 8, 13, 21}));
+    container.start();
+    mImageServer.updateCurrentFile(() -> Optional.of(new byte[]{1, 2, 3, 5, 8, 13, 21}));
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
     verify(mMockServer).startServing(containerCaptor.capture());
@@ -180,10 +180,10 @@ public class ImageServerTest {
 
   @Test
   public void testServingThrowsException() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
+    container.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
     verify(mMockServer).startServing(containerCaptor.capture());
@@ -200,10 +200,10 @@ public class ImageServerTest {
 
   @Test
   public void testResponseCloseThrows() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
+    container.start();
 
     ArgumentCaptor<Container> containerCaptor = ArgumentCaptor.forClass(Container.class);
     verify(mMockServer).startServing(containerCaptor.capture());
@@ -219,11 +219,11 @@ public class ImageServerTest {
 
   @Test
   public void testErrorWhenSettingCurrentFile() throws IOException {
-    ImageServer imageServer = new ImageServer(123, mMockServerCreator, mImmediateExecutor,
-        mMockResourceLoader);
+    WebRequestContainer container =
+        new WebRequestContainer(123, mMockServerCreator, mImageServer, mMockResourceLoader);
     when(mMockResourceLoader.load(anyString())).thenReturn(new byte[]{1, 2, 23, 42});
-    imageServer.start();
-    imageServer.setCurrentFile(Optional::empty);
+    container.start();
+    mImageServer.updateCurrentFile(Optional::empty);
   }
 
   private static Request createMockRequestForUrl(String url) {
