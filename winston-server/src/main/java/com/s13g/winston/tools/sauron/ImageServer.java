@@ -100,12 +100,15 @@ public class ImageServer {
     mMjpegExecutor.execute(() -> {
       byte[] jpegData = null;
       try {
+        // Immediately serve most recent frame.
+        synchronized (mBytesLock) {
+          serveMotionJpegFrame(mCurrentImageBytes, outputStream);
+        }
+
+        // Skip the first frame, since it's old. Then continue to read updated frames.
+        mmJpegQueue.take();
         while ((jpegData = mmJpegQueue.take()) != null) {
-          outputStream.write("--ipcamera\r\n".getBytes());
-          outputStream.write("Content-Type: image/jpeg\r\n".getBytes());
-          outputStream.write(("Content-Length: " + jpegData.length + "\r\n\r\n").getBytes());
-          outputStream.write(jpegData);
-          LOG.debug("Write mJpeg frame");
+          serveMotionJpegFrame(jpegData, outputStream);
         }
       } catch (IOException | InterruptedException e) {
         LOG.warn("Interrupted while serving MJPEG data. Exiting MJPEG loop.");
@@ -115,6 +118,14 @@ public class ImageServer {
         }
       }
     });
+  }
+
+  private void serveMotionJpegFrame(byte[] jpegData, OutputStream outputStream) throws IOException {
+    outputStream.write("--ipcamera\r\n".getBytes());
+    outputStream.write("Content-Type: image/jpeg\r\n".getBytes());
+    outputStream.write(("Content-Length: " + jpegData.length + "\r\n\r\n").getBytes());
+    outputStream.write(jpegData);
+    LOG.debug("Write mJpeg frame");
   }
 
   /** Serves the given data and content type to the given response. */
