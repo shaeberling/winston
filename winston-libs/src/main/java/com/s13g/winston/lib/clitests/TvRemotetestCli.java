@@ -16,9 +16,8 @@
 
 package com.s13g.winston.lib.clitests;
 
-import com.s13g.winston.lib.tv.SamsungRemote;
-import com.s13g.winston.lib.tv.SamsungTvController;
 import com.s13g.winston.lib.tv.TvController;
+import com.s13g.winston.lib.tv.TvControllerFactory;
 
 import java.util.Base64;
 import java.util.concurrent.Executor;
@@ -30,9 +29,11 @@ import java.util.concurrent.Executors;
 public class TvRemotetestCli {
   public static void main(String[] args) {
     Base64.Encoder base64Encoder = Base64.getEncoder();
-    SamsungRemote samsungRemote = new SamsungRemote("Winston", "192.168.1.107", base64Encoder);
     Executor tvExecutor = Executors.newSingleThreadExecutor();
-    TvController tvController = new SamsungTvController(samsungRemote, tvExecutor);
+
+    TvControllerFactory factory = new TvControllerFactory(base64Encoder, tvExecutor);
+    TvController tvController = factory.forSamsungTv("192.168.1.107");
+
     tvController.switchOff();
   }
 }
