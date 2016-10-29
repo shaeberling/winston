@@ -59,6 +59,11 @@ class WemoSwitchImpl implements WemoSwitch {
   }
 
   @Override
+  public String getFriendlyName() {
+    return mFriendlyName;
+  }
+
+  @Override
   public String toString() {
     String toString = "=== Wemo Switch ===\n";
     toString += "Friendly name: " + mFriendlyName + "\n";

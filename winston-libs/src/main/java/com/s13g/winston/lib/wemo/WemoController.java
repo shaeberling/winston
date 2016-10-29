@@ -16,10 +16,12 @@
 
 package com.s13g.winston.lib.wemo;
 
+import java.util.Optional;
+
 /**
  * Interface for interacting with Belkin Wemo devices, like switches.
  */
 public interface WemoController {
-  /** Queries all switches in the system and returns them . */
-  WemoSwitch[] querySwitches();
+  /** Queries a switches at the given address and returns it if found. */
+  Optional<WemoSwitch> querySwitch(String ipAddress);
 }

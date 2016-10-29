@@ -54,41 +54,19 @@ public class WemoControllerImpl implements WemoController {
   private static final String PAYLOAD_SWITCH_ON = createSwitchOnOffPayload(true);
   private static final String PAYLOAD_SWITCH_OFF = createSwitchOnOffPayload(false);
 
-  private final String[] mSwitchIpAddresses;
-
-  /**
-   * @param switchIpAddresses the IP addresses of all known switches.
-   */
-  public WemoControllerImpl(String... switchIpAddresses) {
-    mSwitchIpAddresses = switchIpAddresses;
-  }
-
-  @Override
-  public WemoSwitch[] querySwitches() {
-    List<WemoSwitch> wemoSwitches = new ArrayList<>();
-    for (String ipAddress : mSwitchIpAddresses) {
-      WemoSwitch wemoSwitch = querySwitch(ipAddress);
-      if (wemoSwitch != null) {
-        wemoSwitches.add(wemoSwitch);
-      }
-    }
-    return wemoSwitches.toArray(new WemoSwitch[0]);
-  }
-
-  @Nullable
-  private WemoSwitch querySwitch(String ipAddress) {
+  public Optional<WemoSwitch> querySwitch(String ipAddress) {
     Element root;
     try {
       String setupResponse = HttpUtil.requestUrl(String.format(SETUP_URL, ipAddress));
       Optional<Element> optRoot = XmlUtil.getRootFromString(setupResponse);
       if (!optRoot.isPresent()) {
         LOG.log(Level.WARNING, "Cannot parse setup XML: " + ipAddress);
-        return null;
+        return Optional.empty();
       }
       root = optRoot.get();
     } catch (IOException ex) {
       LOG.log(Level.WARNING, "Could not query switch: " + ipAddress, ex);
-      return null;
+      return Optional.empty();
     }
 
     Namespace ns = root.getNamespace();
@@ -99,9 +77,9 @@ public class WemoControllerImpl implements WemoController {
     String modelNumber = deviceElement.getChildText("modelNumber", ns);
     String firmwareVersion = deviceElement.getChildText("firmwareVersion", ns);
     String serialNumber = deviceElement.getChildText("serialNumber", ns);
-    return new WemoSwitchImpl(friendlyName, manufacturer, modelDescription, modelNumber,
+    return Optional.of(new WemoSwitchImpl(friendlyName, manufacturer, modelDescription, modelNumber,
         firmwareVersion, serialNumber, v -> getSwitchState(ipAddress),
-        on -> sendSwitchOnOffPayload(ipAddress, on));
+        on -> sendSwitchOnOffPayload(ipAddress, on)));
   }
 
   private Optional<Boolean> getSwitchState(String ip) {

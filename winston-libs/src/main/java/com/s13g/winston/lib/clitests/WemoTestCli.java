@@ -32,19 +32,22 @@ public class WemoTestCli {
 
   public static void main(String[] args) throws InterruptedException, IOException {
     LOG.info("Running...");
-    WemoController controller = new WemoControllerImpl("192.168.1.174");
-    WemoSwitch[] switches = controller.querySwitches();
-    LOG.info("Found " + switches.length + " switches.");
-    for (WemoSwitch wemoSwitch : switches) {
-      LOG.info(wemoSwitch.toString());
+    WemoController controller = new WemoControllerImpl();
+    Optional<WemoSwitch> wemoSwitchOpt = controller.querySwitch("192.168.1.174");
+    if (!wemoSwitchOpt.isPresent()) {
+      LOG.warning("Cannot not find switch.");
+      return;
+    }
+    WemoSwitch wemoSwitch = wemoSwitchOpt.get();
 
-      wemoSwitch.setSwitch(false);
-      Optional<Boolean> onState = wemoSwitch.isOn();
-      if (!onState.isPresent()) {
-        LOG.warning("Unable to get switch state.");
-      } else {
-        LOG.info("Switch is " + (onState.get() ? "ON" : "OFF"));
-      }
+    LOG.info(wemoSwitch.toString());
+
+    wemoSwitch.setSwitch(false);
+    Optional<Boolean> onState = wemoSwitch.isOn();
+    if (!onState.isPresent()) {
+      LOG.warning("Unable to get switch state.");
+    } else {
+      LOG.info("Switch is " + (onState.get() ? "ON" : "OFF"));
     }
   }
 }

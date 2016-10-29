@@ -31,4 +31,7 @@ public interface WemoSwitch {
    * Sets the switch on/off.
    */
   boolean setSwitch(boolean on);
+
+  /** Returns the friendly name of the switch. */
+  String getFriendlyName();
 }
