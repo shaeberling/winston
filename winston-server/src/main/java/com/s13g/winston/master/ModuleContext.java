@@ -16,20 +16,33 @@
 
 package com.s13g.winston.master;
 
+import com.s13g.winston.lib.tv.TvControllerFactory;
 import com.s13g.winston.lib.wemo.WemoController;
 import com.s13g.winston.lib.wemo.WemoControllerImpl;
+
+import java.util.Base64;
+import java.util.concurrent.Executors;
 
 /**
  * Contains classes needed my some or all modules.
  */
 public class ModuleContext {
   private final WemoController mWemoController;
+  private final TvControllerFactory mTvControllerFactory;
 
   public ModuleContext() {
+    Base64.Encoder base64Encoder = Base64.getEncoder();
+
     mWemoController = new WemoControllerImpl();
+    mTvControllerFactory =
+        new TvControllerFactory(base64Encoder, Executors.newSingleThreadExecutor());
   }
 
   public WemoController getWemoController() {
     return mWemoController;
+  }
+
+  public TvControllerFactory getTvControllerFactory() {
+    return mTvControllerFactory;
   }
 }
