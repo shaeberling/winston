@@ -17,7 +17,6 @@
 package com.s13g.winston.master.modules.instance;
 
 import com.google.common.collect.ImmutableList;
-import com.s13g.winston.common.ActionFailedException;
 import com.s13g.winston.lib.wemo.WemoController;
 import com.s13g.winston.lib.wemo.WemoSwitch;
 import com.s13g.winston.master.ModuleContext;

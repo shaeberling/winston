@@ -16,7 +16,6 @@
 
 package com.s13g.winston.master.modules;
 
-import com.s13g.winston.common.ActionFailedException;
 import com.s13g.winston.master.channel.Channel;
 
 import java.util.List;
