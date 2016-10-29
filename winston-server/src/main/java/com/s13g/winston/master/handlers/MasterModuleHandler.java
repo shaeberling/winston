@@ -16,6 +16,7 @@
 
 package com.s13g.winston.master.handlers;
 
+import com.google.common.base.Joiner;
 import com.s13g.winston.common.RequestHandler;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.master.channel.Channel;
@@ -62,8 +63,9 @@ public class MasterModuleHandler implements RequestHandler {
       throw new RequestHandlingException("Path does not match: '" + request + "'.");
     }
 
-    if (path.length < 2 || isNullOrEmpty(path[0]) || isNullOrEmpty(path[1])) {
-      throw new RequestHandlingException("Malformed path: '" + request + "'.");
+    // No arguments given, let's list the active modules.
+    if (path.length == 1) {
+      return Joiner.on(',').join(mChannels.keySet());
     }
 
     String module = path[1];
@@ -72,13 +74,9 @@ public class MasterModuleHandler implements RequestHandler {
     }
     Map<String, Channel> channels = mChannels.get(module);
 
-    // Only a module name is given... list all the channels.
+    // Only a module name is given, so list all the channel names.
     if (path.length == 2) {
-      String response = "Channels for this module: ";
-      for (String channelId : channels.keySet()) {
-        response += "'" + channelId + "' ";
-      }
-      return response;
+      return Joiner.on(',').join(channels.keySet());
     }
 
     String channelId = path[2];

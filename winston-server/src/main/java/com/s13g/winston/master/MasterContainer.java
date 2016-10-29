@@ -113,11 +113,6 @@ public class MasterContainer implements Container {
     // Remove slash prefix.
     requestUrl = requestUrl.substring(1);
 
-    int nextSlash = requestUrl.indexOf('/');
-    if (nextSlash <= 0) {
-      throw new RequestHandlingException("Cannot handle request: " + requestUrl);
-    }
-
     // TODO: This should be done on a background thread, with a proper queue, de-duping per
     // command/node etc.
     for (RequestHandler handler : mRequestHandlers) {
