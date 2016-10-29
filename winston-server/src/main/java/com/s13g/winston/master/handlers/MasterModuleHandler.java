@@ -110,6 +110,10 @@ public class MasterModuleHandler implements RequestHandler {
     // Read request for the channel.
     if (path.length == 4) {
       try {
+        if (channelValue.getType() == ChannelValue.Mode.WRITE_ONLY) {
+          throw new RequestHandlingException(
+              "Cannot read from write-only channel: '" + request + "'.", Status.BAD_REQUEST);
+        }
         return String.valueOf(channelValue.read());
       } catch (ChannelException e) {
         throw new RequestHandlingException(
@@ -120,6 +124,10 @@ public class MasterModuleHandler implements RequestHandler {
     // Write request for the channel.
     if (path.length == 5) {
       try {
+        if (channelValue.getType() == ChannelValue.Mode.READ_ONLY) {
+          throw new RequestHandlingException(
+              "Cannot write to read-only channel: '" + request + "'.", Status.BAD_REQUEST);
+        }
         channelValue.writeRaw(path[4]);
         return "OK";
       } catch (ChannelException e) {
