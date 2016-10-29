@@ -18,6 +18,7 @@ package com.s13g.winston.master.modules;
 
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.master.ModuleContext;
+import com.s13g.winston.master.modules.instance.SamsungTvModule;
 import com.s13g.winston.master.modules.instance.WemoModule;
 import com.s13g.winston.proto.Master;
 
@@ -67,20 +68,26 @@ public class ModuleRegistry {
    */
   private void initialize(Master.MasterConfig config) {
     List<Module> modules = new LinkedList<>();
-    for (Master.Module module : config.getModuleList()) {
-      String type = module.getType();
+    for (Master.Module moduleConfig : config.getModuleList()) {
+      String type = moduleConfig.getType();
       if (!mCreators.containsKey(type)) {
         LOG.error("Cannot find module creator for type: " + type);
         continue;
       }
       try {
-        modules.add(mCreators.get(type).create(
-            mModuleContext,
-            new ModuleParameters(module.getParamList())));
+        Module module = mCreators.get(type).create(mModuleContext);
+        try {
+          module.initialize(new ModuleParameters(moduleConfig.getParamList()));
+        } catch (Module.ModuleInitException e) {
+          throw ModuleCreationException.create("Cannot initialize module", e);
+        }
+
+        modules.add(module);
       } catch (ModuleCreationException e) {
         LOG.error("Unable to create module of type: " + type, e);
       }
     }
+
     mActiveModules = ImmutableList.copyOf(modules);
     LOG.info("Active modules: " + mActiveModules.size());
   }
@@ -100,6 +107,7 @@ public class ModuleRegistry {
   private static List<Class<? extends ModuleCreator>> initCreatorsList() {
     List<Class<? extends ModuleCreator>> list = new ArrayList<>();
     list.add(WemoModule.Creator.class);
+    list.add(SamsungTvModule.Creator.class);
     // Add more here ...
     // TODO: Maybe make this dynamic, or add the supported classes to a config file.
     return list;

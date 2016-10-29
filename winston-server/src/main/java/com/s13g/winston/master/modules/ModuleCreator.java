@@ -28,5 +28,5 @@ public interface ModuleCreator<T extends Module> {
   String getType();
 
   /** Takes parameters to crate a new module of type T. */
-  T create(ModuleContext context, ModuleParameters parameters) throws ModuleCreationException;
+  T create(ModuleContext context) throws ModuleCreationException;
 }

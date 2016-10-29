@@ -89,15 +89,8 @@ public class WemoModule implements Module {
     }
 
     @Override
-    public WemoModule create(ModuleContext context,
-                             ModuleParameters parameters) throws ModuleCreationException {
-      WemoModule module = new WemoModule(getType(), context.getWemoController());
-      try {
-        module.initialize(parameters);
-      } catch (ModuleInitException e) {
-        throw ModuleCreationException.create("Cannot initialize module", e);
-      }
-      return module;
+    public WemoModule create(ModuleContext context) throws ModuleCreationException {
+      return new WemoModule(getType(), context.getWemoController());
     }
   }
 }

@@ -17,6 +17,7 @@
 package com.s13g.winston.master.channel.instance;
 
 import com.google.common.collect.ImmutableList;
+import com.s13g.winston.common.TypeConversion;
 import com.s13g.winston.lib.wemo.WemoSwitch;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
@@ -62,13 +63,10 @@ public class WemoSwitchChannel implements Channel {
 
     @Override
     public void writeRaw(String value) throws ChannelException {
-      value = value.toLowerCase();
-      if ("0".equals(value) || "false".equals(value)) {
-        write(false);
-      } else if ("1".equals(value) || "true".equals(value)) {
-        write(true);
-      } else {
-        throw new ChannelException("Illegal raw value: '" + value + "'.");
+      try {
+        write(TypeConversion.stringToBoolean(value));
+      } catch (TypeConversion.IllegalFormatException e) {
+        throw new ChannelException(e.getMessage());
       }
     }
 
