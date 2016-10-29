@@ -91,11 +91,12 @@ public class NestControllerImpl implements NestController {
       String result = HttpUtil.requestUrl(url, HttpUtil.Method.PUT, HttpUtil.ContentType.JSON,
           mAuthHeader, Optional.of(data));
       LOG.info("Result from changing temperature: " + result);
+      // TODO: Check result to ensure setting temperature succeeded.
     } catch (IOException ex) {
       LOG.log(Level.WARNING, "Error changing temperature", ex);
+      return false;
     }
     return true;
-
   }
 
   @Override
