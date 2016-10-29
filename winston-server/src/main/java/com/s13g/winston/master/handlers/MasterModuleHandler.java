@@ -30,19 +30,16 @@ import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Status;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
  * Handles requests for master modules, such as the 'nest' module.
  */
 public class MasterModuleHandler implements RequestHandler {
-  private static final Logger LOG = LogManager.getLogger(MasterModuleHandler.class);
   private static final String REQ_PREFIX = "io";
 
-  private final Map<String, Map<String, Channel>> mChannels;
+  /** module -> channel -> channelValue. */
+  private final Map<String, Map<String, Map<String, ChannelValue>>> mChannels;
 
   public MasterModuleHandler(ModuleRegistry moduleRegistry) {
     mChannels = new HashMap<>();
@@ -50,8 +47,15 @@ public class MasterModuleHandler implements RequestHandler {
       if (!mChannels.containsKey(module.getType())) {
         mChannels.put(module.getType(), new HashMap<>());
       }
+      Map<String, Map<String, ChannelValue>> moduleMap = mChannels.get(module.getType());
       for (Channel channel : module.getChannels()) {
-        mChannels.get(module.getType()).put(channel.getChannelId(), channel);
+        if (!moduleMap.containsKey(channel.getChannelId())) {
+          moduleMap.put(channel.getChannelId(), new HashMap<>());
+        }
+        Map<String, ChannelValue> channelMap = moduleMap.get(channel.getChannelId());
+        for (ChannelValue channelValue : channel.getValues()) {
+          channelMap.put(channelValue.getName(), channelValue);
+        }
       }
     }
   }
@@ -72,7 +76,7 @@ public class MasterModuleHandler implements RequestHandler {
     if (!mChannels.containsKey(module)) {
       throw new RequestHandlingException("Unknown module: '" + module + "'.");
     }
-    Map<String, Channel> channels = mChannels.get(module);
+    Map<String, Map<String, ChannelValue>> channels = mChannels.get(module);
 
     // Only a module name is given, so list all the channel names.
     if (path.length == 2) {
@@ -83,22 +87,19 @@ public class MasterModuleHandler implements RequestHandler {
     if (!channels.containsKey(channelId)) {
       throw new RequestHandlingException("Unknown channel '" + module + "/" + channelId + "'.");
     }
-    Channel channel = channels.get(channelId);
+    Map<String, ChannelValue> channelValues = channels.get(channelId);
 
     // No arguments given... list the channels.
     if (path.length == 3) {
-      List<ChannelValue> values = channel.getValues();
-      return "Number of channels: " + values.size();
+      return Joiner.on(',').join(channelValues.keySet());
     }
 
-    ChannelValue channelValue;
-    try {
-      int channelValueId = Integer.parseInt(path[3]);
-      channelValue = channel.getValues().get(channelValueId);
-    } catch (NumberFormatException ex) {
+    String channelValueName = path[3];
+    if (!channelValues.containsKey(channelValueName)) {
       throw new RequestHandlingException(
-          "Channel value # not a number: '" + request + "'.", Status.BAD_REQUEST);
+          "Unknown channel value name in request '" + request + "'.", Status.BAD_REQUEST);
     }
+    ChannelValue channelValue = channelValues.get(channelValueName);
 
     if (channelValue == null) {
       throw new RequestHandlingException(

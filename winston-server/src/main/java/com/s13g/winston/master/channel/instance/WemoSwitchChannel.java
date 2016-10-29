@@ -56,6 +56,11 @@ public class WemoSwitchChannel implements Channel {
     }
 
     @Override
+    public String getName() {
+      return "switch";
+    }
+
+    @Override
     public void writeRaw(String value) throws ChannelException {
       value = value.toLowerCase();
       if ("0".equals(value) || "false".equals(value)) {
