@@ -26,16 +26,20 @@ option java_package = "com.s13g.winston.proto";
 option java_outer_classname = "Master";
 
 message MasterConfig {
+  /* The port on which the master daemon should listen for connections. */
   int32 daemonPort = 1;
+  /* A list of active modules. */
   repeated Module module = 2;
+  /* All known winston nodes, not all might be active at a given time. */
+  /** TODO: Remove this form here. We will have a Winston module for this. */
   repeated KnownNode known_client = 3;
 }
 
 /* A module that runs on the master. E.g. a Nest or TV controller. */
 message Module {
-  /** The type of the module, such as "nest". */
+  /* The type of the module, such as "nest". */
   string type = 1;
-  /** A number of parameters required to configure the module. */
+  /* A number of parameters required to configure the module. */
   repeated Parameter param = 2;
 }
 
@@ -55,6 +59,8 @@ message KnownNode {
 
 /* Parameters that can be passed to modules. */
 message Parameter {
+  /* Name of the parameter. */
   string name = 1;
+  /* Value of the parameter. */
   string value = 2;
 }

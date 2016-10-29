@@ -122,7 +122,7 @@ public class ConfigWrapper {
     }
 
     List<KnownNode> knownNodes = mConfigProto.getKnownClientList();
-    LOG.info("\nKnown nodes: " + knownNodes.size());
+    LOG.info("Known nodes: " + knownNodes.size());
     LOG.info("---------------------------------");
     for (KnownNode knownNode : knownNodes) {
       LOG.info("  MAC Addr : " + knownNode.getMacAddress());

@@ -19,6 +19,7 @@ package com.s13g.winston.master;
 import com.s13g.winston.lib.core.util.HttpRequesterImpl;
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 import com.s13g.winston.master.config.ConfigWrapper;
+import com.s13g.winston.master.modules.ModuleRegistry;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +35,6 @@ public class MasterDaemon {
   private static final Logger LOG = LogManager.getLogger(MasterDaemon.class);
   private static int NUM_HTTP_THREADS = 8;
 
-
   public static void main(final String... args) throws IOException {
     File configFile = new File("master.config");
     if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
@@ -47,9 +47,13 @@ public class MasterDaemon {
     configWrapper.printToLog();
     configWrapper.assertSane();
 
+    ModuleContext moduleContext = new ModuleContext();
+    ModuleRegistry moduleRegistry = new ModuleRegistry(moduleContext, configWrapper.getConfig());
+
+    int port = configWrapper.getConfig().getDaemonPort();
     HttpRequester httpRequester = new HttpRequesterImpl();
-//    MasterContainer httpContainer =
-//        new MasterContainer(configWrapper.getConfig(), httpRequester);
-//    httpContainer.startServing(NUM_HTTP_THREADS);
+    MasterContainer httpContainer =
+        new MasterContainer(port, null, httpRequester);
+    httpContainer.startServing(NUM_HTTP_THREADS);
   }
 }

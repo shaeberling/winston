@@ -52,10 +52,6 @@ public class MasterContainer implements Container {
     mRequestHandlers = requestHandlers;
   }
 
-  public static MasterContainer from(MasterConfig config, HttpRequester httpRequester) {
-    throw new RuntimeException("Not implemented yet");
-  }
-
   /**
    * Starts serving from this container.
    *
