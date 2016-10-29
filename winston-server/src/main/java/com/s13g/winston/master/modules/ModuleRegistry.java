@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.modules.instance.WemoModule;
 import com.s13g.winston.proto.Master;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,6 +52,13 @@ public class ModuleRegistry {
             ModuleCreator::getType,
             Function.identity()));
     initialize(config);
+  }
+
+  /**
+   * @return A list of all active modules.
+   */
+  public Collection<Module> getActiveModules() {
+    return mActiveModules;
   }
 
   /**

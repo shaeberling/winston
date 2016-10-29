@@ -73,7 +73,7 @@ public class WemoModule implements Module {
   }
 
   @Override
-  public String getType() throws ActionFailedException {
+  public String getType() {
     return mType;
   }
 

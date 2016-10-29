@@ -27,7 +27,7 @@ import java.util.List;
 public interface Module {
   void initialize(ModuleParameters params) throws ModuleInitException;
 
-  String getType() throws ActionFailedException;
+  String getType();
 
   List<Channel> getChannels();
 

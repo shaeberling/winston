@@ -56,8 +56,22 @@ public class WemoSwitchChannel implements Channel {
     }
 
     @Override
-    public void write(Boolean value) throws ChannelException {
-      mSwitch.setSwitch(value);
+    public void writeRaw(String value) throws ChannelException {
+      value = value.toLowerCase();
+      if ("0".equals(value) || "false".equals(value)) {
+        write(false);
+      } else if ("1".equals(value) || "true".equals(value)) {
+        write(true);
+      } else {
+        throw new ChannelException("Illegal raw value: '" + value + "'.");
+      }
+    }
+
+    @Override
+    public void write(Boolean on) throws ChannelException {
+      if (!mSwitch.setSwitch(on)) {
+        throw new ChannelException("Switching failed.");
+      }
     }
 
     @Override

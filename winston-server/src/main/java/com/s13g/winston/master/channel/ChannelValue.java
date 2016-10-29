@@ -26,6 +26,8 @@ public interface ChannelValue<T> {
 
   Mode getType();
 
+  void writeRaw(String value) throws ChannelException;
+
   void write(T value) throws ChannelException;
 
   T read() throws ChannelException;

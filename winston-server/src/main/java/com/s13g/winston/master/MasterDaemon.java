@@ -16,9 +16,11 @@
 
 package com.s13g.winston.master;
 
+import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.core.util.HttpRequesterImpl;
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 import com.s13g.winston.master.config.ConfigWrapper;
+import com.s13g.winston.master.handlers.MasterModuleHandler;
 import com.s13g.winston.master.modules.ModuleRegistry;
 
 import org.apache.logging.log4j.Level;
@@ -49,11 +51,12 @@ public class MasterDaemon {
 
     ModuleContext moduleContext = new ModuleContext();
     ModuleRegistry moduleRegistry = new ModuleRegistry(moduleContext, configWrapper.getConfig());
+    MasterModuleHandler masterModuleHandler = new MasterModuleHandler(moduleRegistry);
 
     int port = configWrapper.getConfig().getDaemonPort();
     HttpRequester httpRequester = new HttpRequesterImpl();
     MasterContainer httpContainer =
-        new MasterContainer(port, null, httpRequester);
+        new MasterContainer(port, ImmutableList.of(masterModuleHandler), httpRequester);
     httpContainer.startServing(NUM_HTTP_THREADS);
   }
 }
