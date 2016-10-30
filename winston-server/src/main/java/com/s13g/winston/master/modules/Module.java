@@ -24,16 +24,30 @@ import java.util.List;
  * The common interface of a master module.
  */
 public interface Module {
+  /**
+   * Initializes a module with the given parameters.
+   *
+   * @param params the parameters for this module.
+   * @throws ModuleInitException if the module could not be initialized.
+   */
   void initialize(ModuleParameters params) throws ModuleInitException;
 
+  /**
+   * @return The type of module which identifies it uniquly.
+   */
   String getType();
 
+  /**
+   * Creates and returns all channel from this module.
+   */
   List<Channel> getChannels();
 
+  /**
+   * Thrown if the module could not be created.
+   */
   class ModuleInitException extends Exception {
     public ModuleInitException(String message) {
       super(message);
     }
   }
-
 }

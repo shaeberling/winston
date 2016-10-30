@@ -22,7 +22,11 @@ import java.util.List;
  * A channel to a concrete item that has values to read and write, such as a switch or a thermostat.
  */
 public interface Channel {
+  /** The ID that uniquly identifies this channel within its module. */
   String getChannelId();
 
+  /**
+   * Creates and returns all the channel values that belong to this channel.
+   */
   List<ChannelValue> getValues();
 }

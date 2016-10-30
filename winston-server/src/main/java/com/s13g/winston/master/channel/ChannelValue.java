@@ -20,17 +20,23 @@ package com.s13g.winston.master.channel;
  * A concrete value of a channel, such as temperature ot a light switch state.
  */
 public interface ChannelValue<T> {
+  /** The mode of a channel value, defines whether a value can be written or read. */
   enum Mode {
     READ_ONLY, READ_WRITE, WRITE_ONLY
   }
 
+  /** Returns the mode of the value. */
   Mode getType();
 
+  /** @return The name of the channel, unique within its channel. */
   String getName();
 
+  /** Writes a raw values, e.g. coming from the REST interface. */
   void writeRaw(String value) throws ChannelException;
 
+  /** Writes the value, if it's allowed. */
   void write(T value) throws ChannelException;
 
+  /** Reads the values, if it's allowed. */
   T read() throws ChannelException;
 }
