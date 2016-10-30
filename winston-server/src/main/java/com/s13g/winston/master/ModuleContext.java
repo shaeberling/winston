@@ -16,6 +16,8 @@
 
 package com.s13g.winston.master;
 
+import com.s13g.winston.lib.nest.NestControllerFactory;
+import com.s13g.winston.lib.nest.data.NestResponseParser;
 import com.s13g.winston.lib.tv.TvControllerFactory;
 import com.s13g.winston.lib.wemo.WemoController;
 import com.s13g.winston.lib.wemo.WemoControllerImpl;
@@ -29,13 +31,16 @@ import java.util.concurrent.Executors;
 public class ModuleContext {
   private final WemoController mWemoController;
   private final TvControllerFactory mTvControllerFactory;
+  private final NestControllerFactory mNestControllerFactory;
 
-  public ModuleContext() {
+  ModuleContext() {
     Base64.Encoder base64Encoder = Base64.getEncoder();
+    NestResponseParser nestResponseParser = new NestResponseParser();
 
     mWemoController = new WemoControllerImpl();
     mTvControllerFactory =
         new TvControllerFactory(base64Encoder, Executors.newSingleThreadExecutor());
+    mNestControllerFactory = new NestControllerFactory(nestResponseParser);
   }
 
   public WemoController getWemoController() {
@@ -44,5 +49,9 @@ public class ModuleContext {
 
   public TvControllerFactory getTvControllerFactory() {
     return mTvControllerFactory;
+  }
+
+  public NestControllerFactory getNestControllerFactory() {
+    return mNestControllerFactory;
   }
 }

@@ -21,7 +21,7 @@ import com.s13g.winston.lib.temperature.Temperature;
 /**
  * Thermostat read-only values.
  */
-public final class Thermostat {
+public final class ThermostatData {
   public final String id;
   public final String name;
   public final double humidity;
@@ -31,7 +31,7 @@ public final class Thermostat {
   public final boolean isOnline;
   public final HvacState hvacState;
 
-  public Thermostat(String id, String name, double humidity, String softwareVersion, Temperature
+  public ThermostatData(String id, String name, double humidity, String softwareVersion, Temperature
       ambientTemperature, Temperature targetTemperature, boolean isOnline, HvacState hvacState) {
     this.id = id;
     this.name = name;

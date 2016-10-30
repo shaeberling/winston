@@ -21,7 +21,7 @@ import com.s13g.winston.lib.nest.NestAuthenticator;
 import com.s13g.winston.lib.nest.NestController;
 import com.s13g.winston.lib.nest.NestControllerImpl;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
-import com.s13g.winston.lib.nest.data.Thermostat;
+import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.lib.temperature.Temperature;
 
 import java.io.File;
@@ -44,13 +44,13 @@ public class NestTestCli {
       return;
     }
 
-    for (Thermostat thermostat : controller.getThermostats()) {
-      System.out.println(thermostat.toString());
+    for (ThermostatData thermostatData : controller.getThermostats()) {
+      System.out.println(thermostatData.toString());
     }
 
-    Thermostat thermostat = controller.getThermostats()[0];
+    ThermostatData thermostatData = controller.getThermostats()[0];
     // Set temperature.
-    controller.setTemperature(thermostat.id, new Temperature(19f, Temperature.Unit.CELSIUS));
+    controller.setTemperature(thermostatData.id, new Temperature(19f, Temperature.Unit.CELSIUS));
 
     // Set away mode.
     //controller.setAwayMode(thermostat.id, AwayMode.HOME);

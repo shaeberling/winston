@@ -16,12 +16,11 @@
 
 package com.s13g.winston.lib.nest;
 
-import com.google.common.base.Preconditions;
 import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
 import com.s13g.winston.lib.nest.data.Structure;
-import com.s13g.winston.lib.nest.data.Thermostat;
+import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.lib.temperature.Temperature;
 
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class NestControllerImpl implements NestController {
   private final String mAuthHeader;
   private final NestResponseParser mResponseParser;
   /** Maps thermostat ID to thermostat. */
-  private Map<String, Thermostat> mThermostats = new HashMap<>();
+  private Map<String, ThermostatData> mThermostats = new HashMap<>();
   /** Maps thermostat ID to the structure it is contained in. */
   private Map<String, Structure> mStructures = new HashMap<>();
 
@@ -65,12 +64,12 @@ public class NestControllerImpl implements NestController {
 
     Structure[] structures = mResponseParser.parseStructureAndDevicesResponse(result);
     for (Structure structure : structures) {
-      for (Thermostat thermostat : structure.thermostats) {
-        if (mThermostats.put(thermostat.id, thermostat) != null) {
-          throw new RuntimeException("Duplicate thermostat: " + thermostat.id);
+      for (ThermostatData thermostatData : structure.mThermostatDatas) {
+        if (mThermostats.put(thermostatData.id, thermostatData) != null) {
+          throw new RuntimeException("Duplicate thermostat: " + thermostatData.id);
         }
-        if (mStructures.put(thermostat.id, structure) != null) {
-          throw new RuntimeException("Duplicate structure for thermostat: " + thermostat.id);
+        if (mStructures.put(thermostatData.id, structure) != null) {
+          throw new RuntimeException("Duplicate structure for thermostat: " + thermostatData.id);
         }
       }
     }
@@ -78,8 +77,8 @@ public class NestControllerImpl implements NestController {
   }
 
   @Override
-  public Thermostat[] getThermostats() {
-    return mThermostats.values().toArray(new Thermostat[0]);
+  public ThermostatData[] getThermostats() {
+    return mThermostats.values().toArray(new ThermostatData[0]);
   }
 
   @Override

@@ -18,6 +18,7 @@ package com.s13g.winston.master.modules;
 
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.master.ModuleContext;
+import com.s13g.winston.master.modules.instance.NestModule;
 import com.s13g.winston.master.modules.instance.SamsungTvModule;
 import com.s13g.winston.master.modules.instance.WemoModule;
 import com.s13g.winston.proto.Master;
@@ -108,6 +109,7 @@ public class ModuleRegistry {
     List<Class<? extends ModuleCreator>> list = new ArrayList<>();
     list.add(WemoModule.Creator.class);
     list.add(SamsungTvModule.Creator.class);
+    list.add(NestModule.Creator.class);
     // Add more here ...
     // TODO: Maybe make this dynamic, or add the supported classes to a config file.
     return list;

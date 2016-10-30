@@ -51,10 +51,10 @@ public class NestResponseParser {
           (key) -> jsonThermostats.add(thermostats.getJSONObject(key)));
       LOG.info("Thermostats found: " + jsonThermostats.size());
 
-      Map<String, Thermostat> thermostatMap = new HashMap<>();
+      Map<String, ThermostatData> thermostatMap = new HashMap<>();
       for (JSONObject jsonThermostat : jsonThermostats) {
-        Thermostat thermostat = parseThermostat(jsonThermostat);
-        thermostatMap.put(thermostat.id, thermostat);
+        ThermostatData thermostatData = parseThermostat(jsonThermostat);
+        thermostatMap.put(thermostatData.id, thermostatData);
       }
 
       List<Pair<String, JSONObject>> jsonStructures = new ArrayList<>();
@@ -74,7 +74,7 @@ public class NestResponseParser {
 
   private Structure parseStructure(String structureId,
                                    JSONObject jsonStructure,
-                                   Map<String, Thermostat> thermostatMap) {
+                                   Map<String, ThermostatData> thermostatMap) {
     String name = jsonStructure.getString("name");
     JSONArray jsonThermostats = jsonStructure.getJSONArray("thermostats");
     Optional<AwayMode> awayMode = AwayMode.fromString(jsonStructure.getString("away"));
@@ -82,19 +82,19 @@ public class NestResponseParser {
       throw new RuntimeException("Cannot parse away mode.");
     }
 
-    Thermostat[] thermostats = new Thermostat[jsonThermostats.length()];
+    ThermostatData[] thermostatDatas = new ThermostatData[jsonThermostats.length()];
     for (int i = 0; i < jsonThermostats.length(); ++i) {
       String thermostatId = jsonThermostats.getString(i);
       if (!thermostatMap.containsKey(thermostatId)) {
         throw new RuntimeException("Thermostat ID '" + thermostatId + "' not found. Referenced " +
             "from structure '" + name + "'.");
       }
-      thermostats[i] = thermostatMap.get(thermostatId);
+      thermostatDatas[i] = thermostatMap.get(thermostatId);
     }
-    return new Structure(structureId, name, awayMode.get(), thermostats);
+    return new Structure(structureId, name, awayMode.get(), thermostatDatas);
   }
 
-  private Thermostat parseThermostat(JSONObject jsonThermostat) {
+  private ThermostatData parseThermostat(JSONObject jsonThermostat) {
     String deviceId = jsonThermostat.getString("device_id");
     String name = jsonThermostat.getString("name");
     double humidity = jsonThermostat.getDouble("humidity");
@@ -110,7 +110,7 @@ public class NestResponseParser {
     if (!hvacState.isPresent()) {
       throw new RuntimeException("Unable to obtain HVAC state");
     }
-    return new Thermostat(deviceId, name, humidity, softwareVersion, ambientTemp,
+    return new ThermostatData(deviceId, name, humidity, softwareVersion, ambientTemp,
         targetTemp, isOnline, hvacState.get());
   }
 }

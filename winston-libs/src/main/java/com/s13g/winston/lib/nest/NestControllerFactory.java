@@ -14,22 +14,24 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.nest.data;
+package com.s13g.winston.lib.nest;
+
+import com.s13g.winston.lib.nest.data.NestResponseParser;
 
 /**
- * Structure read-only data.
+ * Produces NestControllers.
  */
-public final class Structure {
-  public final String id;
-  public final String name;
-  public final AwayMode awayMode;
-  public final ThermostatData[] mThermostatDatas;
+public class NestControllerFactory {
+  private final NestResponseParser mResponseParser;
 
-  public Structure(String id, String name, AwayMode awayMode, ThermostatData[]
-      thermostatDatas) {
-    this.id = id;
-    this.name = name;
-    this.awayMode = awayMode;
-    this.mThermostatDatas = thermostatDatas;
+  public NestControllerFactory(NestResponseParser responseParser) {
+    mResponseParser = responseParser;
+  }
+
+  /**
+   * Creates a nest controller with the given accessToken for authentication.
+   */
+  public NestController create(String accessToken) {
+    return new NestControllerImpl("Bearer " + accessToken, mResponseParser);
   }
 }
