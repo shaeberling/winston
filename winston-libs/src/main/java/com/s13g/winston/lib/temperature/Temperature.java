@@ -16,6 +16,8 @@
 
 package com.s13g.winston.lib.temperature;
 
+import com.google.common.base.Strings;
+
 import java.util.Locale;
 
 /**
@@ -34,6 +36,38 @@ public class Temperature {
 
   private final float mValue;
   private final Unit mUnit;
+
+  /**
+   * Parses the string into a temperature object.
+   *
+   * @param tempStr the string, like "20 C" or "69 F".
+   * @return The temperature object.
+   * @throws IllegalArgumentException thrown if the string cannot be parsed.
+   */
+  public static Temperature parse(String tempStr) throws IllegalArgumentException {
+    if (Strings.isNullOrEmpty(tempStr)) {
+      throw new IllegalArgumentException("Cannot parse to temperature: '" + tempStr + "'.");
+    }
+    String[] parts = tempStr.toLowerCase().trim().split(" ");
+    if (parts.length != 2) {
+      throw new IllegalArgumentException("Cannot parse to temperature: '" + tempStr + "'.");
+    }
+    float number;
+    try {
+      number = Float.parseFloat(parts[0]);
+    } catch (NumberFormatException ex) {
+      throw new IllegalArgumentException("Cannot parse to temperature: '" + tempStr + "'.");
+    }
+
+    switch (parts[1]) {
+      case "c":
+        return new Temperature(number, Unit.CELSIUS);
+      case "f":
+        return new Temperature(number, Unit.FAHRENHEIT);
+      default:
+        throw new IllegalArgumentException("Cannot parse to temperature: '" + tempStr + "'.");
+    }
+  }
 
   public Temperature(float value, Unit unit) {
     mValue = value;
