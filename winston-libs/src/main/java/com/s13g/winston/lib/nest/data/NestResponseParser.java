@@ -19,6 +19,8 @@ package com.s13g.winston.lib.nest.data;
 import com.s13g.winston.lib.core.util.Pair;
 import com.s13g.winston.lib.temperature.Temperature;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,13 +30,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 /**
  * Parses Nest JSON responses.
  */
 public class NestResponseParser {
-  private static final Logger LOG = Logger.getLogger("NestResponseParser");
+  private static final Logger LOG = LogManager.getLogger(NestResponseParser.class);
 
   public Structure[] parseStructureAndDevicesResponse(String json) {
     JSONObject root = new JSONObject(json);

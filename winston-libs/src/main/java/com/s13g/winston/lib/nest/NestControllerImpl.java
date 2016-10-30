@@ -23,18 +23,18 @@ import com.s13g.winston.lib.nest.data.Structure;
 import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.lib.temperature.Temperature;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /** Default implementation of the Nest controller. */
 public class NestControllerImpl implements NestController {
-  private static final Logger LOG = Logger.getLogger("NestControllerImpl");
+  private static final Logger LOG = LogManager.getLogger
+      (NestControllerImpl.class);
   private static final String ROOT_URL = "https://developer-api.nest.com/";
   private final String mAuthHeader;
   private final NestResponseParser mResponseParser;
@@ -57,7 +57,7 @@ public class NestControllerImpl implements NestController {
       result = HttpUtil.requestUrl(ROOT_URL, HttpUtil.Method.GET, HttpUtil.ContentType.JSON,
           mAuthHeader);
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Cannot load data", ex);
+      LOG.warn("Cannot load data", ex);
       return false;
     }
     LOG.info("Get all devices response:\n" + result);
@@ -92,7 +92,7 @@ public class NestControllerImpl implements NestController {
       LOG.info("Result from changing temperature: " + result);
       // TODO: Check result to ensure setting temperature succeeded.
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Error changing temperature", ex);
+      LOG.warn("Error changing temperature", ex);
       return false;
     }
     return true;
@@ -113,7 +113,7 @@ public class NestControllerImpl implements NestController {
       LOG.info("Result from setting away state: " + result);
       return true;
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Error changing away mode", ex);
+      LOG.warn("Error changing away mode", ex);
     }
     return false;
   }
