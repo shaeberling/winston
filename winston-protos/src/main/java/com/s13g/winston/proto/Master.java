@@ -73,7 +73,7 @@ public final class Master {
 
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -82,7 +82,7 @@ public final class Master {
         getKnownClientList();
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -90,7 +90,7 @@ public final class Master {
     com.s13g.winston.proto.Master.KnownNode getKnownClient(int index);
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -98,7 +98,7 @@ public final class Master {
     int getKnownClientCount();
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -107,7 +107,7 @@ public final class Master {
         getKnownClientOrBuilderList();
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -282,7 +282,7 @@ public final class Master {
     private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_;
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -292,7 +292,7 @@ public final class Master {
     }
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -303,7 +303,7 @@ public final class Master {
     }
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -313,7 +313,7 @@ public final class Master {
     }
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -323,7 +323,7 @@ public final class Master {
     }
     /**
      * <pre>
-     ** TODO: Remove this form here. We will have a Winston module for this. 
+     ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1080,7 +1080,7 @@ public final class Master {
 
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1094,7 +1094,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1108,7 +1108,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1122,7 +1122,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1143,7 +1143,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1161,7 +1161,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1181,7 +1181,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1202,7 +1202,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1220,7 +1220,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1238,7 +1238,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1257,7 +1257,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1274,7 +1274,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1291,7 +1291,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1302,7 +1302,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1316,7 +1316,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1331,7 +1331,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1342,7 +1342,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
@@ -1354,7 +1354,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** TODO: Remove this form here. We will have a Winston module for this. 
+       ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>

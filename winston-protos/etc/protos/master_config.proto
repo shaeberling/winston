@@ -31,7 +31,7 @@ message MasterConfig {
   /* A list of active modules. */
   repeated Module module = 2;
   /* All known winston nodes, not all might be active at a given time. */
-  /** TODO: Remove this form here. We will have a Winston module for this. */
+  /** TODO: Remove this from here. We will have a Winston module for this. */
   repeated KnownNode known_client = 3;
 }
 
@@ -74,18 +74,3 @@ message Parameter {
   /* Value of the parameter. */
   string value = 2;
 }
-
-//message ModSpecificWinstonGarage {
-//  message GarageDoorConfig {
-//    /* The name of this garage door. */
-//    string name = 1;
-//    /* The relay that is responsible for opening/closing this door. */
-//    string relay = 2;
-//    /* The sensor showing whether the door is open. */
-//    string open_sensor = 3;
-//    /* The sensor showing whether the door is closed. */
-//    string closed_sensor = 4;
-//  }
-//  /** One entry for each garage door. */
-//  repeated GarageDoorConfig garage_door = 1;
-//}
