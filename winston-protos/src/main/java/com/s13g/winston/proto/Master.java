@@ -19,53 +19,97 @@ public final class Master {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * The port on which the master daemon should listen for connections. 
+     * </pre>
+     *
      * <code>optional int32 daemonPort = 1;</code>
      */
     int getDaemonPort();
 
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     java.util.List<com.s13g.winston.proto.Master.Module> 
         getModuleList();
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     com.s13g.winston.proto.Master.Module getModule(int index);
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     int getModuleCount();
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Master.ModuleOrBuilder> 
         getModuleOrBuilderList();
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     com.s13g.winston.proto.Master.ModuleOrBuilder getModuleOrBuilder(
         int index);
 
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     java.util.List<com.s13g.winston.proto.Master.KnownNode> 
         getKnownClientList();
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     com.s13g.winston.proto.Master.KnownNode getKnownClient(int index);
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     int getKnownClientCount();
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList();
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
@@ -169,6 +213,10 @@ public final class Master {
     public static final int DAEMONPORT_FIELD_NUMBER = 1;
     private int daemonPort_;
     /**
+     * <pre>
+     * The port on which the master daemon should listen for connections. 
+     * </pre>
+     *
      * <code>optional int32 daemonPort = 1;</code>
      */
     public int getDaemonPort() {
@@ -178,12 +226,20 @@ public final class Master {
     public static final int MODULE_FIELD_NUMBER = 2;
     private java.util.List<com.s13g.winston.proto.Master.Module> module_;
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     public java.util.List<com.s13g.winston.proto.Master.Module> getModuleList() {
       return module_;
     }
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Master.ModuleOrBuilder> 
@@ -191,18 +247,30 @@ public final class Master {
       return module_;
     }
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     public int getModuleCount() {
       return module_.size();
     }
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     public com.s13g.winston.proto.Master.Module getModule(int index) {
       return module_.get(index);
     }
     /**
+     * <pre>
+     * A list of active modules. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
      */
     public com.s13g.winston.proto.Master.ModuleOrBuilder getModuleOrBuilder(
@@ -213,12 +281,20 @@ public final class Master {
     public static final int KNOWN_CLIENT_FIELD_NUMBER = 3;
     private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_;
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
       return knownClient_;
     }
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
@@ -226,18 +302,30 @@ public final class Master {
       return knownClient_;
     }
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     public int getKnownClientCount() {
       return knownClient_.size();
     }
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
       return knownClient_.get(index);
     }
     /**
+     * <pre>
+     ** TODO: Remove this form here. We will have a Winston module for this. 
+     * </pre>
+     *
      * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
      */
     public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
@@ -630,12 +718,20 @@ public final class Master {
 
       private int daemonPort_ ;
       /**
+       * <pre>
+       * The port on which the master daemon should listen for connections. 
+       * </pre>
+       *
        * <code>optional int32 daemonPort = 1;</code>
        */
       public int getDaemonPort() {
         return daemonPort_;
       }
       /**
+       * <pre>
+       * The port on which the master daemon should listen for connections. 
+       * </pre>
+       *
        * <code>optional int32 daemonPort = 1;</code>
        */
       public Builder setDaemonPort(int value) {
@@ -645,6 +741,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * The port on which the master daemon should listen for connections. 
+       * </pre>
+       *
        * <code>optional int32 daemonPort = 1;</code>
        */
       public Builder clearDaemonPort() {
@@ -667,6 +767,10 @@ public final class Master {
           com.s13g.winston.proto.Master.Module, com.s13g.winston.proto.Master.Module.Builder, com.s13g.winston.proto.Master.ModuleOrBuilder> moduleBuilder_;
 
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.Module> getModuleList() {
@@ -677,6 +781,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public int getModuleCount() {
@@ -687,6 +795,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public com.s13g.winston.proto.Master.Module getModule(int index) {
@@ -697,6 +809,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder setModule(
@@ -714,6 +830,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder setModule(
@@ -728,6 +848,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder addModule(com.s13g.winston.proto.Master.Module value) {
@@ -744,6 +868,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder addModule(
@@ -761,6 +889,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder addModule(
@@ -775,6 +907,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder addModule(
@@ -789,6 +925,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder addAllModule(
@@ -804,6 +944,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder clearModule() {
@@ -817,6 +961,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public Builder removeModule(int index) {
@@ -830,6 +978,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public com.s13g.winston.proto.Master.Module.Builder getModuleBuilder(
@@ -837,6 +989,10 @@ public final class Master {
         return getModuleFieldBuilder().getBuilder(index);
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public com.s13g.winston.proto.Master.ModuleOrBuilder getModuleOrBuilder(
@@ -847,6 +1003,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Master.ModuleOrBuilder> 
@@ -858,6 +1018,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public com.s13g.winston.proto.Master.Module.Builder addModuleBuilder() {
@@ -865,6 +1029,10 @@ public final class Master {
             com.s13g.winston.proto.Master.Module.getDefaultInstance());
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public com.s13g.winston.proto.Master.Module.Builder addModuleBuilder(
@@ -873,6 +1041,10 @@ public final class Master {
             index, com.s13g.winston.proto.Master.Module.getDefaultInstance());
       }
       /**
+       * <pre>
+       * A list of active modules. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.Module.Builder> 
@@ -907,6 +1079,10 @@ public final class Master {
           com.s13g.winston.proto.Master.KnownNode, com.s13g.winston.proto.Master.KnownNode.Builder, com.s13g.winston.proto.Master.KnownNodeOrBuilder> knownClientBuilder_;
 
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
@@ -917,6 +1093,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public int getKnownClientCount() {
@@ -927,6 +1107,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
@@ -937,6 +1121,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder setKnownClient(
@@ -954,6 +1142,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder setKnownClient(
@@ -968,6 +1160,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder addKnownClient(com.s13g.winston.proto.Master.KnownNode value) {
@@ -984,6 +1180,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder addKnownClient(
@@ -1001,6 +1201,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder addKnownClient(
@@ -1015,6 +1219,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder addKnownClient(
@@ -1029,6 +1237,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder addAllKnownClient(
@@ -1044,6 +1256,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder clearKnownClient() {
@@ -1057,6 +1273,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public Builder removeKnownClient(int index) {
@@ -1070,6 +1290,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder getKnownClientBuilder(
@@ -1077,6 +1301,10 @@ public final class Master {
         return getKnownClientFieldBuilder().getBuilder(index);
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
@@ -1087,6 +1315,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
@@ -1098,6 +1330,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder() {
@@ -1105,6 +1341,10 @@ public final class Master {
             com.s13g.winston.proto.Master.KnownNode.getDefaultInstance());
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder(
@@ -1113,6 +1353,10 @@ public final class Master {
             index, com.s13g.winston.proto.Master.KnownNode.getDefaultInstance());
       }
       /**
+       * <pre>
+       ** TODO: Remove this form here. We will have a Winston module for this. 
+       * </pre>
+       *
        * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode.Builder> 
@@ -1188,7 +1432,7 @@ public final class Master {
 
     /**
      * <pre>
-     ** The type of the module, such as "nest". 
+     * The type of the module, such as "nest". 
      * </pre>
      *
      * <code>optional string type = 1;</code>
@@ -1196,7 +1440,7 @@ public final class Master {
     java.lang.String getType();
     /**
      * <pre>
-     ** The type of the module, such as "nest". 
+     * The type of the module, such as "nest". 
      * </pre>
      *
      * <code>optional string type = 1;</code>
@@ -1206,46 +1450,46 @@ public final class Master {
 
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    java.util.List<com.s13g.winston.proto.Master.Parameter> 
-        getParamList();
+    java.util.List<com.s13g.winston.proto.Master.Channel> 
+        getChannelList();
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    com.s13g.winston.proto.Master.Parameter getParam(int index);
+    com.s13g.winston.proto.Master.Channel getChannel(int index);
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    int getParamCount();
+    int getChannelCount();
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    java.util.List<? extends com.s13g.winston.proto.Master.ParameterOrBuilder> 
-        getParamOrBuilderList();
+    java.util.List<? extends com.s13g.winston.proto.Master.ChannelOrBuilder> 
+        getChannelOrBuilderList();
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    com.s13g.winston.proto.Master.ParameterOrBuilder getParamOrBuilder(
+    com.s13g.winston.proto.Master.ChannelOrBuilder getChannelOrBuilder(
         int index);
   }
   /**
@@ -1265,7 +1509,7 @@ public final class Master {
     }
     private Module() {
       type_ = "";
-      param_ = java.util.Collections.emptyList();
+      channel_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -1301,11 +1545,11 @@ public final class Master {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                param_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Parameter>();
+                channel_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Channel>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              param_.add(
-                  input.readMessage(com.s13g.winston.proto.Master.Parameter.parser(), extensionRegistry));
+              channel_.add(
+                  input.readMessage(com.s13g.winston.proto.Master.Channel.parser(), extensionRegistry));
               break;
             }
           }
@@ -1317,7 +1561,7 @@ public final class Master {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          param_ = java.util.Collections.unmodifiableList(param_);
+          channel_ = java.util.Collections.unmodifiableList(channel_);
         }
         makeExtensionsImmutable();
       }
@@ -1339,7 +1583,7 @@ public final class Master {
     private volatile java.lang.Object type_;
     /**
      * <pre>
-     ** The type of the module, such as "nest". 
+     * The type of the module, such as "nest". 
      * </pre>
      *
      * <code>optional string type = 1;</code>
@@ -1358,7 +1602,7 @@ public final class Master {
     }
     /**
      * <pre>
-     ** The type of the module, such as "nest". 
+     * The type of the module, such as "nest". 
      * </pre>
      *
      * <code>optional string type = 1;</code>
@@ -1377,59 +1621,59 @@ public final class Master {
       }
     }
 
-    public static final int PARAM_FIELD_NUMBER = 2;
-    private java.util.List<com.s13g.winston.proto.Master.Parameter> param_;
+    public static final int CHANNEL_FIELD_NUMBER = 2;
+    private java.util.List<com.s13g.winston.proto.Master.Channel> channel_;
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    public java.util.List<com.s13g.winston.proto.Master.Parameter> getParamList() {
-      return param_;
+    public java.util.List<com.s13g.winston.proto.Master.Channel> getChannelList() {
+      return channel_;
     }
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    public java.util.List<? extends com.s13g.winston.proto.Master.ParameterOrBuilder> 
-        getParamOrBuilderList() {
-      return param_;
+    public java.util.List<? extends com.s13g.winston.proto.Master.ChannelOrBuilder> 
+        getChannelOrBuilderList() {
+      return channel_;
     }
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    public int getParamCount() {
-      return param_.size();
+    public int getChannelCount() {
+      return channel_.size();
     }
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    public com.s13g.winston.proto.Master.Parameter getParam(int index) {
-      return param_.get(index);
+    public com.s13g.winston.proto.Master.Channel getChannel(int index) {
+      return channel_.get(index);
     }
     /**
      * <pre>
-     ** A number of parameters required to configure the module. 
+     * A number of parameters required to configure the module. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
      */
-    public com.s13g.winston.proto.Master.ParameterOrBuilder getParamOrBuilder(
+    public com.s13g.winston.proto.Master.ChannelOrBuilder getChannelOrBuilder(
         int index) {
-      return param_.get(index);
+      return channel_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1447,8 +1691,8 @@ public final class Master {
       if (!getTypeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
       }
-      for (int i = 0; i < param_.size(); i++) {
-        output.writeMessage(2, param_.get(i));
+      for (int i = 0; i < channel_.size(); i++) {
+        output.writeMessage(2, channel_.get(i));
       }
     }
 
@@ -1460,9 +1704,9 @@ public final class Master {
       if (!getTypeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
       }
-      for (int i = 0; i < param_.size(); i++) {
+      for (int i = 0; i < channel_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, param_.get(i));
+          .computeMessageSize(2, channel_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -1482,8 +1726,8 @@ public final class Master {
       boolean result = true;
       result = result && getType()
           .equals(other.getType());
-      result = result && getParamList()
-          .equals(other.getParamList());
+      result = result && getChannelList()
+          .equals(other.getChannelList());
       return result;
     }
 
@@ -1496,9 +1740,9 @@ public final class Master {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getType().hashCode();
-      if (getParamCount() > 0) {
-        hash = (37 * hash) + PARAM_FIELD_NUMBER;
-        hash = (53 * hash) + getParamList().hashCode();
+      if (getChannelCount() > 0) {
+        hash = (37 * hash) + CHANNEL_FIELD_NUMBER;
+        hash = (53 * hash) + getChannelList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1618,18 +1862,18 @@ public final class Master {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getParamFieldBuilder();
+          getChannelFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
         type_ = "";
 
-        if (paramBuilder_ == null) {
-          param_ = java.util.Collections.emptyList();
+        if (channelBuilder_ == null) {
+          channel_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          paramBuilder_.clear();
+          channelBuilder_.clear();
         }
         return this;
       }
@@ -1656,14 +1900,14 @@ public final class Master {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.type_ = type_;
-        if (paramBuilder_ == null) {
+        if (channelBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            param_ = java.util.Collections.unmodifiableList(param_);
+            channel_ = java.util.Collections.unmodifiableList(channel_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.param_ = param_;
+          result.channel_ = channel_;
         } else {
-          result.param_ = paramBuilder_.build();
+          result.channel_ = channelBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1711,29 +1955,29 @@ public final class Master {
           type_ = other.type_;
           onChanged();
         }
-        if (paramBuilder_ == null) {
-          if (!other.param_.isEmpty()) {
-            if (param_.isEmpty()) {
-              param_ = other.param_;
+        if (channelBuilder_ == null) {
+          if (!other.channel_.isEmpty()) {
+            if (channel_.isEmpty()) {
+              channel_ = other.channel_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
-              ensureParamIsMutable();
-              param_.addAll(other.param_);
+              ensureChannelIsMutable();
+              channel_.addAll(other.channel_);
             }
             onChanged();
           }
         } else {
-          if (!other.param_.isEmpty()) {
-            if (paramBuilder_.isEmpty()) {
-              paramBuilder_.dispose();
-              paramBuilder_ = null;
-              param_ = other.param_;
+          if (!other.channel_.isEmpty()) {
+            if (channelBuilder_.isEmpty()) {
+              channelBuilder_.dispose();
+              channelBuilder_ = null;
+              channel_ = other.channel_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              paramBuilder_ = 
+              channelBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getParamFieldBuilder() : null;
+                   getChannelFieldBuilder() : null;
             } else {
-              paramBuilder_.addAllMessages(other.param_);
+              channelBuilder_.addAllMessages(other.channel_);
             }
           }
         }
@@ -1767,7 +2011,7 @@ public final class Master {
       private java.lang.Object type_ = "";
       /**
        * <pre>
-       ** The type of the module, such as "nest". 
+       * The type of the module, such as "nest". 
        * </pre>
        *
        * <code>optional string type = 1;</code>
@@ -1786,7 +2030,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** The type of the module, such as "nest". 
+       * The type of the module, such as "nest". 
        * </pre>
        *
        * <code>optional string type = 1;</code>
@@ -1806,7 +2050,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** The type of the module, such as "nest". 
+       * The type of the module, such as "nest". 
        * </pre>
        *
        * <code>optional string type = 1;</code>
@@ -1823,7 +2067,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** The type of the module, such as "nest". 
+       * The type of the module, such as "nest". 
        * </pre>
        *
        * <code>optional string type = 1;</code>
@@ -1836,7 +2080,7 @@ public final class Master {
       }
       /**
        * <pre>
-       ** The type of the module, such as "nest". 
+       * The type of the module, such as "nest". 
        * </pre>
        *
        * <code>optional string type = 1;</code>
@@ -1853,316 +2097,316 @@ public final class Master {
         return this;
       }
 
-      private java.util.List<com.s13g.winston.proto.Master.Parameter> param_ =
+      private java.util.List<com.s13g.winston.proto.Master.Channel> channel_ =
         java.util.Collections.emptyList();
-      private void ensureParamIsMutable() {
+      private void ensureChannelIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          param_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Parameter>(param_);
+          channel_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Channel>(channel_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.s13g.winston.proto.Master.Parameter, com.s13g.winston.proto.Master.Parameter.Builder, com.s13g.winston.proto.Master.ParameterOrBuilder> paramBuilder_;
+          com.s13g.winston.proto.Master.Channel, com.s13g.winston.proto.Master.Channel.Builder, com.s13g.winston.proto.Master.ChannelOrBuilder> channelBuilder_;
 
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public java.util.List<com.s13g.winston.proto.Master.Parameter> getParamList() {
-        if (paramBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(param_);
+      public java.util.List<com.s13g.winston.proto.Master.Channel> getChannelList() {
+        if (channelBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(channel_);
         } else {
-          return paramBuilder_.getMessageList();
+          return channelBuilder_.getMessageList();
         }
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public int getParamCount() {
-        if (paramBuilder_ == null) {
-          return param_.size();
+      public int getChannelCount() {
+        if (channelBuilder_ == null) {
+          return channel_.size();
         } else {
-          return paramBuilder_.getCount();
+          return channelBuilder_.getCount();
         }
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public com.s13g.winston.proto.Master.Parameter getParam(int index) {
-        if (paramBuilder_ == null) {
-          return param_.get(index);
+      public com.s13g.winston.proto.Master.Channel getChannel(int index) {
+        if (channelBuilder_ == null) {
+          return channel_.get(index);
         } else {
-          return paramBuilder_.getMessage(index);
+          return channelBuilder_.getMessage(index);
         }
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder setParam(
-          int index, com.s13g.winston.proto.Master.Parameter value) {
-        if (paramBuilder_ == null) {
+      public Builder setChannel(
+          int index, com.s13g.winston.proto.Master.Channel value) {
+        if (channelBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureParamIsMutable();
-          param_.set(index, value);
+          ensureChannelIsMutable();
+          channel_.set(index, value);
           onChanged();
         } else {
-          paramBuilder_.setMessage(index, value);
+          channelBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder setParam(
-          int index, com.s13g.winston.proto.Master.Parameter.Builder builderForValue) {
-        if (paramBuilder_ == null) {
-          ensureParamIsMutable();
-          param_.set(index, builderForValue.build());
+      public Builder setChannel(
+          int index, com.s13g.winston.proto.Master.Channel.Builder builderForValue) {
+        if (channelBuilder_ == null) {
+          ensureChannelIsMutable();
+          channel_.set(index, builderForValue.build());
           onChanged();
         } else {
-          paramBuilder_.setMessage(index, builderForValue.build());
+          channelBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder addParam(com.s13g.winston.proto.Master.Parameter value) {
-        if (paramBuilder_ == null) {
+      public Builder addChannel(com.s13g.winston.proto.Master.Channel value) {
+        if (channelBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureParamIsMutable();
-          param_.add(value);
+          ensureChannelIsMutable();
+          channel_.add(value);
           onChanged();
         } else {
-          paramBuilder_.addMessage(value);
+          channelBuilder_.addMessage(value);
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder addParam(
-          int index, com.s13g.winston.proto.Master.Parameter value) {
-        if (paramBuilder_ == null) {
+      public Builder addChannel(
+          int index, com.s13g.winston.proto.Master.Channel value) {
+        if (channelBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureParamIsMutable();
-          param_.add(index, value);
+          ensureChannelIsMutable();
+          channel_.add(index, value);
           onChanged();
         } else {
-          paramBuilder_.addMessage(index, value);
+          channelBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder addParam(
-          com.s13g.winston.proto.Master.Parameter.Builder builderForValue) {
-        if (paramBuilder_ == null) {
-          ensureParamIsMutable();
-          param_.add(builderForValue.build());
+      public Builder addChannel(
+          com.s13g.winston.proto.Master.Channel.Builder builderForValue) {
+        if (channelBuilder_ == null) {
+          ensureChannelIsMutable();
+          channel_.add(builderForValue.build());
           onChanged();
         } else {
-          paramBuilder_.addMessage(builderForValue.build());
+          channelBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder addParam(
-          int index, com.s13g.winston.proto.Master.Parameter.Builder builderForValue) {
-        if (paramBuilder_ == null) {
-          ensureParamIsMutable();
-          param_.add(index, builderForValue.build());
+      public Builder addChannel(
+          int index, com.s13g.winston.proto.Master.Channel.Builder builderForValue) {
+        if (channelBuilder_ == null) {
+          ensureChannelIsMutable();
+          channel_.add(index, builderForValue.build());
           onChanged();
         } else {
-          paramBuilder_.addMessage(index, builderForValue.build());
+          channelBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder addAllParam(
-          java.lang.Iterable<? extends com.s13g.winston.proto.Master.Parameter> values) {
-        if (paramBuilder_ == null) {
-          ensureParamIsMutable();
+      public Builder addAllChannel(
+          java.lang.Iterable<? extends com.s13g.winston.proto.Master.Channel> values) {
+        if (channelBuilder_ == null) {
+          ensureChannelIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, param_);
+              values, channel_);
           onChanged();
         } else {
-          paramBuilder_.addAllMessages(values);
+          channelBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder clearParam() {
-        if (paramBuilder_ == null) {
-          param_ = java.util.Collections.emptyList();
+      public Builder clearChannel() {
+        if (channelBuilder_ == null) {
+          channel_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          paramBuilder_.clear();
+          channelBuilder_.clear();
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public Builder removeParam(int index) {
-        if (paramBuilder_ == null) {
-          ensureParamIsMutable();
-          param_.remove(index);
+      public Builder removeChannel(int index) {
+        if (channelBuilder_ == null) {
+          ensureChannelIsMutable();
+          channel_.remove(index);
           onChanged();
         } else {
-          paramBuilder_.remove(index);
+          channelBuilder_.remove(index);
         }
         return this;
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public com.s13g.winston.proto.Master.Parameter.Builder getParamBuilder(
+      public com.s13g.winston.proto.Master.Channel.Builder getChannelBuilder(
           int index) {
-        return getParamFieldBuilder().getBuilder(index);
+        return getChannelFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public com.s13g.winston.proto.Master.ParameterOrBuilder getParamOrBuilder(
+      public com.s13g.winston.proto.Master.ChannelOrBuilder getChannelOrBuilder(
           int index) {
-        if (paramBuilder_ == null) {
-          return param_.get(index);  } else {
-          return paramBuilder_.getMessageOrBuilder(index);
+        if (channelBuilder_ == null) {
+          return channel_.get(index);  } else {
+          return channelBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public java.util.List<? extends com.s13g.winston.proto.Master.ParameterOrBuilder> 
-           getParamOrBuilderList() {
-        if (paramBuilder_ != null) {
-          return paramBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.s13g.winston.proto.Master.ChannelOrBuilder> 
+           getChannelOrBuilderList() {
+        if (channelBuilder_ != null) {
+          return channelBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(param_);
+          return java.util.Collections.unmodifiableList(channel_);
         }
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public com.s13g.winston.proto.Master.Parameter.Builder addParamBuilder() {
-        return getParamFieldBuilder().addBuilder(
-            com.s13g.winston.proto.Master.Parameter.getDefaultInstance());
+      public com.s13g.winston.proto.Master.Channel.Builder addChannelBuilder() {
+        return getChannelFieldBuilder().addBuilder(
+            com.s13g.winston.proto.Master.Channel.getDefaultInstance());
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public com.s13g.winston.proto.Master.Parameter.Builder addParamBuilder(
+      public com.s13g.winston.proto.Master.Channel.Builder addChannelBuilder(
           int index) {
-        return getParamFieldBuilder().addBuilder(
-            index, com.s13g.winston.proto.Master.Parameter.getDefaultInstance());
+        return getChannelFieldBuilder().addBuilder(
+            index, com.s13g.winston.proto.Master.Channel.getDefaultInstance());
       }
       /**
        * <pre>
-       ** A number of parameters required to configure the module. 
+       * A number of parameters required to configure the module. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Parameter param = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Channel channel = 2;</code>
        */
-      public java.util.List<com.s13g.winston.proto.Master.Parameter.Builder> 
-           getParamBuilderList() {
-        return getParamFieldBuilder().getBuilderList();
+      public java.util.List<com.s13g.winston.proto.Master.Channel.Builder> 
+           getChannelBuilderList() {
+        return getChannelFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.s13g.winston.proto.Master.Parameter, com.s13g.winston.proto.Master.Parameter.Builder, com.s13g.winston.proto.Master.ParameterOrBuilder> 
-          getParamFieldBuilder() {
-        if (paramBuilder_ == null) {
-          paramBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.s13g.winston.proto.Master.Parameter, com.s13g.winston.proto.Master.Parameter.Builder, com.s13g.winston.proto.Master.ParameterOrBuilder>(
-                  param_,
+          com.s13g.winston.proto.Master.Channel, com.s13g.winston.proto.Master.Channel.Builder, com.s13g.winston.proto.Master.ChannelOrBuilder> 
+          getChannelFieldBuilder() {
+        if (channelBuilder_ == null) {
+          channelBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.s13g.winston.proto.Master.Channel, com.s13g.winston.proto.Master.Channel.Builder, com.s13g.winston.proto.Master.ChannelOrBuilder>(
+                  channel_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          param_ = null;
+          channel_ = null;
         }
-        return paramBuilder_;
+        return channelBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3273,25 +3517,1245 @@ public final class Master {
 
   }
 
+  public interface ChannelOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.Channel)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The type of the channel. 
+     * </pre>
+     *
+     * <code>optional string type = 1;</code>
+     */
+    java.lang.String getType();
+    /**
+     * <pre>
+     * The type of the channel. 
+     * </pre>
+     *
+     * <code>optional string type = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTypeBytes();
+
+    /**
+     * <pre>
+     * An optional address to localize the channel. 
+     * </pre>
+     *
+     * <code>optional string address = 2;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <pre>
+     * An optional address to localize the channel. 
+     * </pre>
+     *
+     * <code>optional string address = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    java.util.List<com.s13g.winston.proto.Master.Parameter> 
+        getParameterList();
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    com.s13g.winston.proto.Master.Parameter getParameter(int index);
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    int getParameterCount();
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    java.util.List<? extends com.s13g.winston.proto.Master.ParameterOrBuilder> 
+        getParameterOrBuilderList();
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    com.s13g.winston.proto.Master.ParameterOrBuilder getParameterOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   * Each module can have support for multiple channels. 
+   * </pre>
+   *
+   * Protobuf type {@code com.s13g.winston.proto.Channel}
+   */
+  public  static final class Channel extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.Channel)
+      ChannelOrBuilder {
+    // Use Channel.newBuilder() to construct.
+    private Channel(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Channel() {
+      type_ = "";
+      address_ = "";
+      parameter_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private Channel(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              type_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              address_ = s;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                parameter_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Parameter>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              parameter_.add(
+                  input.readMessage(com.s13g.winston.proto.Master.Parameter.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          parameter_ = java.util.Collections.unmodifiableList(parameter_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.s13g.winston.proto.Master.Channel.class, com.s13g.winston.proto.Master.Channel.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private volatile java.lang.Object type_;
+    /**
+     * <pre>
+     * The type of the channel. 
+     * </pre>
+     *
+     * <code>optional string type = 1;</code>
+     */
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        type_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * The type of the channel. 
+     * </pre>
+     *
+     * <code>optional string type = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ADDRESS_FIELD_NUMBER = 2;
+    private volatile java.lang.Object address_;
+    /**
+     * <pre>
+     * An optional address to localize the channel. 
+     * </pre>
+     *
+     * <code>optional string address = 2;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        address_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * An optional address to localize the channel. 
+     * </pre>
+     *
+     * <code>optional string address = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PARAMETER_FIELD_NUMBER = 3;
+    private java.util.List<com.s13g.winston.proto.Master.Parameter> parameter_;
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    public java.util.List<com.s13g.winston.proto.Master.Parameter> getParameterList() {
+      return parameter_;
+    }
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    public java.util.List<? extends com.s13g.winston.proto.Master.ParameterOrBuilder> 
+        getParameterOrBuilderList() {
+      return parameter_;
+    }
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    public int getParameterCount() {
+      return parameter_.size();
+    }
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    public com.s13g.winston.proto.Master.Parameter getParameter(int index) {
+      return parameter_.get(index);
+    }
+    /**
+     * <pre>
+     * All parameters required to run the channel. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+     */
+    public com.s13g.winston.proto.Master.ParameterOrBuilder getParameterOrBuilder(
+        int index) {
+      return parameter_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
+      }
+      if (!getAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, address_);
+      }
+      for (int i = 0; i < parameter_.size(); i++) {
+        output.writeMessage(3, parameter_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
+      }
+      if (!getAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, address_);
+      }
+      for (int i = 0; i < parameter_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, parameter_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.s13g.winston.proto.Master.Channel)) {
+        return super.equals(obj);
+      }
+      com.s13g.winston.proto.Master.Channel other = (com.s13g.winston.proto.Master.Channel) obj;
+
+      boolean result = true;
+      result = result && getType()
+          .equals(other.getType());
+      result = result && getAddress()
+          .equals(other.getAddress());
+      result = result && getParameterList()
+          .equals(other.getParameterList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getType().hashCode();
+      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getAddress().hashCode();
+      if (getParameterCount() > 0) {
+        hash = (37 * hash) + PARAMETER_FIELD_NUMBER;
+        hash = (53 * hash) + getParameterList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.s13g.winston.proto.Master.Channel prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * Each module can have support for multiple channels. 
+     * </pre>
+     *
+     * Protobuf type {@code com.s13g.winston.proto.Channel}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.Channel)
+        com.s13g.winston.proto.Master.ChannelOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.proto.Master.Channel.class, com.s13g.winston.proto.Master.Channel.Builder.class);
+      }
+
+      // Construct using com.s13g.winston.proto.Master.Channel.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getParameterFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        type_ = "";
+
+        address_ = "";
+
+        if (parameterBuilder_ == null) {
+          parameter_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          parameterBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_descriptor;
+      }
+
+      public com.s13g.winston.proto.Master.Channel getDefaultInstanceForType() {
+        return com.s13g.winston.proto.Master.Channel.getDefaultInstance();
+      }
+
+      public com.s13g.winston.proto.Master.Channel build() {
+        com.s13g.winston.proto.Master.Channel result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.s13g.winston.proto.Master.Channel buildPartial() {
+        com.s13g.winston.proto.Master.Channel result = new com.s13g.winston.proto.Master.Channel(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.type_ = type_;
+        result.address_ = address_;
+        if (parameterBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            parameter_ = java.util.Collections.unmodifiableList(parameter_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.parameter_ = parameter_;
+        } else {
+          result.parameter_ = parameterBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.s13g.winston.proto.Master.Channel) {
+          return mergeFrom((com.s13g.winston.proto.Master.Channel)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.s13g.winston.proto.Master.Channel other) {
+        if (other == com.s13g.winston.proto.Master.Channel.getDefaultInstance()) return this;
+        if (!other.getType().isEmpty()) {
+          type_ = other.type_;
+          onChanged();
+        }
+        if (!other.getAddress().isEmpty()) {
+          address_ = other.address_;
+          onChanged();
+        }
+        if (parameterBuilder_ == null) {
+          if (!other.parameter_.isEmpty()) {
+            if (parameter_.isEmpty()) {
+              parameter_ = other.parameter_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureParameterIsMutable();
+              parameter_.addAll(other.parameter_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.parameter_.isEmpty()) {
+            if (parameterBuilder_.isEmpty()) {
+              parameterBuilder_.dispose();
+              parameterBuilder_ = null;
+              parameter_ = other.parameter_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              parameterBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getParameterFieldBuilder() : null;
+            } else {
+              parameterBuilder_.addAllMessages(other.parameter_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.s13g.winston.proto.Master.Channel parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.s13g.winston.proto.Master.Channel) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object type_ = "";
+      /**
+       * <pre>
+       * The type of the channel. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          type_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The type of the channel. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The type of the channel. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public Builder setType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The type of the channel. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public Builder clearType() {
+        
+        type_ = getDefaultInstance().getType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The type of the channel. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public Builder setTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        type_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object address_ = "";
+      /**
+       * <pre>
+       * An optional address to localize the channel. 
+       * </pre>
+       *
+       * <code>optional string address = 2;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          address_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * An optional address to localize the channel. 
+       * </pre>
+       *
+       * <code>optional string address = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * An optional address to localize the channel. 
+       * </pre>
+       *
+       * <code>optional string address = 2;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * An optional address to localize the channel. 
+       * </pre>
+       *
+       * <code>optional string address = 2;</code>
+       */
+      public Builder clearAddress() {
+        
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * An optional address to localize the channel. 
+       * </pre>
+       *
+       * <code>optional string address = 2;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.s13g.winston.proto.Master.Parameter> parameter_ =
+        java.util.Collections.emptyList();
+      private void ensureParameterIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          parameter_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Parameter>(parameter_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.Parameter, com.s13g.winston.proto.Master.Parameter.Builder, com.s13g.winston.proto.Master.ParameterOrBuilder> parameterBuilder_;
+
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.Parameter> getParameterList() {
+        if (parameterBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(parameter_);
+        } else {
+          return parameterBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public int getParameterCount() {
+        if (parameterBuilder_ == null) {
+          return parameter_.size();
+        } else {
+          return parameterBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public com.s13g.winston.proto.Master.Parameter getParameter(int index) {
+        if (parameterBuilder_ == null) {
+          return parameter_.get(index);
+        } else {
+          return parameterBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder setParameter(
+          int index, com.s13g.winston.proto.Master.Parameter value) {
+        if (parameterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParameterIsMutable();
+          parameter_.set(index, value);
+          onChanged();
+        } else {
+          parameterBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder setParameter(
+          int index, com.s13g.winston.proto.Master.Parameter.Builder builderForValue) {
+        if (parameterBuilder_ == null) {
+          ensureParameterIsMutable();
+          parameter_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          parameterBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder addParameter(com.s13g.winston.proto.Master.Parameter value) {
+        if (parameterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParameterIsMutable();
+          parameter_.add(value);
+          onChanged();
+        } else {
+          parameterBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder addParameter(
+          int index, com.s13g.winston.proto.Master.Parameter value) {
+        if (parameterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureParameterIsMutable();
+          parameter_.add(index, value);
+          onChanged();
+        } else {
+          parameterBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder addParameter(
+          com.s13g.winston.proto.Master.Parameter.Builder builderForValue) {
+        if (parameterBuilder_ == null) {
+          ensureParameterIsMutable();
+          parameter_.add(builderForValue.build());
+          onChanged();
+        } else {
+          parameterBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder addParameter(
+          int index, com.s13g.winston.proto.Master.Parameter.Builder builderForValue) {
+        if (parameterBuilder_ == null) {
+          ensureParameterIsMutable();
+          parameter_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          parameterBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder addAllParameter(
+          java.lang.Iterable<? extends com.s13g.winston.proto.Master.Parameter> values) {
+        if (parameterBuilder_ == null) {
+          ensureParameterIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, parameter_);
+          onChanged();
+        } else {
+          parameterBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder clearParameter() {
+        if (parameterBuilder_ == null) {
+          parameter_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          parameterBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public Builder removeParameter(int index) {
+        if (parameterBuilder_ == null) {
+          ensureParameterIsMutable();
+          parameter_.remove(index);
+          onChanged();
+        } else {
+          parameterBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public com.s13g.winston.proto.Master.Parameter.Builder getParameterBuilder(
+          int index) {
+        return getParameterFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public com.s13g.winston.proto.Master.ParameterOrBuilder getParameterOrBuilder(
+          int index) {
+        if (parameterBuilder_ == null) {
+          return parameter_.get(index);  } else {
+          return parameterBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public java.util.List<? extends com.s13g.winston.proto.Master.ParameterOrBuilder> 
+           getParameterOrBuilderList() {
+        if (parameterBuilder_ != null) {
+          return parameterBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(parameter_);
+        }
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public com.s13g.winston.proto.Master.Parameter.Builder addParameterBuilder() {
+        return getParameterFieldBuilder().addBuilder(
+            com.s13g.winston.proto.Master.Parameter.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public com.s13g.winston.proto.Master.Parameter.Builder addParameterBuilder(
+          int index) {
+        return getParameterFieldBuilder().addBuilder(
+            index, com.s13g.winston.proto.Master.Parameter.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * All parameters required to run the channel. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Parameter parameter = 3;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.Parameter.Builder> 
+           getParameterBuilderList() {
+        return getParameterFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.Parameter, com.s13g.winston.proto.Master.Parameter.Builder, com.s13g.winston.proto.Master.ParameterOrBuilder> 
+          getParameterFieldBuilder() {
+        if (parameterBuilder_ == null) {
+          parameterBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.s13g.winston.proto.Master.Parameter, com.s13g.winston.proto.Master.Parameter.Builder, com.s13g.winston.proto.Master.ParameterOrBuilder>(
+                  parameter_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          parameter_ = null;
+        }
+        return parameterBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.Channel)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.Channel)
+    private static final com.s13g.winston.proto.Master.Channel DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.s13g.winston.proto.Master.Channel();
+    }
+
+    public static com.s13g.winston.proto.Master.Channel getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Channel>
+        PARSER = new com.google.protobuf.AbstractParser<Channel>() {
+      public Channel parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Channel(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Channel> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Channel> getParserForType() {
+      return PARSER;
+    }
+
+    public com.s13g.winston.proto.Master.Channel getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ParameterOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.Parameter)
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * Name of the parameter. 
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     java.lang.String getName();
     /**
+     * <pre>
+     * Name of the parameter. 
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
+     * <pre>
+     * Value of the parameter. 
+     * </pre>
+     *
      * <code>optional string value = 2;</code>
      */
     java.lang.String getValue();
     /**
+     * <pre>
+     * Value of the parameter. 
+     * </pre>
+     *
      * <code>optional string value = 2;</code>
      */
     com.google.protobuf.ByteString
@@ -3380,6 +4844,10 @@ public final class Master {
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
+     * <pre>
+     * Name of the parameter. 
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public java.lang.String getName() {
@@ -3395,6 +4863,10 @@ public final class Master {
       }
     }
     /**
+     * <pre>
+     * Name of the parameter. 
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -3414,6 +4886,10 @@ public final class Master {
     public static final int VALUE_FIELD_NUMBER = 2;
     private volatile java.lang.Object value_;
     /**
+     * <pre>
+     * Value of the parameter. 
+     * </pre>
+     *
      * <code>optional string value = 2;</code>
      */
     public java.lang.String getValue() {
@@ -3429,6 +4905,10 @@ public final class Master {
       }
     }
     /**
+     * <pre>
+     * Value of the parameter. 
+     * </pre>
+     *
      * <code>optional string value = 2;</code>
      */
     public com.google.protobuf.ByteString
@@ -3737,6 +5217,10 @@ public final class Master {
 
       private java.lang.Object name_ = "";
       /**
+       * <pre>
+       * Name of the parameter. 
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public java.lang.String getName() {
@@ -3752,6 +5236,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * Name of the parameter. 
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -3768,6 +5256,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * Name of the parameter. 
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder setName(
@@ -3781,6 +5273,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * Name of the parameter. 
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder clearName() {
@@ -3790,6 +5286,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * Name of the parameter. 
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder setNameBytes(
@@ -3806,6 +5306,10 @@ public final class Master {
 
       private java.lang.Object value_ = "";
       /**
+       * <pre>
+       * Value of the parameter. 
+       * </pre>
+       *
        * <code>optional string value = 2;</code>
        */
       public java.lang.String getValue() {
@@ -3821,6 +5325,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * Value of the parameter. 
+       * </pre>
+       *
        * <code>optional string value = 2;</code>
        */
       public com.google.protobuf.ByteString
@@ -3837,6 +5345,10 @@ public final class Master {
         }
       }
       /**
+       * <pre>
+       * Value of the parameter. 
+       * </pre>
+       *
        * <code>optional string value = 2;</code>
        */
       public Builder setValue(
@@ -3850,6 +5362,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * Value of the parameter. 
+       * </pre>
+       *
        * <code>optional string value = 2;</code>
        */
       public Builder clearValue() {
@@ -3859,6 +5375,10 @@ public final class Master {
         return this;
       }
       /**
+       * <pre>
+       * Value of the parameter. 
+       * </pre>
+       *
        * <code>optional string value = 2;</code>
        */
       public Builder setValueBytes(
@@ -3937,6 +5457,11 @@ public final class Master {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_proto_Channel_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_s13g_winston_proto_Parameter_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3955,13 +5480,15 @@ public final class Master {
       "monPort\030\001 \001(\005\022.\n\006module\030\002 \003(\0132\036.com.s13g" +
       ".winston.proto.Module\0227\n\014known_client\030\003 " +
       "\003(\0132!.com.s13g.winston.proto.KnownNode\"H" +
-      "\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\005param\030\002 \003(\0132!." +
-      "com.s13g.winston.proto.Parameter\"b\n\tKnow" +
+      "\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007channel\030\002 \003(\0132" +
+      "\037.com.s13g.winston.proto.Channel\"b\n\tKnow" +
       "nNode\022\023\n\013mac_address\030\001 \001(\t\022\014\n\004name\030\002 \001(\t" +
       "\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030\004 \001(\010\022\023\n\013confi" +
-      "g_file\030\005 \001(\t\"(\n\tParameter\022\014\n\004name\030\001 \001(\t\022",
-      "\r\n\005value\030\002 \001(\tB \n\026com.s13g.winston.proto" +
-      "B\006Masterb\006proto3"
+      "g_file\030\005 \001(\t\"^\n\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n",
+      "\007address\030\002 \001(\t\0224\n\tparameter\030\003 \003(\0132!.com." +
+      "s13g.winston.proto.Parameter\"(\n\tParamete" +
+      "r\022\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002 \001(\tB \n\026com.s1" +
+      "3g.winston.protoB\006Masterb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3986,15 +5513,21 @@ public final class Master {
     internal_static_com_s13g_winston_proto_Module_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Module_descriptor,
-        new java.lang.String[] { "Type", "Param", });
+        new java.lang.String[] { "Type", "Channel", });
     internal_static_com_s13g_winston_proto_KnownNode_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_KnownNode_descriptor,
         new java.lang.String[] { "MacAddress", "Name", "Port", "UseSsl", "ConfigFile", });
-    internal_static_com_s13g_winston_proto_Parameter_descriptor =
+    internal_static_com_s13g_winston_proto_Channel_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_s13g_winston_proto_Channel_descriptor,
+        new java.lang.String[] { "Type", "Address", "Parameter", });
+    internal_static_com_s13g_winston_proto_Parameter_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_s13g_winston_proto_Parameter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Parameter_descriptor,

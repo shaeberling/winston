@@ -81,7 +81,7 @@ public class WemoSwitchChannel implements Channel {
     public Boolean read() throws ChannelException {
       Optional<Boolean> isOn = mSwitch.isOn();
       if (!isOn.isPresent()) {
-        throw new ChannelException("Unable to get Wemo Switch state");
+        throw new ChannelException("Unable to getParam Wemo Switch state");
       }
       return isOn.get();
     }

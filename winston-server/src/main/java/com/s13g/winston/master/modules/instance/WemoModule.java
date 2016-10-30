@@ -26,6 +26,7 @@ import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleCreationException;
 import com.s13g.winston.master.modules.ModuleCreator;
 import com.s13g.winston.master.modules.ModuleParameters;
+import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +37,7 @@ import java.util.Optional;
  */
 public class WemoModule implements Module {
   private static final String MODULE_TYPE = "wemo";
-  private static final String PARAM_SWITCH_IP = "switch-ip";
+  private static final String CHANNEL_TYPE_SWITCH = "switch";
 
   private final String mType;
   private final WemoController mController;
@@ -50,13 +51,14 @@ public class WemoModule implements Module {
 
   @Override
   public void initialize(ModuleParameters params) throws ModuleInitException {
-    Optional<List<String>> switchIps = params.get(PARAM_SWITCH_IP);
-    if (!switchIps.isPresent()) {
-      throw new ModuleInitException("No switch-ip values configured");
+    List<ChannelConfig> channelConfigs = params.getChannelsOfType(CHANNEL_TYPE_SWITCH);
+    if (channelConfigs.isEmpty()) {
+      throw new ModuleInitException("No switches configured.");
     }
 
     List<Channel> channels = new LinkedList<>();
-    for (String switchIp : switchIps.get()) {
+    for (ChannelConfig channelConfig : channelConfigs) {
+      String switchIp = channelConfig.getAddress();
       Optional<WemoSwitch> wemoSwitch = mController.querySwitch(switchIp);
       if (!wemoSwitch.isPresent()) {
         throw new ModuleInitException("Cannot find Wemo Switch with IP: " + switchIp);

@@ -78,7 +78,7 @@ public class ModuleRegistry {
       try {
         Module module = mCreators.get(type).create(mModuleContext);
         try {
-          module.initialize(new ModuleParameters(moduleConfig.getParamList()));
+          module.initialize(new ModuleParameters(moduleConfig.getChannelList()));
         } catch (Module.ModuleInitException e) {
           throw ModuleCreationException.create("Cannot initialize module", e);
         }

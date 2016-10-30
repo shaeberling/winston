@@ -28,6 +28,7 @@ import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleCreationException;
 import com.s13g.winston.master.modules.ModuleCreator;
 import com.s13g.winston.master.modules.ModuleParameters;
+import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,6 +39,7 @@ import java.util.Optional;
  */
 public class NestModule implements Module {
   private static final String MODULE_TYPE = "nest";
+  private static final String CHANNEL_TYPE_NEST_SERVICE = "nest-service";
   private static final String PARAM_ACCESS_TOKEN = "access-token";
 
   private final String mType;
@@ -45,14 +47,19 @@ public class NestModule implements Module {
 
   private List<Channel> mChannels = ImmutableList.of();
 
-  public NestModule(String type, NestControllerFactory nestControllerFactory) {
+  private NestModule(String type, NestControllerFactory nestControllerFactory) {
     mType = type;
     mNestControllerFactory = nestControllerFactory;
   }
 
   @Override
   public void initialize(ModuleParameters params) throws ModuleInitException {
-    Optional<List<String>> accessTokenOpt = params.get(PARAM_ACCESS_TOKEN);
+    List<ChannelConfig> channelConfigs = params.getChannelsOfType(CHANNEL_TYPE_NEST_SERVICE);
+    if (channelConfigs.size() != 1) {
+      throw new ModuleInitException("Nest needs exactly one 'nest'service' to be configured.");
+    }
+
+    Optional<List<String>> accessTokenOpt = channelConfigs.get(0).getParam(PARAM_ACCESS_TOKEN);
     if (!accessTokenOpt.isPresent() || accessTokenOpt.get().size() != 1) {
       throw new ModuleInitException("Nest requires exactly one 'access-token'.");
     }

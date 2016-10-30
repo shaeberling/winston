@@ -18,6 +18,7 @@ package com.s13g.winston.master.config;
 
 import com.google.common.base.Strings;
 import com.google.protobuf.TextFormat;
+import com.s13g.winston.proto.Master.Channel;
 import com.s13g.winston.proto.Master.KnownNode;
 import com.s13g.winston.proto.Master.MasterConfig;
 import com.s13g.winston.proto.Master.Module;
@@ -80,9 +81,14 @@ public class ConfigWrapper {
         throw new AssertionError("Module type must be set.");
       }
 
-      for (Parameter parameter : module.getParamList()) {
-        if (Strings.isNullOrEmpty(parameter.getName())) {
-          throw new AssertionError("Parameter name must not be empty.");
+      for (Channel channel : module.getChannelList()) {
+        if (Strings.isNullOrEmpty(channel.getType())) {
+          throw new AssertionError("Channel type must be set.");
+        }
+        for (Parameter parameter : channel.getParameterList()) {
+          if (Strings.isNullOrEmpty(parameter.getName())) {
+            throw new AssertionError("Parameter name must not be empty.");
+          }
         }
       }
     }
@@ -115,8 +121,13 @@ public class ConfigWrapper {
     LOG.info("---------------------------------");
     for (Module module : modules) {
       LOG.info("  Type : " + module.getType());
-      for (Parameter param : module.getParamList()) {
-        LOG.info("  Param : " + param.getName() + " -> " + param.getValue());
+      for (Channel channel : module.getChannelList()) {
+        LOG.info("    Type : " + channel.getType());
+        LOG.info("    Addr : " + channel.getAddress());
+        for (Parameter param : channel.getParameterList()) {
+          LOG.info("    Param : " + param.getName() + " -> " + param.getValue());
+        }
+        LOG.info("---------------------------------");
       }
       LOG.info("---------------------------------");
     }

@@ -25,13 +25,13 @@ import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleCreationException;
 import com.s13g.winston.master.modules.ModuleCreator;
 import com.s13g.winston.master.modules.ModuleParameters;
+import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Module for interacting with Samsung TVs.
@@ -39,7 +39,7 @@ import java.util.Optional;
 public class SamsungTvModule implements Module {
   private static final Logger LOG = LogManager.getLogger(SamsungTvModule.class);
   private static final String MODULE_TYPE = "samsungtv";
-  private static final String PARAM_TV_IP = "tv-ip";
+  private static final String CHANNEL_TYPE_TV = "tv";
 
   private final String mType;
   private final TvControllerFactory mFactory;
@@ -53,14 +53,14 @@ public class SamsungTvModule implements Module {
 
   @Override
   public void initialize(ModuleParameters params) throws ModuleInitException {
-    Optional<List<String>> tvIpsOpt = params.get(PARAM_TV_IP);
-    if (!tvIpsOpt.isPresent()) {
-      throw new ModuleInitException("No tv-ip values configured");
+    List<ChannelConfig> channelConfigs = params.getChannelsOfType(CHANNEL_TYPE_TV);
+    if (channelConfigs.isEmpty()) {
+      throw new ModuleInitException("No TVs configured");
     }
-    List<String> tvIps = tvIpsOpt.get();
 
     List<Channel> channels = new LinkedList<>();
-    for (String tvIp : tvIps) {
+    for (ChannelConfig channelConfig : channelConfigs) {
+      String tvIp = channelConfig.getAddress();
       channels.add(new SamsungTvChannel(tvIp, mFactory.forSamsungTv(tvIp)));
     }
     mChannels = ImmutableList.copyOf(channels);
