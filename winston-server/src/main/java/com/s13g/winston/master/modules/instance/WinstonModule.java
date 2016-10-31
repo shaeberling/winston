@@ -19,10 +19,12 @@ package com.s13g.winston.master.modules.instance;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.winston.WinstonController;
+import com.s13g.winston.lib.winston.WinstonGarageNodeController;
 import com.s13g.winston.lib.winston.WinstonPowerNodeController;
 import com.s13g.winston.lib.winston.WinstonSensorNodeController;
 import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.channel.Channel;
+import com.s13g.winston.master.channel.instance.WinstonGarageNodeChannel;
 import com.s13g.winston.master.channel.instance.WinstonPowerNodeChannel;
 import com.s13g.winston.master.channel.instance.WinstonSensorNodeChannel;
 import com.s13g.winston.master.modules.Module;
@@ -52,6 +54,7 @@ public class WinstonModule implements Module {
   private static final String PARAM_SWITCH_IDS = "switch-ids";
   private static final String PARAM_DOOR_NAME = "door-name";
   private static final String PARAM_DOOR_RELAY = "door-relay";
+  private static final String PARAM_DOOR_CLOSED_SENSOR = "door-closed-sensor";
 
   private final String mType;
   private final WinstonController mWinstonController;
@@ -67,6 +70,7 @@ public class WinstonModule implements Module {
   public void initialize(ModuleParameters params) throws ModuleInitException {
     List<Channel> channels = new LinkedList<>();
 
+    // SENSOR nodes.
     List<ChannelConfig> sensorChannels = params.getChannelsOfType(CHANNEL_TYPE_SENSOR);
     for (ChannelConfig sensorConfig : sensorChannels) {
       String address = sensorConfig.getAddress();
@@ -84,6 +88,7 @@ public class WinstonModule implements Module {
       channels.add(new WinstonSensorNodeChannel(sensorNodeController));
     }
 
+    // POWER nodes.
     List<ChannelConfig> powerChannels = params.getChannelsOfType(CHANNEL_TYPE_POWER);
     for (ChannelConfig powerConfig : powerChannels) {
       String address = powerConfig.getAddress();
@@ -99,6 +104,44 @@ public class WinstonModule implements Module {
           mWinstonController.getPowerNodeController(address);
       powerSwitchesOpt.get().forEach(powerNodeController::addSwitch);
       channels.add(new WinstonPowerNodeChannel(powerNodeController));
+    }
+
+    // GARAGE nodes.
+    List<ChannelConfig> garageChannels = params.getChannelsOfType(CHANNEL_TYPE_GARAGE);
+    for (ChannelConfig garageConfig : garageChannels) {
+      String address = garageConfig.getAddress();
+      if (Strings.isNullOrEmpty(address)) {
+        throw new ModuleInitException("Garage channel address may not be empty.");
+      }
+      Optional<List<String>> doorNamesOpt = garageConfig.getParam(PARAM_DOOR_NAME);
+      if (!doorNamesOpt.isPresent()) {
+        throw new ModuleInitException("No 'door-name' set for Winston power channel.");
+      }
+      Optional<List<String>> doorRelaysOpt = garageConfig.getParam(PARAM_DOOR_RELAY);
+      if (!doorRelaysOpt.isPresent()) {
+        throw new ModuleInitException("No 'door-relay' set for Winston power channel.");
+      }
+      Optional<List<String>> closedSensorsOpt = garageConfig.getParam(PARAM_DOOR_CLOSED_SENSOR);
+      if (!closedSensorsOpt.isPresent()) {
+        throw new ModuleInitException("No 'door-closed-sensor' set for Winston power channel.");
+      }
+
+      List<String> doorNames = doorNamesOpt.get();
+      List<String> doorRelays = doorRelaysOpt.get();
+      List<String> closedSensors = closedSensorsOpt.get();
+
+      // Sanity check, we should have an equal amount of each.
+      if (doorNames.size() != doorRelays.size() ||
+          doorNames.size() != closedSensors.size()) {
+        throw new ModuleInitException("Need equals number of door-name, door-relay and " +
+            "door-closed-sensor entries in configuration.");
+      }
+
+      WinstonGarageNodeController garageNodeController =
+          mWinstonController.getGarageNodeController(address);
+      doorRelays.forEach(garageNodeController::addClicker);
+      closedSensors.forEach(garageNodeController::addClosedState);
+      channels.add(new WinstonGarageNodeChannel(doorNamesOpt.get(), garageNodeController));
     }
     mChannels = ImmutableList.copyOf(channels);
   }
