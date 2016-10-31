@@ -17,7 +17,7 @@
 package com.s13g.winston.master.channel.instance;
 
 import com.google.common.collect.ImmutableList;
-import com.s13g.winston.common.TypeConversion;
+import com.s13g.winston.lib.core.TypeConversion;
 import com.s13g.winston.lib.wemo.WemoSwitch;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
