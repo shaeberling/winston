@@ -18,6 +18,7 @@ package com.s13g.winston.lib.clitests;
 
 import com.s13g.winston.lib.temperature.Temperature;
 import com.s13g.winston.lib.winston.WinstonController;
+import com.s13g.winston.lib.winston.WinstonGarageNodeController;
 import com.s13g.winston.lib.winston.WinstonSensorNodeController;
 
 import java.util.Optional;
@@ -40,5 +41,23 @@ public class WinstonCli {
         System.out.println("Temperature: " + temperature.get().get(Temperature.Unit.CELSIUS));
       }
     }
+
+    WinstonGarageNodeController garageController = controller.getGarageNodeController("pi-garage");
+    garageController.addClicker("relay/0");
+    garageController.addClicker("relay/1");
+    garageController.addClosedState("reed/0");
+    garageController.addClosedState("reed/1");
+
+    for (Supplier<Optional<Boolean>> closedState : garageController.getClosedStates()) {
+      Optional<Boolean> closedStateOpt = closedState.get();
+      if (!closedStateOpt.isPresent()) {
+        System.err.println("Cannot get closed state");
+      }
+      System.out.println("Garage is " + (closedStateOpt.get() ? "CLOSED" : "OPEN"));
+    }
+
+    Supplier<Boolean> clickerMainGarage = garageController.getClickers().get(0);
+    boolean success = clickerMainGarage.get();
+    System.out.println("Clicking garage was " + (success ? "SUCCESSFUL" : "UNSUCCESSFUL"));
   }
 }

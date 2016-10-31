@@ -58,9 +58,8 @@ public class WinstonPowerNodeController {
     final String addressFmt = "http://%s:1984/io/%s/%s";
     return (on) -> {
       final String address = String.format(addressFmt, mNodeAddress, path, on ? "1" : "0");
-      String response = "";
       try {
-        response = HttpUtil.requestUrl(address);
+        String response = HttpUtil.requestUrl(address);
         return "OK".equals(response);
       } catch (IOException e) {
         LOG.error("Cannot perform switch action '" + address + "'.");

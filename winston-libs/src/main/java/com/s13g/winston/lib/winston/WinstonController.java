@@ -31,4 +31,8 @@ public class WinstonController {
     return new WinstonPowerNodeController(address);
   }
 
+  public WinstonGarageNodeController getGarageNodeController(String address) {
+    return new WinstonGarageNodeController(address);
+  }
+
 }
