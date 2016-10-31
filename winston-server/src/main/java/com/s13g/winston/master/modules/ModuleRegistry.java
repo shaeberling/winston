@@ -21,6 +21,7 @@ import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.modules.instance.NestModule;
 import com.s13g.winston.master.modules.instance.SamsungTvModule;
 import com.s13g.winston.master.modules.instance.WemoModule;
+import com.s13g.winston.master.modules.instance.WinstonModule;
 import com.s13g.winston.proto.Master;
 
 import org.apache.logging.log4j.LogManager;
@@ -110,6 +111,7 @@ public class ModuleRegistry {
     list.add(WemoModule.Creator.class);
     list.add(SamsungTvModule.Creator.class);
     list.add(NestModule.Creator.class);
+    list.add(WinstonModule.Creator.class);
     // Add more here ...
     // TODO: Maybe make this dynamic, or add the supported classes to a config file.
     return list;
