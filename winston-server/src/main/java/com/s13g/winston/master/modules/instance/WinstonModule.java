@@ -19,15 +19,20 @@ package com.s13g.winston.master.modules.instance;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.winston.WinstonController;
+import com.s13g.winston.lib.winston.WinstonPowerNodeController;
 import com.s13g.winston.lib.winston.WinstonSensorNodeController;
 import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.channel.Channel;
+import com.s13g.winston.master.channel.instance.WinstonPowerNodeChannel;
 import com.s13g.winston.master.channel.instance.WinstonSensorNodeChannel;
 import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleCreationException;
 import com.s13g.winston.master.modules.ModuleCreator;
 import com.s13g.winston.master.modules.ModuleParameters;
 import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,9 +42,16 @@ import java.util.Optional;
  * Module that handles talking to Winston nodes.
  */
 public class WinstonModule implements Module {
+  private static Logger LOG = LogManager.getLogger(WinstonModule.class);
+
   private static final String MODULE_TYPE = "winston";
   private static final String CHANNEL_TYPE_SENSOR = "sensors";
+  private static final String CHANNEL_TYPE_POWER = "power";
+  private static final String CHANNEL_TYPE_GARAGE = "garage";
   private static final String PARAM_TEMP_SENSOR = "temp-sensor";
+  private static final String PARAM_SWITCH_IDS = "switch-ids";
+  private static final String PARAM_DOOR_NAME = "door-name";
+  private static final String PARAM_DOOR_RELAY = "door-relay";
 
   private final String mType;
   private final WinstonController mWinstonController;
@@ -61,14 +73,32 @@ public class WinstonModule implements Module {
       if (Strings.isNullOrEmpty(address)) {
         throw new ModuleInitException("Sensor channel address may not be empty.");
       }
-      WinstonSensorNodeController sensorNodeController =
-          mWinstonController.getSensorNodeController(address);
       Optional<List<String>> tempSensorsOpt = sensorConfig.getParam(PARAM_TEMP_SENSOR);
       if (!tempSensorsOpt.isPresent()) {
+        LOG.warn("No 'temp-sensor' configured for Winston power channel.");
         continue;
       }
+      WinstonSensorNodeController sensorNodeController =
+          mWinstonController.getSensorNodeController(address);
       tempSensorsOpt.get().forEach(sensorNodeController::addTemperatureSensor);
       channels.add(new WinstonSensorNodeChannel(sensorNodeController));
+    }
+
+    List<ChannelConfig> powerChannels = params.getChannelsOfType(CHANNEL_TYPE_POWER);
+    for (ChannelConfig powerConfig : powerChannels) {
+      String address = powerConfig.getAddress();
+      if (Strings.isNullOrEmpty(address)) {
+        throw new ModuleInitException("Power channel address may not be empty.");
+      }
+      Optional<List<String>> powerSwitchesOpt = powerConfig.getParam(PARAM_SWITCH_IDS);
+      if (!powerSwitchesOpt.isPresent()) {
+        LOG.warn("No 'switch-ids' configured for Winston power channel.");
+        continue;
+      }
+      WinstonPowerNodeController powerNodeController =
+          mWinstonController.getPowerNodeController(address);
+      powerSwitchesOpt.get().forEach(powerNodeController::addSwitch);
+      channels.add(new WinstonPowerNodeChannel(powerNodeController));
     }
     mChannels = ImmutableList.copyOf(channels);
   }
