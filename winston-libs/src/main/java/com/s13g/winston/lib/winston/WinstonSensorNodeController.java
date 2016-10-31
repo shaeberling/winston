@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.winston;
 
+import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.lib.temperature.Temperature;
 
@@ -23,6 +24,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -33,12 +36,26 @@ public class WinstonSensorNodeController {
   private static final Logger LOG = LogManager.getLogger(WinstonSensorNodeController.class);
 
   private final String mNodeAddress;
+  private final List<Supplier<Optional<Temperature>>> mTemperatureSensors;
 
   WinstonSensorNodeController(String nodeAddress) {
     mNodeAddress = nodeAddress;
+    mTemperatureSensors = new LinkedList<>();
   }
 
-  public Supplier<Optional<Temperature>> forTemperatureSensor(String path) {
+  public void addTemperatureSensor(String path) {
+    mTemperatureSensors.add(forTemperatureSensor(path));
+  }
+
+  public List<Supplier<Optional<Temperature>>> getTemperatureSensors() {
+    return ImmutableList.copyOf(mTemperatureSensors);
+  }
+
+  public String getNodeAddress() {
+    return mNodeAddress;
+  }
+
+  private Supplier<Optional<Temperature>> forTemperatureSensor(String path) {
     final String addressFmt = "http://%s:1984/io/%s";
     final String address = String.format(addressFmt, mNodeAddress, path);
     return () -> {

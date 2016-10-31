@@ -30,16 +30,15 @@ public class WinstonCli {
   public static void main(String[] args) {
     WinstonController controller = new WinstonController();
     WinstonSensorNodeController sensorNode = controller.getSensorNodeController("pi-cam-1");
+    sensorNode.addTemperatureSensor("ds18b20_temp/0");
 
-    Supplier<Optional<Temperature>> tempSupplier =
-        sensorNode.forTemperatureSensor("ds18b20_temp/0");
-
-    Optional<Temperature> temperature = tempSupplier.get();
-    if (!temperature.isPresent()) {
-      System.err.println("Cannot read temperature");
-    } else {
-      System.out.println("Temperature: " + temperature.get().get(Temperature.Unit.CELSIUS));
+    for (Supplier<Optional<Temperature>> tempSupplier : sensorNode.getTemperatureSensors()) {
+      Optional<Temperature> temperature = tempSupplier.get();
+      if (!temperature.isPresent()) {
+        System.err.println("Cannot read temperature");
+      } else {
+        System.out.println("Temperature: " + temperature.get().get(Temperature.Unit.CELSIUS));
+      }
     }
-
   }
 }
