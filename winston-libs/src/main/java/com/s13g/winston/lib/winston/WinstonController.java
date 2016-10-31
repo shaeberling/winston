@@ -27,4 +27,8 @@ public class WinstonController {
     return new WinstonSensorNodeController(address);
   }
 
+  public WinstonPowerNodeController getPowerNodeController(String address) {
+    return new WinstonPowerNodeController(address);
+  }
+
 }
