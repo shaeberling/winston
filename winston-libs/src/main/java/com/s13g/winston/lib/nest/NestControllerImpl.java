@@ -33,8 +33,7 @@ import java.util.Optional;
 
 /** Default implementation of the Nest controller. */
 public class NestControllerImpl implements NestController {
-  private static final Logger LOG = LogManager.getLogger
-      (NestControllerImpl.class);
+  private static final Logger LOG = LogManager.getLogger(NestControllerImpl.class);
   private static final String ROOT_URL = "https://developer-api.nest.com/";
   private final String mAuthHeader;
   private final NestResponseParser mResponseParser;

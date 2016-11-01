@@ -29,6 +29,7 @@ public class Thermostat {
   private final NestController mNestController;
 
   private boolean mLastRefreshSuccess;
+  private String mName;
   private Temperature mAmbientTemperature;
   private Temperature mTargetTemperature;
   private float mHumidty;
@@ -43,6 +44,7 @@ public class Thermostat {
     mLastRefreshSuccess = false;
     for (ThermostatData data : mNestController.getThermostats()) {
       if (data.id.equals(mId)) {
+        mName = data.name;
         mAmbientTemperature = data.ambientTemperature;
         mTargetTemperature = data.targetTemperature;
         mHumidty = (float) data.humidity;
@@ -53,18 +55,16 @@ public class Thermostat {
     return this;
   }
 
+  public Optional<String> getName() {
+    return returnIfRefreshSuccessful(mName);
+  }
+
   public Optional<Temperature> getAmbientTemperature() {
-    if (!mLastRefreshSuccess) {
-      return Optional.empty();
-    }
-    return Optional.of(mAmbientTemperature);
+    return returnIfRefreshSuccessful(mAmbientTemperature);
   }
 
   public Optional<Temperature> getTargetTemperature() {
-    if (!mLastRefreshSuccess) {
-      return Optional.empty();
-    }
-    return Optional.of(mTargetTemperature);
+    return returnIfRefreshSuccessful(mTargetTemperature);
   }
 
   public void setTargetTemperature(Temperature temperature) {
@@ -72,9 +72,13 @@ public class Thermostat {
   }
 
   public Optional<Float> getHumidity() {
+    return returnIfRefreshSuccessful(mHumidty);
+  }
+
+  private <T> Optional<T> returnIfRefreshSuccessful(T value) {
     if (!mLastRefreshSuccess) {
       return Optional.empty();
     }
-    return Optional.of(mHumidty);
+    return Optional.of(value);
   }
 }
