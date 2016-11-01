@@ -22,6 +22,7 @@ import com.s13g.winston.lib.temperature.Temperature;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
 import com.s13g.winston.master.channel.ChannelValue;
+import com.s13g.winston.master.channel.ReadOnlyChannelValue;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,44 +46,37 @@ public class NestThermostatChannel implements Channel {
 
   @Override
   public List<ChannelValue> getValues() {
+    ChannelValue<Float> ambientTempCelcius = new ReadOnlyChannelValue<>(
+        "ambientTempCelsius", this::readTemperature,
+        "Cannot set ambientTemp. Set targetTemp instead.");
+    ChannelValue<Float> humidity = new ReadOnlyChannelValue<>(
+        "humidity", this::readHumidity, "Cannot set humidity.");
+
     return ImmutableList.of(
-        new NestAmbientTemperatureCelsiusChannel(),
-        new NestTargetTemperatureCelsiusChannel(),
-        new NestHumidityChannel());
+        ambientTempCelcius,
+        humidity,
+        new NestTargetTemperatureCelsiusChannel());
   }
 
-  private class NestAmbientTemperatureCelsiusChannel implements ChannelValue<Float> {
-
-    @Override
-    public Mode getType() {
-      return Mode.READ_ONLY;
+  /** Reads the temperature from the thermostat. */
+  private float readTemperature() throws ChannelException {
+    Optional<Temperature> ambientTemperature = mThermostat.refresh().getAmbientTemperature();
+    if (!ambientTemperature.isPresent()) {
+      throw new ChannelException("Cannot read ambient temperature for '" + mChannelId + "'.");
     }
-
-    @Override
-    public String getName() {
-      return "ambientTempCelsius";
-    }
-
-    @Override
-    public void writeRaw(String value) throws ChannelException {
-      throw new ChannelException("Cannot set ambientTemp. Set targetTemp instead.");
-    }
-
-    @Override
-    public void write(Float value) throws ChannelException {
-      throw new ChannelException("Cannot set ambientTemp. Set targetTemp instead.");
-    }
-
-    @Override
-    public Float read() throws ChannelException {
-      Optional<Temperature> ambientTemperature = mThermostat.refresh().getAmbientTemperature();
-      if (!ambientTemperature.isPresent()) {
-        throw new ChannelException("Cannot read ambient temperature for '" + mChannelId + "'.");
-      }
-      return ambientTemperature.get().get(Temperature.Unit.CELSIUS);
-    }
+    return ambientTemperature.get().get(Temperature.Unit.CELSIUS);
   }
 
+  /** Read the humidity from the thermostat. */
+  private float readHumidity() throws ChannelException {
+    Optional<Float> ambientTemperature = mThermostat.refresh().getHumidity();
+    if (!ambientTemperature.isPresent()) {
+      throw new ChannelException("Cannot read humidity for '" + mChannelId + "'.");
+    }
+    return ambientTemperature.get();
+  }
+
+  /** Read/Write channel for the thermostat's target temperature. */
   private class NestTargetTemperatureCelsiusChannel implements ChannelValue<Float> {
     @Override
     public Mode getType() {
@@ -115,37 +109,6 @@ public class NestThermostatChannel implements Channel {
         throw new ChannelException("Cannot read target temperature for '" + mChannelId + "'.");
       }
       return ambientTemperature.get().get(Temperature.Unit.CELSIUS);
-    }
-  }
-
-  private class NestHumidityChannel implements ChannelValue<Float> {
-    @Override
-    public Mode getType() {
-      return Mode.READ_ONLY;
-    }
-
-    @Override
-    public String getName() {
-      return "humidity";
-    }
-
-    @Override
-    public void writeRaw(String valueRaw) throws ChannelException {
-      throw new ChannelException("Cannot set humidity.");
-    }
-
-    @Override
-    public void write(Float value) throws ChannelException {
-      throw new ChannelException("Cannot set humidity.");
-    }
-
-    @Override
-    public Float read() throws ChannelException {
-      Optional<Float> ambientTemperature = mThermostat.refresh().getHumidity();
-      if (!ambientTemperature.isPresent()) {
-        throw new ChannelException("Cannot read humidity for '" + mChannelId + "'.");
-      }
-      return ambientTemperature.get();
     }
   }
 }
