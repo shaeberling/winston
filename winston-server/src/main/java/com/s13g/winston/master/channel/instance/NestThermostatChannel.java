@@ -46,6 +46,8 @@ public class NestThermostatChannel implements Channel {
 
   @Override
   public List<ChannelValue> getValues() {
+    ChannelValue<String> deviceName = new ReadOnlyChannelValue<>(
+        "deviceName", this::readName, "Cannot set name");
     ChannelValue<Float> ambientTempCelcius = new ReadOnlyChannelValue<>(
         "ambientTempCelsius", this::readTemperature,
         "Cannot set ambientTemp. Set targetTemp instead.");
@@ -53,9 +55,18 @@ public class NestThermostatChannel implements Channel {
         "humidity", this::readHumidity, "Cannot set humidity.");
 
     return ImmutableList.of(
+        deviceName,
         ambientTempCelcius,
         humidity,
         new NestTargetTemperatureCelsiusChannel());
+  }
+
+  private String readName() throws ChannelException {
+    Optional<String> deviceName = mThermostat.refresh().getName();
+    if (!deviceName.isPresent()) {
+      throw new ChannelException("Cannot read thermostat name for '" + mChannelId + "'.");
+    }
+    return deviceName.get();
   }
 
   /** Reads the temperature from the thermostat. */
@@ -69,11 +80,11 @@ public class NestThermostatChannel implements Channel {
 
   /** Read the humidity from the thermostat. */
   private float readHumidity() throws ChannelException {
-    Optional<Float> ambientTemperature = mThermostat.refresh().getHumidity();
-    if (!ambientTemperature.isPresent()) {
+    Optional<Float> humidity = mThermostat.refresh().getHumidity();
+    if (!humidity.isPresent()) {
       throw new ChannelException("Cannot read humidity for '" + mChannelId + "'.");
     }
-    return ambientTemperature.get();
+    return humidity.get();
   }
 
   /** Read/Write channel for the thermostat's target temperature. */
