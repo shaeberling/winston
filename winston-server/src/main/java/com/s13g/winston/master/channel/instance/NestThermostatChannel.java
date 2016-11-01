@@ -53,21 +53,13 @@ public class NestThermostatChannel implements Channel {
 
   @Override
   public List<ChannelValue> getValues() {
-    ChannelValue<String> deviceName = new ReadOnlyChannelValue<>(
-        "deviceName", this::readName, "Cannot set name");
-    ChannelValue<Float> ambientTempCelcius = new ReadOnlyChannelValue<>(
-        "ambientTempCelsius", this::readTemperature,
-        "Cannot set ambientTemp. Set targetTemp instead.");
-    ChannelValue<Float> humidity = new ReadOnlyChannelValue<>(
-        "humidity", this::readHumidity, "Cannot set humidity.");
-    ChannelValue<String> hvacStatus = new ReadOnlyChannelValue<>(
-        "hvacState", this::readHvacState, "Cannot set Hvac state.");
-
     return ImmutableList.of(
-        deviceName,
-        ambientTempCelcius,
-        humidity,
-        hvacStatus,
+        new ReadOnlyChannelValue<>("deviceName", this::readName, "Cannot set name"),
+        new ReadOnlyChannelValue<>("ambientTempCelsius", this::readTemperature, "Can't set " +
+            "ambientTemp. Set targetTemp instead."),
+        new ReadOnlyChannelValue<>("humidity", this::readHumidity, "Cannot set humidity."),
+        new ReadOnlyChannelValue<>("hvacState", this::readHvacState, "Cannot set Hvac state."),
+        new ReadOnlyChannelValue<>("isOnline", this::readIsOnline, "Cannot set online state."),
         new NestTargetTemperatureCelsiusChannel());
   }
 
@@ -105,7 +97,14 @@ public class NestThermostatChannel implements Channel {
       throw new ChannelException("Cannot read HVAC state for '" + mChannelId + "'.");
     }
     return hvacState.get().toString();
+  }
 
+  private boolean readIsOnline() throws ChannelException {
+    Optional<Boolean> isOnline = mThermostat.refresh(MAX_DATA_AGE_MILLIS).getIsOnline();
+    if (!isOnline.isPresent()) {
+      throw new ChannelException("Cannot read online state for '" + mChannelId + "'.");
+    }
+    return isOnline.get();
   }
 
   /** Read/Write channel for the thermostat's target temperature. */
