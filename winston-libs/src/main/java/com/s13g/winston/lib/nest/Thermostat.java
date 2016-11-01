@@ -31,11 +31,7 @@ public class Thermostat {
 
   private boolean mLastRefreshSuccess;
   private long mLastRefreshTime;
-  private String mName;
-  private Temperature mAmbientTemperature;
-  private Temperature mTargetTemperature;
-  private float mHumidty;
-  private HvacState mHvacState;
+  private ThermostatData mLatestData;
 
   public Thermostat(String id, NestController nestController) {
     mId = id;
@@ -57,11 +53,7 @@ public class Thermostat {
     mLastRefreshSuccess = false;
     for (ThermostatData data : mNestController.getThermostats()) {
       if (data.id.equals(mId)) {
-        mName = data.name;
-        mAmbientTemperature = data.ambientTemperature;
-        mTargetTemperature = data.targetTemperature;
-        mHumidty = (float) data.humidity;
-        mHvacState = data.hvacState;
+        mLatestData = data;
         mLastRefreshSuccess = true;
         mLastRefreshTime = System.currentTimeMillis();
         break;
@@ -71,15 +63,15 @@ public class Thermostat {
   }
 
   public Optional<String> getName() {
-    return returnIfRefreshSuccessful(mName);
+    return returnIfRefreshSuccessful(mLatestData.name);
   }
 
   public Optional<Temperature> getAmbientTemperature() {
-    return returnIfRefreshSuccessful(mAmbientTemperature);
+    return returnIfRefreshSuccessful(mLatestData.ambientTemperature);
   }
 
   public Optional<Temperature> getTargetTemperature() {
-    return returnIfRefreshSuccessful(mTargetTemperature);
+    return returnIfRefreshSuccessful(mLatestData.targetTemperature);
   }
 
   public void setTargetTemperature(Temperature temperature) {
@@ -87,11 +79,15 @@ public class Thermostat {
   }
 
   public Optional<Float> getHumidity() {
-    return returnIfRefreshSuccessful(mHumidty);
+    return returnIfRefreshSuccessful((float) mLatestData.humidity);
   }
 
   public Optional<HvacState> getHvacState() {
-    return returnIfRefreshSuccessful(mHvacState);
+    return returnIfRefreshSuccessful(mLatestData.hvacState);
+  }
+
+  public Optional<Boolean> getIsOnline() {
+    return returnIfRefreshSuccessful(mLatestData.isOnline);
   }
 
   private <T> Optional<T> returnIfRefreshSuccessful(T value) {
