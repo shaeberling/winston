@@ -31,6 +31,12 @@ import java.util.Optional;
  * A channel for a Nest thermostat.
  */
 public class NestThermostatChannel implements Channel {
+  /**
+   * After this time, the data is considered old and needs to be refreshed if accessed again. This
+   * avoid multiple requests to the multiple values here to send out a request each, even though
+   * we get the data for all channels with one request to the Nest API.
+   */
+  private static final long MAX_DATA_AGE_MILLIS = 10 * 1000;
   private final String mChannelId;
   private final Thermostat mThermostat;
 
@@ -62,7 +68,7 @@ public class NestThermostatChannel implements Channel {
   }
 
   private String readName() throws ChannelException {
-    Optional<String> deviceName = mThermostat.refresh().getName();
+    Optional<String> deviceName = mThermostat.refresh(MAX_DATA_AGE_MILLIS).getName();
     if (!deviceName.isPresent()) {
       throw new ChannelException("Cannot read thermostat name for '" + mChannelId + "'.");
     }
@@ -71,7 +77,8 @@ public class NestThermostatChannel implements Channel {
 
   /** Reads the temperature from the thermostat. */
   private float readTemperature() throws ChannelException {
-    Optional<Temperature> ambientTemperature = mThermostat.refresh().getAmbientTemperature();
+    Optional<Temperature> ambientTemperature =
+        mThermostat.refresh(MAX_DATA_AGE_MILLIS).getAmbientTemperature();
     if (!ambientTemperature.isPresent()) {
       throw new ChannelException("Cannot read ambient temperature for '" + mChannelId + "'.");
     }
@@ -80,7 +87,7 @@ public class NestThermostatChannel implements Channel {
 
   /** Read the humidity from the thermostat. */
   private float readHumidity() throws ChannelException {
-    Optional<Float> humidity = mThermostat.refresh().getHumidity();
+    Optional<Float> humidity = mThermostat.refresh(MAX_DATA_AGE_MILLIS).getHumidity();
     if (!humidity.isPresent()) {
       throw new ChannelException("Cannot read humidity for '" + mChannelId + "'.");
     }
@@ -115,7 +122,8 @@ public class NestThermostatChannel implements Channel {
 
     @Override
     public Float read() throws ChannelException {
-      Optional<Temperature> ambientTemperature = mThermostat.refresh().getTargetTemperature();
+      Optional<Temperature> ambientTemperature =
+          mThermostat.refresh(MAX_DATA_AGE_MILLIS).getTargetTemperature();
       if (!ambientTemperature.isPresent()) {
         throw new ChannelException("Cannot read target temperature for '" + mChannelId + "'.");
       }

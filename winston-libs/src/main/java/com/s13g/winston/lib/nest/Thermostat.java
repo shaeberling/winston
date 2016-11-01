@@ -29,6 +29,7 @@ public class Thermostat {
   private final NestController mNestController;
 
   private boolean mLastRefreshSuccess;
+  private long mLastRefreshTime;
   private String mName;
   private Temperature mAmbientTemperature;
   private Temperature mTargetTemperature;
@@ -39,7 +40,17 @@ public class Thermostat {
     mNestController = nestController;
   }
 
-  public Thermostat refresh() {
+  /**
+   * Refreshes the thermostat if the last refresh is older than the given age.
+   *
+   * @param maxAgeMillis if the thermostat data has been refreshed less than this time ago, it will
+   * not be refreshed again.
+   */
+  public Thermostat refresh(long maxAgeMillis) {
+    boolean dataExpired = mLastRefreshTime + maxAgeMillis < System.currentTimeMillis();
+    if (maxAgeMillis < 0 || !dataExpired) {
+      return this;
+    }
     mNestController.refresh();
     mLastRefreshSuccess = false;
     for (ThermostatData data : mNestController.getThermostats()) {
@@ -49,6 +60,7 @@ public class Thermostat {
         mTargetTemperature = data.targetTemperature;
         mHumidty = (float) data.humidity;
         mLastRefreshSuccess = true;
+        mLastRefreshTime = System.currentTimeMillis();
         break;
       }
     }
