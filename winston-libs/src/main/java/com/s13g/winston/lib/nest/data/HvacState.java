@@ -29,6 +29,11 @@ public enum HvacState {
     this.str = str;
   }
 
+  @Override
+  public String toString() {
+    return str;
+  }
+
   /**
    * Gets the state enum from the given value string.
    */

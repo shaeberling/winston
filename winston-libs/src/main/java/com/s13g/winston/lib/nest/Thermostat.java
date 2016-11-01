@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.nest;
 
+import com.s13g.winston.lib.nest.data.HvacState;
 import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.lib.temperature.Temperature;
 
@@ -34,6 +35,7 @@ public class Thermostat {
   private Temperature mAmbientTemperature;
   private Temperature mTargetTemperature;
   private float mHumidty;
+  private HvacState mHvacState;
 
   public Thermostat(String id, NestController nestController) {
     mId = id;
@@ -59,6 +61,7 @@ public class Thermostat {
         mAmbientTemperature = data.ambientTemperature;
         mTargetTemperature = data.targetTemperature;
         mHumidty = (float) data.humidity;
+        mHvacState = data.hvacState;
         mLastRefreshSuccess = true;
         mLastRefreshTime = System.currentTimeMillis();
         break;
@@ -85,6 +88,10 @@ public class Thermostat {
 
   public Optional<Float> getHumidity() {
     return returnIfRefreshSuccessful(mHumidty);
+  }
+
+  public Optional<HvacState> getHvacState() {
+    return returnIfRefreshSuccessful(mHvacState);
   }
 
   private <T> Optional<T> returnIfRefreshSuccessful(T value) {

@@ -18,6 +18,7 @@ package com.s13g.winston.master.channel.instance;
 
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.nest.Thermostat;
+import com.s13g.winston.lib.nest.data.HvacState;
 import com.s13g.winston.lib.temperature.Temperature;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
@@ -59,11 +60,14 @@ public class NestThermostatChannel implements Channel {
         "Cannot set ambientTemp. Set targetTemp instead.");
     ChannelValue<Float> humidity = new ReadOnlyChannelValue<>(
         "humidity", this::readHumidity, "Cannot set humidity.");
+    ChannelValue<String> hvacStatus = new ReadOnlyChannelValue<>(
+        "hvacState", this::readHvacState, "Cannot set Hvac state.");
 
     return ImmutableList.of(
         deviceName,
         ambientTempCelcius,
         humidity,
+        hvacStatus,
         new NestTargetTemperatureCelsiusChannel());
   }
 
@@ -92,6 +96,16 @@ public class NestThermostatChannel implements Channel {
       throw new ChannelException("Cannot read humidity for '" + mChannelId + "'.");
     }
     return humidity.get();
+  }
+
+  /** Read the HVAC state from the thermostat. */
+  private String readHvacState() throws ChannelException {
+    Optional<HvacState> hvacState = mThermostat.refresh(MAX_DATA_AGE_MILLIS).getHvacState();
+    if (!hvacState.isPresent()) {
+      throw new ChannelException("Cannot read HVAC state for '" + mChannelId + "'.");
+    }
+    return hvacState.get().toString();
+
   }
 
   /** Read/Write channel for the thermostat's target temperature. */
