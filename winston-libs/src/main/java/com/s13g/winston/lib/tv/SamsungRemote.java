@@ -66,7 +66,7 @@ public class SamsungRemote {
   private final char[] DENIED = {0x64, 0x00, 0x00, 0x00};
   private final char[] TIMEOUT = {0x65, 0x00};
 
-  private final Socket mSocket;
+  private Socket mSocket;
   private final InetSocketAddress mInetSocketAddress;
   private final Base64.Encoder mEncoder;
   private final String mRemoteName;
@@ -87,10 +87,15 @@ public class SamsungRemote {
   public SamsungRemote(String remoteName, String host, Base64.Encoder encoder) {
     mRemoteName = remoteName;
     mEncoder = encoder;
+    mInetSocketAddress = new InetSocketAddress(host, PORT);
+    resetSocketAndStreams();
+  }
+
+  /** Recreates the socket and the Input/Output streams. */
+  private void resetSocketAndStreams() {
     mOut = new NoOpWriter();
     mIn = new NoOpReader();
     mSocket = new Socket();
-    mInetSocketAddress = new InetSocketAddress(host, PORT);
   }
 
   /**
@@ -418,6 +423,15 @@ public class SamsungRemote {
    */
   private boolean connect() {
     try {
+      // If the TV is shut down, there is no way to tell whether the connection is shut down and
+      // the socket will think it is still connected, even though it's not. In this case, let's
+      // make sure we close the socket and the streams before setting it back up.
+      if (mSocket.isConnected()) {
+        mSocket.close();
+        mOut.close();
+        mIn.close();
+        resetSocketAndStreams();
+      }
       mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
       mSocket.setSoTimeout(SO_TIMEOUT);
       mOut = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
