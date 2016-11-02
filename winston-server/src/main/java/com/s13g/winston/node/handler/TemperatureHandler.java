@@ -19,14 +19,10 @@ package com.s13g.winston.node.handler;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.lib.temperature.TemperatureSensorController;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 /**
  * Handler for temperature sensor readings.
  */
 public class TemperatureHandler implements Handler {
-  private static final Logger LOG = LogManager.getLogger(TemperatureHandler.class);
   private final TemperatureSensorController mController;
 
   public TemperatureHandler(TemperatureSensorController temperatureSensorController) {

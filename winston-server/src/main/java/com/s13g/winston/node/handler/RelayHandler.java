@@ -28,14 +28,14 @@ import com.s13g.winston.lib.relay.RelayController;
  * Handles relay requests.
  */
 public class RelayHandler implements Handler {
-  private static interface RelayCommandRunner {
-    public void runForRelay(int num);
+  private interface RelayCommandRunner {
+    void runForRelay(int num);
   }
 
   private static final Logger LOG = LogManager.getLogger(RelayHandler.class);
   private final RelayController mRelayController;
 
-  private static enum RelayCommand {
+  private enum RelayCommand {
     OFF, ON, CLICK
   }
 
