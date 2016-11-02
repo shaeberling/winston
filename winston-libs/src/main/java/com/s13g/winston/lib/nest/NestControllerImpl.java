@@ -67,7 +67,7 @@ public class NestControllerImpl implements NestController {
         if (mThermostats.put(thermostatData.id, thermostatData) != null) {
           throw new RuntimeException("Duplicate thermostat: " + thermostatData.id);
         }
-        if (mStructures.put(thermostatData.id, structure) != null) {
+        if (mStructures.put(structure.id, structure) != null) {
           throw new RuntimeException("Duplicate structure for thermostat: " + thermostatData.id);
         }
       }
@@ -103,12 +103,11 @@ public class NestControllerImpl implements NestController {
   }
 
   @Override
-  public boolean setAwayMode(String thermostatId, AwayMode awayMode) {
-    StructureData structure = mStructures.get(thermostatId);
+  public boolean setAwayMode(String structureId, AwayMode awayMode) {
+    StructureData structure = mStructures.get(structureId);
     if (structure == null) {
-      throw new RuntimeException("No structure found for thermostat: " + thermostatId);
+      throw new RuntimeException("No structure found for ID: " + structureId);
     }
-    String structureId = structure.id;
     String url = ROOT_URL + "structures/" + structureId;
     try {
       String data = "{\"away\": \"" + awayMode.str + "\"}";

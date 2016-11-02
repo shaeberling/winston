@@ -25,7 +25,7 @@ public final class StructureData {
   public final AwayMode awayMode;
   public final ThermostatData[] mThermostatDatas;
 
-  public StructureData(String id, String name, AwayMode awayMode, ThermostatData[]
+  StructureData(String id, String name, AwayMode awayMode, ThermostatData[]
       thermostatDatas) {
     this.id = id;
     this.name = name;

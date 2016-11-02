@@ -40,5 +40,5 @@ public interface NestController {
 
   boolean setTemperature(String thermostatId, Temperature temperature);
 
-  boolean setAwayMode(String thermostatId, AwayMode awayMode);
+  boolean setAwayMode(String structureId, AwayMode awayMode);
 }

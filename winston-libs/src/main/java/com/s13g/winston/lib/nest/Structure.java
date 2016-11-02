@@ -53,7 +53,6 @@ public class Structure {
       }
     }
     return this;
-
   }
 
   public Optional<String> getName() {
@@ -62,6 +61,10 @@ public class Structure {
 
   public Optional<AwayMode> getAwayMode() {
     return returnIfRefreshSuccessful(mLatestData.awayMode);
+  }
+
+  public boolean setAwayMode(AwayMode awayMode) {
+    return mNestController.setAwayMode(mId, awayMode);
   }
 
   private <T> Optional<T> returnIfRefreshSuccessful(T value) {

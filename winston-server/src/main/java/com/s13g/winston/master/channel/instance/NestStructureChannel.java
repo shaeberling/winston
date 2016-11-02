@@ -16,8 +16,10 @@
 
 package com.s13g.winston.master.channel.instance;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.nest.Structure;
+import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
 import com.s13g.winston.master.channel.ChannelValue;
@@ -52,7 +54,8 @@ public class NestStructureChannel implements Channel {
   @Override
   public List<ChannelValue> getValues() {
     return ImmutableList.of(
-        new ReadOnlyChannelValue<>("structureName", this::readName, "Cannot set structure name."));
+        new ReadOnlyChannelValue<>("structureName", this::readName, "Cannot set structure name."),
+        new NestStructureAwayModeChannel());
   }
 
   private String readName() throws ChannelException {
@@ -61,5 +64,47 @@ public class NestStructureChannel implements Channel {
       throw new ChannelException("Cannot read structure name for '" + mChannelId + "'.");
     }
     return structureName.get();
+  }
+
+  private class NestStructureAwayModeChannel implements ChannelValue<String> {
+    @Override
+    public Mode getType() {
+      return Mode.READ_WRITE;
+    }
+
+    @Override
+    public String getName() {
+      return "awayMode";
+    }
+
+    @Override
+    public void writeRaw(String value) throws ChannelException {
+      write(value);
+    }
+
+    @Override
+    public void write(String value) throws ChannelException {
+      if (Strings.isNullOrEmpty(value)) {
+        throw new ChannelException("Need non-null away mode value.");
+      }
+      for (AwayMode awayMode : AwayMode.values()) {
+        if (value.equals(awayMode.toString())) {
+          if (!mStructure.setAwayMode(awayMode)) {
+            throw new ChannelException("Cannot change away mode to '" + value + "'.");
+          }
+          return;
+        }
+      }
+      throw new ChannelException("Cannot find away mode for value '" + value + "'.");
+    }
+
+    @Override
+    public String read() throws ChannelException {
+      Optional<AwayMode> awayMode = mStructure.refresh(MAX_DATA_AGE_MILLIS).getAwayMode();
+      if (!awayMode.isPresent()) {
+        throw new ChannelException("Cannot get away more for '" + mChannelId + "'.");
+      }
+      return awayMode.get().toString();
+    }
   }
 }

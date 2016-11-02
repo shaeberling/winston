@@ -29,6 +29,11 @@ public enum AwayMode {
     this.str = str;
   }
 
+  @Override
+  public String toString() {
+    return str;
+  }
+
   /**
    * Gets the mode enum from the given value string.
    */
