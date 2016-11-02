@@ -130,7 +130,9 @@ public class NestThermostatChannel implements Channel {
 
     @Override
     public void write(Float value) throws ChannelException {
-      mThermostat.setTargetTemperature(new Temperature(value, Temperature.Unit.CELSIUS));
+      if (!mThermostat.setTargetTemperature(new Temperature(value, Temperature.Unit.CELSIUS))) {
+        throw new ChannelException("Cannot set target temperature to '" + value + "'.");
+      }
     }
 
     @Override

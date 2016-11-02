@@ -74,8 +74,8 @@ public class Thermostat {
     return returnIfRefreshSuccessful(mLatestData.targetTemperature);
   }
 
-  public void setTargetTemperature(Temperature temperature) {
-    mNestController.setTemperature(mId, temperature);
+  public boolean setTargetTemperature(Temperature temperature) {
+    return mNestController.setTemperature(mId, temperature);
   }
 
   public Optional<Float> getHumidity() {
