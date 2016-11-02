@@ -21,6 +21,7 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.base.Strings;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.lib.relay.RelayController;
 
@@ -59,21 +60,52 @@ public class RelayHandler implements Handler {
 
   @Override
   public String handleRequest(String arguments) {
-    // TODO: Argument validation!
-    final int relayNo = Integer.parseInt(arguments.substring(0, arguments.indexOf('/')));
-    final int commandNo = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1,
-        arguments.length()));
-    if (commandNo < 0 || commandNo >= COMMANDS.length) {
-      LOG.warn("Unknown relay command: " + commandNo);
+    if (Strings.isNullOrEmpty(arguments)) {
+      LOG.warn("Null or empty arguments.");
       return "FAIL";
     }
-    RelayCommandRunner commandRunner = mCommands.get(COMMANDS[commandNo]);
-    if (commandRunner == null) {
-      LOG.warn("Unmapped relay command: " + commandNo);
+
+    String[] args = arguments.split("/");
+    if (args.length == 0) {
+      LOG.warn("Arguments invalid: '" + arguments + "'.");
       return "FAIL";
     }
-    commandRunner.runForRelay(relayNo);
-    return "OK";
+    final int relayNo;
+    try {
+      relayNo = Integer.parseInt(args[0]);
+    } catch (NumberFormatException e) {
+      LOG.warn("Illegal relay number: '" + args[0] + "'.");
+      return "FAIL";
+    }
+
+    if (args.length == 1) {
+      return mRelayController.isRelayOn(relayNo) ? "1" : "0";
+    }
+
+    if (args.length > 2) {
+      LOG.warn("Too many arguments: '" + arguments + "'.");
+      return "FAIL";
+    }
+
+    // args.length == 2;
+    try {
+      final int commandNo = Integer.parseInt(args[1]);
+      if (commandNo < 0 || commandNo >= COMMANDS.length) {
+        LOG.warn("Unknown relay command: " + commandNo);
+        return "FAIL";
+      }
+      RelayCommandRunner commandRunner = mCommands.get(COMMANDS[commandNo]);
+      if (commandRunner == null) {
+        LOG.warn("Unmapped relay command: " + commandNo);
+        return "FAIL";
+      }
+      commandRunner.runForRelay(relayNo);
+      return "OK";
+
+    } catch (NumberFormatException e) {
+      LOG.warn("Illegal command number: '" + args[1] + "'.");
+      return "FAIL";
+    }
   }
 
   @Override

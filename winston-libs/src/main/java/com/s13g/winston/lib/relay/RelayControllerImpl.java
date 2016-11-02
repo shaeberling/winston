@@ -116,10 +116,7 @@ public class RelayControllerImpl implements RelayController {
     }
   }
 
-  /**
-   * @return Whether the relay with the given number is currently on.
-   */
-  private synchronized boolean isRelayOn(int num) {
+  public synchronized boolean isRelayOn(int num) {
     GpioPinDigitalOutput gpio = mActivePins.get(num);
     return gpio != null && gpio.isLow();
   }

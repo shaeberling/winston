@@ -19,13 +19,16 @@ package com.s13g.winston.master.channel.instance;
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.core.TypeConversion;
 import com.s13g.winston.lib.winston.WinstonPowerNodeController;
+import com.s13g.winston.lib.winston.WinstonPowerNodeController.SwitchActions;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
 import com.s13g.winston.master.channel.ChannelValue;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * A channel for a winston power node.
@@ -46,8 +49,9 @@ public class WinstonPowerNodeChannel implements Channel {
   public List<ChannelValue> getValues() {
     List<ChannelValue> channels = new LinkedList<>();
     int count = 0;
-    for (Function<Boolean, Boolean> powerSwticher : mPowerNodeController.getSwitchChanger()) {
-      channels.add(new PowerSwitchChannelValue("outlet-" + count++, powerSwticher));
+    for (SwitchActions switchAction : mPowerNodeController.getSwitchActions()) {
+      channels.add(new PowerSwitchChannelValue(
+          "outlet-" + count++, switchAction.getSwitchPower(), switchAction.getStatusReader()));
     }
     return ImmutableList.copyOf(channels);
   }
@@ -55,16 +59,19 @@ public class WinstonPowerNodeChannel implements Channel {
   private class PowerSwitchChannelValue implements ChannelValue<Boolean> {
     private final String mName;
     private final Function<Boolean, Boolean> mSwitcher;
+    private final Supplier<Optional<Boolean>> mStatusReader;
 
-    private PowerSwitchChannelValue(String name, Function<Boolean, Boolean> switcher) {
+    private PowerSwitchChannelValue(String name,
+                                    Function<Boolean, Boolean> switcher,
+                                    Supplier<Optional<Boolean>> statusReader) {
       mName = name;
       mSwitcher = switcher;
+      mStatusReader = statusReader;
     }
 
     @Override
     public Mode getType() {
-      // TODO: Need to implment read-functionality on the node first.
-      return Mode.WRITE_ONLY;
+      return Mode.READ_WRITE;
     }
 
     @Override
@@ -90,7 +97,11 @@ public class WinstonPowerNodeChannel implements Channel {
 
     @Override
     public Boolean read() throws ChannelException {
-      throw new ChannelException("Read not supported yet.");
+      Optional<Boolean> statusOpt = mStatusReader.get();
+      if (!statusOpt.isPresent()) {
+        throw new ChannelException("Cannot read switch status for '" + mName + "'.");
+      }
+      return statusOpt.get();
     }
   }
 }

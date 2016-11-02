@@ -28,7 +28,7 @@ public interface RelayController extends NodeController {
    * Switches the relay with the given number.
    *
    * @param num the relay number, starting with 0.
-   * @param on  Whether to switch it on, otherwise off.
+   * @param on Whether to switch it on, otherwise off.
    */
   void switchRelay(int num, boolean on);
 
@@ -41,4 +41,9 @@ public interface RelayController extends NodeController {
    * @param num the relay to click.
    */
   void clickRelay(int num);
+
+  /**
+   * @return Whether the relay with the given number is currently on.
+   */
+  boolean isRelayOn(int num);
 }

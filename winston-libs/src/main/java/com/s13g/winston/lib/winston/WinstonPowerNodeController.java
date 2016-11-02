@@ -25,7 +25,9 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Controller for interfacing with a winston power node, such as the power box.
@@ -34,20 +36,19 @@ public class WinstonPowerNodeController {
   private static final Logger LOG = LogManager.getLogger(WinstonPowerNodeController.class);
 
   private final String mNodeAddress;
-  private final List<Function<Boolean, Boolean>> mSwitchPower;
-  // TODO: Need to make the node support returning the state so we can add reading from it.
+  private final List<SwitchActions> mSwitches;
 
   WinstonPowerNodeController(String nodeAddress) {
     mNodeAddress = nodeAddress;
-    mSwitchPower = new LinkedList<>();
+    mSwitches = new LinkedList<>();
   }
 
   public void addSwitch(String path) {
-    mSwitchPower.add(forSwitchChange(path));
+    mSwitches.add(new SwitchActions(forSwitchChange(path), forStatusReader(path)));
   }
 
-  public List<Function<Boolean, Boolean>> getSwitchChanger() {
-    return ImmutableList.copyOf(mSwitchPower);
+  public List<SwitchActions> getSwitchActions() {
+    return ImmutableList.copyOf(mSwitches);
   }
 
   public String getNodeAddress() {
@@ -66,5 +67,44 @@ public class WinstonPowerNodeController {
       }
       return false;
     };
+  }
+
+  private Supplier<Optional<Boolean>> forStatusReader(String path) {
+    final String addressFmt = "http://%s:1984/io/%s";
+    return () -> {
+      final String address = String.format(addressFmt, mNodeAddress, path);
+      try {
+        String response = HttpUtil.requestUrl(address);
+        if ("1".equals(response) || "true".equalsIgnoreCase(response)) {
+          return Optional.of(true);
+        } else if ("0".equals(response) || "false".equalsIgnoreCase(response)) {
+          return Optional.of(false);
+        }
+        LOG.error("Illegal witch status response: '" + response + "'.");
+        return Optional.empty();
+      } catch (IOException e) {
+        LOG.error("Cannot perform switch action '" + address + "'.");
+      }
+      return Optional.empty();
+    };
+  }
+
+  public static class SwitchActions {
+    private final Function<Boolean, Boolean> mSwitchPower;
+    private final Supplier<Optional<Boolean>> mStatusReader;
+
+    SwitchActions(Function<Boolean, Boolean> switchPower,
+                  Supplier<Optional<Boolean>> statusReader) {
+      mSwitchPower = switchPower;
+      mStatusReader = statusReader;
+    }
+
+    public Function<Boolean, Boolean> getSwitchPower() {
+      return mSwitchPower;
+    }
+
+    public Supplier<Optional<Boolean>> getStatusReader() {
+      return mStatusReader;
+    }
   }
 }
