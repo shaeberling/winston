@@ -37,7 +37,7 @@ import java.util.Optional;
 public class NestResponseParser {
   private static final Logger LOG = LogManager.getLogger(NestResponseParser.class);
 
-  public Structure[] parseStructureAndDevicesResponse(String json) {
+  public StructureData[] parseStructureAndDevicesResponse(String json) {
     JSONObject root = new JSONObject(json);
 
     try {
@@ -62,20 +62,20 @@ public class NestResponseParser {
       JSONObject structures = root.getJSONObject("structures");
       structures.keys().forEachRemaining(
           (key) -> jsonStructures.add(new Pair<>(key, structures.getJSONObject(key))));
-      Structure[] structureResult = new Structure[jsonStructures.size()];
+      StructureData[] structureResult = new StructureData[jsonStructures.size()];
       for (int i = 0; i < jsonStructures.size(); ++i) {
         structureResult[i] = parseStructure(jsonStructures.get(i).first,
             jsonStructures.get(i).second, thermostatMap);
       }
       return structureResult;
     } catch (JSONException ex) {
-      return new Structure[0];
+      return new StructureData[0];
     }
   }
 
-  private Structure parseStructure(String structureId,
-                                   JSONObject jsonStructure,
-                                   Map<String, ThermostatData> thermostatMap) {
+  private StructureData parseStructure(String structureId,
+                                       JSONObject jsonStructure,
+                                       Map<String, ThermostatData> thermostatMap) {
     String name = jsonStructure.getString("name");
     JSONArray jsonThermostats = jsonStructure.getJSONArray("thermostats");
     Optional<AwayMode> awayMode = AwayMode.fromString(jsonStructure.getString("away"));
@@ -92,7 +92,7 @@ public class NestResponseParser {
       }
       thermostatDatas[i] = thermostatMap.get(thermostatId);
     }
-    return new Structure(structureId, name, awayMode.get(), thermostatDatas);
+    return new StructureData(structureId, name, awayMode.get(), thermostatDatas);
   }
 
   private ThermostatData parseThermostat(JSONObject jsonThermostat) {

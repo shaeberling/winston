@@ -19,10 +19,13 @@ package com.s13g.winston.master.modules.instance;
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.nest.NestController;
 import com.s13g.winston.lib.nest.NestControllerFactory;
+import com.s13g.winston.lib.nest.Structure;
 import com.s13g.winston.lib.nest.Thermostat;
+import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.channel.Channel;
+import com.s13g.winston.master.channel.instance.NestStructureChannel;
 import com.s13g.winston.master.channel.instance.NestThermostatChannel;
 import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleCreationException;
@@ -65,11 +68,14 @@ public class NestModule implements Module {
     }
     NestController controller = mNestControllerFactory.create(accessTokenOpt.get().get(0));
     controller.refresh();
-    ThermostatData[] thermostatData = controller.getThermostats();
 
     List<Channel> channels = new LinkedList<>();
-    for (ThermostatData data : thermostatData) {
+
+    for (ThermostatData data : controller.getThermostats()) {
       channels.add(new NestThermostatChannel(data.id, new Thermostat(data.id, controller)));
+    }
+    for (StructureData data : controller.getStructures()) {
+      channels.add(new NestStructureChannel(data.id, new Structure(data.id, controller)));
     }
     mChannels = ImmutableList.copyOf(channels);
   }

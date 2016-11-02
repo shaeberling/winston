@@ -19,13 +19,13 @@ package com.s13g.winston.lib.nest.data;
 /**
  * Structure read-only data.
  */
-public final class Structure {
+public final class StructureData {
   public final String id;
   public final String name;
   public final AwayMode awayMode;
   public final ThermostatData[] mThermostatDatas;
 
-  public Structure(String id, String name, AwayMode awayMode, ThermostatData[]
+  public StructureData(String id, String name, AwayMode awayMode, ThermostatData[]
       thermostatDatas) {
     this.id = id;
     this.name = name;

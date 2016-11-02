@@ -17,6 +17,7 @@
 package com.s13g.winston.lib.nest;
 
 import com.s13g.winston.lib.nest.data.AwayMode;
+import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.lib.temperature.Temperature;
 
@@ -31,10 +32,11 @@ public interface NestController {
    */
   boolean refresh();
 
-  /**
-   * @return A list of all thermostats, containing read-only data.
-   */
+  /** @return A list of all thermostats, containing read-only data. */
   ThermostatData[] getThermostats();
+
+  /** @return A list of all structures, containing read-only data. */
+  StructureData[] getStructures();
 
   boolean setTemperature(String thermostatId, Temperature temperature);
 

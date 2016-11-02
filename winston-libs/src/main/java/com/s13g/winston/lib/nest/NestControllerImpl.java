@@ -19,7 +19,7 @@ package com.s13g.winston.lib.nest;
 import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
-import com.s13g.winston.lib.nest.data.Structure;
+import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.lib.temperature.Temperature;
 
@@ -40,7 +40,7 @@ public class NestControllerImpl implements NestController {
   /** Maps thermostat ID to thermostat. */
   private Map<String, ThermostatData> mThermostats = new HashMap<>();
   /** Maps thermostat ID to the structure it is contained in. */
-  private Map<String, Structure> mStructures = new HashMap<>();
+  private Map<String, StructureData> mStructures = new HashMap<>();
 
   public NestControllerImpl(String authHeader, NestResponseParser responseParser) {
     mAuthHeader = authHeader;
@@ -61,8 +61,8 @@ public class NestControllerImpl implements NestController {
     }
     LOG.info("Get all devices response:\n" + result);
 
-    Structure[] structures = mResponseParser.parseStructureAndDevicesResponse(result);
-    for (Structure structure : structures) {
+    StructureData[] structures = mResponseParser.parseStructureAndDevicesResponse(result);
+    for (StructureData structure : structures) {
       for (ThermostatData thermostatData : structure.mThermostatDatas) {
         if (mThermostats.put(thermostatData.id, thermostatData) != null) {
           throw new RuntimeException("Duplicate thermostat: " + thermostatData.id);
@@ -78,6 +78,11 @@ public class NestControllerImpl implements NestController {
   @Override
   public ThermostatData[] getThermostats() {
     return mThermostats.values().toArray(new ThermostatData[0]);
+  }
+
+  @Override
+  public StructureData[] getStructures() {
+    return mStructures.values().toArray(new StructureData[0]);
   }
 
   @Override
@@ -99,7 +104,7 @@ public class NestControllerImpl implements NestController {
 
   @Override
   public boolean setAwayMode(String thermostatId, AwayMode awayMode) {
-    Structure structure = mStructures.get(thermostatId);
+    StructureData structure = mStructures.get(thermostatId);
     if (structure == null) {
       throw new RuntimeException("No structure found for thermostat: " + thermostatId);
     }
