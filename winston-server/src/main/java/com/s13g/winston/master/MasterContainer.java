@@ -36,6 +36,8 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;
 
+import javax.net.ssl.SSLContext;
+
 /**
  * HTTP Container for serving the master daemon HTTP requests.
  */
@@ -59,12 +61,23 @@ public class MasterContainer implements Container {
    * @throws IOException thrown if HTTP serving could not be started.
    */
   void startServing(int numThreads) throws IOException {
+    startServing(numThreads, null);
+  }
+
+  /**
+   * Starts serving HTTPS encrypted traffic from this container.
+   *
+   * @param numThreads the number of threads to handle the HTTP requests.
+   * @param context a valid SSLContext for serving secure connections.
+   * @throws IOException thrown if HTTP serving could not be started.
+   */
+  void startServing(int numThreads, SSLContext context) throws IOException {
     final ContainerSocketProcessor processor = new ContainerSocketProcessor(this, numThreads);
 
     // Since this server will run forever, no need to close connection.
     final Connection connection = new SocketConnection(processor);
     final SocketAddress address = new InetSocketAddress(mPort);
-    connection.connect(address);
+    connection.connect(address, context);
     LOG.info("Listening to: " + address.toString());
   }
 

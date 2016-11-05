@@ -32,6 +32,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 /**
  * Wrapper around the configuration proto with some helper methods.
  */
@@ -77,16 +79,16 @@ public class ConfigWrapper {
 
     List<Module> modules = mConfigProto.getModuleList();
     for (Module module : modules) {
-      if (Strings.isNullOrEmpty(module.getType())) {
+      if (isNullOrEmpty(module.getType())) {
         throw new AssertionError("Module type must be set.");
       }
 
       for (Channel channel : module.getChannelList()) {
-        if (Strings.isNullOrEmpty(channel.getType())) {
+        if (isNullOrEmpty(channel.getType())) {
           throw new AssertionError("Channel type must be set.");
         }
         for (Parameter parameter : channel.getParameterList()) {
-          if (Strings.isNullOrEmpty(parameter.getName())) {
+          if (isNullOrEmpty(parameter.getName())) {
             throw new AssertionError("Parameter name must not be empty.");
           }
         }
@@ -95,19 +97,24 @@ public class ConfigWrapper {
 
     for (KnownNode knownNode : mConfigProto.getKnownClientList()) {
       // TODO: Parse MAC address, check if it is valid.
-      if (Strings.isNullOrEmpty(knownNode.getMacAddress())) {
+      if (isNullOrEmpty(knownNode.getMacAddress())) {
         throw new AssertionError("KnownClient MAC address must be set");
       }
-      if (Strings.isNullOrEmpty(knownNode.getName())) {
+      if (isNullOrEmpty(knownNode.getName())) {
         throw new AssertionError("KnownClient name must be set");
       }
       if (knownNode.getPort() <= 0) {
         throw new AssertionError("KnownClient port must be > 0");
       }
       // TODO: Check if file exists and that it can be parsed.
-      if (Strings.isNullOrEmpty(knownNode.getConfigFile())) {
+      if (isNullOrEmpty(knownNode.getConfigFile())) {
         throw new AssertionError("KnownClient config_file must be set");
       }
+    }
+
+    if (!isNullOrEmpty(mConfigProto.getSslKeystorePath()) &&
+        isNullOrEmpty(mConfigProto.getSslKeystorePassword())) {
+      throw new AssertionError("SSL keystore given without password");
     }
   }
 
@@ -115,17 +122,20 @@ public class ConfigWrapper {
    * Will print out the configuration to LOG.
    */
   public void printToLog() {
-    LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
+    LOG.info("Daemon Port     :" + mConfigProto.getDaemonPort());
+    LOG.info("Keystore        :" + mConfigProto.getSslKeystorePath());
+    LOG.info("Keystore passwd : " + (isNullOrEmpty(mConfigProto.getSslKeystorePassword())
+        ? "<not given>" : "<given>"));
     List<Module> modules = mConfigProto.getModuleList();
-    LOG.info("Modules: " + modules.size());
+    LOG.info("Modules         : " + modules.size());
     LOG.info("---------------------------------");
     for (Module module : modules) {
       LOG.info("  Type : " + module.getType());
       for (Channel channel : module.getChannelList()) {
-        LOG.info("    Type : " + channel.getType());
-        LOG.info("    Addr : " + channel.getAddress());
+        LOG.info("    Type   : " + channel.getType());
+        LOG.info("    Addr   : " + channel.getAddress());
         for (Parameter param : channel.getParameterList()) {
-          LOG.info("    Param : " + param.getName() + " -> " + param.getValue());
+          LOG.info("    Param   : " + param.getName() + " -> " + param.getValue());
         }
         LOG.info("---------------------------------");
       }

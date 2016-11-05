@@ -28,11 +28,15 @@ option java_outer_classname = "Master";
 message MasterConfig {
   /* The port on which the master daemon should listen for connections. */
   int32 daemonPort = 1;
+  /* Path to the certificate keystore for serving SSL connections. */
+  string sslKeystorePath = 2;
+  /* Password for the keystore used to serve SSL connections. */
+  string sslKeystorePassword = 3;
   /* A list of active modules. */
-  repeated Module module = 2;
+  repeated Module module = 4;
   /* All known winston nodes, not all might be active at a given time. */
   /** TODO: Remove this from here. We will have a Winston module for this. */
-  repeated KnownNode known_client = 3;
+  repeated KnownNode known_client = 5;
 }
 
 /* A module that runs on the master. E.g. a Nest or TV controller. */

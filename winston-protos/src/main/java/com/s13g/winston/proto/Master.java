@@ -29,10 +29,46 @@ public final class Master {
 
     /**
      * <pre>
+     * Path to the certificate keystore for serving SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePath = 2;</code>
+     */
+    java.lang.String getSslKeystorePath();
+    /**
+     * <pre>
+     * Path to the certificate keystore for serving SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePath = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getSslKeystorePathBytes();
+
+    /**
+     * <pre>
+     * Password for the keystore used to serve SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePassword = 3;</code>
+     */
+    java.lang.String getSslKeystorePassword();
+    /**
+     * <pre>
+     * Password for the keystore used to serve SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePassword = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getSslKeystorePasswordBytes();
+
+    /**
+     * <pre>
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     java.util.List<com.s13g.winston.proto.Master.Module> 
         getModuleList();
@@ -41,7 +77,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     com.s13g.winston.proto.Master.Module getModule(int index);
     /**
@@ -49,7 +85,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     int getModuleCount();
     /**
@@ -57,7 +93,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Master.ModuleOrBuilder> 
         getModuleOrBuilderList();
@@ -66,7 +102,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     com.s13g.winston.proto.Master.ModuleOrBuilder getModuleOrBuilder(
         int index);
@@ -76,7 +112,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     java.util.List<com.s13g.winston.proto.Master.KnownNode> 
         getKnownClientList();
@@ -85,7 +121,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     com.s13g.winston.proto.Master.KnownNode getKnownClient(int index);
     /**
@@ -93,7 +129,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     int getKnownClientCount();
     /**
@@ -101,7 +137,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList();
@@ -110,7 +146,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
         int index);
@@ -128,6 +164,8 @@ public final class Master {
     }
     private MasterConfig() {
       daemonPort_ = 0;
+      sslKeystorePath_ = "";
+      sslKeystorePassword_ = "";
       module_ = java.util.Collections.emptyList();
       knownClient_ = java.util.Collections.emptyList();
     }
@@ -163,18 +201,30 @@ public final class Master {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              sslKeystorePath_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              sslKeystorePassword_ = s;
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 module_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Module>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000008;
               }
               module_.add(
                   input.readMessage(com.s13g.winston.proto.Master.Module.parser(), extensionRegistry));
               break;
             }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000010;
               }
               knownClient_.add(
                   input.readMessage(com.s13g.winston.proto.Master.KnownNode.parser(), extensionRegistry));
@@ -188,10 +238,10 @@ public final class Master {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           module_ = java.util.Collections.unmodifiableList(module_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
         }
         makeExtensionsImmutable();
@@ -223,14 +273,98 @@ public final class Master {
       return daemonPort_;
     }
 
-    public static final int MODULE_FIELD_NUMBER = 2;
+    public static final int SSLKEYSTOREPATH_FIELD_NUMBER = 2;
+    private volatile java.lang.Object sslKeystorePath_;
+    /**
+     * <pre>
+     * Path to the certificate keystore for serving SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePath = 2;</code>
+     */
+    public java.lang.String getSslKeystorePath() {
+      java.lang.Object ref = sslKeystorePath_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sslKeystorePath_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Path to the certificate keystore for serving SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePath = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSslKeystorePathBytes() {
+      java.lang.Object ref = sslKeystorePath_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sslKeystorePath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SSLKEYSTOREPASSWORD_FIELD_NUMBER = 3;
+    private volatile java.lang.Object sslKeystorePassword_;
+    /**
+     * <pre>
+     * Password for the keystore used to serve SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePassword = 3;</code>
+     */
+    public java.lang.String getSslKeystorePassword() {
+      java.lang.Object ref = sslKeystorePassword_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        sslKeystorePassword_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Password for the keystore used to serve SSL connections. 
+     * </pre>
+     *
+     * <code>optional string sslKeystorePassword = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSslKeystorePasswordBytes() {
+      java.lang.Object ref = sslKeystorePassword_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        sslKeystorePassword_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MODULE_FIELD_NUMBER = 4;
     private java.util.List<com.s13g.winston.proto.Master.Module> module_;
     /**
      * <pre>
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     public java.util.List<com.s13g.winston.proto.Master.Module> getModuleList() {
       return module_;
@@ -240,7 +374,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Master.ModuleOrBuilder> 
         getModuleOrBuilderList() {
@@ -251,7 +385,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     public int getModuleCount() {
       return module_.size();
@@ -261,7 +395,7 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     public com.s13g.winston.proto.Master.Module getModule(int index) {
       return module_.get(index);
@@ -271,21 +405,21 @@ public final class Master {
      * A list of active modules. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
      */
     public com.s13g.winston.proto.Master.ModuleOrBuilder getModuleOrBuilder(
         int index) {
       return module_.get(index);
     }
 
-    public static final int KNOWN_CLIENT_FIELD_NUMBER = 3;
+    public static final int KNOWN_CLIENT_FIELD_NUMBER = 5;
     private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_;
     /**
      * <pre>
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
       return knownClient_;
@@ -295,7 +429,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList() {
@@ -306,7 +440,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     public int getKnownClientCount() {
       return knownClient_.size();
@@ -316,7 +450,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
       return knownClient_.get(index);
@@ -326,7 +460,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
      */
     public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
         int index) {
@@ -348,11 +482,17 @@ public final class Master {
       if (daemonPort_ != 0) {
         output.writeInt32(1, daemonPort_);
       }
+      if (!getSslKeystorePathBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sslKeystorePath_);
+      }
+      if (!getSslKeystorePasswordBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, sslKeystorePassword_);
+      }
       for (int i = 0; i < module_.size(); i++) {
-        output.writeMessage(2, module_.get(i));
+        output.writeMessage(4, module_.get(i));
       }
       for (int i = 0; i < knownClient_.size(); i++) {
-        output.writeMessage(3, knownClient_.get(i));
+        output.writeMessage(5, knownClient_.get(i));
       }
     }
 
@@ -365,13 +505,19 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, daemonPort_);
       }
+      if (!getSslKeystorePathBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sslKeystorePath_);
+      }
+      if (!getSslKeystorePasswordBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, sslKeystorePassword_);
+      }
       for (int i = 0; i < module_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, module_.get(i));
+          .computeMessageSize(4, module_.get(i));
       }
       for (int i = 0; i < knownClient_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, knownClient_.get(i));
+          .computeMessageSize(5, knownClient_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -391,6 +537,10 @@ public final class Master {
       boolean result = true;
       result = result && (getDaemonPort()
           == other.getDaemonPort());
+      result = result && getSslKeystorePath()
+          .equals(other.getSslKeystorePath());
+      result = result && getSslKeystorePassword()
+          .equals(other.getSslKeystorePassword());
       result = result && getModuleList()
           .equals(other.getModuleList());
       result = result && getKnownClientList()
@@ -407,6 +557,10 @@ public final class Master {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + DAEMONPORT_FIELD_NUMBER;
       hash = (53 * hash) + getDaemonPort();
+      hash = (37 * hash) + SSLKEYSTOREPATH_FIELD_NUMBER;
+      hash = (53 * hash) + getSslKeystorePath().hashCode();
+      hash = (37 * hash) + SSLKEYSTOREPASSWORD_FIELD_NUMBER;
+      hash = (53 * hash) + getSslKeystorePassword().hashCode();
       if (getModuleCount() > 0) {
         hash = (37 * hash) + MODULE_FIELD_NUMBER;
         hash = (53 * hash) + getModuleList().hashCode();
@@ -537,15 +691,19 @@ public final class Master {
         super.clear();
         daemonPort_ = 0;
 
+        sslKeystorePath_ = "";
+
+        sslKeystorePassword_ = "";
+
         if (moduleBuilder_ == null) {
           module_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           moduleBuilder_.clear();
         }
         if (knownClientBuilder_ == null) {
           knownClient_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           knownClientBuilder_.clear();
         }
@@ -574,19 +732,21 @@ public final class Master {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.daemonPort_ = daemonPort_;
+        result.sslKeystorePath_ = sslKeystorePath_;
+        result.sslKeystorePassword_ = sslKeystorePassword_;
         if (moduleBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             module_ = java.util.Collections.unmodifiableList(module_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.module_ = module_;
         } else {
           result.module_ = moduleBuilder_.build();
         }
         if (knownClientBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.knownClient_ = knownClient_;
         } else {
@@ -637,11 +797,19 @@ public final class Master {
         if (other.getDaemonPort() != 0) {
           setDaemonPort(other.getDaemonPort());
         }
+        if (!other.getSslKeystorePath().isEmpty()) {
+          sslKeystorePath_ = other.sslKeystorePath_;
+          onChanged();
+        }
+        if (!other.getSslKeystorePassword().isEmpty()) {
+          sslKeystorePassword_ = other.sslKeystorePassword_;
+          onChanged();
+        }
         if (moduleBuilder_ == null) {
           if (!other.module_.isEmpty()) {
             if (module_.isEmpty()) {
               module_ = other.module_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureModuleIsMutable();
               module_.addAll(other.module_);
@@ -654,7 +822,7 @@ public final class Master {
               moduleBuilder_.dispose();
               moduleBuilder_ = null;
               module_ = other.module_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000008);
               moduleBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getModuleFieldBuilder() : null;
@@ -667,7 +835,7 @@ public final class Master {
           if (!other.knownClient_.isEmpty()) {
             if (knownClient_.isEmpty()) {
               knownClient_ = other.knownClient_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureKnownClientIsMutable();
               knownClient_.addAll(other.knownClient_);
@@ -680,7 +848,7 @@ public final class Master {
               knownClientBuilder_.dispose();
               knownClientBuilder_ = null;
               knownClient_ = other.knownClient_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000010);
               knownClientBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getKnownClientFieldBuilder() : null;
@@ -754,12 +922,190 @@ public final class Master {
         return this;
       }
 
+      private java.lang.Object sslKeystorePath_ = "";
+      /**
+       * <pre>
+       * Path to the certificate keystore for serving SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePath = 2;</code>
+       */
+      public java.lang.String getSslKeystorePath() {
+        java.lang.Object ref = sslKeystorePath_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          sslKeystorePath_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Path to the certificate keystore for serving SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePath = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSslKeystorePathBytes() {
+        java.lang.Object ref = sslKeystorePath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sslKeystorePath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Path to the certificate keystore for serving SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePath = 2;</code>
+       */
+      public Builder setSslKeystorePath(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sslKeystorePath_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Path to the certificate keystore for serving SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePath = 2;</code>
+       */
+      public Builder clearSslKeystorePath() {
+        
+        sslKeystorePath_ = getDefaultInstance().getSslKeystorePath();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Path to the certificate keystore for serving SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePath = 2;</code>
+       */
+      public Builder setSslKeystorePathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        sslKeystorePath_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object sslKeystorePassword_ = "";
+      /**
+       * <pre>
+       * Password for the keystore used to serve SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePassword = 3;</code>
+       */
+      public java.lang.String getSslKeystorePassword() {
+        java.lang.Object ref = sslKeystorePassword_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          sslKeystorePassword_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Password for the keystore used to serve SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePassword = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSslKeystorePasswordBytes() {
+        java.lang.Object ref = sslKeystorePassword_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          sslKeystorePassword_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Password for the keystore used to serve SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePassword = 3;</code>
+       */
+      public Builder setSslKeystorePassword(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        sslKeystorePassword_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Password for the keystore used to serve SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePassword = 3;</code>
+       */
+      public Builder clearSslKeystorePassword() {
+        
+        sslKeystorePassword_ = getDefaultInstance().getSslKeystorePassword();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Password for the keystore used to serve SSL connections. 
+       * </pre>
+       *
+       * <code>optional string sslKeystorePassword = 3;</code>
+       */
+      public Builder setSslKeystorePasswordBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        sslKeystorePassword_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.s13g.winston.proto.Master.Module> module_ =
         java.util.Collections.emptyList();
       private void ensureModuleIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           module_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Module>(module_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -771,7 +1117,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.Module> getModuleList() {
         if (moduleBuilder_ == null) {
@@ -785,7 +1131,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public int getModuleCount() {
         if (moduleBuilder_ == null) {
@@ -799,7 +1145,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public com.s13g.winston.proto.Master.Module getModule(int index) {
         if (moduleBuilder_ == null) {
@@ -813,7 +1159,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder setModule(
           int index, com.s13g.winston.proto.Master.Module value) {
@@ -834,7 +1180,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder setModule(
           int index, com.s13g.winston.proto.Master.Module.Builder builderForValue) {
@@ -852,7 +1198,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder addModule(com.s13g.winston.proto.Master.Module value) {
         if (moduleBuilder_ == null) {
@@ -872,7 +1218,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder addModule(
           int index, com.s13g.winston.proto.Master.Module value) {
@@ -893,7 +1239,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder addModule(
           com.s13g.winston.proto.Master.Module.Builder builderForValue) {
@@ -911,7 +1257,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder addModule(
           int index, com.s13g.winston.proto.Master.Module.Builder builderForValue) {
@@ -929,7 +1275,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder addAllModule(
           java.lang.Iterable<? extends com.s13g.winston.proto.Master.Module> values) {
@@ -948,12 +1294,12 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder clearModule() {
         if (moduleBuilder_ == null) {
           module_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           moduleBuilder_.clear();
@@ -965,7 +1311,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public Builder removeModule(int index) {
         if (moduleBuilder_ == null) {
@@ -982,7 +1328,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public com.s13g.winston.proto.Master.Module.Builder getModuleBuilder(
           int index) {
@@ -993,7 +1339,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public com.s13g.winston.proto.Master.ModuleOrBuilder getModuleOrBuilder(
           int index) {
@@ -1007,7 +1353,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Master.ModuleOrBuilder> 
            getModuleOrBuilderList() {
@@ -1022,7 +1368,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public com.s13g.winston.proto.Master.Module.Builder addModuleBuilder() {
         return getModuleFieldBuilder().addBuilder(
@@ -1033,7 +1379,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public com.s13g.winston.proto.Master.Module.Builder addModuleBuilder(
           int index) {
@@ -1045,7 +1391,7 @@ public final class Master {
        * A list of active modules. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.Module module = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.Module module = 4;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.Module.Builder> 
            getModuleBuilderList() {
@@ -1058,7 +1404,7 @@ public final class Master {
           moduleBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Master.Module, com.s13g.winston.proto.Master.Module.Builder, com.s13g.winston.proto.Master.ModuleOrBuilder>(
                   module_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           module_ = null;
@@ -1069,9 +1415,9 @@ public final class Master {
       private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_ =
         java.util.Collections.emptyList();
       private void ensureKnownClientIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>(knownClient_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -1083,7 +1429,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
         if (knownClientBuilder_ == null) {
@@ -1097,7 +1443,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public int getKnownClientCount() {
         if (knownClientBuilder_ == null) {
@@ -1111,7 +1457,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
         if (knownClientBuilder_ == null) {
@@ -1125,7 +1471,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder setKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode value) {
@@ -1146,7 +1492,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder setKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1164,7 +1510,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder addKnownClient(com.s13g.winston.proto.Master.KnownNode value) {
         if (knownClientBuilder_ == null) {
@@ -1184,7 +1530,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder addKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode value) {
@@ -1205,7 +1551,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder addKnownClient(
           com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1223,7 +1569,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder addKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1241,7 +1587,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder addAllKnownClient(
           java.lang.Iterable<? extends com.s13g.winston.proto.Master.KnownNode> values) {
@@ -1260,12 +1606,12 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder clearKnownClient() {
         if (knownClientBuilder_ == null) {
           knownClient_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           knownClientBuilder_.clear();
@@ -1277,7 +1623,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public Builder removeKnownClient(int index) {
         if (knownClientBuilder_ == null) {
@@ -1294,7 +1640,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder getKnownClientBuilder(
           int index) {
@@ -1305,7 +1651,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
           int index) {
@@ -1319,7 +1665,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
            getKnownClientOrBuilderList() {
@@ -1334,7 +1680,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder() {
         return getKnownClientFieldBuilder().addBuilder(
@@ -1345,7 +1691,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder(
           int index) {
@@ -1357,7 +1703,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode.Builder> 
            getKnownClientBuilderList() {
@@ -1370,7 +1716,7 @@ public final class Master {
           knownClientBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Master.KnownNode, com.s13g.winston.proto.Master.KnownNode.Builder, com.s13g.winston.proto.Master.KnownNodeOrBuilder>(
                   knownClient_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           knownClient_ = null;
@@ -5476,19 +5822,21 @@ public final class Master {
   static {
     java.lang.String[] descriptorData = {
       "\n\036etc/protos/master_config.proto\022\026com.s1" +
-      "3g.winston.proto\"\213\001\n\014MasterConfig\022\022\n\ndae" +
-      "monPort\030\001 \001(\005\022.\n\006module\030\002 \003(\0132\036.com.s13g" +
-      ".winston.proto.Module\0227\n\014known_client\030\003 " +
-      "\003(\0132!.com.s13g.winston.proto.KnownNode\"H" +
-      "\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007channel\030\002 \003(\0132" +
-      "\037.com.s13g.winston.proto.Channel\"b\n\tKnow" +
-      "nNode\022\023\n\013mac_address\030\001 \001(\t\022\014\n\004name\030\002 \001(\t" +
-      "\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030\004 \001(\010\022\023\n\013confi" +
-      "g_file\030\005 \001(\t\"^\n\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n",
-      "\007address\030\002 \001(\t\0224\n\tparameter\030\003 \003(\0132!.com." +
-      "s13g.winston.proto.Parameter\"(\n\tParamete" +
-      "r\022\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002 \001(\tB \n\026com.s1" +
-      "3g.winston.protoB\006Masterb\006proto3"
+      "3g.winston.proto\"\301\001\n\014MasterConfig\022\022\n\ndae" +
+      "monPort\030\001 \001(\005\022\027\n\017sslKeystorePath\030\002 \001(\t\022\033" +
+      "\n\023sslKeystorePassword\030\003 \001(\t\022.\n\006module\030\004 " +
+      "\003(\0132\036.com.s13g.winston.proto.Module\0227\n\014k" +
+      "nown_client\030\005 \003(\0132!.com.s13g.winston.pro" +
+      "to.KnownNode\"H\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007" +
+      "channel\030\002 \003(\0132\037.com.s13g.winston.proto.C" +
+      "hannel\"b\n\tKnownNode\022\023\n\013mac_address\030\001 \001(\t" +
+      "\022\014\n\004name\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030",
+      "\004 \001(\010\022\023\n\013config_file\030\005 \001(\t\"^\n\007Channel\022\014\n" +
+      "\004type\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\0224\n\tparamete" +
+      "r\030\003 \003(\0132!.com.s13g.winston.proto.Paramet" +
+      "er\"(\n\tParameter\022\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002" +
+      " \001(\tB \n\026com.s13g.winston.protoB\006Masterb\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5507,7 +5855,7 @@ public final class Master {
     internal_static_com_s13g_winston_proto_MasterConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_MasterConfig_descriptor,
-        new java.lang.String[] { "DaemonPort", "Module", "KnownClient", });
+        new java.lang.String[] { "DaemonPort", "SslKeystorePath", "SslKeystorePassword", "Module", "KnownClient", });
     internal_static_com_s13g_winston_proto_Module_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_s13g_winston_proto_Module_fieldAccessorTable = new
