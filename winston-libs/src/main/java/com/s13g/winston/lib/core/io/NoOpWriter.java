@@ -19,12 +19,14 @@ package com.s13g.winston.lib.core.io;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.annotation.Nonnull;
+
 /**
- * Created by haeberling on 8/19/16.
+ * A writer that does nothing.
  */
 public class NoOpWriter extends Writer {
   @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
+  public void write(@Nonnull char[] cbuf, int off, int len) throws IOException {
   }
 
   @Override

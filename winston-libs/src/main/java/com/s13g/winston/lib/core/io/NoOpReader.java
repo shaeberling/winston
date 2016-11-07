@@ -20,13 +20,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.CharBuffer;
 
+import javax.annotation.Nonnull;
+
 /**
  * A reader that does nothing.
  */
 public class NoOpReader extends Reader {
 
   @Override
-  public int read(char[] cbuf, int off, int len) throws IOException {
+  public int read(@Nonnull char[] cbuf, int off, int len) throws IOException {
     return 0;
   }
 
