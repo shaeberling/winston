@@ -27,6 +27,10 @@ package com.s13g.winston.lib.tv;
 
 import com.s13g.winston.lib.core.io.NoOpReader;
 import com.s13g.winston.lib.core.io.NoOpWriter;
+import com.s13g.winston.lib.core.util.MultiCloseable;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,10 +42,9 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class has been forked from Maarten Visscher's SamsungRemote project at:
@@ -55,7 +58,7 @@ import java.util.logging.Logger;
  * @author Maarten Visscher <mail@maartenvisscher.nl>
  */
 public class SamsungRemote {
-  private static final Logger LOG = Logger.getLogger("SamsungRemote");
+  private static final Logger LOG = LogManager.getLogger("SamsungRemote");
   private final int PORT = 55000;
   private final int SO_TIMEOUT = 3 * 1000; // Socket connect and read timeout mIn milliseconds.
   private final int SO_AUTHENTICATE_TIMEOUT = 300 * 1000; // Socket read timeout while
@@ -66,13 +69,14 @@ public class SamsungRemote {
   private final char[] DENIED = {0x64, 0x00, 0x00, 0x00};
   private final char[] TIMEOUT = {0x65, 0x00};
 
-  private Socket mSocket;
   private final InetSocketAddress mInetSocketAddress;
   private final Base64.Encoder mEncoder;
   private final String mRemoteName;
 
+  private Socket mSocket;
   private Writer mOut;
   private Reader mIn;
+  private MultiCloseable mSocketStreamCloseable;
 
   /**
    * Opens a mSocket connection to the television and keeps a simple mLog when
@@ -93,9 +97,20 @@ public class SamsungRemote {
 
   /** Recreates the socket and the Input/Output streams. */
   private void resetSocketAndStreams() {
+    // First close the streams and socket if they exist.
+    if (mSocketStreamCloseable != null) {
+      try {
+        mSocketStreamCloseable.close();
+      } catch (IOException ex) {
+        LOG.info("Issue when trying to close socket.", ex);
+      }
+    }
+
+    // Then create a new socket. The streams wil be no-op until an actual connection is made.
     mOut = new NoOpWriter();
     mIn = new NoOpReader();
     mSocket = new Socket();
+    mSocketStreamCloseable = new MultiCloseable().add(mSocket);
   }
 
   /**
@@ -156,13 +171,13 @@ public class SamsungRemote {
       LOG.info("Authentication response: access granted.");
       return TVReply.ALLOWED; // Access granted.
     } else if (Arrays.equals(payload, DENIED)) {
-      LOG.warning("Authentication response: access denied.");
+      LOG.warn("Authentication response: access denied.");
       return TVReply.DENIED; // Access denied.
     } else if (Arrays.equals(payload, TIMEOUT)) {
-      LOG.warning("Authentication response: timeout.");
+      LOG.warn("Authentication response: timeout.");
       return TVReply.TIMEOUT; // Timeout.
     }
-    LOG.severe("Authentication message is unknown: " + new String(payload));
+    LOG.error("Authentication message is unknown: " + new String(payload));
     throw new IOException("Got unknown response.");
   }
 
@@ -411,7 +426,7 @@ public class SamsungRemote {
       authenticate(mRemoteName);
       return true;
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Cannot authenticate", ex);
+      LOG.warn("Cannot authenticate", ex);
       return false;
     }
   }
@@ -427,18 +442,22 @@ public class SamsungRemote {
       // the socket will think it is still connected, even though it's not. In this case, let's
       // make sure we close the socket and the streams before setting it back up.
       if (mSocket.isConnected()) {
-        mSocket.close();
-        mOut.close();
-        mIn.close();
         resetSocketAndStreams();
       }
-      mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
+      try {
+        mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
+      } catch (SocketException ex) {
+        LOG.info("Failed to connect to TV, retrying ...");
+        resetSocketAndStreams();
+        mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
+      }
       mSocket.setSoTimeout(SO_TIMEOUT);
       mOut = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
       mIn = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
+      mSocketStreamCloseable.add(mOut, mIn);
       return true;
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Cannot connect to TV", ex);
+      LOG.warn("Cannot connect to TV", ex);
       return false;
     }
   }
@@ -452,9 +471,9 @@ public class SamsungRemote {
     try {
       mOut = new NoOpWriter();
       mIn = new NoOpReader();
-      mSocket.close();
+      mSocketStreamCloseable.close();
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Error while closing connection", ex);
+      LOG.warn("Error while closing connection", ex);
     }
   }
 
