@@ -16,10 +16,8 @@
 
 package com.s13g.winston.master;
 
-import com.s13g.winston.common.RequestHandler;
+import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
-import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
-import com.s13g.winston.proto.Master.MasterConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +32,6 @@ import org.simpleframework.transport.connect.SocketConnection;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.List;
 
 import javax.net.ssl.SSLContext;
 
@@ -45,23 +42,11 @@ public class MasterContainer implements Container {
 
   private static final Logger LOG = LogManager.getLogger(MasterContainer.class);
   private final int mPort;
-  private final HttpRequester mHttpRequester;
-  private final List<RequestHandler> mRequestHandlers;
+  private final RequestHandlers mRequestHandlers;
 
-  MasterContainer(int port, List<RequestHandler> requestHandlers, HttpRequester httpRequester) {
+  MasterContainer(int port, RequestHandlers requestHandlers) {
     mPort = port;
-    mHttpRequester = httpRequester;
     mRequestHandlers = requestHandlers;
-  }
-
-  /**
-   * Starts serving from this container.
-   *
-   * @param numThreads the number of threads to handle the HTTP requests.
-   * @throws IOException thrown if HTTP serving could not be started.
-   */
-  void startServing(int numThreads) throws IOException {
-    startServing(numThreads, null);
   }
 
   /**
@@ -125,14 +110,6 @@ public class MasterContainer implements Container {
 
     // Remove slash prefix.
     requestUrl = requestUrl.substring(1);
-
-    // TODO: This should be done on a background thread, with a proper queue, de-duping per
-    // command/node etc.
-    for (RequestHandler handler : mRequestHandlers) {
-      if (handler.canHandle(requestUrl)) {
-        return handler.doHandle(requestUrl);
-      }
-    }
-    throw new RequestHandlingException("No request handler found. " + requestUrl, Status.NOT_FOUND);
+    return mRequestHandlers.handleRequest(requestUrl);
   }
 }

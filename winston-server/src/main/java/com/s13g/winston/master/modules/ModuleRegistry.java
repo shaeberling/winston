@@ -17,7 +17,9 @@
 package com.s13g.winston.master.modules;
 
 import com.google.common.collect.ImmutableList;
+import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.master.ModuleContext;
+import com.s13g.winston.master.modules.instance.GroupModule;
 import com.s13g.winston.master.modules.instance.NestModule;
 import com.s13g.winston.master.modules.instance.SamsungTvModule;
 import com.s13g.winston.master.modules.instance.WemoModule;
@@ -43,11 +45,15 @@ public class ModuleRegistry {
   private static final List<Class<? extends ModuleCreator>> sCreatorClasses = initCreatorsList();
 
   private final ModuleContext mModuleContext;
+  private final RequestHandlers mRequestHandlers;
   private final Map<String, ModuleCreator> mCreators;
-  private Collection<Module> mActiveModules;
+  private Collection<Module> mActiveModules = null;
 
-  public ModuleRegistry(ModuleContext moduleContext, Master.MasterConfig config) {
+  public ModuleRegistry(ModuleContext moduleContext,
+                        Master.MasterConfig config,
+                        RequestHandlers requestHandlers) {
     mModuleContext = moduleContext;
+    mRequestHandlers = requestHandlers;
     mCreators = createCreators()
         .stream()
         .collect(Collectors.toMap(
@@ -60,6 +66,9 @@ public class ModuleRegistry {
    * @return A list of all active modules.
    */
   public Collection<Module> getActiveModules() {
+    if (mActiveModules == null) {
+      throw new RuntimeException("Must called initialize() first!");
+    }
     return mActiveModules;
   }
 
@@ -88,6 +97,11 @@ public class ModuleRegistry {
       } catch (ModuleCreationException e) {
         LOG.error("Unable to create module of type: " + type, e);
       }
+    }
+
+    // If groups are configured, we add the Group module.
+    if (config.getGroupCount() > 0) {
+      modules.add(new GroupModule(config.getGroupList(), mRequestHandlers));
     }
 
     mActiveModules = ImmutableList.copyOf(modules);

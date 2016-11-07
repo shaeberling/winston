@@ -34,9 +34,11 @@ message MasterConfig {
   string sslKeystorePassword = 3;
   /* A list of active modules. */
   repeated Module module = 4;
+  /* A list of defined group actions. */
+  repeated Group group = 5;
   /* All known winston nodes, not all might be active at a given time. */
   /** TODO: Remove this from here. We will have a Winston module for this. */
-  repeated KnownNode known_client = 5;
+  repeated KnownNode known_client = 6;
 }
 
 /* A module that runs on the master. E.g. a Nest or TV controller. */
@@ -45,6 +47,22 @@ message Module {
   string type = 1;
   /* A number of parameters required to configure the module. */
   repeated Channel channel = 2;
+}
+
+/* A group can execute multiple actions when executed. */
+message Group {
+  /* The name of this group. */
+  string name = 1;
+  /* All the trigger actions for this group. */
+  repeated GroupTrigger trigger = 2;
+}
+
+/* A group trigger fires the given actions when the input is given. */
+message GroupTrigger {
+  /* The input values that trigger the actions. */
+  repeated string input = 1;
+  /* The actions to execute when the input matches. */
+  repeated string action = 2;
 }
 
 /* A known client/node. */

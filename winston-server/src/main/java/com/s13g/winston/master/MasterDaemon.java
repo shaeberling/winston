@@ -17,6 +17,7 @@
 package com.s13g.winston.master;
 
 import com.google.common.collect.ImmutableList;
+import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.SslContextCreator;
 import com.s13g.winston.common.SslContextCreator.SslContextCreationException;
 import com.s13g.winston.lib.core.util.HttpRequesterImpl;
@@ -58,8 +59,10 @@ public class MasterDaemon {
     Master.MasterConfig config = configWrapper.getConfig();
 
     ModuleContext moduleContext = new ModuleContext();
-    ModuleRegistry moduleRegistry = new ModuleRegistry(moduleContext, config);
-    MasterModuleHandler masterModuleHandler = new MasterModuleHandler(moduleRegistry);
+    RequestHandlers requestHandlers = new RequestHandlers();
+    ModuleRegistry moduleRegistry = new ModuleRegistry(moduleContext, config, requestHandlers);
+    requestHandlers.addRequestHandler(new MasterModuleHandler(moduleRegistry));
+
 
     SSLContext sslContext = null;
     String keystorePath = config.getSslKeystorePath();
@@ -69,9 +72,8 @@ public class MasterDaemon {
     }
     int port = config.getDaemonPort();
 
-    HttpRequester httpRequester = new HttpRequesterImpl();
     MasterContainer httpContainer =
-        new MasterContainer(port, ImmutableList.of(masterModuleHandler), httpRequester);
+        new MasterContainer(port, requestHandlers);
     httpContainer.startServing(NUM_HTTP_THREADS, sslContext);
   }
 }

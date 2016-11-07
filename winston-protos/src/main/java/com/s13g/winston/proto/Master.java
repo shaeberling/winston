@@ -109,10 +109,54 @@ public final class Master {
 
     /**
      * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    java.util.List<com.s13g.winston.proto.Master.Group> 
+        getGroupList();
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    com.s13g.winston.proto.Master.Group getGroup(int index);
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    int getGroupCount();
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    java.util.List<? extends com.s13g.winston.proto.Master.GroupOrBuilder> 
+        getGroupOrBuilderList();
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    com.s13g.winston.proto.Master.GroupOrBuilder getGroupOrBuilder(
+        int index);
+
+    /**
+     * <pre>
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     java.util.List<com.s13g.winston.proto.Master.KnownNode> 
         getKnownClientList();
@@ -121,7 +165,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     com.s13g.winston.proto.Master.KnownNode getKnownClient(int index);
     /**
@@ -129,7 +173,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     int getKnownClientCount();
     /**
@@ -137,7 +181,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList();
@@ -146,7 +190,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
         int index);
@@ -167,6 +211,7 @@ public final class Master {
       sslKeystorePath_ = "";
       sslKeystorePassword_ = "";
       module_ = java.util.Collections.emptyList();
+      group_ = java.util.Collections.emptyList();
       knownClient_ = java.util.Collections.emptyList();
     }
 
@@ -223,8 +268,17 @@ public final class Master {
             }
             case 42: {
               if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>();
+                group_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Group>();
                 mutable_bitField0_ |= 0x00000010;
+              }
+              group_.add(
+                  input.readMessage(com.s13g.winston.proto.Master.Group.parser(), extensionRegistry));
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>();
+                mutable_bitField0_ |= 0x00000020;
               }
               knownClient_.add(
                   input.readMessage(com.s13g.winston.proto.Master.KnownNode.parser(), extensionRegistry));
@@ -242,6 +296,9 @@ public final class Master {
           module_ = java.util.Collections.unmodifiableList(module_);
         }
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          group_ = java.util.Collections.unmodifiableList(group_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
         }
         makeExtensionsImmutable();
@@ -412,14 +469,69 @@ public final class Master {
       return module_.get(index);
     }
 
-    public static final int KNOWN_CLIENT_FIELD_NUMBER = 5;
+    public static final int GROUP_FIELD_NUMBER = 5;
+    private java.util.List<com.s13g.winston.proto.Master.Group> group_;
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    public java.util.List<com.s13g.winston.proto.Master.Group> getGroupList() {
+      return group_;
+    }
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    public java.util.List<? extends com.s13g.winston.proto.Master.GroupOrBuilder> 
+        getGroupOrBuilderList() {
+      return group_;
+    }
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    public int getGroupCount() {
+      return group_.size();
+    }
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    public com.s13g.winston.proto.Master.Group getGroup(int index) {
+      return group_.get(index);
+    }
+    /**
+     * <pre>
+     * A list of defined group actions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+     */
+    public com.s13g.winston.proto.Master.GroupOrBuilder getGroupOrBuilder(
+        int index) {
+      return group_.get(index);
+    }
+
+    public static final int KNOWN_CLIENT_FIELD_NUMBER = 6;
     private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_;
     /**
      * <pre>
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
       return knownClient_;
@@ -429,7 +541,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList() {
@@ -440,7 +552,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     public int getKnownClientCount() {
       return knownClient_.size();
@@ -450,7 +562,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
       return knownClient_.get(index);
@@ -460,7 +572,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
      */
     public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
         int index) {
@@ -491,8 +603,11 @@ public final class Master {
       for (int i = 0; i < module_.size(); i++) {
         output.writeMessage(4, module_.get(i));
       }
+      for (int i = 0; i < group_.size(); i++) {
+        output.writeMessage(5, group_.get(i));
+      }
       for (int i = 0; i < knownClient_.size(); i++) {
-        output.writeMessage(5, knownClient_.get(i));
+        output.writeMessage(6, knownClient_.get(i));
       }
     }
 
@@ -515,9 +630,13 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, module_.get(i));
       }
+      for (int i = 0; i < group_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, group_.get(i));
+      }
       for (int i = 0; i < knownClient_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, knownClient_.get(i));
+          .computeMessageSize(6, knownClient_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -543,6 +662,8 @@ public final class Master {
           .equals(other.getSslKeystorePassword());
       result = result && getModuleList()
           .equals(other.getModuleList());
+      result = result && getGroupList()
+          .equals(other.getGroupList());
       result = result && getKnownClientList()
           .equals(other.getKnownClientList());
       return result;
@@ -564,6 +685,10 @@ public final class Master {
       if (getModuleCount() > 0) {
         hash = (37 * hash) + MODULE_FIELD_NUMBER;
         hash = (53 * hash) + getModuleList().hashCode();
+      }
+      if (getGroupCount() > 0) {
+        hash = (37 * hash) + GROUP_FIELD_NUMBER;
+        hash = (53 * hash) + getGroupList().hashCode();
       }
       if (getKnownClientCount() > 0) {
         hash = (37 * hash) + KNOWN_CLIENT_FIELD_NUMBER;
@@ -684,6 +809,7 @@ public final class Master {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getModuleFieldBuilder();
+          getGroupFieldBuilder();
           getKnownClientFieldBuilder();
         }
       }
@@ -701,9 +827,15 @@ public final class Master {
         } else {
           moduleBuilder_.clear();
         }
+        if (groupBuilder_ == null) {
+          group_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          groupBuilder_.clear();
+        }
         if (knownClientBuilder_ == null) {
           knownClient_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           knownClientBuilder_.clear();
         }
@@ -743,10 +875,19 @@ public final class Master {
         } else {
           result.module_ = moduleBuilder_.build();
         }
-        if (knownClientBuilder_ == null) {
+        if (groupBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
+            group_ = java.util.Collections.unmodifiableList(group_);
             bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.group_ = group_;
+        } else {
+          result.group_ = groupBuilder_.build();
+        }
+        if (knownClientBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.knownClient_ = knownClient_;
         } else {
@@ -831,11 +972,37 @@ public final class Master {
             }
           }
         }
+        if (groupBuilder_ == null) {
+          if (!other.group_.isEmpty()) {
+            if (group_.isEmpty()) {
+              group_ = other.group_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureGroupIsMutable();
+              group_.addAll(other.group_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.group_.isEmpty()) {
+            if (groupBuilder_.isEmpty()) {
+              groupBuilder_.dispose();
+              groupBuilder_ = null;
+              group_ = other.group_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              groupBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getGroupFieldBuilder() : null;
+            } else {
+              groupBuilder_.addAllMessages(other.group_);
+            }
+          }
+        }
         if (knownClientBuilder_ == null) {
           if (!other.knownClient_.isEmpty()) {
             if (knownClient_.isEmpty()) {
               knownClient_ = other.knownClient_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureKnownClientIsMutable();
               knownClient_.addAll(other.knownClient_);
@@ -848,7 +1015,7 @@ public final class Master {
               knownClientBuilder_.dispose();
               knownClientBuilder_ = null;
               knownClient_ = other.knownClient_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
               knownClientBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getKnownClientFieldBuilder() : null;
@@ -1412,12 +1579,324 @@ public final class Master {
         return moduleBuilder_;
       }
 
+      private java.util.List<com.s13g.winston.proto.Master.Group> group_ =
+        java.util.Collections.emptyList();
+      private void ensureGroupIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          group_ = new java.util.ArrayList<com.s13g.winston.proto.Master.Group>(group_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.Group, com.s13g.winston.proto.Master.Group.Builder, com.s13g.winston.proto.Master.GroupOrBuilder> groupBuilder_;
+
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.Group> getGroupList() {
+        if (groupBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(group_);
+        } else {
+          return groupBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public int getGroupCount() {
+        if (groupBuilder_ == null) {
+          return group_.size();
+        } else {
+          return groupBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public com.s13g.winston.proto.Master.Group getGroup(int index) {
+        if (groupBuilder_ == null) {
+          return group_.get(index);
+        } else {
+          return groupBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder setGroup(
+          int index, com.s13g.winston.proto.Master.Group value) {
+        if (groupBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupIsMutable();
+          group_.set(index, value);
+          onChanged();
+        } else {
+          groupBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder setGroup(
+          int index, com.s13g.winston.proto.Master.Group.Builder builderForValue) {
+        if (groupBuilder_ == null) {
+          ensureGroupIsMutable();
+          group_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          groupBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder addGroup(com.s13g.winston.proto.Master.Group value) {
+        if (groupBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupIsMutable();
+          group_.add(value);
+          onChanged();
+        } else {
+          groupBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder addGroup(
+          int index, com.s13g.winston.proto.Master.Group value) {
+        if (groupBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupIsMutable();
+          group_.add(index, value);
+          onChanged();
+        } else {
+          groupBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder addGroup(
+          com.s13g.winston.proto.Master.Group.Builder builderForValue) {
+        if (groupBuilder_ == null) {
+          ensureGroupIsMutable();
+          group_.add(builderForValue.build());
+          onChanged();
+        } else {
+          groupBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder addGroup(
+          int index, com.s13g.winston.proto.Master.Group.Builder builderForValue) {
+        if (groupBuilder_ == null) {
+          ensureGroupIsMutable();
+          group_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          groupBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder addAllGroup(
+          java.lang.Iterable<? extends com.s13g.winston.proto.Master.Group> values) {
+        if (groupBuilder_ == null) {
+          ensureGroupIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, group_);
+          onChanged();
+        } else {
+          groupBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder clearGroup() {
+        if (groupBuilder_ == null) {
+          group_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          groupBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public Builder removeGroup(int index) {
+        if (groupBuilder_ == null) {
+          ensureGroupIsMutable();
+          group_.remove(index);
+          onChanged();
+        } else {
+          groupBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public com.s13g.winston.proto.Master.Group.Builder getGroupBuilder(
+          int index) {
+        return getGroupFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public com.s13g.winston.proto.Master.GroupOrBuilder getGroupOrBuilder(
+          int index) {
+        if (groupBuilder_ == null) {
+          return group_.get(index);  } else {
+          return groupBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public java.util.List<? extends com.s13g.winston.proto.Master.GroupOrBuilder> 
+           getGroupOrBuilderList() {
+        if (groupBuilder_ != null) {
+          return groupBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(group_);
+        }
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public com.s13g.winston.proto.Master.Group.Builder addGroupBuilder() {
+        return getGroupFieldBuilder().addBuilder(
+            com.s13g.winston.proto.Master.Group.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public com.s13g.winston.proto.Master.Group.Builder addGroupBuilder(
+          int index) {
+        return getGroupFieldBuilder().addBuilder(
+            index, com.s13g.winston.proto.Master.Group.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * A list of defined group actions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.Group group = 5;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.Group.Builder> 
+           getGroupBuilderList() {
+        return getGroupFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.Group, com.s13g.winston.proto.Master.Group.Builder, com.s13g.winston.proto.Master.GroupOrBuilder> 
+          getGroupFieldBuilder() {
+        if (groupBuilder_ == null) {
+          groupBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.s13g.winston.proto.Master.Group, com.s13g.winston.proto.Master.Group.Builder, com.s13g.winston.proto.Master.GroupOrBuilder>(
+                  group_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          group_ = null;
+        }
+        return groupBuilder_;
+      }
+
       private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_ =
         java.util.Collections.emptyList();
       private void ensureKnownClientIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>(knownClient_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -1429,7 +1908,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
         if (knownClientBuilder_ == null) {
@@ -1443,7 +1922,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public int getKnownClientCount() {
         if (knownClientBuilder_ == null) {
@@ -1457,7 +1936,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
         if (knownClientBuilder_ == null) {
@@ -1471,7 +1950,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder setKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode value) {
@@ -1492,7 +1971,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder setKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1510,7 +1989,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder addKnownClient(com.s13g.winston.proto.Master.KnownNode value) {
         if (knownClientBuilder_ == null) {
@@ -1530,7 +2009,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder addKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode value) {
@@ -1551,7 +2030,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder addKnownClient(
           com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1569,7 +2048,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder addKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1587,7 +2066,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder addAllKnownClient(
           java.lang.Iterable<? extends com.s13g.winston.proto.Master.KnownNode> values) {
@@ -1606,12 +2085,12 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder clearKnownClient() {
         if (knownClientBuilder_ == null) {
           knownClient_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           knownClientBuilder_.clear();
@@ -1623,7 +2102,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public Builder removeKnownClient(int index) {
         if (knownClientBuilder_ == null) {
@@ -1640,7 +2119,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder getKnownClientBuilder(
           int index) {
@@ -1651,7 +2130,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
           int index) {
@@ -1665,7 +2144,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
            getKnownClientOrBuilderList() {
@@ -1680,7 +2159,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder() {
         return getKnownClientFieldBuilder().addBuilder(
@@ -1691,7 +2170,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder(
           int index) {
@@ -1703,7 +2182,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 5;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode.Builder> 
            getKnownClientBuilderList() {
@@ -1716,7 +2195,7 @@ public final class Master {
           knownClientBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Master.KnownNode, com.s13g.winston.proto.Master.KnownNode.Builder, com.s13g.winston.proto.Master.KnownNodeOrBuilder>(
                   knownClient_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           knownClient_ = null;
@@ -2798,6 +3277,1927 @@ public final class Master {
     }
 
     public com.s13g.winston.proto.Master.Module getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GroupOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.Group)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The name of this group. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * The name of this group. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    java.util.List<com.s13g.winston.proto.Master.GroupTrigger> 
+        getTriggerList();
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    com.s13g.winston.proto.Master.GroupTrigger getTrigger(int index);
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    int getTriggerCount();
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    java.util.List<? extends com.s13g.winston.proto.Master.GroupTriggerOrBuilder> 
+        getTriggerOrBuilderList();
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    com.s13g.winston.proto.Master.GroupTriggerOrBuilder getTriggerOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   * A group can execute multiple actions when executed. 
+   * </pre>
+   *
+   * Protobuf type {@code com.s13g.winston.proto.Group}
+   */
+  public  static final class Group extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.Group)
+      GroupOrBuilder {
+    // Use Group.newBuilder() to construct.
+    private Group(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Group() {
+      name_ = "";
+      trigger_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private Group(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                trigger_ = new java.util.ArrayList<com.s13g.winston.proto.Master.GroupTrigger>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              trigger_.add(
+                  input.readMessage(com.s13g.winston.proto.Master.GroupTrigger.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          trigger_ = java.util.Collections.unmodifiableList(trigger_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.s13g.winston.proto.Master.Group.class, com.s13g.winston.proto.Master.Group.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object name_;
+    /**
+     * <pre>
+     * The name of this group. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * The name of this group. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TRIGGER_FIELD_NUMBER = 2;
+    private java.util.List<com.s13g.winston.proto.Master.GroupTrigger> trigger_;
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    public java.util.List<com.s13g.winston.proto.Master.GroupTrigger> getTriggerList() {
+      return trigger_;
+    }
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    public java.util.List<? extends com.s13g.winston.proto.Master.GroupTriggerOrBuilder> 
+        getTriggerOrBuilderList() {
+      return trigger_;
+    }
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    public int getTriggerCount() {
+      return trigger_.size();
+    }
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    public com.s13g.winston.proto.Master.GroupTrigger getTrigger(int index) {
+      return trigger_.get(index);
+    }
+    /**
+     * <pre>
+     * All the trigger actions for this group. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+     */
+    public com.s13g.winston.proto.Master.GroupTriggerOrBuilder getTriggerOrBuilder(
+        int index) {
+      return trigger_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      }
+      for (int i = 0; i < trigger_.size(); i++) {
+        output.writeMessage(2, trigger_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      for (int i = 0; i < trigger_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, trigger_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.s13g.winston.proto.Master.Group)) {
+        return super.equals(obj);
+      }
+      com.s13g.winston.proto.Master.Group other = (com.s13g.winston.proto.Master.Group) obj;
+
+      boolean result = true;
+      result = result && getName()
+          .equals(other.getName());
+      result = result && getTriggerList()
+          .equals(other.getTriggerList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      if (getTriggerCount() > 0) {
+        hash = (37 * hash) + TRIGGER_FIELD_NUMBER;
+        hash = (53 * hash) + getTriggerList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Group parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.Group parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.s13g.winston.proto.Master.Group prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * A group can execute multiple actions when executed. 
+     * </pre>
+     *
+     * Protobuf type {@code com.s13g.winston.proto.Group}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.Group)
+        com.s13g.winston.proto.Master.GroupOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.proto.Master.Group.class, com.s13g.winston.proto.Master.Group.Builder.class);
+      }
+
+      // Construct using com.s13g.winston.proto.Master.Group.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getTriggerFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+
+        if (triggerBuilder_ == null) {
+          trigger_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          triggerBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_descriptor;
+      }
+
+      public com.s13g.winston.proto.Master.Group getDefaultInstanceForType() {
+        return com.s13g.winston.proto.Master.Group.getDefaultInstance();
+      }
+
+      public com.s13g.winston.proto.Master.Group build() {
+        com.s13g.winston.proto.Master.Group result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.s13g.winston.proto.Master.Group buildPartial() {
+        com.s13g.winston.proto.Master.Group result = new com.s13g.winston.proto.Master.Group(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.name_ = name_;
+        if (triggerBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            trigger_ = java.util.Collections.unmodifiableList(trigger_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.trigger_ = trigger_;
+        } else {
+          result.trigger_ = triggerBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.s13g.winston.proto.Master.Group) {
+          return mergeFrom((com.s13g.winston.proto.Master.Group)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.s13g.winston.proto.Master.Group other) {
+        if (other == com.s13g.winston.proto.Master.Group.getDefaultInstance()) return this;
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (triggerBuilder_ == null) {
+          if (!other.trigger_.isEmpty()) {
+            if (trigger_.isEmpty()) {
+              trigger_ = other.trigger_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureTriggerIsMutable();
+              trigger_.addAll(other.trigger_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.trigger_.isEmpty()) {
+            if (triggerBuilder_.isEmpty()) {
+              triggerBuilder_.dispose();
+              triggerBuilder_ = null;
+              trigger_ = other.trigger_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              triggerBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getTriggerFieldBuilder() : null;
+            } else {
+              triggerBuilder_.addAllMessages(other.trigger_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.s13g.winston.proto.Master.Group parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.s13g.winston.proto.Master.Group) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * The name of this group. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The name of this group. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The name of this group. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The name of this group. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The name of this group. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.s13g.winston.proto.Master.GroupTrigger> trigger_ =
+        java.util.Collections.emptyList();
+      private void ensureTriggerIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          trigger_ = new java.util.ArrayList<com.s13g.winston.proto.Master.GroupTrigger>(trigger_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.GroupTrigger, com.s13g.winston.proto.Master.GroupTrigger.Builder, com.s13g.winston.proto.Master.GroupTriggerOrBuilder> triggerBuilder_;
+
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.GroupTrigger> getTriggerList() {
+        if (triggerBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(trigger_);
+        } else {
+          return triggerBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public int getTriggerCount() {
+        if (triggerBuilder_ == null) {
+          return trigger_.size();
+        } else {
+          return triggerBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public com.s13g.winston.proto.Master.GroupTrigger getTrigger(int index) {
+        if (triggerBuilder_ == null) {
+          return trigger_.get(index);
+        } else {
+          return triggerBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder setTrigger(
+          int index, com.s13g.winston.proto.Master.GroupTrigger value) {
+        if (triggerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTriggerIsMutable();
+          trigger_.set(index, value);
+          onChanged();
+        } else {
+          triggerBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder setTrigger(
+          int index, com.s13g.winston.proto.Master.GroupTrigger.Builder builderForValue) {
+        if (triggerBuilder_ == null) {
+          ensureTriggerIsMutable();
+          trigger_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          triggerBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder addTrigger(com.s13g.winston.proto.Master.GroupTrigger value) {
+        if (triggerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTriggerIsMutable();
+          trigger_.add(value);
+          onChanged();
+        } else {
+          triggerBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder addTrigger(
+          int index, com.s13g.winston.proto.Master.GroupTrigger value) {
+        if (triggerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTriggerIsMutable();
+          trigger_.add(index, value);
+          onChanged();
+        } else {
+          triggerBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder addTrigger(
+          com.s13g.winston.proto.Master.GroupTrigger.Builder builderForValue) {
+        if (triggerBuilder_ == null) {
+          ensureTriggerIsMutable();
+          trigger_.add(builderForValue.build());
+          onChanged();
+        } else {
+          triggerBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder addTrigger(
+          int index, com.s13g.winston.proto.Master.GroupTrigger.Builder builderForValue) {
+        if (triggerBuilder_ == null) {
+          ensureTriggerIsMutable();
+          trigger_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          triggerBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder addAllTrigger(
+          java.lang.Iterable<? extends com.s13g.winston.proto.Master.GroupTrigger> values) {
+        if (triggerBuilder_ == null) {
+          ensureTriggerIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, trigger_);
+          onChanged();
+        } else {
+          triggerBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder clearTrigger() {
+        if (triggerBuilder_ == null) {
+          trigger_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          triggerBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public Builder removeTrigger(int index) {
+        if (triggerBuilder_ == null) {
+          ensureTriggerIsMutable();
+          trigger_.remove(index);
+          onChanged();
+        } else {
+          triggerBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public com.s13g.winston.proto.Master.GroupTrigger.Builder getTriggerBuilder(
+          int index) {
+        return getTriggerFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public com.s13g.winston.proto.Master.GroupTriggerOrBuilder getTriggerOrBuilder(
+          int index) {
+        if (triggerBuilder_ == null) {
+          return trigger_.get(index);  } else {
+          return triggerBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public java.util.List<? extends com.s13g.winston.proto.Master.GroupTriggerOrBuilder> 
+           getTriggerOrBuilderList() {
+        if (triggerBuilder_ != null) {
+          return triggerBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(trigger_);
+        }
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public com.s13g.winston.proto.Master.GroupTrigger.Builder addTriggerBuilder() {
+        return getTriggerFieldBuilder().addBuilder(
+            com.s13g.winston.proto.Master.GroupTrigger.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public com.s13g.winston.proto.Master.GroupTrigger.Builder addTriggerBuilder(
+          int index) {
+        return getTriggerFieldBuilder().addBuilder(
+            index, com.s13g.winston.proto.Master.GroupTrigger.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * All the trigger actions for this group. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.GroupTrigger trigger = 2;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.GroupTrigger.Builder> 
+           getTriggerBuilderList() {
+        return getTriggerFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.GroupTrigger, com.s13g.winston.proto.Master.GroupTrigger.Builder, com.s13g.winston.proto.Master.GroupTriggerOrBuilder> 
+          getTriggerFieldBuilder() {
+        if (triggerBuilder_ == null) {
+          triggerBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.s13g.winston.proto.Master.GroupTrigger, com.s13g.winston.proto.Master.GroupTrigger.Builder, com.s13g.winston.proto.Master.GroupTriggerOrBuilder>(
+                  trigger_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          trigger_ = null;
+        }
+        return triggerBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.Group)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.Group)
+    private static final com.s13g.winston.proto.Master.Group DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.s13g.winston.proto.Master.Group();
+    }
+
+    public static com.s13g.winston.proto.Master.Group getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Group>
+        PARSER = new com.google.protobuf.AbstractParser<Group>() {
+      public Group parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Group(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Group> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Group> getParserForType() {
+      return PARSER;
+    }
+
+    public com.s13g.winston.proto.Master.Group getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface GroupTriggerOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.GroupTrigger)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    java.util.List<java.lang.String>
+        getInputList();
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    int getInputCount();
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    java.lang.String getInput(int index);
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getInputBytes(int index);
+
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    java.util.List<java.lang.String>
+        getActionList();
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    int getActionCount();
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    java.lang.String getAction(int index);
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getActionBytes(int index);
+  }
+  /**
+   * <pre>
+   * A group trigger fires the given actions when the input is given. 
+   * </pre>
+   *
+   * Protobuf type {@code com.s13g.winston.proto.GroupTrigger}
+   */
+  public  static final class GroupTrigger extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.GroupTrigger)
+      GroupTriggerOrBuilder {
+    // Use GroupTrigger.newBuilder() to construct.
+    private GroupTrigger(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private GroupTrigger() {
+      input_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      action_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private GroupTrigger(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                input_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              input_.add(s);
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                action_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              action_.add(s);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          input_ = input_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          action_ = action_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.s13g.winston.proto.Master.GroupTrigger.class, com.s13g.winston.proto.Master.GroupTrigger.Builder.class);
+    }
+
+    public static final int INPUT_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList input_;
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getInputList() {
+      return input_;
+    }
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    public int getInputCount() {
+      return input_.size();
+    }
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    public java.lang.String getInput(int index) {
+      return input_.get(index);
+    }
+    /**
+     * <pre>
+     * The input values that trigger the actions. 
+     * </pre>
+     *
+     * <code>repeated string input = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getInputBytes(int index) {
+      return input_.getByteString(index);
+    }
+
+    public static final int ACTION_FIELD_NUMBER = 2;
+    private com.google.protobuf.LazyStringList action_;
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getActionList() {
+      return action_;
+    }
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    public int getActionCount() {
+      return action_.size();
+    }
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    public java.lang.String getAction(int index) {
+      return action_.get(index);
+    }
+    /**
+     * <pre>
+     * The actions to execute when the input matches. 
+     * </pre>
+     *
+     * <code>repeated string action = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getActionBytes(int index) {
+      return action_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < input_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, input_.getRaw(i));
+      }
+      for (int i = 0; i < action_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, action_.getRaw(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < input_.size(); i++) {
+          dataSize += computeStringSizeNoTag(input_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getInputList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < action_.size(); i++) {
+          dataSize += computeStringSizeNoTag(action_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getActionList().size();
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.s13g.winston.proto.Master.GroupTrigger)) {
+        return super.equals(obj);
+      }
+      com.s13g.winston.proto.Master.GroupTrigger other = (com.s13g.winston.proto.Master.GroupTrigger) obj;
+
+      boolean result = true;
+      result = result && getInputList()
+          .equals(other.getInputList());
+      result = result && getActionList()
+          .equals(other.getActionList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getInputCount() > 0) {
+        hash = (37 * hash) + INPUT_FIELD_NUMBER;
+        hash = (53 * hash) + getInputList().hashCode();
+      }
+      if (getActionCount() > 0) {
+        hash = (37 * hash) + ACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getActionList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.s13g.winston.proto.Master.GroupTrigger prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * A group trigger fires the given actions when the input is given. 
+     * </pre>
+     *
+     * Protobuf type {@code com.s13g.winston.proto.GroupTrigger}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.GroupTrigger)
+        com.s13g.winston.proto.Master.GroupTriggerOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.proto.Master.GroupTrigger.class, com.s13g.winston.proto.Master.GroupTrigger.Builder.class);
+      }
+
+      // Construct using com.s13g.winston.proto.Master.GroupTrigger.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        input_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        action_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
+      }
+
+      public com.s13g.winston.proto.Master.GroupTrigger getDefaultInstanceForType() {
+        return com.s13g.winston.proto.Master.GroupTrigger.getDefaultInstance();
+      }
+
+      public com.s13g.winston.proto.Master.GroupTrigger build() {
+        com.s13g.winston.proto.Master.GroupTrigger result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.s13g.winston.proto.Master.GroupTrigger buildPartial() {
+        com.s13g.winston.proto.Master.GroupTrigger result = new com.s13g.winston.proto.Master.GroupTrigger(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          input_ = input_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.input_ = input_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          action_ = action_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.action_ = action_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.s13g.winston.proto.Master.GroupTrigger) {
+          return mergeFrom((com.s13g.winston.proto.Master.GroupTrigger)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.s13g.winston.proto.Master.GroupTrigger other) {
+        if (other == com.s13g.winston.proto.Master.GroupTrigger.getDefaultInstance()) return this;
+        if (!other.input_.isEmpty()) {
+          if (input_.isEmpty()) {
+            input_ = other.input_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureInputIsMutable();
+            input_.addAll(other.input_);
+          }
+          onChanged();
+        }
+        if (!other.action_.isEmpty()) {
+          if (action_.isEmpty()) {
+            action_ = other.action_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureActionIsMutable();
+            action_.addAll(other.action_);
+          }
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.s13g.winston.proto.Master.GroupTrigger parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.s13g.winston.proto.Master.GroupTrigger) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList input_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureInputIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          input_ = new com.google.protobuf.LazyStringArrayList(input_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getInputList() {
+        return input_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public int getInputCount() {
+        return input_.size();
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public java.lang.String getInput(int index) {
+        return input_.get(index);
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getInputBytes(int index) {
+        return input_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public Builder setInput(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureInputIsMutable();
+        input_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public Builder addInput(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureInputIsMutable();
+        input_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public Builder addAllInput(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureInputIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, input_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public Builder clearInput() {
+        input_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The input values that trigger the actions. 
+       * </pre>
+       *
+       * <code>repeated string input = 1;</code>
+       */
+      public Builder addInputBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureInputIsMutable();
+        input_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList action_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureActionIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          action_ = new com.google.protobuf.LazyStringArrayList(action_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getActionList() {
+        return action_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public int getActionCount() {
+        return action_.size();
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public java.lang.String getAction(int index) {
+        return action_.get(index);
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getActionBytes(int index) {
+        return action_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public Builder setAction(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureActionIsMutable();
+        action_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public Builder addAction(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureActionIsMutable();
+        action_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public Builder addAllAction(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureActionIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, action_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public Builder clearAction() {
+        action_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The actions to execute when the input matches. 
+       * </pre>
+       *
+       * <code>repeated string action = 2;</code>
+       */
+      public Builder addActionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureActionIsMutable();
+        action_.add(value);
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.GroupTrigger)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.GroupTrigger)
+    private static final com.s13g.winston.proto.Master.GroupTrigger DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.s13g.winston.proto.Master.GroupTrigger();
+    }
+
+    public static com.s13g.winston.proto.Master.GroupTrigger getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<GroupTrigger>
+        PARSER = new com.google.protobuf.AbstractParser<GroupTrigger>() {
+      public GroupTrigger parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new GroupTrigger(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GroupTrigger> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GroupTrigger> getParserForType() {
+      return PARSER;
+    }
+
+    public com.s13g.winston.proto.Master.GroupTrigger getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5798,6 +8198,16 @@ public final class Master {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_s13g_winston_proto_Module_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_proto_Group_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_s13g_winston_proto_Group_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_s13g_winston_proto_KnownNode_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -5822,21 +8232,25 @@ public final class Master {
   static {
     java.lang.String[] descriptorData = {
       "\n\036etc/protos/master_config.proto\022\026com.s1" +
-      "3g.winston.proto\"\301\001\n\014MasterConfig\022\022\n\ndae" +
+      "3g.winston.proto\"\357\001\n\014MasterConfig\022\022\n\ndae" +
       "monPort\030\001 \001(\005\022\027\n\017sslKeystorePath\030\002 \001(\t\022\033" +
       "\n\023sslKeystorePassword\030\003 \001(\t\022.\n\006module\030\004 " +
-      "\003(\0132\036.com.s13g.winston.proto.Module\0227\n\014k" +
-      "nown_client\030\005 \003(\0132!.com.s13g.winston.pro" +
-      "to.KnownNode\"H\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007" +
-      "channel\030\002 \003(\0132\037.com.s13g.winston.proto.C" +
-      "hannel\"b\n\tKnownNode\022\023\n\013mac_address\030\001 \001(\t" +
-      "\022\014\n\004name\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030",
-      "\004 \001(\010\022\023\n\013config_file\030\005 \001(\t\"^\n\007Channel\022\014\n" +
-      "\004type\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\0224\n\tparamete" +
-      "r\030\003 \003(\0132!.com.s13g.winston.proto.Paramet" +
-      "er\"(\n\tParameter\022\014\n\004name\030\001 \001(\t\022\r\n\005value\030\002" +
-      " \001(\tB \n\026com.s13g.winston.protoB\006Masterb\006" +
-      "proto3"
+      "\003(\0132\036.com.s13g.winston.proto.Module\022,\n\005g" +
+      "roup\030\005 \003(\0132\035.com.s13g.winston.proto.Grou" +
+      "p\0227\n\014known_client\030\006 \003(\0132!.com.s13g.winst" +
+      "on.proto.KnownNode\"H\n\006Module\022\014\n\004type\030\001 \001" +
+      "(\t\0220\n\007channel\030\002 \003(\0132\037.com.s13g.winston.p" +
+      "roto.Channel\"L\n\005Group\022\014\n\004name\030\001 \001(\t\0225\n\007t",
+      "rigger\030\002 \003(\0132$.com.s13g.winston.proto.Gr" +
+      "oupTrigger\"-\n\014GroupTrigger\022\r\n\005input\030\001 \003(" +
+      "\t\022\016\n\006action\030\002 \003(\t\"b\n\tKnownNode\022\023\n\013mac_ad" +
+      "dress\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022" +
+      "\017\n\007use_ssl\030\004 \001(\010\022\023\n\013config_file\030\005 \001(\t\"^\n" +
+      "\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\022" +
+      "4\n\tparameter\030\003 \003(\0132!.com.s13g.winston.pr" +
+      "oto.Parameter\"(\n\tParameter\022\014\n\004name\030\001 \001(\t" +
+      "\022\r\n\005value\030\002 \001(\tB \n\026com.s13g.winston.prot" +
+      "oB\006Masterb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5855,27 +8269,39 @@ public final class Master {
     internal_static_com_s13g_winston_proto_MasterConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_MasterConfig_descriptor,
-        new java.lang.String[] { "DaemonPort", "SslKeystorePath", "SslKeystorePassword", "Module", "KnownClient", });
+        new java.lang.String[] { "DaemonPort", "SslKeystorePath", "SslKeystorePassword", "Module", "Group", "KnownClient", });
     internal_static_com_s13g_winston_proto_Module_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_s13g_winston_proto_Module_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Module_descriptor,
         new java.lang.String[] { "Type", "Channel", });
-    internal_static_com_s13g_winston_proto_KnownNode_descriptor =
+    internal_static_com_s13g_winston_proto_Group_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_com_s13g_winston_proto_Group_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_s13g_winston_proto_Group_descriptor,
+        new java.lang.String[] { "Name", "Trigger", });
+    internal_static_com_s13g_winston_proto_GroupTrigger_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_s13g_winston_proto_GroupTrigger_descriptor,
+        new java.lang.String[] { "Input", "Action", });
+    internal_static_com_s13g_winston_proto_KnownNode_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_KnownNode_descriptor,
         new java.lang.String[] { "MacAddress", "Name", "Port", "UseSsl", "ConfigFile", });
     internal_static_com_s13g_winston_proto_Channel_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Channel_descriptor,
         new java.lang.String[] { "Type", "Address", "Parameter", });
     internal_static_com_s13g_winston_proto_Parameter_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_com_s13g_winston_proto_Parameter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Parameter_descriptor,
