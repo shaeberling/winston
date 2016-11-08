@@ -153,10 +153,54 @@ public final class Master {
 
     /**
      * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    java.util.List<com.s13g.winston.proto.Master.AuthenticatedClient> 
+        getAuthClientList();
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    com.s13g.winston.proto.Master.AuthenticatedClient getAuthClient(int index);
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    int getAuthClientCount();
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    java.util.List<? extends com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder> 
+        getAuthClientOrBuilderList();
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder getAuthClientOrBuilder(
+        int index);
+
+    /**
+     * <pre>
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     java.util.List<com.s13g.winston.proto.Master.KnownNode> 
         getKnownClientList();
@@ -165,7 +209,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     com.s13g.winston.proto.Master.KnownNode getKnownClient(int index);
     /**
@@ -173,7 +217,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     int getKnownClientCount();
     /**
@@ -181,7 +225,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList();
@@ -190,7 +234,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
         int index);
@@ -212,6 +256,7 @@ public final class Master {
       sslKeystorePassword_ = "";
       module_ = java.util.Collections.emptyList();
       group_ = java.util.Collections.emptyList();
+      authClient_ = java.util.Collections.emptyList();
       knownClient_ = java.util.Collections.emptyList();
     }
 
@@ -277,8 +322,17 @@ public final class Master {
             }
             case 50: {
               if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>();
+                authClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.AuthenticatedClient>();
                 mutable_bitField0_ |= 0x00000020;
+              }
+              authClient_.add(
+                  input.readMessage(com.s13g.winston.proto.Master.AuthenticatedClient.parser(), extensionRegistry));
+              break;
+            }
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>();
+                mutable_bitField0_ |= 0x00000040;
               }
               knownClient_.add(
                   input.readMessage(com.s13g.winston.proto.Master.KnownNode.parser(), extensionRegistry));
@@ -299,6 +353,9 @@ public final class Master {
           group_ = java.util.Collections.unmodifiableList(group_);
         }
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          authClient_ = java.util.Collections.unmodifiableList(authClient_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
         }
         makeExtensionsImmutable();
@@ -524,14 +581,69 @@ public final class Master {
       return group_.get(index);
     }
 
-    public static final int KNOWN_CLIENT_FIELD_NUMBER = 6;
+    public static final int AUTH_CLIENT_FIELD_NUMBER = 6;
+    private java.util.List<com.s13g.winston.proto.Master.AuthenticatedClient> authClient_;
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    public java.util.List<com.s13g.winston.proto.Master.AuthenticatedClient> getAuthClientList() {
+      return authClient_;
+    }
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    public java.util.List<? extends com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder> 
+        getAuthClientOrBuilderList() {
+      return authClient_;
+    }
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    public int getAuthClientCount() {
+      return authClient_.size();
+    }
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    public com.s13g.winston.proto.Master.AuthenticatedClient getAuthClient(int index) {
+      return authClient_.get(index);
+    }
+    /**
+     * <pre>
+     * Only authenticated clients have access to secure system functions. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+     */
+    public com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder getAuthClientOrBuilder(
+        int index) {
+      return authClient_.get(index);
+    }
+
+    public static final int KNOWN_CLIENT_FIELD_NUMBER = 7;
     private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_;
     /**
      * <pre>
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
       return knownClient_;
@@ -541,7 +653,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
         getKnownClientOrBuilderList() {
@@ -552,7 +664,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     public int getKnownClientCount() {
       return knownClient_.size();
@@ -562,7 +674,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
       return knownClient_.get(index);
@@ -572,7 +684,7 @@ public final class Master {
      ** TODO: Remove this from here. We will have a Winston module for this. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+     * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
      */
     public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
         int index) {
@@ -606,8 +718,11 @@ public final class Master {
       for (int i = 0; i < group_.size(); i++) {
         output.writeMessage(5, group_.get(i));
       }
+      for (int i = 0; i < authClient_.size(); i++) {
+        output.writeMessage(6, authClient_.get(i));
+      }
       for (int i = 0; i < knownClient_.size(); i++) {
-        output.writeMessage(6, knownClient_.get(i));
+        output.writeMessage(7, knownClient_.get(i));
       }
     }
 
@@ -634,9 +749,13 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, group_.get(i));
       }
+      for (int i = 0; i < authClient_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, authClient_.get(i));
+      }
       for (int i = 0; i < knownClient_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, knownClient_.get(i));
+          .computeMessageSize(7, knownClient_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -664,6 +783,8 @@ public final class Master {
           .equals(other.getModuleList());
       result = result && getGroupList()
           .equals(other.getGroupList());
+      result = result && getAuthClientList()
+          .equals(other.getAuthClientList());
       result = result && getKnownClientList()
           .equals(other.getKnownClientList());
       return result;
@@ -689,6 +810,10 @@ public final class Master {
       if (getGroupCount() > 0) {
         hash = (37 * hash) + GROUP_FIELD_NUMBER;
         hash = (53 * hash) + getGroupList().hashCode();
+      }
+      if (getAuthClientCount() > 0) {
+        hash = (37 * hash) + AUTH_CLIENT_FIELD_NUMBER;
+        hash = (53 * hash) + getAuthClientList().hashCode();
       }
       if (getKnownClientCount() > 0) {
         hash = (37 * hash) + KNOWN_CLIENT_FIELD_NUMBER;
@@ -810,6 +935,7 @@ public final class Master {
                 .alwaysUseFieldBuilders) {
           getModuleFieldBuilder();
           getGroupFieldBuilder();
+          getAuthClientFieldBuilder();
           getKnownClientFieldBuilder();
         }
       }
@@ -833,9 +959,15 @@ public final class Master {
         } else {
           groupBuilder_.clear();
         }
+        if (authClientBuilder_ == null) {
+          authClient_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          authClientBuilder_.clear();
+        }
         if (knownClientBuilder_ == null) {
           knownClient_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           knownClientBuilder_.clear();
         }
@@ -884,10 +1016,19 @@ public final class Master {
         } else {
           result.group_ = groupBuilder_.build();
         }
-        if (knownClientBuilder_ == null) {
+        if (authClientBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020)) {
-            knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
+            authClient_ = java.util.Collections.unmodifiableList(authClient_);
             bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.authClient_ = authClient_;
+        } else {
+          result.authClient_ = authClientBuilder_.build();
+        }
+        if (knownClientBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.knownClient_ = knownClient_;
         } else {
@@ -998,11 +1139,37 @@ public final class Master {
             }
           }
         }
+        if (authClientBuilder_ == null) {
+          if (!other.authClient_.isEmpty()) {
+            if (authClient_.isEmpty()) {
+              authClient_ = other.authClient_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureAuthClientIsMutable();
+              authClient_.addAll(other.authClient_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.authClient_.isEmpty()) {
+            if (authClientBuilder_.isEmpty()) {
+              authClientBuilder_.dispose();
+              authClientBuilder_ = null;
+              authClient_ = other.authClient_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              authClientBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getAuthClientFieldBuilder() : null;
+            } else {
+              authClientBuilder_.addAllMessages(other.authClient_);
+            }
+          }
+        }
         if (knownClientBuilder_ == null) {
           if (!other.knownClient_.isEmpty()) {
             if (knownClient_.isEmpty()) {
               knownClient_ = other.knownClient_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensureKnownClientIsMutable();
               knownClient_.addAll(other.knownClient_);
@@ -1015,7 +1182,7 @@ public final class Master {
               knownClientBuilder_.dispose();
               knownClientBuilder_ = null;
               knownClient_ = other.knownClient_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               knownClientBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getKnownClientFieldBuilder() : null;
@@ -1891,12 +2058,324 @@ public final class Master {
         return groupBuilder_;
       }
 
+      private java.util.List<com.s13g.winston.proto.Master.AuthenticatedClient> authClient_ =
+        java.util.Collections.emptyList();
+      private void ensureAuthClientIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          authClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.AuthenticatedClient>(authClient_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.AuthenticatedClient, com.s13g.winston.proto.Master.AuthenticatedClient.Builder, com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder> authClientBuilder_;
+
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.AuthenticatedClient> getAuthClientList() {
+        if (authClientBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(authClient_);
+        } else {
+          return authClientBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public int getAuthClientCount() {
+        if (authClientBuilder_ == null) {
+          return authClient_.size();
+        } else {
+          return authClientBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public com.s13g.winston.proto.Master.AuthenticatedClient getAuthClient(int index) {
+        if (authClientBuilder_ == null) {
+          return authClient_.get(index);
+        } else {
+          return authClientBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder setAuthClient(
+          int index, com.s13g.winston.proto.Master.AuthenticatedClient value) {
+        if (authClientBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAuthClientIsMutable();
+          authClient_.set(index, value);
+          onChanged();
+        } else {
+          authClientBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder setAuthClient(
+          int index, com.s13g.winston.proto.Master.AuthenticatedClient.Builder builderForValue) {
+        if (authClientBuilder_ == null) {
+          ensureAuthClientIsMutable();
+          authClient_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          authClientBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder addAuthClient(com.s13g.winston.proto.Master.AuthenticatedClient value) {
+        if (authClientBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAuthClientIsMutable();
+          authClient_.add(value);
+          onChanged();
+        } else {
+          authClientBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder addAuthClient(
+          int index, com.s13g.winston.proto.Master.AuthenticatedClient value) {
+        if (authClientBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAuthClientIsMutable();
+          authClient_.add(index, value);
+          onChanged();
+        } else {
+          authClientBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder addAuthClient(
+          com.s13g.winston.proto.Master.AuthenticatedClient.Builder builderForValue) {
+        if (authClientBuilder_ == null) {
+          ensureAuthClientIsMutable();
+          authClient_.add(builderForValue.build());
+          onChanged();
+        } else {
+          authClientBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder addAuthClient(
+          int index, com.s13g.winston.proto.Master.AuthenticatedClient.Builder builderForValue) {
+        if (authClientBuilder_ == null) {
+          ensureAuthClientIsMutable();
+          authClient_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          authClientBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder addAllAuthClient(
+          java.lang.Iterable<? extends com.s13g.winston.proto.Master.AuthenticatedClient> values) {
+        if (authClientBuilder_ == null) {
+          ensureAuthClientIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, authClient_);
+          onChanged();
+        } else {
+          authClientBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder clearAuthClient() {
+        if (authClientBuilder_ == null) {
+          authClient_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          authClientBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public Builder removeAuthClient(int index) {
+        if (authClientBuilder_ == null) {
+          ensureAuthClientIsMutable();
+          authClient_.remove(index);
+          onChanged();
+        } else {
+          authClientBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public com.s13g.winston.proto.Master.AuthenticatedClient.Builder getAuthClientBuilder(
+          int index) {
+        return getAuthClientFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder getAuthClientOrBuilder(
+          int index) {
+        if (authClientBuilder_ == null) {
+          return authClient_.get(index);  } else {
+          return authClientBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public java.util.List<? extends com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder> 
+           getAuthClientOrBuilderList() {
+        if (authClientBuilder_ != null) {
+          return authClientBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(authClient_);
+        }
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public com.s13g.winston.proto.Master.AuthenticatedClient.Builder addAuthClientBuilder() {
+        return getAuthClientFieldBuilder().addBuilder(
+            com.s13g.winston.proto.Master.AuthenticatedClient.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public com.s13g.winston.proto.Master.AuthenticatedClient.Builder addAuthClientBuilder(
+          int index) {
+        return getAuthClientFieldBuilder().addBuilder(
+            index, com.s13g.winston.proto.Master.AuthenticatedClient.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * Only authenticated clients have access to secure system functions. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.AuthenticatedClient auth_client = 6;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Master.AuthenticatedClient.Builder> 
+           getAuthClientBuilderList() {
+        return getAuthClientFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Master.AuthenticatedClient, com.s13g.winston.proto.Master.AuthenticatedClient.Builder, com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder> 
+          getAuthClientFieldBuilder() {
+        if (authClientBuilder_ == null) {
+          authClientBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.s13g.winston.proto.Master.AuthenticatedClient, com.s13g.winston.proto.Master.AuthenticatedClient.Builder, com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder>(
+                  authClient_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          authClient_ = null;
+        }
+        return authClientBuilder_;
+      }
+
       private java.util.List<com.s13g.winston.proto.Master.KnownNode> knownClient_ =
         java.util.Collections.emptyList();
       private void ensureKnownClientIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           knownClient_ = new java.util.ArrayList<com.s13g.winston.proto.Master.KnownNode>(knownClient_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
 
@@ -1908,7 +2387,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode> getKnownClientList() {
         if (knownClientBuilder_ == null) {
@@ -1922,7 +2401,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public int getKnownClientCount() {
         if (knownClientBuilder_ == null) {
@@ -1936,7 +2415,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode getKnownClient(int index) {
         if (knownClientBuilder_ == null) {
@@ -1950,7 +2429,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder setKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode value) {
@@ -1971,7 +2450,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder setKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -1989,7 +2468,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder addKnownClient(com.s13g.winston.proto.Master.KnownNode value) {
         if (knownClientBuilder_ == null) {
@@ -2009,7 +2488,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder addKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode value) {
@@ -2030,7 +2509,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder addKnownClient(
           com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -2048,7 +2527,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder addKnownClient(
           int index, com.s13g.winston.proto.Master.KnownNode.Builder builderForValue) {
@@ -2066,7 +2545,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder addAllKnownClient(
           java.lang.Iterable<? extends com.s13g.winston.proto.Master.KnownNode> values) {
@@ -2085,12 +2564,12 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder clearKnownClient() {
         if (knownClientBuilder_ == null) {
           knownClient_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           knownClientBuilder_.clear();
@@ -2102,7 +2581,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public Builder removeKnownClient(int index) {
         if (knownClientBuilder_ == null) {
@@ -2119,7 +2598,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder getKnownClientBuilder(
           int index) {
@@ -2130,7 +2609,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public com.s13g.winston.proto.Master.KnownNodeOrBuilder getKnownClientOrBuilder(
           int index) {
@@ -2144,7 +2623,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Master.KnownNodeOrBuilder> 
            getKnownClientOrBuilderList() {
@@ -2159,7 +2638,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder() {
         return getKnownClientFieldBuilder().addBuilder(
@@ -2170,7 +2649,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public com.s13g.winston.proto.Master.KnownNode.Builder addKnownClientBuilder(
           int index) {
@@ -2182,7 +2661,7 @@ public final class Master {
        ** TODO: Remove this from here. We will have a Winston module for this. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 6;</code>
+       * <code>repeated .com.s13g.winston.proto.KnownNode known_client = 7;</code>
        */
       public java.util.List<com.s13g.winston.proto.Master.KnownNode.Builder> 
            getKnownClientBuilderList() {
@@ -2195,7 +2674,7 @@ public final class Master {
           knownClientBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Master.KnownNode, com.s13g.winston.proto.Master.KnownNode.Builder, com.s13g.winston.proto.Master.KnownNodeOrBuilder>(
                   knownClient_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           knownClient_ = null;
@@ -5203,1066 +5682,6 @@ public final class Master {
 
   }
 
-  public interface KnownNodeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.KnownNode)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * MAC address uniquly addresses a client. 
-     * </pre>
-     *
-     * <code>optional string mac_address = 1;</code>
-     */
-    java.lang.String getMacAddress();
-    /**
-     * <pre>
-     * MAC address uniquly addresses a client. 
-     * </pre>
-     *
-     * <code>optional string mac_address = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getMacAddressBytes();
-
-    /**
-     * <pre>
-     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-     * </pre>
-     *
-     * <code>optional string name = 2;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <pre>
-     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-     * </pre>
-     *
-     * <code>optional string name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <pre>
-     * The port to access the node daemon, typically 1984. 
-     * </pre>
-     *
-     * <code>optional int32 port = 3;</code>
-     */
-    int getPort();
-
-    /**
-     * <pre>
-     * Whether the node daemon should accessed through https. 
-     * </pre>
-     *
-     * <code>optional bool use_ssl = 4;</code>
-     */
-    boolean getUseSsl();
-
-    /**
-     * <pre>
-     * The config to send to the client, which defines its active plugins. 
-     * </pre>
-     *
-     * <code>optional string config_file = 5;</code>
-     */
-    java.lang.String getConfigFile();
-    /**
-     * <pre>
-     * The config to send to the client, which defines its active plugins. 
-     * </pre>
-     *
-     * <code>optional string config_file = 5;</code>
-     */
-    com.google.protobuf.ByteString
-        getConfigFileBytes();
-  }
-  /**
-   * <pre>
-   * A known client/node. 
-   * </pre>
-   *
-   * Protobuf type {@code com.s13g.winston.proto.KnownNode}
-   */
-  public  static final class KnownNode extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.KnownNode)
-      KnownNodeOrBuilder {
-    // Use KnownNode.newBuilder() to construct.
-    private KnownNode(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private KnownNode() {
-      macAddress_ = "";
-      name_ = "";
-      port_ = 0;
-      useSsl_ = false;
-      configFile_ = "";
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private KnownNode(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              macAddress_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              name_ = s;
-              break;
-            }
-            case 24: {
-
-              port_ = input.readInt32();
-              break;
-            }
-            case 32: {
-
-              useSsl_ = input.readBool();
-              break;
-            }
-            case 42: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              configFile_ = s;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.s13g.winston.proto.Master.KnownNode.class, com.s13g.winston.proto.Master.KnownNode.Builder.class);
-    }
-
-    public static final int MAC_ADDRESS_FIELD_NUMBER = 1;
-    private volatile java.lang.Object macAddress_;
-    /**
-     * <pre>
-     * MAC address uniquly addresses a client. 
-     * </pre>
-     *
-     * <code>optional string mac_address = 1;</code>
-     */
-    public java.lang.String getMacAddress() {
-      java.lang.Object ref = macAddress_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        macAddress_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * MAC address uniquly addresses a client. 
-     * </pre>
-     *
-     * <code>optional string mac_address = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMacAddressBytes() {
-      java.lang.Object ref = macAddress_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        macAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int NAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object name_;
-    /**
-     * <pre>
-     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-     * </pre>
-     *
-     * <code>optional string name = 2;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-     * </pre>
-     *
-     * <code>optional string name = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PORT_FIELD_NUMBER = 3;
-    private int port_;
-    /**
-     * <pre>
-     * The port to access the node daemon, typically 1984. 
-     * </pre>
-     *
-     * <code>optional int32 port = 3;</code>
-     */
-    public int getPort() {
-      return port_;
-    }
-
-    public static final int USE_SSL_FIELD_NUMBER = 4;
-    private boolean useSsl_;
-    /**
-     * <pre>
-     * Whether the node daemon should accessed through https. 
-     * </pre>
-     *
-     * <code>optional bool use_ssl = 4;</code>
-     */
-    public boolean getUseSsl() {
-      return useSsl_;
-    }
-
-    public static final int CONFIG_FILE_FIELD_NUMBER = 5;
-    private volatile java.lang.Object configFile_;
-    /**
-     * <pre>
-     * The config to send to the client, which defines its active plugins. 
-     * </pre>
-     *
-     * <code>optional string config_file = 5;</code>
-     */
-    public java.lang.String getConfigFile() {
-      java.lang.Object ref = configFile_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        configFile_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * The config to send to the client, which defines its active plugins. 
-     * </pre>
-     *
-     * <code>optional string config_file = 5;</code>
-     */
-    public com.google.protobuf.ByteString
-        getConfigFileBytes() {
-      java.lang.Object ref = configFile_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        configFile_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getMacAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, macAddress_);
-      }
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-      }
-      if (port_ != 0) {
-        output.writeInt32(3, port_);
-      }
-      if (useSsl_ != false) {
-        output.writeBool(4, useSsl_);
-      }
-      if (!getConfigFileBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, configFile_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getMacAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, macAddress_);
-      }
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-      }
-      if (port_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, port_);
-      }
-      if (useSsl_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, useSsl_);
-      }
-      if (!getConfigFileBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, configFile_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.s13g.winston.proto.Master.KnownNode)) {
-        return super.equals(obj);
-      }
-      com.s13g.winston.proto.Master.KnownNode other = (com.s13g.winston.proto.Master.KnownNode) obj;
-
-      boolean result = true;
-      result = result && getMacAddress()
-          .equals(other.getMacAddress());
-      result = result && getName()
-          .equals(other.getName());
-      result = result && (getPort()
-          == other.getPort());
-      result = result && (getUseSsl()
-          == other.getUseSsl());
-      result = result && getConfigFile()
-          .equals(other.getConfigFile());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + MAC_ADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getMacAddress().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      hash = (37 * hash) + PORT_FIELD_NUMBER;
-      hash = (53 * hash) + getPort();
-      hash = (37 * hash) + USE_SSL_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getUseSsl());
-      hash = (37 * hash) + CONFIG_FILE_FIELD_NUMBER;
-      hash = (53 * hash) + getConfigFile().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.s13g.winston.proto.Master.KnownNode prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * A known client/node. 
-     * </pre>
-     *
-     * Protobuf type {@code com.s13g.winston.proto.KnownNode}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.KnownNode)
-        com.s13g.winston.proto.Master.KnownNodeOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.s13g.winston.proto.Master.KnownNode.class, com.s13g.winston.proto.Master.KnownNode.Builder.class);
-      }
-
-      // Construct using com.s13g.winston.proto.Master.KnownNode.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        macAddress_ = "";
-
-        name_ = "";
-
-        port_ = 0;
-
-        useSsl_ = false;
-
-        configFile_ = "";
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
-      }
-
-      public com.s13g.winston.proto.Master.KnownNode getDefaultInstanceForType() {
-        return com.s13g.winston.proto.Master.KnownNode.getDefaultInstance();
-      }
-
-      public com.s13g.winston.proto.Master.KnownNode build() {
-        com.s13g.winston.proto.Master.KnownNode result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.s13g.winston.proto.Master.KnownNode buildPartial() {
-        com.s13g.winston.proto.Master.KnownNode result = new com.s13g.winston.proto.Master.KnownNode(this);
-        result.macAddress_ = macAddress_;
-        result.name_ = name_;
-        result.port_ = port_;
-        result.useSsl_ = useSsl_;
-        result.configFile_ = configFile_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.s13g.winston.proto.Master.KnownNode) {
-          return mergeFrom((com.s13g.winston.proto.Master.KnownNode)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.s13g.winston.proto.Master.KnownNode other) {
-        if (other == com.s13g.winston.proto.Master.KnownNode.getDefaultInstance()) return this;
-        if (!other.getMacAddress().isEmpty()) {
-          macAddress_ = other.macAddress_;
-          onChanged();
-        }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.getPort() != 0) {
-          setPort(other.getPort());
-        }
-        if (other.getUseSsl() != false) {
-          setUseSsl(other.getUseSsl());
-        }
-        if (!other.getConfigFile().isEmpty()) {
-          configFile_ = other.configFile_;
-          onChanged();
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.s13g.winston.proto.Master.KnownNode parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.s13g.winston.proto.Master.KnownNode) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object macAddress_ = "";
-      /**
-       * <pre>
-       * MAC address uniquly addresses a client. 
-       * </pre>
-       *
-       * <code>optional string mac_address = 1;</code>
-       */
-      public java.lang.String getMacAddress() {
-        java.lang.Object ref = macAddress_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          macAddress_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * MAC address uniquly addresses a client. 
-       * </pre>
-       *
-       * <code>optional string mac_address = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMacAddressBytes() {
-        java.lang.Object ref = macAddress_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          macAddress_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * MAC address uniquly addresses a client. 
-       * </pre>
-       *
-       * <code>optional string mac_address = 1;</code>
-       */
-      public Builder setMacAddress(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        macAddress_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * MAC address uniquly addresses a client. 
-       * </pre>
-       *
-       * <code>optional string mac_address = 1;</code>
-       */
-      public Builder clearMacAddress() {
-        
-        macAddress_ = getDefaultInstance().getMacAddress();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * MAC address uniquly addresses a client. 
-       * </pre>
-       *
-       * <code>optional string mac_address = 1;</code>
-       */
-      public Builder setMacAddressBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        macAddress_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <pre>
-       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-       * </pre>
-       *
-       * <code>optional string name = 2;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-       * </pre>
-       *
-       * <code>optional string name = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-       * </pre>
-       *
-       * <code>optional string name = 2;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-       * </pre>
-       *
-       * <code>optional string name = 2;</code>
-       */
-      public Builder clearName() {
-        
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
-       * </pre>
-       *
-       * <code>optional string name = 2;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int port_ ;
-      /**
-       * <pre>
-       * The port to access the node daemon, typically 1984. 
-       * </pre>
-       *
-       * <code>optional int32 port = 3;</code>
-       */
-      public int getPort() {
-        return port_;
-      }
-      /**
-       * <pre>
-       * The port to access the node daemon, typically 1984. 
-       * </pre>
-       *
-       * <code>optional int32 port = 3;</code>
-       */
-      public Builder setPort(int value) {
-        
-        port_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The port to access the node daemon, typically 1984. 
-       * </pre>
-       *
-       * <code>optional int32 port = 3;</code>
-       */
-      public Builder clearPort() {
-        
-        port_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private boolean useSsl_ ;
-      /**
-       * <pre>
-       * Whether the node daemon should accessed through https. 
-       * </pre>
-       *
-       * <code>optional bool use_ssl = 4;</code>
-       */
-      public boolean getUseSsl() {
-        return useSsl_;
-      }
-      /**
-       * <pre>
-       * Whether the node daemon should accessed through https. 
-       * </pre>
-       *
-       * <code>optional bool use_ssl = 4;</code>
-       */
-      public Builder setUseSsl(boolean value) {
-        
-        useSsl_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Whether the node daemon should accessed through https. 
-       * </pre>
-       *
-       * <code>optional bool use_ssl = 4;</code>
-       */
-      public Builder clearUseSsl() {
-        
-        useSsl_ = false;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object configFile_ = "";
-      /**
-       * <pre>
-       * The config to send to the client, which defines its active plugins. 
-       * </pre>
-       *
-       * <code>optional string config_file = 5;</code>
-       */
-      public java.lang.String getConfigFile() {
-        java.lang.Object ref = configFile_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          configFile_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * The config to send to the client, which defines its active plugins. 
-       * </pre>
-       *
-       * <code>optional string config_file = 5;</code>
-       */
-      public com.google.protobuf.ByteString
-          getConfigFileBytes() {
-        java.lang.Object ref = configFile_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          configFile_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * The config to send to the client, which defines its active plugins. 
-       * </pre>
-       *
-       * <code>optional string config_file = 5;</code>
-       */
-      public Builder setConfigFile(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        configFile_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The config to send to the client, which defines its active plugins. 
-       * </pre>
-       *
-       * <code>optional string config_file = 5;</code>
-       */
-      public Builder clearConfigFile() {
-        
-        configFile_ = getDefaultInstance().getConfigFile();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The config to send to the client, which defines its active plugins. 
-       * </pre>
-       *
-       * <code>optional string config_file = 5;</code>
-       */
-      public Builder setConfigFileBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        configFile_ = value;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.KnownNode)
-    }
-
-    // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.KnownNode)
-    private static final com.s13g.winston.proto.Master.KnownNode DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.s13g.winston.proto.Master.KnownNode();
-    }
-
-    public static com.s13g.winston.proto.Master.KnownNode getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<KnownNode>
-        PARSER = new com.google.protobuf.AbstractParser<KnownNode>() {
-      public KnownNode parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new KnownNode(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<KnownNode> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<KnownNode> getParserForType() {
-      return PARSER;
-    }
-
-    public com.s13g.winston.proto.Master.KnownNode getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface ChannelOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.Channel)
       com.google.protobuf.MessageOrBuilder {
@@ -8187,6 +7606,1786 @@ public final class Master {
 
   }
 
+  public interface AuthenticatedClientOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.AuthenticatedClient)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Human readable name of this client. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * Human readable name of this client. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * A random auth_token used to authenticate the client. 
+     * </pre>
+     *
+     * <code>optional string auth_token = 2;</code>
+     */
+    java.lang.String getAuthToken();
+    /**
+     * <pre>
+     * A random auth_token used to authenticate the client. 
+     * </pre>
+     *
+     * <code>optional string auth_token = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAuthTokenBytes();
+  }
+  /**
+   * <pre>
+   * To prevent unauthorized access, only clients with a token can access secure functionality.
+   * </pre>
+   *
+   * Protobuf type {@code com.s13g.winston.proto.AuthenticatedClient}
+   */
+  public  static final class AuthenticatedClient extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.AuthenticatedClient)
+      AuthenticatedClientOrBuilder {
+    // Use AuthenticatedClient.newBuilder() to construct.
+    private AuthenticatedClient(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AuthenticatedClient() {
+      name_ = "";
+      authToken_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private AuthenticatedClient(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              authToken_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.s13g.winston.proto.Master.AuthenticatedClient.class, com.s13g.winston.proto.Master.AuthenticatedClient.Builder.class);
+    }
+
+    public static final int NAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object name_;
+    /**
+     * <pre>
+     * Human readable name of this client. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Human readable name of this client. 
+     * </pre>
+     *
+     * <code>optional string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int AUTH_TOKEN_FIELD_NUMBER = 2;
+    private volatile java.lang.Object authToken_;
+    /**
+     * <pre>
+     * A random auth_token used to authenticate the client. 
+     * </pre>
+     *
+     * <code>optional string auth_token = 2;</code>
+     */
+    public java.lang.String getAuthToken() {
+      java.lang.Object ref = authToken_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        authToken_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * A random auth_token used to authenticate the client. 
+     * </pre>
+     *
+     * <code>optional string auth_token = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAuthTokenBytes() {
+      java.lang.Object ref = authToken_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        authToken_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      }
+      if (!getAuthTokenBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, authToken_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      if (!getAuthTokenBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, authToken_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.s13g.winston.proto.Master.AuthenticatedClient)) {
+        return super.equals(obj);
+      }
+      com.s13g.winston.proto.Master.AuthenticatedClient other = (com.s13g.winston.proto.Master.AuthenticatedClient) obj;
+
+      boolean result = true;
+      result = result && getName()
+          .equals(other.getName());
+      result = result && getAuthToken()
+          .equals(other.getAuthToken());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + AUTH_TOKEN_FIELD_NUMBER;
+      hash = (53 * hash) + getAuthToken().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.s13g.winston.proto.Master.AuthenticatedClient prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * To prevent unauthorized access, only clients with a token can access secure functionality.
+     * </pre>
+     *
+     * Protobuf type {@code com.s13g.winston.proto.AuthenticatedClient}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.AuthenticatedClient)
+        com.s13g.winston.proto.Master.AuthenticatedClientOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.proto.Master.AuthenticatedClient.class, com.s13g.winston.proto.Master.AuthenticatedClient.Builder.class);
+      }
+
+      // Construct using com.s13g.winston.proto.Master.AuthenticatedClient.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+
+        authToken_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
+      }
+
+      public com.s13g.winston.proto.Master.AuthenticatedClient getDefaultInstanceForType() {
+        return com.s13g.winston.proto.Master.AuthenticatedClient.getDefaultInstance();
+      }
+
+      public com.s13g.winston.proto.Master.AuthenticatedClient build() {
+        com.s13g.winston.proto.Master.AuthenticatedClient result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.s13g.winston.proto.Master.AuthenticatedClient buildPartial() {
+        com.s13g.winston.proto.Master.AuthenticatedClient result = new com.s13g.winston.proto.Master.AuthenticatedClient(this);
+        result.name_ = name_;
+        result.authToken_ = authToken_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.s13g.winston.proto.Master.AuthenticatedClient) {
+          return mergeFrom((com.s13g.winston.proto.Master.AuthenticatedClient)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.s13g.winston.proto.Master.AuthenticatedClient other) {
+        if (other == com.s13g.winston.proto.Master.AuthenticatedClient.getDefaultInstance()) return this;
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (!other.getAuthToken().isEmpty()) {
+          authToken_ = other.authToken_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.s13g.winston.proto.Master.AuthenticatedClient parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.s13g.winston.proto.Master.AuthenticatedClient) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * Human readable name of this client. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Human readable name of this client. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Human readable name of this client. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Human readable name of this client. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Human readable name of this client. 
+       * </pre>
+       *
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object authToken_ = "";
+      /**
+       * <pre>
+       * A random auth_token used to authenticate the client. 
+       * </pre>
+       *
+       * <code>optional string auth_token = 2;</code>
+       */
+      public java.lang.String getAuthToken() {
+        java.lang.Object ref = authToken_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          authToken_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * A random auth_token used to authenticate the client. 
+       * </pre>
+       *
+       * <code>optional string auth_token = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAuthTokenBytes() {
+        java.lang.Object ref = authToken_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          authToken_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * A random auth_token used to authenticate the client. 
+       * </pre>
+       *
+       * <code>optional string auth_token = 2;</code>
+       */
+      public Builder setAuthToken(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        authToken_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * A random auth_token used to authenticate the client. 
+       * </pre>
+       *
+       * <code>optional string auth_token = 2;</code>
+       */
+      public Builder clearAuthToken() {
+        
+        authToken_ = getDefaultInstance().getAuthToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * A random auth_token used to authenticate the client. 
+       * </pre>
+       *
+       * <code>optional string auth_token = 2;</code>
+       */
+      public Builder setAuthTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        authToken_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.AuthenticatedClient)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.AuthenticatedClient)
+    private static final com.s13g.winston.proto.Master.AuthenticatedClient DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.s13g.winston.proto.Master.AuthenticatedClient();
+    }
+
+    public static com.s13g.winston.proto.Master.AuthenticatedClient getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AuthenticatedClient>
+        PARSER = new com.google.protobuf.AbstractParser<AuthenticatedClient>() {
+      public AuthenticatedClient parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AuthenticatedClient(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AuthenticatedClient> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AuthenticatedClient> getParserForType() {
+      return PARSER;
+    }
+
+    public com.s13g.winston.proto.Master.AuthenticatedClient getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface KnownNodeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.KnownNode)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * MAC address uniquly addresses a client. 
+     * </pre>
+     *
+     * <code>optional string mac_address = 1;</code>
+     */
+    java.lang.String getMacAddress();
+    /**
+     * <pre>
+     * MAC address uniquly addresses a client. 
+     * </pre>
+     *
+     * <code>optional string mac_address = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getMacAddressBytes();
+
+    /**
+     * <pre>
+     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * The port to access the node daemon, typically 1984. 
+     * </pre>
+     *
+     * <code>optional int32 port = 3;</code>
+     */
+    int getPort();
+
+    /**
+     * <pre>
+     * Whether the node daemon should accessed through https. 
+     * </pre>
+     *
+     * <code>optional bool use_ssl = 4;</code>
+     */
+    boolean getUseSsl();
+
+    /**
+     * <pre>
+     * The config to send to the client, which defines its active plugins. 
+     * </pre>
+     *
+     * <code>optional string config_file = 5;</code>
+     */
+    java.lang.String getConfigFile();
+    /**
+     * <pre>
+     * The config to send to the client, which defines its active plugins. 
+     * </pre>
+     *
+     * <code>optional string config_file = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getConfigFileBytes();
+  }
+  /**
+   * <pre>
+   * A known client/node. 
+   * </pre>
+   *
+   * Protobuf type {@code com.s13g.winston.proto.KnownNode}
+   */
+  public  static final class KnownNode extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.KnownNode)
+      KnownNodeOrBuilder {
+    // Use KnownNode.newBuilder() to construct.
+    private KnownNode(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private KnownNode() {
+      macAddress_ = "";
+      name_ = "";
+      port_ = 0;
+      useSsl_ = false;
+      configFile_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private KnownNode(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              macAddress_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
+              break;
+            }
+            case 24: {
+
+              port_ = input.readInt32();
+              break;
+            }
+            case 32: {
+
+              useSsl_ = input.readBool();
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              configFile_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.s13g.winston.proto.Master.KnownNode.class, com.s13g.winston.proto.Master.KnownNode.Builder.class);
+    }
+
+    public static final int MAC_ADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object macAddress_;
+    /**
+     * <pre>
+     * MAC address uniquly addresses a client. 
+     * </pre>
+     *
+     * <code>optional string mac_address = 1;</code>
+     */
+    public java.lang.String getMacAddress() {
+      java.lang.Object ref = macAddress_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        macAddress_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * MAC address uniquly addresses a client. 
+     * </pre>
+     *
+     * <code>optional string mac_address = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMacAddressBytes() {
+      java.lang.Object ref = macAddress_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        macAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object name_;
+    /**
+     * <pre>
+     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PORT_FIELD_NUMBER = 3;
+    private int port_;
+    /**
+     * <pre>
+     * The port to access the node daemon, typically 1984. 
+     * </pre>
+     *
+     * <code>optional int32 port = 3;</code>
+     */
+    public int getPort() {
+      return port_;
+    }
+
+    public static final int USE_SSL_FIELD_NUMBER = 4;
+    private boolean useSsl_;
+    /**
+     * <pre>
+     * Whether the node daemon should accessed through https. 
+     * </pre>
+     *
+     * <code>optional bool use_ssl = 4;</code>
+     */
+    public boolean getUseSsl() {
+      return useSsl_;
+    }
+
+    public static final int CONFIG_FILE_FIELD_NUMBER = 5;
+    private volatile java.lang.Object configFile_;
+    /**
+     * <pre>
+     * The config to send to the client, which defines its active plugins. 
+     * </pre>
+     *
+     * <code>optional string config_file = 5;</code>
+     */
+    public java.lang.String getConfigFile() {
+      java.lang.Object ref = configFile_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        configFile_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * The config to send to the client, which defines its active plugins. 
+     * </pre>
+     *
+     * <code>optional string config_file = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getConfigFileBytes() {
+      java.lang.Object ref = configFile_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        configFile_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getMacAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, macAddress_);
+      }
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
+      }
+      if (port_ != 0) {
+        output.writeInt32(3, port_);
+      }
+      if (useSsl_ != false) {
+        output.writeBool(4, useSsl_);
+      }
+      if (!getConfigFileBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, configFile_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getMacAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, macAddress_);
+      }
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
+      }
+      if (port_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, port_);
+      }
+      if (useSsl_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, useSsl_);
+      }
+      if (!getConfigFileBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, configFile_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.s13g.winston.proto.Master.KnownNode)) {
+        return super.equals(obj);
+      }
+      com.s13g.winston.proto.Master.KnownNode other = (com.s13g.winston.proto.Master.KnownNode) obj;
+
+      boolean result = true;
+      result = result && getMacAddress()
+          .equals(other.getMacAddress());
+      result = result && getName()
+          .equals(other.getName());
+      result = result && (getPort()
+          == other.getPort());
+      result = result && (getUseSsl()
+          == other.getUseSsl());
+      result = result && getConfigFile()
+          .equals(other.getConfigFile());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + MAC_ADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getMacAddress().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getPort();
+      hash = (37 * hash) + USE_SSL_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUseSsl());
+      hash = (37 * hash) + CONFIG_FILE_FIELD_NUMBER;
+      hash = (53 * hash) + getConfigFile().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.s13g.winston.proto.Master.KnownNode prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * A known client/node. 
+     * </pre>
+     *
+     * Protobuf type {@code com.s13g.winston.proto.KnownNode}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.KnownNode)
+        com.s13g.winston.proto.Master.KnownNodeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.proto.Master.KnownNode.class, com.s13g.winston.proto.Master.KnownNode.Builder.class);
+      }
+
+      // Construct using com.s13g.winston.proto.Master.KnownNode.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        macAddress_ = "";
+
+        name_ = "";
+
+        port_ = 0;
+
+        useSsl_ = false;
+
+        configFile_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
+      }
+
+      public com.s13g.winston.proto.Master.KnownNode getDefaultInstanceForType() {
+        return com.s13g.winston.proto.Master.KnownNode.getDefaultInstance();
+      }
+
+      public com.s13g.winston.proto.Master.KnownNode build() {
+        com.s13g.winston.proto.Master.KnownNode result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.s13g.winston.proto.Master.KnownNode buildPartial() {
+        com.s13g.winston.proto.Master.KnownNode result = new com.s13g.winston.proto.Master.KnownNode(this);
+        result.macAddress_ = macAddress_;
+        result.name_ = name_;
+        result.port_ = port_;
+        result.useSsl_ = useSsl_;
+        result.configFile_ = configFile_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.s13g.winston.proto.Master.KnownNode) {
+          return mergeFrom((com.s13g.winston.proto.Master.KnownNode)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.s13g.winston.proto.Master.KnownNode other) {
+        if (other == com.s13g.winston.proto.Master.KnownNode.getDefaultInstance()) return this;
+        if (!other.getMacAddress().isEmpty()) {
+          macAddress_ = other.macAddress_;
+          onChanged();
+        }
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.getPort() != 0) {
+          setPort(other.getPort());
+        }
+        if (other.getUseSsl() != false) {
+          setUseSsl(other.getUseSsl());
+        }
+        if (!other.getConfigFile().isEmpty()) {
+          configFile_ = other.configFile_;
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.s13g.winston.proto.Master.KnownNode parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.s13g.winston.proto.Master.KnownNode) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object macAddress_ = "";
+      /**
+       * <pre>
+       * MAC address uniquly addresses a client. 
+       * </pre>
+       *
+       * <code>optional string mac_address = 1;</code>
+       */
+      public java.lang.String getMacAddress() {
+        java.lang.Object ref = macAddress_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          macAddress_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * MAC address uniquly addresses a client. 
+       * </pre>
+       *
+       * <code>optional string mac_address = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMacAddressBytes() {
+        java.lang.Object ref = macAddress_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          macAddress_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * MAC address uniquly addresses a client. 
+       * </pre>
+       *
+       * <code>optional string mac_address = 1;</code>
+       */
+      public Builder setMacAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        macAddress_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * MAC address uniquly addresses a client. 
+       * </pre>
+       *
+       * <code>optional string mac_address = 1;</code>
+       */
+      public Builder clearMacAddress() {
+        
+        macAddress_ = getDefaultInstance().getMacAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * MAC address uniquly addresses a client. 
+       * </pre>
+       *
+       * <code>optional string mac_address = 1;</code>
+       */
+      public Builder setMacAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        macAddress_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int port_ ;
+      /**
+       * <pre>
+       * The port to access the node daemon, typically 1984. 
+       * </pre>
+       *
+       * <code>optional int32 port = 3;</code>
+       */
+      public int getPort() {
+        return port_;
+      }
+      /**
+       * <pre>
+       * The port to access the node daemon, typically 1984. 
+       * </pre>
+       *
+       * <code>optional int32 port = 3;</code>
+       */
+      public Builder setPort(int value) {
+        
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The port to access the node daemon, typically 1984. 
+       * </pre>
+       *
+       * <code>optional int32 port = 3;</code>
+       */
+      public Builder clearPort() {
+        
+        port_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean useSsl_ ;
+      /**
+       * <pre>
+       * Whether the node daemon should accessed through https. 
+       * </pre>
+       *
+       * <code>optional bool use_ssl = 4;</code>
+       */
+      public boolean getUseSsl() {
+        return useSsl_;
+      }
+      /**
+       * <pre>
+       * Whether the node daemon should accessed through https. 
+       * </pre>
+       *
+       * <code>optional bool use_ssl = 4;</code>
+       */
+      public Builder setUseSsl(boolean value) {
+        
+        useSsl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Whether the node daemon should accessed through https. 
+       * </pre>
+       *
+       * <code>optional bool use_ssl = 4;</code>
+       */
+      public Builder clearUseSsl() {
+        
+        useSsl_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object configFile_ = "";
+      /**
+       * <pre>
+       * The config to send to the client, which defines its active plugins. 
+       * </pre>
+       *
+       * <code>optional string config_file = 5;</code>
+       */
+      public java.lang.String getConfigFile() {
+        java.lang.Object ref = configFile_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          configFile_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The config to send to the client, which defines its active plugins. 
+       * </pre>
+       *
+       * <code>optional string config_file = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getConfigFileBytes() {
+        java.lang.Object ref = configFile_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          configFile_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * The config to send to the client, which defines its active plugins. 
+       * </pre>
+       *
+       * <code>optional string config_file = 5;</code>
+       */
+      public Builder setConfigFile(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        configFile_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The config to send to the client, which defines its active plugins. 
+       * </pre>
+       *
+       * <code>optional string config_file = 5;</code>
+       */
+      public Builder clearConfigFile() {
+        
+        configFile_ = getDefaultInstance().getConfigFile();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The config to send to the client, which defines its active plugins. 
+       * </pre>
+       *
+       * <code>optional string config_file = 5;</code>
+       */
+      public Builder setConfigFileBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        configFile_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.KnownNode)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.KnownNode)
+    private static final com.s13g.winston.proto.Master.KnownNode DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.s13g.winston.proto.Master.KnownNode();
+    }
+
+    public static com.s13g.winston.proto.Master.KnownNode getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<KnownNode>
+        PARSER = new com.google.protobuf.AbstractParser<KnownNode>() {
+      public KnownNode parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new KnownNode(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<KnownNode> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<KnownNode> getParserForType() {
+      return PARSER;
+    }
+
+    public com.s13g.winston.proto.Master.KnownNode getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_s13g_winston_proto_MasterConfig_descriptor;
   private static final 
@@ -8208,11 +9407,6 @@ public final class Master {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_s13g_winston_proto_KnownNode_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_s13g_winston_proto_Channel_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -8222,6 +9416,16 @@ public final class Master {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_s13g_winston_proto_Parameter_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_s13g_winston_proto_AuthenticatedClient_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_proto_KnownNode_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8232,25 +9436,28 @@ public final class Master {
   static {
     java.lang.String[] descriptorData = {
       "\n\036etc/protos/master_config.proto\022\026com.s1" +
-      "3g.winston.proto\"\357\001\n\014MasterConfig\022\022\n\ndae" +
+      "3g.winston.proto\"\261\002\n\014MasterConfig\022\022\n\ndae" +
       "monPort\030\001 \001(\005\022\027\n\017sslKeystorePath\030\002 \001(\t\022\033" +
       "\n\023sslKeystorePassword\030\003 \001(\t\022.\n\006module\030\004 " +
       "\003(\0132\036.com.s13g.winston.proto.Module\022,\n\005g" +
       "roup\030\005 \003(\0132\035.com.s13g.winston.proto.Grou" +
-      "p\0227\n\014known_client\030\006 \003(\0132!.com.s13g.winst" +
-      "on.proto.KnownNode\"H\n\006Module\022\014\n\004type\030\001 \001" +
-      "(\t\0220\n\007channel\030\002 \003(\0132\037.com.s13g.winston.p" +
-      "roto.Channel\"L\n\005Group\022\014\n\004name\030\001 \001(\t\0225\n\007t",
-      "rigger\030\002 \003(\0132$.com.s13g.winston.proto.Gr" +
-      "oupTrigger\"-\n\014GroupTrigger\022\r\n\005input\030\001 \003(" +
-      "\t\022\016\n\006action\030\002 \003(\t\"b\n\tKnownNode\022\023\n\013mac_ad" +
-      "dress\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022" +
-      "\017\n\007use_ssl\030\004 \001(\010\022\023\n\013config_file\030\005 \001(\t\"^\n" +
-      "\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n\007address\030\002 \001(\t\022" +
-      "4\n\tparameter\030\003 \003(\0132!.com.s13g.winston.pr" +
-      "oto.Parameter\"(\n\tParameter\022\014\n\004name\030\001 \001(\t" +
-      "\022\r\n\005value\030\002 \001(\tB \n\026com.s13g.winston.prot" +
-      "oB\006Masterb\006proto3"
+      "p\022@\n\013auth_client\030\006 \003(\0132+.com.s13g.winsto" +
+      "n.proto.AuthenticatedClient\0227\n\014known_cli" +
+      "ent\030\007 \003(\0132!.com.s13g.winston.proto.Known" +
+      "Node\"H\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007channel\030",
+      "\002 \003(\0132\037.com.s13g.winston.proto.Channel\"L" +
+      "\n\005Group\022\014\n\004name\030\001 \001(\t\0225\n\007trigger\030\002 \003(\0132$" +
+      ".com.s13g.winston.proto.GroupTrigger\"-\n\014" +
+      "GroupTrigger\022\r\n\005input\030\001 \003(\t\022\016\n\006action\030\002 " +
+      "\003(\t\"^\n\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n\007address\030" +
+      "\002 \001(\t\0224\n\tparameter\030\003 \003(\0132!.com.s13g.wins" +
+      "ton.proto.Parameter\"(\n\tParameter\022\014\n\004name" +
+      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"7\n\023AuthenticatedCl" +
+      "ient\022\014\n\004name\030\001 \001(\t\022\022\n\nauth_token\030\002 \001(\t\"b" +
+      "\n\tKnownNode\022\023\n\013mac_address\030\001 \001(\t\022\014\n\004name",
+      "\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030\004 \001(\010\022\023\n" +
+      "\013config_file\030\005 \001(\tB \n\026com.s13g.winston.p" +
+      "rotoB\006Masterb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8269,7 +9476,7 @@ public final class Master {
     internal_static_com_s13g_winston_proto_MasterConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_MasterConfig_descriptor,
-        new java.lang.String[] { "DaemonPort", "SslKeystorePath", "SslKeystorePassword", "Module", "Group", "KnownClient", });
+        new java.lang.String[] { "DaemonPort", "SslKeystorePath", "SslKeystorePassword", "Module", "Group", "AuthClient", "KnownClient", });
     internal_static_com_s13g_winston_proto_Module_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_s13g_winston_proto_Module_fieldAccessorTable = new
@@ -8288,24 +9495,30 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_GroupTrigger_descriptor,
         new java.lang.String[] { "Input", "Action", });
-    internal_static_com_s13g_winston_proto_KnownNode_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_s13g_winston_proto_KnownNode_descriptor,
-        new java.lang.String[] { "MacAddress", "Name", "Port", "UseSsl", "ConfigFile", });
     internal_static_com_s13g_winston_proto_Channel_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Channel_descriptor,
         new java.lang.String[] { "Type", "Address", "Parameter", });
     internal_static_com_s13g_winston_proto_Parameter_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_s13g_winston_proto_Parameter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_Parameter_descriptor,
         new java.lang.String[] { "Name", "Value", });
+    internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_s13g_winston_proto_AuthenticatedClient_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor,
+        new java.lang.String[] { "Name", "AuthToken", });
+    internal_static_com_s13g_winston_proto_KnownNode_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_s13g_winston_proto_KnownNode_descriptor,
+        new java.lang.String[] { "MacAddress", "Name", "Port", "UseSsl", "ConfigFile", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

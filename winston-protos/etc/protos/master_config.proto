@@ -36,9 +36,11 @@ message MasterConfig {
   repeated Module module = 4;
   /* A list of defined group actions. */
   repeated Group group = 5;
+  /* Only authenticated clients have access to secure system functions. */
+  repeated AuthenticatedClient auth_client = 6;
   /* All known winston nodes, not all might be active at a given time. */
   /** TODO: Remove this from here. We will have a Winston module for this. */
-  repeated KnownNode known_client = 6;
+  repeated KnownNode known_client = 7;
 }
 
 /* A module that runs on the master. E.g. a Nest or TV controller. */
@@ -65,20 +67,6 @@ message GroupTrigger {
   repeated string action = 2;
 }
 
-/* A known client/node. */
-message KnownNode {
-  /* MAC address uniquly addresses a client. */
-  string mac_address = 1;
-  /* Human-readable unique alias for the node, e.g. 'pi-power-1'. */
-  string name = 2;
-  /* The port to access the node daemon, typically 1984. */
-  int32 port = 3;
-  /* Whether the node daemon should accessed through https. */
-  bool use_ssl = 4;
-  /* The config to send to the client, which defines its active plugins. */
-  string config_file = 5;
-}
-
 /* Each module can have support for multiple channels. */
 message Channel {
   /* The type of the channel. */
@@ -95,4 +83,26 @@ message Parameter {
   string name = 1;
   /* Value of the parameter. */
   string value = 2;
+}
+
+/* To prevent unauthorized access, only clients with a token can access secure functionality.*/
+message AuthenticatedClient {
+  /* Human readable name of this client. */
+  string name = 1;
+  /* A random auth_token used to authenticate the client. */
+  string auth_token = 2;
+}
+
+/* A known client/node. */
+message KnownNode {
+  /* MAC address uniquly addresses a client. */
+  string mac_address = 1;
+  /* Human-readable unique alias for the node, e.g. 'pi-power-1'. */
+  string name = 2;
+  /* The port to access the node daemon, typically 1984. */
+  int32 port = 3;
+  /* Whether the node daemon should accessed through https. */
+  bool use_ssl = 4;
+  /* The config to send to the client, which defines its active plugins. */
+  string config_file = 5;
 }

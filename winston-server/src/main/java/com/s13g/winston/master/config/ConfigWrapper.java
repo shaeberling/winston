@@ -18,6 +18,7 @@ package com.s13g.winston.master.config;
 
 import com.google.common.base.Strings;
 import com.google.protobuf.TextFormat;
+import com.s13g.winston.proto.Master;
 import com.s13g.winston.proto.Master.Channel;
 import com.s13g.winston.proto.Master.KnownNode;
 import com.s13g.winston.proto.Master.MasterConfig;
@@ -126,6 +127,7 @@ public class ConfigWrapper {
     LOG.info("Keystore        :" + mConfigProto.getSslKeystorePath());
     LOG.info("Keystore passwd : " + (isNullOrEmpty(mConfigProto.getSslKeystorePassword())
         ? "<not given>" : "<given>"));
+    LOG.info("Auth clients    :" + mConfigProto.getAuthClientCount());
     List<Module> modules = mConfigProto.getModuleList();
     LOG.info("Modules         : " + modules.size());
     LOG.info("---------------------------------");
@@ -140,6 +142,13 @@ public class ConfigWrapper {
         LOG.info("---------------------------------");
       }
       LOG.info("---------------------------------");
+    }
+
+    List<Master.Group> groups = mConfigProto.getGroupList();
+    LOG.info("Groups defined: " + groups.size());
+    for (Master.Group group : groups) {
+      LOG.info("  Name    : " + group.getName());
+      LOG.info("  Triggers: " + group.getTriggerCount());
     }
 
     List<KnownNode> knownNodes = mConfigProto.getKnownClientList();
