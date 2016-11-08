@@ -117,6 +117,10 @@ public class ConfigWrapper {
         isNullOrEmpty(mConfigProto.getSslKeystorePassword())) {
       throw new AssertionError("SSL keystore given without password");
     }
+
+    if (mConfigProto.getAuthClientCount() == 0) {
+      throw new AssertionError("Not authenticated clients set. Nobody would have access.");
+    }
   }
 
   /**
