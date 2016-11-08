@@ -16,22 +16,34 @@
 
 package com.s13g.winston;
 
+import com.google.common.base.Strings;
 import com.s13g.winston.common.RequestHandler;
 import com.s13g.winston.common.RequestHandlingException;
+import com.s13g.winston.proto.Master.AuthenticatedClient;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.simpleframework.http.Address;
 import org.simpleframework.http.Status;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Contains all handlers that can handle incoming HTTP requests.
  */
 public class RequestHandlers {
+  private static final Logger LOG = LogManager.getLogger(RequestHandlers.class);
+  private static final String AUTH_TOKEN_PARAM = "authtoken";
+
+  private final Map<String, AuthenticatedClient> mAuthClients;
   private final List<RequestHandler> mRequestHandlers;
   private final Object mLock;
 
-  public RequestHandlers() {
+  public RequestHandlers(List<AuthenticatedClient> authClientList) {
+    mAuthClients = createAuthClientMap(authClientList);
     mRequestHandlers = new LinkedList<>();
     mLock = new Object();
   }
@@ -42,7 +54,36 @@ public class RequestHandlers {
     }
   }
 
-  public String handleRequest(String requestUrl) throws RequestHandlingException {
+  /**
+   * Handles the given request and performs an authentication check.
+   *
+   * @param address the request address
+   * @return The request response.
+   * @throws RequestHandlingException      if there was an error while trying to handle this
+   *                                       request.
+   * @throws RequestNotAuthorizedException if the client was not authorized to perform this
+   *                                       request.
+   */
+  public String handleRequest(Address address)
+      throws RequestHandlingException, RequestNotAuthorizedException {
+    String path = address.getPath().getPath();
+    if (path.startsWith("/")) {
+      path = path.substring(1);
+    }
+
+    String authToken = address.getQuery().get(AUTH_TOKEN_PARAM);
+    if (Strings.isNullOrEmpty(authToken)) {
+      throw new RequestNotAuthorizedException("No authtoken given");
+    }
+    if (!mAuthClients.containsKey(authToken)) {
+      throw new RequestNotAuthorizedException("Invalid authtoken");
+    }
+    LOG.info("Authorized client: " + mAuthClients.get(authToken).getName());
+    return handleRequestTrusted(path);
+  }
+
+  /** Call this for requests that are already trusted and don't need an auth token check. */
+  public String handleRequestTrusted(String requestUrl) throws RequestHandlingException {
     synchronized (mLock) {
       // TODO: This should be done on a background thread, with a proper queue, de-duping per
       // command/node etc.
@@ -53,6 +94,20 @@ public class RequestHandlers {
       }
       throw new RequestHandlingException("No request handler found. " + requestUrl,
           Status.NOT_FOUND);
+    }
+  }
+
+  private Map<String, AuthenticatedClient> createAuthClientMap(List<AuthenticatedClient> clients) {
+    Map<String, AuthenticatedClient> result = new HashMap<>();
+    for (AuthenticatedClient client : clients) {
+      result.put(client.getAuthToken(), client);
+    }
+    return result;
+  }
+
+  public static class RequestNotAuthorizedException extends Exception {
+    public RequestNotAuthorizedException(String message) {
+      super(message);
     }
   }
 }

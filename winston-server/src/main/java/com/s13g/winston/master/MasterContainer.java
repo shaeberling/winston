@@ -78,6 +78,14 @@ public class MasterContainer implements Container {
       } else {
         response.setStatus(Status.BAD_REQUEST);
       }
+    } catch (RequestHandlers.RequestNotAuthorizedException e) {
+      LOG.warn("Unauthorized access: " + request.getAddress().toString());
+      response.setStatus(Status.FORBIDDEN);
+      try {
+        response.getPrintStream().append(e.getMessage());
+      } catch (IOException e1) {
+        LOG.error("Cannot write error to response", e1);
+      }
     } catch (Exception e) {
       LOG.error("Error handling request", e);
     } finally {
@@ -96,20 +104,21 @@ public class MasterContainer implements Container {
    * @return The response of the HTTP request.
    * @throws RequestHandlingException thrown if the request could not be handled.
    */
-  private String doHandle(Request req) throws RequestHandlingException {
-    String requestUrl = req.getAddress().toString();
+  private String doHandle(Request req)
+      throws RequestHandlingException, RequestHandlers.RequestNotAuthorizedException {
+    String requestPath = req.getAddress().getPath().getPath();
     // Ignore this, don't even log it.
-    if (requestUrl.equals("/favicon.ico")) {
+    if (requestPath.equals("/favicon.ico")) {
       return "";
     }
-    LOG.info("Request: " + requestUrl);
+    LOG.info("Request Path: " + requestPath);
 
-    if (!requestUrl.startsWith("/")) {
-      throw new RequestHandlingException("Cannot handle request: " + requestUrl);
+    if (!requestPath.startsWith("/")) {
+      throw new RequestHandlingException("Cannot handle request: " + requestPath);
     }
 
     // Remove slash prefix.
-    requestUrl = requestUrl.substring(1);
-    return mRequestHandlers.handleRequest(requestUrl);
+    requestPath = requestPath.substring(1);
+    return mRequestHandlers.handleRequest(req.getAddress());
   }
 }

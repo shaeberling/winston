@@ -59,7 +59,7 @@ public class MasterDaemon {
     Master.MasterConfig config = configWrapper.getConfig();
 
     ModuleContext moduleContext = new ModuleContext();
-    RequestHandlers requestHandlers = new RequestHandlers();
+    RequestHandlers requestHandlers = new RequestHandlers(config.getAuthClientList());
     ModuleRegistry moduleRegistry = new ModuleRegistry(moduleContext, config, requestHandlers);
     requestHandlers.addRequestHandler(new MasterModuleHandler(moduleRegistry));
 

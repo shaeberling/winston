@@ -16,11 +16,7 @@
 
 package com.s13g.winston.master.channel.instance;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.SettableFuture;
 import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.master.channel.Channel;
@@ -33,10 +29,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 /**
  * This channel produces a value for each configured group.
@@ -94,7 +88,7 @@ public class GroupChannel implements Channel {
             for (String action : trigger.getActionList()) {
               try {
                 // TODO: Consider doing this asynchronously so reuests can fire in parallel.
-                mRequestHandlers.handleRequest(action);
+                mRequestHandlers.handleRequestTrusted(action);
               } catch (RequestHandlingException e) {
                 throw new ChannelException("Some request in the group failed '" + mName + "'.");
               }
