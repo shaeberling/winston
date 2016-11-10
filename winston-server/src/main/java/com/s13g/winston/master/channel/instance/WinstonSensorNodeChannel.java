@@ -21,6 +21,7 @@ import com.s13g.winston.lib.temperature.Temperature;
 import com.s13g.winston.lib.winston.WinstonSensorNodeController;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 
 import java.util.LinkedList;
@@ -44,6 +45,11 @@ public class WinstonSensorNodeChannel implements Channel {
   }
 
   @Override
+  public ChannelType getType() {
+    return ChannelType.WINSTON_SENSORBOX;
+  }
+
+  @Override
   public List<ChannelValue> getValues() {
     List<ChannelValue> channels = new LinkedList<>();
     int count = 0;
@@ -64,7 +70,7 @@ public class WinstonSensorNodeChannel implements Channel {
     }
 
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.READ_ONLY;
     }
 

@@ -26,7 +26,7 @@ public interface ChannelValue<T> {
   }
 
   /** Returns the mode of the value. */
-  Mode getType();
+  Mode getMode();
 
   /** @return The name of the channel, unique within its channel. */
   String getName();

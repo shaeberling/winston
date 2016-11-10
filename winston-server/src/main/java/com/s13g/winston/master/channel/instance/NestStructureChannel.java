@@ -22,6 +22,7 @@ import com.s13g.winston.lib.nest.Structure;
 import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.channel.ReadOnlyChannelValue;
 
@@ -35,7 +36,7 @@ public class NestStructureChannel implements Channel {
   /**
    * After this time, the data is considered old and needs to be refreshed if accessed again. This
    * avoid multiple requests to the multiple values here to send out a request each, even though
-   * we get the data for all channels with one request to the Nest API.
+   * we getChannel the data for all channels with one request to the Nest API.
    */
   private static final long MAX_DATA_AGE_MILLIS = 10 * 1000;
   private final String mChannelId;
@@ -49,6 +50,11 @@ public class NestStructureChannel implements Channel {
   @Override
   public String getChannelId() {
     return mChannelId;
+  }
+
+  @Override
+  public ChannelType getType() {
+    return ChannelType.NEST_STRUCTURE;
   }
 
   @Override
@@ -68,7 +74,7 @@ public class NestStructureChannel implements Channel {
 
   private class NestStructureAwayModeChannel implements ChannelValue<String> {
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.READ_WRITE;
     }
 
@@ -102,7 +108,7 @@ public class NestStructureChannel implements Channel {
     public String read() throws ChannelException {
       Optional<AwayMode> awayMode = mStructure.refresh(MAX_DATA_AGE_MILLIS).getAwayMode();
       if (!awayMode.isPresent()) {
-        throw new ChannelException("Cannot get away more for '" + mChannelId + "'.");
+        throw new ChannelException("Cannot getChannel away more for '" + mChannelId + "'.");
       }
       return awayMode.get().toString();
     }

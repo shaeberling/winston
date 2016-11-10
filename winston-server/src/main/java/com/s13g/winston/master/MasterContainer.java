@@ -30,6 +30,7 @@ import org.simpleframework.transport.connect.Connection;
 import org.simpleframework.transport.connect.SocketConnection;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
@@ -69,7 +70,7 @@ public class MasterContainer implements Container {
   @Override
   public void handle(Request request, Response response) {
     try {
-      response.getPrintStream().append(doHandle(request));
+      doHandle(request, response.getOutputStream());
       response.setStatus(Status.OK);
     } catch (RequestHandlingException e) {
       LOG.warn("Cannot handle request", e);
@@ -100,16 +101,16 @@ public class MasterContainer implements Container {
   /**
    * Handle the HTTP request
    *
-   * @param req the HTTP request
-   * @return The response of the HTTP request.
+   * @param req the HTTP request.
+   * @param response where the HTTP response is written to.
    * @throws RequestHandlingException thrown if the request could not be handled.
    */
-  private String doHandle(Request req)
+  private void doHandle(Request req, OutputStream response)
       throws RequestHandlingException, RequestHandlers.RequestNotAuthorizedException {
     String requestPath = req.getAddress().getPath().getPath();
     // Ignore this, don't even log it.
     if (requestPath.equals("/favicon.ico")) {
-      return "";
+      return;
     }
     LOG.info("Request Path: " + requestPath);
 
@@ -118,7 +119,6 @@ public class MasterContainer implements Container {
     }
 
     // Remove slash prefix.
-    requestPath = requestPath.substring(1);
-    return mRequestHandlers.handleRequest(req.getAddress());
+    mRequestHandlers.handleRequest(req.getAddress(), response);
   }
 }

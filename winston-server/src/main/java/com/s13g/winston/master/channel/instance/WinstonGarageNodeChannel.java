@@ -21,6 +21,7 @@ import com.s13g.winston.lib.core.TypeConversion;
 import com.s13g.winston.lib.winston.WinstonGarageNodeController;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 
 import java.util.LinkedList;
@@ -44,6 +45,11 @@ public class WinstonGarageNodeChannel implements Channel {
   @Override
   public String getChannelId() {
     return mGarageNodeController.getNodeAddress();
+  }
+
+  @Override
+  public ChannelType getType() {
+    return ChannelType.WINSTON_GARAGE;
   }
 
   @Override
@@ -73,7 +79,7 @@ public class WinstonGarageNodeChannel implements Channel {
     }
 
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.WRITE_ONLY;
     }
 
@@ -117,7 +123,7 @@ public class WinstonGarageNodeChannel implements Channel {
     }
 
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.READ_ONLY;
     }
 

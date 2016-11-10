@@ -16,14 +16,13 @@
 
 package com.s13g.winston.master;
 
-import com.google.common.collect.ImmutableList;
 import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.SslContextCreator;
 import com.s13g.winston.common.SslContextCreator.SslContextCreationException;
-import com.s13g.winston.lib.core.util.HttpRequesterImpl;
-import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 import com.s13g.winston.master.config.ConfigWrapper;
+import com.s13g.winston.master.handlers.ChannelDataHandler;
 import com.s13g.winston.master.handlers.MasterModuleHandler;
+import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleRegistry;
 import com.s13g.winston.proto.Master;
 
@@ -33,6 +32,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.net.ssl.SSLContext;
 
@@ -43,7 +43,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  */
 public class MasterDaemon {
   private static final Logger LOG = LogManager.getLogger(MasterDaemon.class);
-  private static int NUM_HTTP_THREADS = 8;
+  private static final int NUM_HTTP_THREADS = 8;
 
   public static void main(final String... args) throws IOException, SslContextCreationException {
     File configFile = new File("master.config");
@@ -58,12 +58,15 @@ public class MasterDaemon {
     configWrapper.assertSane();
     Master.MasterConfig config = configWrapper.getConfig();
 
+    // Load all the modules and hook up request handlers.
     ModuleContext moduleContext = new ModuleContext();
     RequestHandlers requestHandlers = new RequestHandlers(config.getAuthClientList());
     ModuleRegistry moduleRegistry = new ModuleRegistry(moduleContext, config, requestHandlers);
-    requestHandlers.addRequestHandler(new MasterModuleHandler(moduleRegistry));
+    Collection<Module> modules = moduleRegistry.getActiveModules();
+    requestHandlers.addRequestHandler(new MasterModuleHandler(modules));
+    requestHandlers.addRequestHandler(new ChannelDataHandler(modules));
 
-
+    // Set up HTTPS and start serving.
     SSLContext sslContext = null;
     String keystorePath = config.getSslKeystorePath();
     String keystorePassword = config.getSslKeystorePassword();

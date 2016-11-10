@@ -21,6 +21,7 @@ import com.s13g.winston.lib.core.TypeConversion;
 import com.s13g.winston.lib.wemo.WemoSwitch;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 
 import java.util.List;
@@ -44,6 +45,11 @@ public class WemoSwitchChannel implements Channel {
   }
 
   @Override
+  public ChannelType getType() {
+    return ChannelType.WEMO_SWITCH;
+  }
+
+  @Override
   public List<ChannelValue> getValues() {
     ChannelValue value = new WemoSwitchStateChannelValue();
     return ImmutableList.of(value);
@@ -52,7 +58,7 @@ public class WemoSwitchChannel implements Channel {
   private class WemoSwitchStateChannelValue implements ChannelValue<Boolean> {
 
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.READ_WRITE;
     }
 

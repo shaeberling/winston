@@ -35,7 +35,7 @@ public class ReadOnlyChannelValue<T> implements ChannelValue<T> {
   }
 
   @Override
-  public Mode getType() {
+  public Mode getMode() {
     return Mode.READ_ONLY;
   }
 

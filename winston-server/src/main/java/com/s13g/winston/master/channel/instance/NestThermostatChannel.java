@@ -22,6 +22,7 @@ import com.s13g.winston.lib.nest.data.HvacState;
 import com.s13g.winston.lib.temperature.Temperature;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.channel.ReadOnlyChannelValue;
 
@@ -35,7 +36,7 @@ public class NestThermostatChannel implements Channel {
   /**
    * After this time, the data is considered old and needs to be refreshed if accessed again. This
    * avoid multiple requests to the multiple values here to send out a request each, even though
-   * we get the data for all channels with one request to the Nest API.
+   * we getChannel the data for all channels with one request to the Nest API.
    */
   private static final long MAX_DATA_AGE_MILLIS = 10 * 1000;
   private final String mChannelId;
@@ -49,6 +50,11 @@ public class NestThermostatChannel implements Channel {
   @Override
   public String getChannelId() {
     return mChannelId;
+  }
+
+  @Override
+  public ChannelType getType() {
+    return ChannelType.NEST_THERMOSTAT;
   }
 
   @Override
@@ -110,7 +116,7 @@ public class NestThermostatChannel implements Channel {
   /** Read/Write channel for the thermostat's target temperature. */
   private class NestTargetTemperatureCelsiusChannel implements ChannelValue<Float> {
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.READ_WRITE;
     }
 

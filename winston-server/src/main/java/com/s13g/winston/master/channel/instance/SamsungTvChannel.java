@@ -21,6 +21,7 @@ import com.s13g.winston.lib.core.TypeConversion;
 import com.s13g.winston.lib.tv.TvController;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class SamsungTvChannel implements Channel {
   }
 
   @Override
+  public ChannelType getType() {
+    return ChannelType.SAMSUNG_TV;
+  }
+
+  @Override
   public List<ChannelValue> getValues() {
     ChannelValue powerValue = new SamsungPowerChannelValue();
     return ImmutableList.of(powerValue);
@@ -51,7 +57,7 @@ public class SamsungTvChannel implements Channel {
   private class SamsungPowerChannelValue implements ChannelValue<Boolean> {
 
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.WRITE_ONLY;
     }
 

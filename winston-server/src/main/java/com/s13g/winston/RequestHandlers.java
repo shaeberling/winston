@@ -26,6 +26,7 @@ import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Status;
 
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,14 +58,14 @@ public class RequestHandlers {
   /**
    * Handles the given request and performs an authentication check.
    *
-   * @param address the request address
-   * @return The request response.
+   * @param address the request address.
+   * @param response where the response is written to.
    * @throws RequestHandlingException      if there was an error while trying to handle this
    *                                       request.
    * @throws RequestNotAuthorizedException if the client was not authorized to perform this
    *                                       request.
    */
-  public String handleRequest(Address address)
+  public void handleRequest(Address address, OutputStream response)
       throws RequestHandlingException, RequestNotAuthorizedException {
     String path = address.getPath().getPath();
     if (path.startsWith("/")) {
@@ -79,17 +80,19 @@ public class RequestHandlers {
       throw new RequestNotAuthorizedException("Invalid authtoken");
     }
     LOG.info("Authorized client: " + mAuthClients.get(authToken).getName());
-    return handleRequestTrusted(path);
+    handleRequestTrusted(path, response);
   }
 
   /** Call this for requests that are already trusted and don't need an auth token check. */
-  public String handleRequestTrusted(String requestUrl) throws RequestHandlingException {
+  public void handleRequestTrusted(String requestUrl, OutputStream response) throws
+      RequestHandlingException {
     synchronized (mLock) {
       // TODO: This should be done on a background thread, with a proper queue, de-duping per
       // command/node etc.
       for (RequestHandler handler : mRequestHandlers) {
         if (handler.canHandle(requestUrl)) {
-          return handler.doHandle(requestUrl);
+          handler.doHandle(requestUrl, response);
+          return;
         }
       }
       throw new RequestHandlingException("No request handler found. " + requestUrl,
@@ -106,7 +109,7 @@ public class RequestHandlers {
   }
 
   public static class RequestNotAuthorizedException extends Exception {
-    public RequestNotAuthorizedException(String message) {
+    RequestNotAuthorizedException(String message) {
       super(message);
     }
   }

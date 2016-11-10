@@ -23,60 +23,66 @@ import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.modules.Module;
-import com.s13g.winston.master.modules.ModuleRegistry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Status;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Collection;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
  * Handles requests for master modules, such as the 'nest' module.
  */
 public class MasterModuleHandler implements RequestHandler {
+  private static final Logger LOG = LogManager.getLogger(MasterModuleHandler.class);
   private static final String REQ_PREFIX = "io";
 
   /** module -> channel -> channelValue. */
-  private final Map<String, Map<String, Map<String, ChannelValue>>> mChannels;
+  private final Collection<Module> mModules;
 
-  public MasterModuleHandler(ModuleRegistry moduleRegistry) {
-    mChannels = new HashMap<>();
-    for (Module module : moduleRegistry.getActiveModules()) {
-      if (!mChannels.containsKey(module.getType())) {
-        mChannels.put(module.getType(), new HashMap<>());
-      }
-      Map<String, Map<String, ChannelValue>> moduleMap = mChannels.get(module.getType());
-      for (Channel channel : module.getChannels()) {
-        if (!moduleMap.containsKey(channel.getChannelId())) {
-          moduleMap.put(channel.getChannelId(), new HashMap<>());
-        }
-        Map<String, ChannelValue> channelMap = moduleMap.get(channel.getChannelId());
-        for (ChannelValue channelValue : channel.getValues()) {
-          channelMap.put(channelValue.getName(), channelValue);
-        }
-      }
-    }
+  public MasterModuleHandler(Collection<Module> modules) {
+    mModules = modules;
   }
 
   @Override
-  public String doHandle(String request) throws RequestHandlingException {
+  public void doHandle(String request, OutputStream response) throws RequestHandlingException {
+    try (OutputStreamWriter writer = new OutputStreamWriter(response)) {
+      writer.write(handle(request));
+    } catch (IOException e) {
+      LOG.error("Cannot write response", e);
+      throw new RequestHandlingException("Cannot write response.", Status.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  private String handle(String request) throws RequestHandlingException {
     String[] path = request.split("/");
     if (!REQ_PREFIX.equals(path[0])) {
       throw new RequestHandlingException("Path does not match: '" + request + "'.");
     }
 
+    Map<String, Module> modules = mModules.stream().collect(
+        Collectors.toMap(Module::getType, Function.identity()));
+
     // No arguments given, let's list the active modules.
     if (path.length == 1) {
-      return Joiner.on(',').join(mChannels.keySet());
+      return Joiner.on(',').join(modules.keySet());
     }
 
-    String module = path[1];
-    if (!mChannels.containsKey(module)) {
-      throw new RequestHandlingException("Unknown module: '" + module + "'.");
+    String moduleType = path[1];
+    if (!modules.containsKey(moduleType)) {
+      throw new RequestHandlingException("Unknown module: '" + moduleType + "'.");
     }
-    Map<String, Map<String, ChannelValue>> channels = mChannels.get(module);
+
+    Map<String, Channel> channels = modules.get(moduleType).getChannels().stream().collect(
+        Collectors.toMap(Channel::getChannelId, Function.identity()));
 
     // Only a module name is given, so list all the channel names.
     if (path.length == 2) {
@@ -85,9 +91,11 @@ public class MasterModuleHandler implements RequestHandler {
 
     String channelId = path[2];
     if (!channels.containsKey(channelId)) {
-      throw new RequestHandlingException("Unknown channel '" + module + "/" + channelId + "'.");
+      throw new RequestHandlingException("Unknown channel '" + moduleType + "/" + channelId + "'.");
     }
-    Map<String, ChannelValue> channelValues = channels.get(channelId);
+
+    Map<String, ChannelValue> channelValues = channels.get(channelId).getValues().stream().collect(
+        Collectors.toMap(ChannelValue::getName, Function.identity()));
 
     // No arguments given... list the channels.
     if (path.length == 3) {
@@ -109,7 +117,7 @@ public class MasterModuleHandler implements RequestHandler {
     // Read request for the channel.
     if (path.length == 4) {
       try {
-        if (channelValue.getType() == ChannelValue.Mode.WRITE_ONLY) {
+        if (channelValue.getMode() == ChannelValue.Mode.WRITE_ONLY) {
           throw new RequestHandlingException(
               "Cannot read from write-only channel: '" + request + "'.", Status.BAD_REQUEST);
         }
@@ -123,7 +131,7 @@ public class MasterModuleHandler implements RequestHandler {
     // Write request for the channel.
     if (path.length == 5) {
       try {
-        if (channelValue.getType() == ChannelValue.Mode.READ_ONLY) {
+        if (channelValue.getMode() == ChannelValue.Mode.READ_ONLY) {
           throw new RequestHandlingException(
               "Cannot write to read-only channel: '" + request + "'.", Status.BAD_REQUEST);
         }
@@ -140,7 +148,7 @@ public class MasterModuleHandler implements RequestHandler {
 
   @Override
   public boolean canHandle(String request) {
-    // Master modules respond to the standard /io/ requests that nodes use.
-    return request.startsWith(REQ_PREFIX);
+    return !isNullOrEmpty(request) && request.startsWith(REQ_PREFIX);
   }
+
 }

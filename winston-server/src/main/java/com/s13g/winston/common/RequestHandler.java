@@ -16,6 +16,8 @@
 
 package com.s13g.winston.common;
 
+import java.io.OutputStream;
+
 /**
  * Classes implementing this interface can respond to HTTP requests.
  */
@@ -24,10 +26,10 @@ public interface RequestHandler {
    * Handle the HTTP request
    *
    * @param request the request
-   * @return The response for the request.
+   * @param response where the response is written to.
    * @throws RequestHandlingException Thrown is there was an error handling the request.
    */
-  String doHandle(String request) throws RequestHandlingException;
+  void doHandle(String request, OutputStream response) throws RequestHandlingException;
 
   /**
    * @param request the request

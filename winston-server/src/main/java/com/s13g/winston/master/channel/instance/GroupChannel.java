@@ -21,12 +21,15 @@ import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
+import com.s13g.winston.master.channel.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.proto.Master;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -53,6 +56,11 @@ public class GroupChannel implements Channel {
   }
 
   @Override
+  public ChannelType getType() {
+    return ChannelType.GROUP;
+  }
+
+  @Override
   public List<ChannelValue> getValues() {
     List<ChannelValue> values = new LinkedList<>();
     for (Master.Group group : mGroups) {
@@ -71,7 +79,7 @@ public class GroupChannel implements Channel {
     }
 
     @Override
-    public Mode getType() {
+    public Mode getMode() {
       return Mode.WRITE_ONLY;
     }
 
@@ -86,10 +94,10 @@ public class GroupChannel implements Channel {
         for (String input : trigger.getInputList()) {
           if (input.equals(value)) {
             for (String action : trigger.getActionList()) {
-              try {
+              try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
                 // TODO: Consider doing this asynchronously so reuests can fire in parallel.
-                mRequestHandlers.handleRequestTrusted(action);
-              } catch (RequestHandlingException e) {
+                mRequestHandlers.handleRequestTrusted(action, out);
+              } catch (IOException | RequestHandlingException e) {
                 throw new ChannelException("Some request in the group failed '" + mName + "'.");
               }
             }
