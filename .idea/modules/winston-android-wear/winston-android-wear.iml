@@ -81,17 +81,7 @@
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-v13/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/9.4.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-v13/25.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.google.android.support/wearable/1.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/incremental-safeguard" />
@@ -110,21 +100,21 @@
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android SDK" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="support-v4-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v13-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-9.4.0" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-basement-9.4.0" level="project" />
-    <orderEntry type="library" exported="" name="play-services-tasks-9.4.0" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-wearable-9.4.0" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-base-9.8.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-basement-9.8.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-media-compat-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v13-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-compat-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="support-fragment-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-tasks-9.8.0" level="project" />
     <orderEntry type="library" exported="" name="guava-20.0" level="project" />
+    <orderEntry type="library" exported="" name="support-core-ui-25.0.0" level="project" />
+    <orderEntry type="library" exported="" name="play-services-wearable-9.8.0" level="project" />
+    <orderEntry type="library" exported="" name="support-core-utils-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-21.0.0" level="project" />
     <orderEntry type="library" exported="" name="protobuf-java-3.0.0" level="project" />
     <orderEntry type="library" exported="" name="wearable-1.1.0" level="project" />
