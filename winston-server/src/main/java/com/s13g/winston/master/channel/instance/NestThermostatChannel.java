@@ -19,10 +19,10 @@ package com.s13g.winston.master.channel.instance;
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.nest.Thermostat;
 import com.s13g.winston.lib.nest.data.HvacState;
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
-import com.s13g.winston.master.channel.ChannelType;
+import com.s13g.winston.shared.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.channel.ReadOnlyChannelValue;
 

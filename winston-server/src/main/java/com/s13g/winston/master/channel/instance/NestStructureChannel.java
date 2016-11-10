@@ -22,7 +22,7 @@ import com.s13g.winston.lib.nest.Structure;
 import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
-import com.s13g.winston.master.channel.ChannelType;
+import com.s13g.winston.shared.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.channel.ReadOnlyChannelValue;
 

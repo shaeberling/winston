@@ -18,7 +18,7 @@ package com.s13g.winston.lib.winston;
 
 import com.google.common.collect.ImmutableList;
 import com.s13g.winston.lib.core.net.HttpUtil;
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

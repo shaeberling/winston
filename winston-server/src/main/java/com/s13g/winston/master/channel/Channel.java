@@ -26,7 +26,7 @@ public interface Channel {
   String getChannelId();
 
   /** The type of this channel, which tells clients how to display/handle this channel. */
-  ChannelType getType();
+  com.s13g.winston.shared.ChannelType getType();
 
   /**
    * Creates and returns all the channel values that belong to this channel.

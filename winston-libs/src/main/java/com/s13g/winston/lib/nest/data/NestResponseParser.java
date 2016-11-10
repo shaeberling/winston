@@ -17,7 +17,7 @@
 package com.s13g.winston.lib.nest.data;
 
 import com.s13g.winston.lib.core.util.Pair;
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

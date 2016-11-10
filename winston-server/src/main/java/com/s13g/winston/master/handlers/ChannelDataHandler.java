@@ -70,6 +70,7 @@ public class ChannelDataHandler implements RequestHandler {
     if (requestParts[0].equals(REQ_PREFIX_TEXT)) {
       try (OutputStreamWriter writer = new OutputStreamWriter(response)) {
         writer.append(dataToText());
+        return;
       } catch (IOException e) {
         LOG.error("Cannot write response", e);
         throw new RequestHandlingException("Cannot write response.", Status.INTERNAL_SERVER_ERROR);

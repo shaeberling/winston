@@ -18,7 +18,7 @@ package com.s13g.winston.lib.nest;
 
 import com.s13g.winston.lib.nest.data.HvacState;
 import com.s13g.winston.lib.nest.data.ThermostatData;
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 
 import java.util.Optional;
 

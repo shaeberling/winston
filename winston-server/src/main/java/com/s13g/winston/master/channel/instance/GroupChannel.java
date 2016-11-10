@@ -21,7 +21,7 @@ import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
-import com.s13g.winston.master.channel.ChannelType;
+import com.s13g.winston.shared.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.proto.Master;
 

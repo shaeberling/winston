@@ -18,11 +18,9 @@ package com.s13g.winston.lib.temperature;
 
 import com.s13g.winston.lib.plugin.NodeController;
 
-import java.util.Locale;
-
 /**
  * Common temperature sensor interface.
  */
 public interface TemperatureSensorController extends NodeController {
-  Temperature getTemperature();
+  com.s13g.winston.shared.data.Temperature getTemperature();
 }

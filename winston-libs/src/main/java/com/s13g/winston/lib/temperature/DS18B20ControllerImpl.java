@@ -47,7 +47,7 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
    * <p>
    * TODO: Add timestamp so we know when it becomes too old.
    */
-  private Temperature mLastKnownGoodTemperature = new Temperature(-42, Temperature.Unit.CELSIUS);
+  private com.s13g.winston.shared.data.Temperature mLastKnownGoodTemperature = new com.s13g.winston.shared.data.Temperature(-42, com.s13g.winston.shared.data.Temperature.Unit.CELSIUS);
 
   /**
    * Initialize the temperature sensor for the given device.
@@ -100,9 +100,9 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
   }
 
   @Override
-  public Temperature getTemperature() {
+  public com.s13g.winston.shared.data.Temperature getTemperature() {
     try {
-      mLastKnownGoodTemperature = new Temperature(readValue() / 1000f, Temperature.Unit
+      mLastKnownGoodTemperature = new com.s13g.winston.shared.data.Temperature(readValue() / 1000f, com.s13g.winston.shared.data.Temperature.Unit
           .CELSIUS);
     } catch (IOException ex) {
       LOG.warn("Could not read temperature", ex);

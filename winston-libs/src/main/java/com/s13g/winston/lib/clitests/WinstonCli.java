@@ -16,7 +16,7 @@
 
 package com.s13g.winston.lib.clitests;
 
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 import com.s13g.winston.lib.winston.WinstonController;
 import com.s13g.winston.lib.winston.WinstonGarageNodeController;
 import com.s13g.winston.lib.winston.WinstonSensorNodeController;

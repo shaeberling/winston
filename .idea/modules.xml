@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/winston-libs/winston-libs.iml" filepath="$PROJECT_DIR$/.idea/modules/winston-libs/winston-libs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/winston-protos/winston-protos.iml" filepath="$PROJECT_DIR$/.idea/modules/winston-protos/winston-protos.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/winston-server/winston-server.iml" filepath="$PROJECT_DIR$/.idea/modules/winston-server/winston-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/winston-shared/winston-shared.iml" filepath="$PROJECT_DIR$/.idea/modules/winston-shared/winston-shared.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ws-winston.iml" filepath="$PROJECT_DIR$/.idea/modules/ws-winston.iml" />
     </modules>
   </component>

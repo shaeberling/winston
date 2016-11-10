@@ -19,7 +19,7 @@ package com.s13g.winston.lib.nest;
 import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 
 /**
  * Interface for interacting with the Nest API.

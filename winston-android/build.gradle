@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    compile project(':winston-shared') 
     compile 'com.google.guava:guava:19.0'
     compile 'com.google.protobuf.nano:protobuf-javanano:3.0+'
     compile 'com.android.support:appcompat-v7:23.3.0'

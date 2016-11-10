@@ -20,11 +20,9 @@ import com.google.common.io.Files;
 import com.s13g.winston.lib.nest.NestAuthenticator;
 import com.s13g.winston.lib.nest.NestController;
 import com.s13g.winston.lib.nest.NestControllerImpl;
-import com.s13g.winston.lib.nest.Structure;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
 import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
-import com.s13g.winston.lib.temperature.Temperature;
 
 import java.io.File;
 import java.io.IOException;

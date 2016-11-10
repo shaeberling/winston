@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.master.channel;
+package com.s13g.winston.shared;
 
 /**
  * Defines all types of channels.

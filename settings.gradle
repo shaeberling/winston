@@ -1,1 +1,1 @@
-include ":winston-protos", ":winston-android-wear", ":winston-android", ":winston-libs", ":winston-server"
+include ":winston-shared", ":winston-protos", ":winston-android-wear", ":winston-android", ":winston-libs", ":winston-server"

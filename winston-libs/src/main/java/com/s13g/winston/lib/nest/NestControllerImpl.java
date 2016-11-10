@@ -21,7 +21,7 @@ import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
 import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
-import com.s13g.winston.lib.temperature.Temperature;
+import com.s13g.winston.shared.data.Temperature;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -22,7 +22,7 @@ import com.s13g.winston.lib.winston.WinstonPowerNodeController;
 import com.s13g.winston.lib.winston.WinstonPowerNodeController.SwitchActions;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
-import com.s13g.winston.master.channel.ChannelType;
+import com.s13g.winston.shared.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 
 import java.util.LinkedList;

@@ -14,14 +14,14 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.temperature;
+package com.s13g.winston.shared.data;
 
 import com.google.common.base.Strings;
 
 import java.util.Locale;
 
 /**
- * Represents a temperature.
+ * Represents a temperature value. Can be parsed and put into a string.
  */
 public class Temperature {
   public enum Unit {
