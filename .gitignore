@@ -18,5 +18,5 @@ RemoteSystemsTempFiles/
 
 master.config
 node.config
-
+*.jks
 
