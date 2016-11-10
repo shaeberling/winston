@@ -21,20 +21,29 @@ option java_package = "com.s13g.winston.proto";
 option java_outer_classname = "ForClients";
 
 /* Contains whole system data loaded by a client. */
-message SystemData {
-    /* Whether the request for this data was successful. */
-    bool success = 1;
+message ChannelData {
+    /* All the channels that are known to the system. */
+    repeated Channel channel = 1;
 
-    /* All the I/Os that are known to the system. */
-    repeated IoChannel io_channel = 2;
-
-    /* Defines a single IoChannel. */
-    message IoChannel {
-        /* System-wide unique ID, e.g. '/pi-power-1/io/relay/0'. */
+    /* Defines a single Winston channel. */
+    message Channel {
+        /* System-wide unique ID, e.g. 'io/winston/pi-power-1'. */
         string id = 1;
+        /* The ID of the module. */
+        string module_type = 2;
         /* The type of the channel, like 'temperature' etc. */
-        string type = 2;
+        string type = 3;
         /* Human readable name, to be used as a label. */
-        string name = 3;
+        string name = 4;
+        /* All values from this channel .*/
+        repeated ChannelValue value = 5;
+
+        /* Defines a channel value. */
+        message ChannelValue {
+            /* The id of the ChannelValue. */
+            string id = 1;
+            /* Read/write mode. */
+            string mode = 2;
+        }
     }
 }
