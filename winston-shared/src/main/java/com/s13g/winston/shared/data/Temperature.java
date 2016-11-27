@@ -16,6 +16,7 @@
 
 package com.s13g.winston.shared.data;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 import java.util.Locale;
@@ -72,6 +73,10 @@ public class Temperature {
   public Temperature(float value, Unit unit) {
     mValue = value;
     mUnit = unit;
+  }
+
+  public float getRounded(Unit unit) {
+    return Math.round(get(unit) * 100.0f) / 100.0f;
   }
 
   /** Returns the temperature value in the given unit. */
