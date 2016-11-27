@@ -26,12 +26,15 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+
+import com.s13g.winston.shared.data.Temperature;
 
 /**
  * A tile view which can display temperature.
  */
-public class TemperatureTile extends View {
+public class TemperatureTileView extends View {
   private static final float RELATIVE_DRAWING_OFFSET = 0.1f;
   private static final int TEXT_COLOR = Color.BLACK;
   private static final float TEXT_SIZE_FRACTION = 6f;
@@ -43,7 +46,7 @@ public class TemperatureTile extends View {
   private static final String CELSIUS_STRING = "%1$s°C";
 
   private Config mConfig = new Config(0, 50);
-  private float mCurrentTemp = 21.4f;
+  private float mCurrentTempC = 21.4f;
 
   private Rect mArea;
   private RectF mArcArea;
@@ -52,35 +55,41 @@ public class TemperatureTile extends View {
   private Paint mArcValuePaint;
   private float mTextHeightHalf;
 
-  public TemperatureTile(Context context) {
+  public TemperatureTileView(Context context) {
     super(context);
     initialize();
   }
 
-  public TemperatureTile(Context context, AttributeSet attrs) {
+  public TemperatureTileView(Context context, AttributeSet attrs) {
     super(context, attrs);
     initialize();
   }
 
-  public TemperatureTile(Context context, AttributeSet attrs, int defStyleAttr) {
+  public TemperatureTileView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     initialize();
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public TemperatureTile(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public TemperatureTileView(Context context, AttributeSet attrs, int defStyleAttr,
+                             int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     initialize();
   }
 
-  public void setTemperatureCelsius(float temperature) {
-    mCurrentTemp = temperature;
-    this.invalidate();
+  public void setTemperature(Temperature temperature) {
+    mCurrentTempC = temperature.getRounded(Temperature.Unit.CELSIUS);
+    post(new Runnable() {
+      @Override
+      public void run() {
+        invalidate();
+      }
+    });
   }
 
   public void setConfig(Config config) {
     mConfig = config;
-    this.invalidate();
+    invalidate();
   }
 
   private void initialize() {
@@ -105,12 +114,12 @@ public class TemperatureTile extends View {
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
-    canvas.drawText(String.format(CELSIUS_STRING, mCurrentTemp), mArea.centerX(), mArea.centerY() +
+    canvas.drawText(String.format(CELSIUS_STRING, mCurrentTempC), mArea.centerX(), mArea.centerY() +
         mTextHeightHalf, mTextPaint);
     canvas.drawArc(mArcArea, 180, 180, false, mArcPaint);
 
     float tempRange = mConfig.maxTemp - mConfig.minTemp;
-    float angle = ((mCurrentTemp - mConfig.minTemp) / tempRange) * 176;
+    float angle = ((mCurrentTempC - mConfig.minTemp) / tempRange) * 176;
     angle = Math.max(Math.min(angle, 176), 0);
     canvas.drawArc(mArcArea, 182, angle, false, mArcValuePaint);
   }
@@ -138,8 +147,8 @@ public class TemperatureTile extends View {
   }
 
   public static class Config {
-    public final float minTemp;
-    public final float maxTemp;
+    final float minTemp;
+    final float maxTemp;
 
 
     public Config(float minTemp, float maxTemp) {

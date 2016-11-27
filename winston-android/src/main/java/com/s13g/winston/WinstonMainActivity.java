@@ -17,73 +17,93 @@
 package com.s13g.winston;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.google.common.base.Optional;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.async.Executors;
 import com.s13g.winston.async.Scope;
 import com.s13g.winston.control.VoiceCommands;
-import com.s13g.winston.net.SystemDataLoader;
-import com.s13g.winston.net.SystemDataLoaderForTesting;
-import com.s13g.winston.net.SystemDataLoaderImpl;
-import com.s13g.winston.proto.nano.ForClients;
-import com.s13g.winston.requests.NodeRequests;
+import com.s13g.winston.controller.TileCreatorRegistry;
+import com.s13g.winston.net.HttpRequester;
+import com.s13g.winston.net.HttpRequesterImpl;
+import com.s13g.winston.proto.nano.ForClients.ChannelData;
+import com.s13g.winston.requests.ChannelDataRequester;
+import com.s13g.winston.requests.ChannelValueRequester;
 import com.s13g.winston.views.TiledViewCreator;
+import com.s13g.winston.views.Toaster;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class WinstonMainActivity extends Activity implements View.OnClickListener {
-  private static final Logger LOG = Logger.getLogger("WinstonMainActivity");
-  private static final boolean TEST_MODE_ENABLED = true;
+  private static final Logger LOG = Logger.getLogger("MainActivity");
 
   private Scope mActivityScope;
-  private NodeRequests mNodeRequests;
+  private Toaster mToaster;
+  private PreferenceManager mPreferenceManager;
   private VoiceCommands mVoiceCommands;
   private Executors mExecutors;
-  private SystemDataLoader mSystemDataLoader;
+  private ChannelDataRequester mChannelDataRequest;
+  private ChannelValueRequester mChannelValueRequester;
+  private TileCreatorRegistry mTileCreatorRegistry;
   private TiledViewCreator mTiledViewCreator;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     mActivityScope = new Scope();
     mExecutors = new Executors();
+
+    mToaster = new Toaster(this);
+    mPreferenceManager = new PreferenceManager(getApplicationContext());
+    Optional<HttpRequester> httpRequester = HttpRequesterImpl.create(mPreferenceManager, mToaster);
+
     mVoiceCommands = VoiceCommands.create(getApplicationContext());
-    if (TEST_MODE_ENABLED) {
-      mSystemDataLoader = new SystemDataLoaderForTesting(mExecutors.getNetworkExecutor());
-    } else {
-      mSystemDataLoader = new SystemDataLoaderImpl(mExecutors.getNetworkExecutor());
+
+    // Don't continue, if we cannot initialize an http requester.
+    if (!httpRequester.isPresent()) {
+      return;
     }
-    mActivityScope.add(mSystemDataLoader);
-    mTiledViewCreator = new TiledViewCreator((ViewGroup) findViewById(R.id.tile_container));
+
+    mChannelDataRequest = mActivityScope.add(
+        new ChannelDataRequester(httpRequester.get(), mExecutors.getNetworkExecutor()));
+    mChannelValueRequester = new ChannelValueRequester(httpRequester.get(), mExecutors
+        .getNetworkExecutor());
+
+    mTileCreatorRegistry = new TileCreatorRegistry(getApplicationContext(), mChannelValueRequester);
+    mTiledViewCreator = new TiledViewCreator((ViewGroup) findViewById(R.id.tile_container),
+        mTileCreatorRegistry.getCreators());
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    mNodeRequests = new NodeRequests();
-    mActivityScope.add(mNodeRequests);
 
-    ListenableFuture<ForClients.SystemData> systemData = mSystemDataLoader.loadSystemData();
-    Futures.addCallback(systemData, new FutureCallback<ForClients.SystemData>() {
+    if (mChannelDataRequest == null) {
+      return;
+    }
+
+    ListenableFuture<ChannelData> channelData = mChannelDataRequest.execute();
+    Futures.addCallback(channelData, new FutureCallback<ChannelData>() {
       @Override
-      public void onSuccess(ForClients.SystemData result) {
-        onSystemDataLoaded(result);
+      public void onSuccess(ChannelData data) {
+        onSystemDataLoaded(data);
       }
 
       @Override
       public void onFailure(Throwable t) {
-        // TODO: Show an error message.
+        LOG.log(Level.SEVERE, "Request failed", t);
+        mToaster.showToast(t.getMessage(), Toaster.Duration.LONG);
       }
     });
   }
@@ -112,9 +132,14 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
     // as you specify a parent activity in AndroidManifest.xml.
     int id = item.getItemId();
     if (id == R.id.action_settings) {
+      Intent intent = new Intent(this, SettingsActivity.class);
+      startActivity(intent);
       return true;
     } else if (id == R.id.action_voice_command) {
       onStartVoiceControl();
+      return true;
+    } else if (id == R.id.action_refresh) {
+      mTiledViewCreator.refreshAll();
       return true;
     }
     return super.onOptionsItemSelected(item);
@@ -122,40 +147,21 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
 
   @Override
   public void onClick(final View view) {
-
     switch (view.getId()) {
-      case R.id.action_garage_0:
-        onActionCloseGarage();
-        break;
-      case R.id.action_light:
-        onActionLightOn();
-        break;
     }
   }
 
-  private void onSystemDataLoaded(ForClients.SystemData systemData) {
-    mTiledViewCreator.addTiles(systemData.ioChannel);
+  private void onSystemDataLoaded(final ChannelData channelData) {
+    mExecutors.getMainThreadExecutor().execute(new Runnable() {
+      @Override
+      public void run() {
+        mTiledViewCreator.addTiles(channelData);
+      }
+    });
   }
 
   private void onStartVoiceControl() {
-    Toast.makeText(
-        getApplicationContext(), getString(R.string.speak_now), Toast.LENGTH_LONG).show();
+    mToaster.showToast(getString(R.string.speak_now), Toaster.Duration.LONG);
     mVoiceCommands.onStart();
-  }
-
-  private void onActionCloseGarage() {
-    mNodeRequests.execute("/garage/1");
-  }
-
-  private void onActionOpenGarage() {
-    mNodeRequests.execute("/garage/1");
-  }
-
-  private void onActionLightOff() {
-    mNodeRequests.execute("/light/1");
-  }
-
-  private void onActionLightOn() {
-    mNodeRequests.execute("/light/1");
   }
 }

@@ -29,5 +29,11 @@
         android:showAsAction="ifRoom"
         android:icon="@drawable/ic_settings_voice_24"
         android:title="@string/action_voice_command"/>
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_refresh_24dp"
+        android:title="@string/action_refresh"/>
 
 </menu>

@@ -16,31 +16,24 @@
 
 package com.s13g.winston.async;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.support.annotation.NonNull;
+
 import java.util.concurrent.Executor;
 
 /**
- * Executors that are used in the winston android app.
+ * An executor that runs everything on the main/UI thread.
  */
-public class Executors {
-  private final Executor mMainThread;
-  private final Executor mNetworkExecutor;
+public class UiThreadExecutor implements Executor {
+  private final Handler mMainHandler;
 
-  public Executors() {
-    mMainThread = new UiThreadExecutor();
-    mNetworkExecutor = java.util.concurrent.Executors.newFixedThreadPool(2);
+  public UiThreadExecutor() {
+    mMainHandler = new Handler(Looper.getMainLooper());
   }
 
-  /**
-   * @return Executor that executes everything on the main/UI thread.
-   */
-  public Executor getMainThreadExecutor() {
-    return mMainThread;
-  }
-
-  /**
-   * @return Executor to be used for network access.
-   */
-  public Executor getNetworkExecutor() {
-    return mNetworkExecutor;
+  @Override
+  public void execute(@NonNull Runnable runnable) {
+    mMainHandler.post(runnable);
   }
 }

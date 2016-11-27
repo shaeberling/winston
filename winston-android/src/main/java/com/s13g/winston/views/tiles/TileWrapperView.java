@@ -33,25 +33,25 @@ import com.s13g.winston.R;
  * <p>
  * Also enables us to show some debug data when required.
  */
-public class TileWrapper extends LinearLayout {
+public class TileWrapperView extends LinearLayout {
 
-  public TileWrapper(Context context) {
+  public TileWrapperView(Context context) {
     super(context);
     initialize();
   }
 
-  public TileWrapper(Context context, AttributeSet attrs) {
+  public TileWrapperView(Context context, AttributeSet attrs) {
     super(context, attrs);
     initialize();
   }
 
-  public TileWrapper(Context context, AttributeSet attrs, int defStyleAttr) {
+  public TileWrapperView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     initialize();
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public TileWrapper(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public TileWrapperView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     initialize();
   }
@@ -60,6 +60,15 @@ public class TileWrapper extends LinearLayout {
     TextView titleView = (TextView) findViewById(R.id.title);
     titleView.setText(title);
     ((ViewGroup) findViewById(R.id.placeholder)).addView(view);
+  }
+
+  public void setFooterText(final int resId) {
+    post(new Runnable() {
+      @Override
+      public void run() {
+        ((TextView) findViewById(R.id.footer)).setText(resId);
+      }
+    });
   }
 
   private void initialize() {

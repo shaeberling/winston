@@ -14,14 +14,18 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.net;
+package com.s13g.winston;
 
-import com.google.common.util.concurrent.ListenableFuture;
-import com.s13g.winston.proto.nano.ForClients;
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
 
 /**
- * Loads the data about nodes in the current system from the master.
+ * Presents app preferences to the user.
  */
-public interface SystemDataLoader extends AutoCloseable {
-  ListenableFuture<ForClients.SystemData> loadSystemData();
+public class SettingsActivity extends PreferenceActivity {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    addPreferencesFromResource(R.xml.preferences);
+  }
 }

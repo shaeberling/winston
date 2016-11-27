@@ -14,11 +14,17 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston;
+package com.s13g.winston.controller;
+
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
- * Handles the master-server communication.
+ * Common interface for all tile controllers.
  */
-public class ServerCommunication {
+public interface TileController {
 
+  /** Updates the tile with the latest data from Winston master. */
+  ListenableFuture<Boolean> refresh();
+
+  // TODO: Add certain actions.
 }

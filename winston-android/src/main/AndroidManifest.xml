@@ -36,6 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/preference_activity_title">
+        </activity>
 
         <service
             android:name=".WearListener"

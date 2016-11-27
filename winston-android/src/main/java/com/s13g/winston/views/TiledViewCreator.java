@@ -17,16 +17,18 @@
 package com.s13g.winston.views;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.s13g.winston.proto.nano.ForClients;
-import com.s13g.winston.views.tiles.ErrorTile;
-import com.s13g.winston.views.tiles.LightTile;
-import com.s13g.winston.views.tiles.TemperatureTile;
-import com.s13g.winston.views.tiles.TileWrapper;
+import com.s13g.winston.controller.ChannelTileCreator;
+import com.s13g.winston.controller.WrappedTileController;
+import com.s13g.winston.proto.nano.ForClients.ChannelData;
+import com.s13g.winston.shared.ChannelType;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -36,44 +38,68 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class TiledViewCreator {
   private static final Logger LOG = Logger.getLogger("TiledViewCreator");
+
   private final ViewGroup mTileContainer;
   private final Context mContext;
+  private final List<WrappedTileController> mControllers;
+  private final Map<ChannelType, ChannelTileCreator> mCreators;
 
-  public TiledViewCreator(ViewGroup tileContainer) {
+  public TiledViewCreator(ViewGroup tileContainer,
+                          Map<ChannelType, ChannelTileCreator> tileCreators) {
     mTileContainer = checkNotNull(tileContainer);
     mContext = checkNotNull(mTileContainer.getContext());
+    mControllers = new LinkedList<>();
+    mCreators = tileCreators;
   }
 
-  public void addTiles(ForClients.SystemData.IoChannel[] channels) {
+  /**
+   * Add tile data. Call this on the main thread.
+   *
+   * @param data tile data.
+   */
+  public void addTiles(ChannelData data) {
+    LOG.info("Adding tiles: " + data.channel.length);
+
     ViewGroup newRow = null;
-    for (int i = 0; i < channels.length; ++i) {
-      if (i % 2 == 0) {
-        newRow = createRow();
-        mTileContainer.addView(newRow);
+    int c = 0;
+    for (int i = 0; i < data.channel.length; ++i) {
+      ChannelData.Channel channel = data.channel[i];
+      LOG.info("Adding views for channel: " + channel.id);
+      List<WrappedTileController> tiles = createWrappedTiles(channel);
+      for (WrappedTileController tile : tiles) {
+        if (c++ % 2 == 0) {
+          newRow = createRow();
+          mTileContainer.addView(newRow);
+        }
+        newRow.addView(tile.getView());
       }
-      ForClients.SystemData.IoChannel channel = channels[i];
-      LOG.info("Adding view for channel: " + channel.id);
-      newRow.addView(wrapTile(createTile(channels[i]), channels[i].name));
+      mControllers.addAll(tiles);
     }
     mTileContainer.invalidate();
     mTileContainer.requestLayout();
   }
 
-  private View createTile(ForClients.SystemData.IoChannel channel) {
-    switch (channel.type) {
-      case "temperature":
-        return new TemperatureTile(mContext);
-      case "switch/light":
-        return new LightTile(mContext);
-      default:
-        return new ErrorTile(mContext);
+  public void refreshAll() {
+    for (WrappedTileController controller : mControllers) {
+      controller.refresh();
+      // TODO: Use the future to change some global UI maybe.
     }
   }
 
-  private ViewGroup wrapTile(View view, String title) {
-    TileWrapper tileWrapper = new TileWrapper(mContext);
-    tileWrapper.setTileView(title, view);
-    return tileWrapper;
+  private List<WrappedTileController> createWrappedTiles(ChannelData.Channel channel) {
+    ChannelType type = ChannelType.valueOf(channel.type);
+    if (mCreators.containsKey(type)) {
+      return mCreators.get(type).createWrappedTiles(channel);
+    } else {
+      LOG.log(Level.WARNING, "Not supported channel type: " + type);
+    }
+    return new LinkedList<>();
+
+//        case WINSTON_POWERBOX:
+//        case WEMO_SWITCH:
+//          return Lists.newArrayList((View) wrapTile(new LightTile(mContext), channelName));
+//        default:
+//          return Lists.newArrayList((View) wrapTile(new ErrorTile(mContext), channelName));
   }
 
   private ViewGroup createRow() {

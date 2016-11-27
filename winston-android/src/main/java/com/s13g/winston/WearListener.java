@@ -18,7 +18,6 @@ package com.s13g.winston;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
-import com.s13g.winston.requests.NodeRequests;
 
 import java.util.logging.Logger;
 
@@ -27,23 +26,14 @@ import java.util.logging.Logger;
  */
 public class WearListener extends WearableListenerService {
     private static final Logger LOG = Logger.getLogger("MainActivity");
-    private NodeRequests mNodeRequests;
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         LOG.info("Wear message received: " + messageEvent.getPath());
-        if (mNodeRequests == null) {
-            mNodeRequests = new NodeRequests();
-        }
-        mNodeRequests.execute(messageEvent.getPath());
     }
 
     @Override
     public void onDestroy() {
-        if (mNodeRequests != null) {
-            mNodeRequests.close();
-            mNodeRequests = null;
-        }
         super.onDestroy();
     }
 }

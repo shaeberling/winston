@@ -43,12 +43,19 @@ public class Scope implements AutoCloseable {
     }
   }
 
-  public void add(AutoCloseable closeable) {
+  /**
+   * Adds te closeable to the list of items being closes then the scope is being closed
+   *
+   * @param closeable the closeable to add to the scope.
+   * @return For fluent programming, returns the closeable itself.
+   */
+  public <T extends AutoCloseable> T add(T closeable) {
     synchronized (mLock) {
       if (mClosed) {
         throw new IllegalStateException("Cannot add to a closed scope.");
       }
       mCloseables.add(closeable);
     }
+    return closeable;
   }
 }

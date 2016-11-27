@@ -17,33 +17,15 @@
 package com.s13g.winston.net;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.s13g.winston.proto.nano.ForClients.SystemData;
 
+import java.io.IOException;
 import java.util.concurrent.Executor;
 
 /**
- * Default implementation for loading system data.
+ * Interface for class that provide HTTP request functionality.
  */
-public class SystemDataLoaderImpl implements SystemDataLoader {
-  private final Executor mExecutor;
+public interface HttpRequester {
+  byte[] request(String url) throws IOException;
 
-  /**
-   * Creates a new system data loader.
-   *
-   * @param executor the executor to be used for making the request to load the data. master server
-   * being available.
-   */
-  public SystemDataLoaderImpl(Executor executor) {
-    mExecutor = executor;
-  }
-
-  @Override
-  public ListenableFuture<SystemData> loadSystemData() {
-    throw new RuntimeException("Not implemented yet");
-  }
-
-  @Override
-  public void close() throws Exception {
-    throw new RuntimeException("Not implemented yet");
-  }
+  ListenableFuture<byte[]> requestAsync(String url, Executor executor);
 }

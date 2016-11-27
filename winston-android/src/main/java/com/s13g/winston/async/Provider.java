@@ -16,31 +16,11 @@
 
 package com.s13g.winston.async;
 
-import java.util.concurrent.Executor;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /**
- * Executors that are used in the winston android app.
+ * Asynchronosuly provides stuff.
  */
-public class Executors {
-  private final Executor mMainThread;
-  private final Executor mNetworkExecutor;
-
-  public Executors() {
-    mMainThread = new UiThreadExecutor();
-    mNetworkExecutor = java.util.concurrent.Executors.newFixedThreadPool(2);
-  }
-
-  /**
-   * @return Executor that executes everything on the main/UI thread.
-   */
-  public Executor getMainThreadExecutor() {
-    return mMainThread;
-  }
-
-  /**
-   * @return Executor to be used for network access.
-   */
-  public Executor getNetworkExecutor() {
-    return mNetworkExecutor;
-  }
+public interface Provider<T> {
+  ListenableFuture<T> provide();
 }
