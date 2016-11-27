@@ -80,15 +80,16 @@
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/bundles" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/dependency-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/dex" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.android.support/support-v13/25.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/exploded-aar/com.google.android.support/wearable/1.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/instant-run-support" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/lint" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/jill" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/manifests" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/packaged" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/rs" />
@@ -96,8 +97,6 @@
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/reports" />
-      <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/test-results" />
       <excludeFolder url="file://$MODULE_DIR$/../../../winston-android-wear/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android SDK" jdkType="Android SDK" />

@@ -8,6 +8,9 @@ android {
         applicationId "com.s13g.winston"
         minSdkVersion 19
         targetSdkVersion 25
+        jackOptions {
+            enabled false
+        }
     }
 
     buildTypes {
@@ -15,7 +18,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+        debug {
+            minifyEnabled false
+            ext.enableCrashlytics = false
+        }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
