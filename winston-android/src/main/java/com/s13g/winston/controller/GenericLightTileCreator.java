@@ -30,6 +30,8 @@ import com.s13g.winston.views.tiles.TileWrapperView;
 
 import javax.annotation.Nullable;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 /**
  * For channel tile creators that produce light tiles.
  */
@@ -66,7 +68,9 @@ public abstract class GenericLightTileCreator extends ChannelTileCreator {
                 });
           }
         });
-    TileWrapperView wrapperView = wrapTile(tile, channel.name + "/" + value.id);
+    String title = isNullOrEmpty(channel.name) ? channel.id : channel.name;
+    title += "/" + value.id;
+    TileWrapperView wrapperView = wrapTile(tile, title);
     return new WrappedTileController(controller, wrapperView);
   }
 

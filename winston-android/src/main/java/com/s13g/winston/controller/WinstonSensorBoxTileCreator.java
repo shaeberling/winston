@@ -36,6 +36,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.s13g.winston.shared.ChannelType.WINSTON_SENSORBOX;
 
 /**
@@ -91,7 +92,9 @@ class WinstonSensorBoxTileCreator extends ChannelTileCreator {
                 });
           }
         });
-    TileWrapperView wrapperView = wrapTile(tile, channel.name + "/" + value.id);
+    String title = isNullOrEmpty(channel.name) ? channel.id : channel.name;
+    title += "/" + value.id;
+    TileWrapperView wrapperView = wrapTile(tile, title);
     return new WrappedTileController(tempController, wrapperView);
   }
 }
