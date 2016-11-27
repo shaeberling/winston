@@ -36,6 +36,11 @@ public final class TypeConversion {
     }
   }
 
+  /** Converts a boolean to a string for the winston API. */
+  public static String booleanToString(Boolean value) {
+    return value == null || !value ? "0" : "1";
+  }
+
   public static class IllegalFormatException extends Exception {
     IllegalFormatException(String messge) {
       super(messge);

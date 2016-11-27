@@ -16,15 +16,25 @@
 
 package com.s13g.winston.controller;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.async.Provider;
 import com.s13g.winston.views.tiles.LightTileView;
 
 /**
  * Controller for the {@link com.s13g.winston.views.tiles.LightTileView}.
  */
-class LightTileController extends BasicTileController {
+class LightTileController extends BasicTileController<LightTileView, Boolean> {
 
-  LightTileController(LightTileView tileView, Provider<Boolean> provider) {
-    super(tileView, provider);
+  LightTileController(LightTileView tileView,
+                      Provider<Boolean> provider,
+                      Function<Boolean, ListenableFuture<Boolean>> mainAction) {
+    super(tileView, provider, mainAction);
+  }
+
+  @Override
+  protected Boolean updateValueOnMainAction(Boolean currentValue) {
+    // Invert the value.
+    return currentValue == null || !currentValue;
   }
 }

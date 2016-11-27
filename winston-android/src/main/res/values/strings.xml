@@ -32,6 +32,7 @@
     <string name="tile_refreshing">Refreshing …</string>
     <string name="tile_refreshing_failed">Refresh failed</string>
     <string name="tile_refreshing_success">Refresh success</string>
+    <string name="tile_action_failed">Action failed</string>
 
     <!-- Preferences -->
     <string name="preference_activity_title">Winston settings</string>

@@ -16,16 +16,33 @@
 
 package com.s13g.winston.controller;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.async.Provider;
 import com.s13g.winston.shared.data.Temperature;
 import com.s13g.winston.views.tiles.TemperatureTileView;
 
+import javax.annotation.Nullable;
+
 /**
  * Controller for the temperature tile.
  */
-class TemperatureTileController extends BasicTileController {
+class TemperatureTileController extends BasicTileController<TemperatureTileView, Temperature> {
 
   TemperatureTileController(TemperatureTileView tileView, Provider<Temperature> provider) {
-    super(tileView, provider);
+    super(tileView, provider, new Function<Temperature, ListenableFuture<Boolean>>() {
+      @Nullable
+      @Override
+      public ListenableFuture<Boolean> apply(@Nullable Temperature input) {
+        // We don't have actions for temperature tiles yet.
+        return Futures.immediateFuture(true);
+      }
+    });
+  }
+
+  @Override
+  protected Temperature updateValueOnMainAction(Temperature currentValue) {
+    return currentValue;
   }
 }

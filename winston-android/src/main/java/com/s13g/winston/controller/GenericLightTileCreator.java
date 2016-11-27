@@ -22,7 +22,8 @@ import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.async.Provider;
-import com.s13g.winston.proto.nano.ForClients;
+import com.s13g.winston.proto.nano.ForClients.ChannelData.Channel;
+import com.s13g.winston.proto.nano.ForClients.ChannelData.Channel.ChannelValue;
 import com.s13g.winston.requests.ChannelValueRequester;
 import com.s13g.winston.shared.data.TypeConversion;
 import com.s13g.winston.views.tiles.LightTileView;
@@ -35,7 +36,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 /**
  * For channel tile creators that produce light tiles.
  */
-public abstract class GenericLightTileCreator extends ChannelTileCreator {
+abstract class GenericLightTileCreator extends ChannelTileCreator {
   private final ChannelValueRequester mRequester;
 
   GenericLightTileCreator(Context context, ChannelValueRequester requester) {
@@ -43,9 +44,10 @@ public abstract class GenericLightTileCreator extends ChannelTileCreator {
     mRequester = requester;
   }
 
-  protected WrappedTileController createLightTile(final ForClients.ChannelData.Channel channel,
-                                                  final
-  ForClients.ChannelData.Channel.ChannelValue value) {
+  WrappedTileController createLightTile(final Channel channel,
+                                        final ChannelValue value) {
+    final Function<String, ListenableFuture<Boolean>> actionRequester =
+        mRequester.getActionRequester(channel.moduleType, channel.id, value.id);
     LightTileView tile = new LightTileView(mContext);
     LightTileController controller =
         new LightTileController(tile, new Provider<Boolean>() {
@@ -66,6 +68,12 @@ public abstract class GenericLightTileCreator extends ChannelTileCreator {
                     }
                   }
                 });
+          }
+        }, new Function<Boolean, ListenableFuture<Boolean>>() {
+          @Nullable
+          @Override
+          public ListenableFuture<Boolean> apply(@Nullable Boolean input) {
+            return actionRequester.apply(TypeConversion.booleanToString(input));
           }
         });
     String title = isNullOrEmpty(channel.name) ? channel.id : channel.name;

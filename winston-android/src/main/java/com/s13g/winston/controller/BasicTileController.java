@@ -18,6 +18,7 @@ package com.s13g.winston.controller;
 
 import android.util.Log;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -31,22 +32,36 @@ import javax.annotation.Nullable;
 /**
  * Basic controller for tiles.
  */
-public class BasicTileController<V extends TileView<T>, T> implements TileController {
+abstract class BasicTileController<V extends TileView<T>, T> implements TileController {
   private static final String TAG = "BasicTileCtrl";
 
   private final V mTileView;
   private final Provider<T> mProvider;
+  private final Function<T, ListenableFuture<Boolean>> mMainAction;
   private final Object mLock;
+  @Nullable
+  private T mValue;
   private ListenableFuture<Boolean> mPreviousRequest;
 
-  public BasicTileController(V tileView, Provider<T> provider) {
+  BasicTileController(V tileView, Provider<T> provider,
+                      Function<T, ListenableFuture<Boolean>> mainAction) {
     mTileView = Preconditions.checkNotNull(tileView);
     mProvider = Preconditions.checkNotNull(provider);
+    mMainAction = mainAction;
     mLock = new Object();
+    mValue = null;
     mPreviousRequest = null;
   }
 
-  public ListenableFuture<Boolean> refresh() {
+  @Override
+  public ListenableFuture<Boolean> onMainAction() {
+    synchronized (mLock) {
+      return mMainAction.apply(updateValueOnMainAction(mValue));
+    }
+  }
+
+  @Override
+  public ListenableFuture<Boolean> onRefresh() {
     synchronized (mLock) {
       if (mPreviousRequest != null && !mPreviousRequest.isCancelled()) {
         mPreviousRequest.cancel(true);
@@ -60,6 +75,7 @@ public class BasicTileController<V extends TileView<T>, T> implements TileContro
             Log.d(TAG, "Failed to get value (null)");
             successFuture.set(false);
           } else {
+            updateValue(result);
             mTileView.setValue(result);
             successFuture.set(true);
           }
@@ -73,6 +89,15 @@ public class BasicTileController<V extends TileView<T>, T> implements TileContro
       });
       mPreviousRequest = successFuture;
       return successFuture;
+    }
+  }
+
+  /** Tells us what the updated value will be on main action. */
+  protected abstract T updateValueOnMainAction(T currentValue);
+
+  private void updateValue(T value) {
+    synchronized (mLock) {
+      mValue = value;
     }
   }
 }

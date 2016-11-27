@@ -18,6 +18,7 @@ package com.s13g.winston.controller;
 
 import android.view.View;
 
+import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -30,13 +31,20 @@ import javax.annotation.Nullable;
  * Controller interface for all wrapped tiles.
  */
 public class WrappedTileController implements TileController {
-
   private final TileController mTileController;
   private final TileWrapperView mTileWrapper;
 
-  public WrappedTileController(TileController tileController, TileWrapperView tileWrapper) {
+  WrappedTileController(TileController tileController, TileWrapperView tileWrapper) {
     mTileController = tileController;
     mTileWrapper = tileWrapper;
+
+    // When the tile is clicked, send the main action to
+    tileWrapper.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        onMainAction();
+      }
+    });
   }
 
   public View getView() {
@@ -44,9 +52,24 @@ public class WrappedTileController implements TileController {
   }
 
   @Override
-  public ListenableFuture<Boolean> refresh() {
+  public ListenableFuture<Boolean> onMainAction() {
+    return Futures.transformAsync(mTileController.onMainAction(),
+        new AsyncFunction<Boolean, Boolean>() {
+          @Override
+          public ListenableFuture<Boolean> apply(@Nullable Boolean input) throws Exception {
+            if (input == null || !input) {
+              mTileWrapper.setFooterText(R.string.tile_action_failed);
+              return Futures.immediateFuture(false);
+            }
+            return onRefresh();
+          }
+        });
+  }
+
+  @Override
+  public ListenableFuture<Boolean> onRefresh() {
     mTileWrapper.setFooterText(R.string.tile_refreshing);
-    ListenableFuture<Boolean> refreshFuture = mTileController.refresh();
+    ListenableFuture<Boolean> refreshFuture = mTileController.onRefresh();
     Futures.addCallback(refreshFuture, new FutureCallback<Boolean>() {
       @Override
       public void onSuccess(@Nullable Boolean success) {

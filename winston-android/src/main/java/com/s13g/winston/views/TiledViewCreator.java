@@ -81,7 +81,7 @@ public class TiledViewCreator {
 
   public void refreshAll() {
     for (WrappedTileController controller : mControllers) {
-      controller.refresh();
+      controller.onRefresh();
       // TODO: Use the future to change some global UI maybe.
     }
   }

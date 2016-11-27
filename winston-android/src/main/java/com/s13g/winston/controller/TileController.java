@@ -21,10 +21,13 @@ import com.google.common.util.concurrent.ListenableFuture;
 /**
  * Common interface for all tile controllers.
  */
-public interface TileController {
+interface TileController {
+
+  /** This is typically a click on the tile. */
+  ListenableFuture<Boolean>  onMainAction();
 
   /** Updates the tile with the latest data from Winston master. */
-  ListenableFuture<Boolean> refresh();
+  ListenableFuture<Boolean> onRefresh();
 
   // TODO: Add certain actions.
 }
