@@ -14,18 +14,11 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.controller;
-
-import com.s13g.winston.async.Provider;
-import com.s13g.winston.shared.data.Temperature;
-import com.s13g.winston.views.tiles.TemperatureTileView;
+package com.s13g.winston.views.tiles;
 
 /**
- * Controller for the temperature tile.
+ * Common interface for all tile views.
  */
-class TemperatureTileController extends BasicTileController {
-
-  TemperatureTileController(TemperatureTileView tileView, Provider<Temperature> provider) {
-    super(tileView, provider);
-  }
+public interface TileView<T> {
+  void setValue(T value);
 }

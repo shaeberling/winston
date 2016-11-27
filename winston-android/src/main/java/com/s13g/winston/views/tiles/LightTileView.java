@@ -27,14 +27,18 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.google.common.base.Preconditions;
+
 /**
  * A tile view that renders a widget to display and toggle a light.
  */
-public class LightTile extends View {
+public class LightTileView extends View implements TileView<Boolean> {
   private static final int BACKGROUND_PAINT = Color.rgb(245, 245, 245);
   private static final int LIGHT_ON_PAINT = Color.rgb(225, 225, 140);
   private static final int LIGHT_OFF_PAINT = Color.rgb(150, 150, 150);
   private static final int STROKE_WIDTH_PX = 20;
+
+  private boolean mIsOn;
 
   private Rect mArea;
   private int bulbWidthPx;
@@ -45,28 +49,29 @@ public class LightTile extends View {
 
   private Point[] mRayPoints;
 
-  public LightTile(Context context) {
+  public LightTileView(Context context) {
     super(context);
     initialize();
   }
 
-  public LightTile(Context context, AttributeSet attrs) {
+  public LightTileView(Context context, AttributeSet attrs) {
     super(context, attrs);
     initialize();
   }
 
-  public LightTile(Context context, AttributeSet attrs, int defStyleAttr) {
+  public LightTileView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     initialize();
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public LightTile(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public LightTileView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
     initialize();
   }
 
   private void initialize() {
+    mIsOn = false;
     mArea = new Rect();
     mBackgroundPaint = new Paint();
     mBackgroundPaint.setColor(BACKGROUND_PAINT);
@@ -85,13 +90,15 @@ public class LightTile extends View {
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
+    Paint paint = mIsOn ? mLightOnPaint : mLightOffPaint;
+
     // Draw a light consisting of  a circle in the middle and rays being emitted.
-    canvas.drawCircle(mArea.centerX(), mArea.centerY(), bulbWidthPx, mLightOnPaint);
+    canvas.drawCircle(mArea.centerX(), mArea.centerY(), bulbWidthPx, paint);
 
     for (int i = 0; i < mRayPoints.length; i = i + 2) {
       canvas.drawLine(
           mRayPoints[i].x, mRayPoints[i].y,
-          mRayPoints[i + 1].x, mRayPoints[i + 1].y, mLightOnPaint);
+          mRayPoints[i + 1].x, mRayPoints[i + 1].y, paint);
     }
   }
 
@@ -118,6 +125,17 @@ public class LightTile extends View {
     // Make the tile a square, based on width.
     int size = MeasureSpec.getSize(widthMeasureSpec);
     setMeasuredDimension(size, size);
+  }
+
+  @Override
+  public void setValue(Boolean value) {
+    mIsOn = Preconditions.checkNotNull(value);
+    post(new Runnable() {
+      @Override
+      public void run() {
+        invalidate();
+      }
+    });
   }
 
   /**

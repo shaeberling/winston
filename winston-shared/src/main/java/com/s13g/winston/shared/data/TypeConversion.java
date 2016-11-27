@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.s13g.winston.lib.core;
+package com.s13g.winston.shared.data;
 
 /**
  * Helper to do basic type conversion.

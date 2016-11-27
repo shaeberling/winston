@@ -34,8 +34,9 @@ public class TileCreatorRegistry {
 
   public TileCreatorRegistry(Context context, ChannelValueRequester requester) {
     mCreators = new HashMap<>();
-    add(new WinstonSensorBoxTileCreator(context, requester));
     add(new NestThermostatTileCreator(context, requester));
+    add(new WinstonSensorBoxTileCreator(context, requester));
+    add(new WemoTileCreator(context, requester));
   }
 
   private void add(ChannelTileCreator creator) {

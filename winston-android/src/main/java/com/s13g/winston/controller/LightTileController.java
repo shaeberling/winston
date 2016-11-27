@@ -17,15 +17,14 @@
 package com.s13g.winston.controller;
 
 import com.s13g.winston.async.Provider;
-import com.s13g.winston.shared.data.Temperature;
-import com.s13g.winston.views.tiles.TemperatureTileView;
+import com.s13g.winston.views.tiles.LightTileView;
 
 /**
- * Controller for the temperature tile.
+ * Controller for the {@link com.s13g.winston.views.tiles.LightTileView}.
  */
-class TemperatureTileController extends BasicTileController {
+class LightTileController extends BasicTileController {
 
-  TemperatureTileController(TemperatureTileView tileView, Provider<Temperature> provider) {
+  LightTileController(LightTileView tileView, Provider<Boolean> provider) {
     super(tileView, provider);
   }
 }

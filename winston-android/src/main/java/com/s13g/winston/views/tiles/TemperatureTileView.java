@@ -26,7 +26,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.s13g.winston.shared.data.Temperature;
@@ -34,7 +33,7 @@ import com.s13g.winston.shared.data.Temperature;
 /**
  * A tile view which can display temperature.
  */
-public class TemperatureTileView extends View {
+public class TemperatureTileView extends View implements TileView<Temperature> {
   private static final float RELATIVE_DRAWING_OFFSET = 0.1f;
   private static final int TEXT_COLOR = Color.BLACK;
   private static final float TEXT_SIZE_FRACTION = 6f;
@@ -77,7 +76,8 @@ public class TemperatureTileView extends View {
     initialize();
   }
 
-  public void setTemperature(Temperature temperature) {
+  @Override
+  public void setValue(Temperature temperature) {
     mCurrentTempC = temperature.getRounded(Temperature.Unit.CELSIUS);
     post(new Runnable() {
       @Override

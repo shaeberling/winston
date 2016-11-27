@@ -17,7 +17,7 @@
 package com.s13g.winston.master.channel.instance;
 
 import com.google.common.collect.ImmutableList;
-import com.s13g.winston.lib.core.TypeConversion;
+import com.s13g.winston.shared.data.TypeConversion;
 import com.s13g.winston.lib.winston.WinstonPowerNodeController;
 import com.s13g.winston.lib.winston.WinstonPowerNodeController.SwitchActions;
 import com.s13g.winston.master.channel.Channel;

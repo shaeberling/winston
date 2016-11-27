@@ -17,7 +17,7 @@
 package com.s13g.winston.lib.winston;
 
 import com.google.common.collect.ImmutableList;
-import com.s13g.winston.lib.core.TypeConversion;
+import com.s13g.winston.shared.data.TypeConversion;
 import com.s13g.winston.lib.core.net.HttpUtil;
 
 import org.apache.logging.log4j.LogManager;
