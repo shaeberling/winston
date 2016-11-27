@@ -18,8 +18,7 @@ package com.s13g.winston.controller;
 
 import android.content.Context;
 
-import com.s13g.winston.proto.nano.ForClients.ChannelData.Channel;
-import com.s13g.winston.proto.nano.ForClients.ChannelData.Channel.ChannelValue;
+import com.s13g.winston.proto.nano.ForClients;
 import com.s13g.winston.requests.ChannelValueRequester;
 import com.s13g.winston.shared.ChannelType;
 
@@ -29,26 +28,24 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 /**
- * Creates tiles for the wemo switch module.
+ * Creates tiles for the winston power box node.
  */
-class WemoTileCreator extends GenericLightTileCreator {
-
-  WemoTileCreator(Context context, ChannelValueRequester requester) {
+public class WinstonPowerBoxTileCreator extends GenericLightTileCreator {
+  WinstonPowerBoxTileCreator(Context context, ChannelValueRequester requester) {
     super(context, requester);
   }
 
   @Override
   ChannelType getType() {
-    return ChannelType.WEMO_SWITCH;
+    return ChannelType.WINSTON_POWERBOX;
   }
 
   @Nonnull
   @Override
-  public List<WrappedTileController> createWrappedTiles(Channel channel) {
+  public List<WrappedTileController> createWrappedTiles(ForClients.ChannelData.Channel channel) {
     List<WrappedTileController> mViews = new LinkedList<>();
-    for (ChannelValue value : channel.value) {
-      // TODO: Need to add a 'type' to each channel value so we know what it is.
-      if (value.id.startsWith("switch")) {
+    for (ForClients.ChannelData.Channel.ChannelValue value : channel.value) {
+      if (value.id.startsWith("outlet")) {
         mViews.add(createLightTile(channel, value));
       }
     }

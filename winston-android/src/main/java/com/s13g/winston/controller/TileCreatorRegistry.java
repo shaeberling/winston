@@ -36,6 +36,7 @@ public class TileCreatorRegistry {
     mCreators = new HashMap<>();
     add(new NestThermostatTileCreator(context, requester));
     add(new WinstonSensorBoxTileCreator(context, requester));
+    add(new WinstonPowerBoxTileCreator(context, requester));
     add(new WemoTileCreator(context, requester));
   }
 
