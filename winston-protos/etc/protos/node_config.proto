@@ -39,6 +39,9 @@ message NodeConfig {
   /* 1-Wire plugins to be activated on this node.*/
   repeated OneWirePlugin onewire_plugins = 3;
 
+  /** I2C plugins to be activated on this node. */
+  repeated I2cPlugin i2c_plugins = 4;
+
   /* Defines a 1-Wire plugin that should be active on this node. */
   message OneWirePlugin {
     /* The type defines which plugin to load. */
@@ -53,5 +56,15 @@ message NodeConfig {
     string type = 1;
     /* Mapping from e.g. GPIO pins. */
     repeated int32 mapping = 2;
+  }
+
+  /** An I2C based plugin that is active on this node.*/
+  message I2cPlugin {
+    /* The type defines which plugin to load. */
+    string type = 1;
+    /** The I2C bus of the device. Typically "1". */
+    int32 bus = 2;
+    /* The address of the I2C device, e.g. "64" for "0x40". */
+    int32 address = 3;
   }
 }

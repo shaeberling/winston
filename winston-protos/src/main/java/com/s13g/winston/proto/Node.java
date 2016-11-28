@@ -129,6 +129,50 @@ public final class Node {
      */
     com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginsOrBuilder(
         int index);
+
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> 
+        getI2CPluginsList();
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugins(int index);
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    int getI2CPluginsCount();
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
+        getI2CPluginsOrBuilderList();
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginsOrBuilder(
+        int index);
   }
   /**
    * <pre>
@@ -150,6 +194,7 @@ public final class Node {
       daemonPort_ = 0;
       gpioPlugins_ = java.util.Collections.emptyList();
       onewirePlugins_ = java.util.Collections.emptyList();
+      i2CPlugins_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -200,6 +245,15 @@ public final class Node {
                   input.readMessage(com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.parser(), extensionRegistry));
               break;
             }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                i2CPlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              i2CPlugins_.add(
+                  input.readMessage(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.parser(), extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -213,6 +267,9 @@ public final class Node {
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           onewirePlugins_ = java.util.Collections.unmodifiableList(onewirePlugins_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          i2CPlugins_ = java.util.Collections.unmodifiableList(i2CPlugins_);
         }
         makeExtensionsImmutable();
       }
@@ -1725,6 +1782,719 @@ public final class Node {
 
     }
 
+    public interface I2cPluginOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.s13g.winston.proto.NodeConfig.I2cPlugin)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <pre>
+       * The type defines which plugin to load. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      java.lang.String getType();
+      /**
+       * <pre>
+       * The type defines which plugin to load. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getTypeBytes();
+
+      /**
+       * <pre>
+       ** The I2C bus of the device. Typically "1". 
+       * </pre>
+       *
+       * <code>optional int32 bus = 2;</code>
+       */
+      int getBus();
+
+      /**
+       * <pre>
+       * The address of the I2C device, e.g. "64" for "0x40". 
+       * </pre>
+       *
+       * <code>optional int32 address = 3;</code>
+       */
+      int getAddress();
+    }
+    /**
+     * <pre>
+     ** An I2C based plugin that is active on this node.
+     * </pre>
+     *
+     * Protobuf type {@code com.s13g.winston.proto.NodeConfig.I2cPlugin}
+     */
+    public  static final class I2cPlugin extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.NodeConfig.I2cPlugin)
+        I2cPluginOrBuilder {
+      // Use I2cPlugin.newBuilder() to construct.
+      private I2cPlugin(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private I2cPlugin() {
+        type_ = "";
+        bus_ = 0;
+        address_ = 0;
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private I2cPlugin(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                type_ = s;
+                break;
+              }
+              case 16: {
+
+                bus_ = input.readInt32();
+                break;
+              }
+              case 24: {
+
+                address_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.class, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder.class);
+      }
+
+      public static final int TYPE_FIELD_NUMBER = 1;
+      private volatile java.lang.Object type_;
+      /**
+       * <pre>
+       * The type defines which plugin to load. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public java.lang.String getType() {
+        java.lang.Object ref = type_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          type_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       * The type defines which plugin to load. 
+       * </pre>
+       *
+       * <code>optional string type = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeBytes() {
+        java.lang.Object ref = type_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          type_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int BUS_FIELD_NUMBER = 2;
+      private int bus_;
+      /**
+       * <pre>
+       ** The I2C bus of the device. Typically "1". 
+       * </pre>
+       *
+       * <code>optional int32 bus = 2;</code>
+       */
+      public int getBus() {
+        return bus_;
+      }
+
+      public static final int ADDRESS_FIELD_NUMBER = 3;
+      private int address_;
+      /**
+       * <pre>
+       * The address of the I2C device, e.g. "64" for "0x40". 
+       * </pre>
+       *
+       * <code>optional int32 address = 3;</code>
+       */
+      public int getAddress() {
+        return address_;
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!getTypeBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
+        }
+        if (bus_ != 0) {
+          output.writeInt32(2, bus_);
+        }
+        if (address_ != 0) {
+          output.writeInt32(3, address_);
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getTypeBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
+        }
+        if (bus_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, bus_);
+        }
+        if (address_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, address_);
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.s13g.winston.proto.Node.NodeConfig.I2cPlugin)) {
+          return super.equals(obj);
+        }
+        com.s13g.winston.proto.Node.NodeConfig.I2cPlugin other = (com.s13g.winston.proto.Node.NodeConfig.I2cPlugin) obj;
+
+        boolean result = true;
+        result = result && getType()
+            .equals(other.getType());
+        result = result && (getBus()
+            == other.getBus());
+        result = result && (getAddress()
+            == other.getAddress());
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (37 * hash) + TYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getType().hashCode();
+        hash = (37 * hash) + BUS_FIELD_NUMBER;
+        hash = (53 * hash) + getBus();
+        hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+        hash = (53 * hash) + getAddress();
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * <pre>
+       ** An I2C based plugin that is active on this node.
+       * </pre>
+       *
+       * Protobuf type {@code com.s13g.winston.proto.NodeConfig.I2cPlugin}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:com.s13g.winston.proto.NodeConfig.I2cPlugin)
+          com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.class, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder.class);
+        }
+
+        // Construct using com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          type_ = "";
+
+          bus_ = 0;
+
+          address_ = 0;
+
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
+        }
+
+        public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getDefaultInstanceForType() {
+          return com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance();
+        }
+
+        public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin build() {
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin buildPartial() {
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin result = new com.s13g.winston.proto.Node.NodeConfig.I2cPlugin(this);
+          result.type_ = type_;
+          result.bus_ = bus_;
+          result.address_ = address_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.s13g.winston.proto.Node.NodeConfig.I2cPlugin) {
+            return mergeFrom((com.s13g.winston.proto.Node.NodeConfig.I2cPlugin)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin other) {
+          if (other == com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance()) return this;
+          if (!other.getType().isEmpty()) {
+            type_ = other.type_;
+            onChanged();
+          }
+          if (other.getBus() != 0) {
+            setBus(other.getBus());
+          }
+          if (other.getAddress() != 0) {
+            setAddress(other.getAddress());
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.s13g.winston.proto.Node.NodeConfig.I2cPlugin) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private java.lang.Object type_ = "";
+        /**
+         * <pre>
+         * The type defines which plugin to load. 
+         * </pre>
+         *
+         * <code>optional string type = 1;</code>
+         */
+        public java.lang.String getType() {
+          java.lang.Object ref = type_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            type_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         * The type defines which plugin to load. 
+         * </pre>
+         *
+         * <code>optional string type = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getTypeBytes() {
+          java.lang.Object ref = type_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            type_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         * The type defines which plugin to load. 
+         * </pre>
+         *
+         * <code>optional string type = 1;</code>
+         */
+        public Builder setType(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          type_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * The type defines which plugin to load. 
+         * </pre>
+         *
+         * <code>optional string type = 1;</code>
+         */
+        public Builder clearType() {
+          
+          type_ = getDefaultInstance().getType();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * The type defines which plugin to load. 
+         * </pre>
+         *
+         * <code>optional string type = 1;</code>
+         */
+        public Builder setTypeBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          type_ = value;
+          onChanged();
+          return this;
+        }
+
+        private int bus_ ;
+        /**
+         * <pre>
+         ** The I2C bus of the device. Typically "1". 
+         * </pre>
+         *
+         * <code>optional int32 bus = 2;</code>
+         */
+        public int getBus() {
+          return bus_;
+        }
+        /**
+         * <pre>
+         ** The I2C bus of the device. Typically "1". 
+         * </pre>
+         *
+         * <code>optional int32 bus = 2;</code>
+         */
+        public Builder setBus(int value) {
+          
+          bus_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         ** The I2C bus of the device. Typically "1". 
+         * </pre>
+         *
+         * <code>optional int32 bus = 2;</code>
+         */
+        public Builder clearBus() {
+          
+          bus_ = 0;
+          onChanged();
+          return this;
+        }
+
+        private int address_ ;
+        /**
+         * <pre>
+         * The address of the I2C device, e.g. "64" for "0x40". 
+         * </pre>
+         *
+         * <code>optional int32 address = 3;</code>
+         */
+        public int getAddress() {
+          return address_;
+        }
+        /**
+         * <pre>
+         * The address of the I2C device, e.g. "64" for "0x40". 
+         * </pre>
+         *
+         * <code>optional int32 address = 3;</code>
+         */
+        public Builder setAddress(int value) {
+          
+          address_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         * The address of the I2C device, e.g. "64" for "0x40". 
+         * </pre>
+         *
+         * <code>optional int32 address = 3;</code>
+         */
+        public Builder clearAddress() {
+          
+          address_ = 0;
+          onChanged();
+          return this;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:com.s13g.winston.proto.NodeConfig.I2cPlugin)
+      }
+
+      // @@protoc_insertion_point(class_scope:com.s13g.winston.proto.NodeConfig.I2cPlugin)
+      private static final com.s13g.winston.proto.Node.NodeConfig.I2cPlugin DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.s13g.winston.proto.Node.NodeConfig.I2cPlugin();
+      }
+
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<I2cPlugin>
+          PARSER = new com.google.protobuf.AbstractParser<I2cPlugin>() {
+        public I2cPlugin parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new I2cPlugin(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<I2cPlugin> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<I2cPlugin> getParserForType() {
+        return PARSER;
+      }
+
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
     private int bitField0_;
     public static final int DAEMON_PORT_FIELD_NUMBER = 1;
     private int daemonPort_;
@@ -1864,6 +2634,61 @@ public final class Node {
       return onewirePlugins_.get(index);
     }
 
+    public static final int I2C_PLUGINS_FIELD_NUMBER = 4;
+    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> i2CPlugins_;
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> getI2CPluginsList() {
+      return i2CPlugins_;
+    }
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
+        getI2CPluginsOrBuilderList() {
+      return i2CPlugins_;
+    }
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    public int getI2CPluginsCount() {
+      return i2CPlugins_.size();
+    }
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugins(int index) {
+      return i2CPlugins_.get(index);
+    }
+    /**
+     * <pre>
+     ** I2C plugins to be activated on this node. 
+     * </pre>
+     *
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     */
+    public com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginsOrBuilder(
+        int index) {
+      return i2CPlugins_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1885,6 +2710,9 @@ public final class Node {
       for (int i = 0; i < onewirePlugins_.size(); i++) {
         output.writeMessage(3, onewirePlugins_.get(i));
       }
+      for (int i = 0; i < i2CPlugins_.size(); i++) {
+        output.writeMessage(4, i2CPlugins_.get(i));
+      }
     }
 
     public int getSerializedSize() {
@@ -1903,6 +2731,10 @@ public final class Node {
       for (int i = 0; i < onewirePlugins_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, onewirePlugins_.get(i));
+      }
+      for (int i = 0; i < i2CPlugins_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, i2CPlugins_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -1926,6 +2758,8 @@ public final class Node {
           .equals(other.getGpioPluginsList());
       result = result && getOnewirePluginsList()
           .equals(other.getOnewirePluginsList());
+      result = result && getI2CPluginsList()
+          .equals(other.getI2CPluginsList());
       return result;
     }
 
@@ -1945,6 +2779,10 @@ public final class Node {
       if (getOnewirePluginsCount() > 0) {
         hash = (37 * hash) + ONEWIRE_PLUGINS_FIELD_NUMBER;
         hash = (53 * hash) + getOnewirePluginsList().hashCode();
+      }
+      if (getI2CPluginsCount() > 0) {
+        hash = (37 * hash) + I2C_PLUGINS_FIELD_NUMBER;
+        hash = (53 * hash) + getI2CPluginsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2067,6 +2905,7 @@ public final class Node {
                 .alwaysUseFieldBuilders) {
           getGpioPluginsFieldBuilder();
           getOnewirePluginsFieldBuilder();
+          getI2CPluginsFieldBuilder();
         }
       }
       public Builder clear() {
@@ -2084,6 +2923,12 @@ public final class Node {
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           onewirePluginsBuilder_.clear();
+        }
+        if (i2CPluginsBuilder_ == null) {
+          i2CPlugins_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          i2CPluginsBuilder_.clear();
         }
         return this;
       }
@@ -2127,6 +2972,15 @@ public final class Node {
           result.onewirePlugins_ = onewirePlugins_;
         } else {
           result.onewirePlugins_ = onewirePluginsBuilder_.build();
+        }
+        if (i2CPluginsBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            i2CPlugins_ = java.util.Collections.unmodifiableList(i2CPlugins_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.i2CPlugins_ = i2CPlugins_;
+        } else {
+          result.i2CPlugins_ = i2CPluginsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2222,6 +3076,32 @@ public final class Node {
                    getOnewirePluginsFieldBuilder() : null;
             } else {
               onewirePluginsBuilder_.addAllMessages(other.onewirePlugins_);
+            }
+          }
+        }
+        if (i2CPluginsBuilder_ == null) {
+          if (!other.i2CPlugins_.isEmpty()) {
+            if (i2CPlugins_.isEmpty()) {
+              i2CPlugins_ = other.i2CPlugins_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureI2CPluginsIsMutable();
+              i2CPlugins_.addAll(other.i2CPlugins_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.i2CPlugins_.isEmpty()) {
+            if (i2CPluginsBuilder_.isEmpty()) {
+              i2CPluginsBuilder_.dispose();
+              i2CPluginsBuilder_ = null;
+              i2CPlugins_ = other.i2CPlugins_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              i2CPluginsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getI2CPluginsFieldBuilder() : null;
+            } else {
+              i2CPluginsBuilder_.addAllMessages(other.i2CPlugins_);
             }
           }
         }
@@ -2967,6 +3847,318 @@ public final class Node {
         }
         return onewirePluginsBuilder_;
       }
+
+      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> i2CPlugins_ =
+        java.util.Collections.emptyList();
+      private void ensureI2CPluginsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          i2CPlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin>(i2CPlugins_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> i2CPluginsBuilder_;
+
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> getI2CPluginsList() {
+        if (i2CPluginsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(i2CPlugins_);
+        } else {
+          return i2CPluginsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public int getI2CPluginsCount() {
+        if (i2CPluginsBuilder_ == null) {
+          return i2CPlugins_.size();
+        } else {
+          return i2CPluginsBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugins(int index) {
+        if (i2CPluginsBuilder_ == null) {
+          return i2CPlugins_.get(index);
+        } else {
+          return i2CPluginsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder setI2CPlugins(
+          int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
+        if (i2CPluginsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.set(index, value);
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder setI2CPlugins(
+          int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder builderForValue) {
+        if (i2CPluginsBuilder_ == null) {
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder addI2CPlugins(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
+        if (i2CPluginsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.add(value);
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder addI2CPlugins(
+          int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
+        if (i2CPluginsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.add(index, value);
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder addI2CPlugins(
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder builderForValue) {
+        if (i2CPluginsBuilder_ == null) {
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.add(builderForValue.build());
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder addI2CPlugins(
+          int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder builderForValue) {
+        if (i2CPluginsBuilder_ == null) {
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder addAllI2CPlugins(
+          java.lang.Iterable<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> values) {
+        if (i2CPluginsBuilder_ == null) {
+          ensureI2CPluginsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, i2CPlugins_);
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder clearI2CPlugins() {
+        if (i2CPluginsBuilder_ == null) {
+          i2CPlugins_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public Builder removeI2CPlugins(int index) {
+        if (i2CPluginsBuilder_ == null) {
+          ensureI2CPluginsIsMutable();
+          i2CPlugins_.remove(index);
+          onChanged();
+        } else {
+          i2CPluginsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder getI2CPluginsBuilder(
+          int index) {
+        return getI2CPluginsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginsOrBuilder(
+          int index) {
+        if (i2CPluginsBuilder_ == null) {
+          return i2CPlugins_.get(index);  } else {
+          return i2CPluginsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
+           getI2CPluginsOrBuilderList() {
+        if (i2CPluginsBuilder_ != null) {
+          return i2CPluginsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(i2CPlugins_);
+        }
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder addI2CPluginsBuilder() {
+        return getI2CPluginsFieldBuilder().addBuilder(
+            com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder addI2CPluginsBuilder(
+          int index) {
+        return getI2CPluginsFieldBuilder().addBuilder(
+            index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       ** I2C plugins to be activated on this node. 
+       * </pre>
+       *
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       */
+      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder> 
+           getI2CPluginsBuilderList() {
+        return getI2CPluginsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
+          getI2CPluginsFieldBuilder() {
+        if (i2CPluginsBuilder_ == null) {
+          i2CPluginsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder>(
+                  i2CPlugins_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          i2CPlugins_ = null;
+        }
+        return i2CPluginsBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -3031,6 +4223,11 @@ public final class Node {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3041,15 +4238,18 @@ public final class Node {
   static {
     java.lang.String[] descriptorData = {
       "\n\034etc/protos/node_config.proto\022\026com.s13g" +
-      ".winston.proto\"\213\002\n\nNodeConfig\022\023\n\013daemon_" +
+      ".winston.proto\"\207\003\n\nNodeConfig\022\023\n\013daemon_" +
       "port\030\001 \001(\005\022C\n\014gpio_plugins\030\002 \003(\0132-.com.s" +
       "13g.winston.proto.NodeConfig.GpioPlugin\022" +
       "I\n\017onewire_plugins\030\003 \003(\01320.com.s13g.wins" +
-      "ton.proto.NodeConfig.OneWirePlugin\032+\n\rOn" +
-      "eWirePlugin\022\014\n\004type\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\032" +
-      "+\n\nGpioPlugin\022\014\n\004type\030\001 \001(\t\022\017\n\007mapping\030\002" +
-      " \003(\005B\036\n\026com.s13g.winston.protoB\004Nodeb\006pr" +
-      "oto3"
+      "ton.proto.NodeConfig.OneWirePlugin\022A\n\013i2" +
+      "c_plugins\030\004 \003(\0132,.com.s13g.winston.proto" +
+      ".NodeConfig.I2cPlugin\032+\n\rOneWirePlugin\022\014" +
+      "\n\004type\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\032+\n\nGpioPlugin" +
+      "\022\014\n\004type\030\001 \001(\t\022\017\n\007mapping\030\002 \003(\005\0327\n\tI2cPl",
+      "ugin\022\014\n\004type\030\001 \001(\t\022\013\n\003bus\030\002 \001(\005\022\017\n\007addre" +
+      "ss\030\003 \001(\005B\036\n\026com.s13g.winston.protoB\004Node" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3068,7 +4268,7 @@ public final class Node {
     internal_static_com_s13g_winston_proto_NodeConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_NodeConfig_descriptor,
-        new java.lang.String[] { "DaemonPort", "GpioPlugins", "OnewirePlugins", });
+        new java.lang.String[] { "DaemonPort", "GpioPlugins", "OnewirePlugins", "I2CPlugins", });
     internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_descriptor =
       internal_static_com_s13g_winston_proto_NodeConfig_descriptor.getNestedTypes().get(0);
     internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_fieldAccessorTable = new
@@ -3081,6 +4281,12 @@ public final class Node {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_descriptor,
         new java.lang.String[] { "Type", "Mapping", });
+    internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor =
+      internal_static_com_s13g_winston_proto_NodeConfig_descriptor.getNestedTypes().get(2);
+    internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor,
+        new java.lang.String[] { "Type", "Bus", "Address", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

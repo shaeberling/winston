@@ -98,6 +98,15 @@ public class NodeContainer implements Container {
         activeHandlers.add(plugin.handler.get());
       }
     }
+
+    // ==== I2C ====
+    for (NodeConfig.I2cPlugin i2cPlugin : config.getI2CPluginsList()) {
+      NodePlugin plugin = nodePluginCreator.create(i2cPlugin);
+      if (plugin.hasHandler()) {
+        // Add all active handlers so we can forward HTTP requests to it.
+        activeHandlers.add(plugin.handler.get());
+      }
+    }
     return new NodeContainer(config.getDaemonPort(), createHandlerMap(activeHandlers));
   }
 

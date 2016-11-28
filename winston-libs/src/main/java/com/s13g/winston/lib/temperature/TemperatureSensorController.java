@@ -17,10 +17,13 @@
 package com.s13g.winston.lib.temperature;
 
 import com.s13g.winston.lib.plugin.NodeController;
+import com.s13g.winston.shared.data.Temperature;
+
+import java.util.Optional;
 
 /**
  * Common temperature sensor interface.
  */
 public interface TemperatureSensorController extends NodeController {
-  com.s13g.winston.shared.data.Temperature getTemperature();
+  Optional<Temperature> getTemperature();
 }

@@ -70,8 +70,9 @@ public class ConfigWrapper {
       throw new AssertionError("Invalid Port:" + mConfigProto.getDaemonPort());
     }
 
-    int numPlugins = mConfigProto.getGpioPluginsList().size() + mConfigProto
-        .getOnewirePluginsList().size();
+    int numPlugins = mConfigProto.getGpioPluginsList().size() +
+        mConfigProto.getOnewirePluginsList().size() +
+        mConfigProto.getI2CPluginsList().size();
     if (numPlugins == 0) {
       throw new AssertionError("No active plugins found");
     }
@@ -107,6 +108,14 @@ public class ConfigWrapper {
     for (NodeConfig.OneWirePlugin plugin : oneWirePluginsList) {
       LOG.info("  Type    : " + plugin.getType());
       LOG.info("  Name    : " + plugin.getName());
+    }
+    LOG.info("---------------------------------");
+    List<NodeConfig.I2cPlugin> i2cPluginsList = mConfigProto.getI2CPluginsList();
+    LOG.info("Active I2C plugins: " + i2cPluginsList.size());
+    for (NodeConfig.I2cPlugin plugin : i2cPluginsList) {
+      LOG.info("  Type    : " + plugin.getType());
+      LOG.info("  Bus     : " + plugin.getBus());
+      LOG.info("  Addr    : " + plugin.getAddress());
     }
     LOG.info("---------------------------------");
   }

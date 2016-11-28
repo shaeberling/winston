@@ -18,26 +18,34 @@ package com.s13g.winston.node.handler;
 
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.lib.temperature.TemperatureSensorController;
+import com.s13g.winston.shared.data.Temperature;
+
+import java.util.Optional;
 
 /**
  * Handler for temperature sensor readings.
  */
 public class TemperatureHandler implements Handler {
   private final TemperatureSensorController mController;
+  private final NodePluginType mType;
 
-  public TemperatureHandler(TemperatureSensorController temperatureSensorController) {
+  public TemperatureHandler(TemperatureSensorController temperatureSensorController,
+                            NodePluginType type) {
     mController = temperatureSensorController;
+    mType = type;
   }
 
   @Override
   public String handleRequest(String arguments) {
     // We only support a single temperature node right now.
     // TODO: Add support for multiple temperature nodes. Maybe even mix types.
-    return mController.getTemperature().toString();
+    Optional<Temperature> temperature = mController.getTemperature();
+    // TODO: We need support some kind of exception with message here.
+    return temperature.map(Temperature::toString).orElse("");
   }
 
   @Override
   public NodePluginType getRpcName() {
-    return NodePluginType.DS18B20_TEMP;
+    return mType;
   }
 }

@@ -31,6 +31,7 @@ import com.s13g.winston.lib.reed.ReedControllerImpl;
 import com.s13g.winston.lib.relay.RelayController;
 import com.s13g.winston.lib.relay.RelayControllerImpl;
 import com.s13g.winston.lib.temperature.DS18B20ControllerImpl;
+import com.s13g.winston.lib.temperature.HTU21DControllerImpl;
 import com.s13g.winston.lib.temperature.TemperatureSensorController;
 import com.s13g.winston.node.handler.Handler;
 import com.s13g.winston.node.handler.LedHandler;
@@ -45,6 +46,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Creates NodePlugins.
@@ -93,6 +95,19 @@ public class NodePluginCreator {
     String type = oneWirePlugin.getType();
     String name = oneWirePlugin.getName();
     return createOneWire(type, name);
+  }
+
+  /**
+   * Create a node plugin for an I2C controller.
+   *
+   * @param i2cPlugins the I2C plugin config.
+   * @return The plugin.
+   */
+  public NodePlugin create(NodeConfig.I2cPlugin i2cPlugins) {
+    String type = i2cPlugins.getType();
+    int bus = i2cPlugins.getBus();
+    int address = i2cPlugins.getAddress();
+    return createI2C(type, bus, address);
   }
 
   /**
@@ -156,17 +171,39 @@ public class NodePluginCreator {
   private NodePlugin createOneWire(String type, String name) {
     NodePluginType pluginType = getPluginType(type);
 
-    // Add new 1-Wire based controllers here.
     NodeController controller;
     Handler handler;
 
+    // Add new 1-Wire based controllers here.
     switch (pluginType) {
       case DS18B20_TEMP:
         controller = new DS18B20ControllerImpl(name, mFileCreator);
-        handler = new TemperatureHandler((TemperatureSensorController) controller);
+        handler = new TemperatureHandler((TemperatureSensorController) controller, pluginType);
         break;
       default:
         throw new RuntimeException("No 1-wire controller defined for valid type: " + type);
+    }
+    return new NodePlugin(pluginType, controller, handler);
+  }
+
+  private NodePlugin createI2C(String type, int bus, int address) {
+    NodePluginType pluginType = getPluginType(type);
+
+    NodeController controller;
+    Handler handler;
+
+    // Add new 1-Wire based controllers here.
+    switch (pluginType) {
+      case HTU21D_TEMP_HUMID:
+        Optional<NodeController> controllerOpt = HTU21DControllerImpl.create(bus, address);
+        if (!controllerOpt.isPresent()) {
+          throw new RuntimeException("Cannot initialize I2C controller of type: " + type);
+        }
+        controller = controllerOpt.get();
+        handler = new TemperatureHandler((TemperatureSensorController) controller, pluginType);
+        break;
+      default:
+        throw new RuntimeException("No I2C controller defined for valid type: " + type);
     }
     return new NodePlugin(pluginType, controller, handler);
   }

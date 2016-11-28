@@ -18,12 +18,14 @@ package com.s13g.winston.lib.temperature;
 
 import com.s13g.winston.lib.core.file.ReadableFile;
 import com.s13g.winston.lib.plugin.NodePluginType;
+import com.s13g.winston.shared.data.Temperature;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 /**
  * Communicates with the DS18B20 temp sensor via 1-wire.
@@ -47,7 +49,7 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
    * <p>
    * TODO: Add timestamp so we know when it becomes too old.
    */
-  private com.s13g.winston.shared.data.Temperature mLastKnownGoodTemperature = new com.s13g.winston.shared.data.Temperature(-42, com.s13g.winston.shared.data.Temperature.Unit.CELSIUS);
+  private Temperature mLastKnownGoodTemperature = new Temperature(-42, Temperature.Unit.CELSIUS);
 
   /**
    * Initialize the temperature sensor for the given device.
@@ -100,14 +102,15 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
   }
 
   @Override
-  public com.s13g.winston.shared.data.Temperature getTemperature() {
+  public Optional<Temperature> getTemperature() {
     try {
-      mLastKnownGoodTemperature = new com.s13g.winston.shared.data.Temperature(readValue() / 1000f, com.s13g.winston.shared.data.Temperature.Unit
-          .CELSIUS);
+      mLastKnownGoodTemperature = new Temperature(readValue() / 1000f,
+          Temperature.Unit.CELSIUS);
+      return Optional.of(mLastKnownGoodTemperature);
     } catch (IOException ex) {
       LOG.warn("Could not read temperature", ex);
     }
-    return mLastKnownGoodTemperature;
+    return Optional.empty();
   }
 
   @Override
