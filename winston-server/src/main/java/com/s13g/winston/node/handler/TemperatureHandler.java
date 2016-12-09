@@ -39,9 +39,12 @@ public class TemperatureHandler implements Handler {
   public String handleRequest(String arguments) {
     // We only support a single temperature node right now.
     // TODO: Add support for multiple temperature nodes. Maybe even mix types.
-    Optional<Temperature> temperature = mController.getTemperature();
+    Optional<Temperature> temperatureOpt = mController.getTemperature();
+    Optional<Integer> humidityOpt = mController.getHumidityPercent();
     // TODO: We need support some kind of exception with message here.
-    return temperature.map(Temperature::toString).orElse("");
+    String temperature = temperatureOpt.map(Temperature::toString).orElse("");
+    String humidity = humidityOpt.isPresent() ? humidityOpt.get().toString() : "";
+    return temperature + "/" + humidity;
   }
 
   @Override

@@ -26,4 +26,6 @@ import java.util.Optional;
  */
 public interface TemperatureSensorController extends NodeController {
   Optional<Temperature> getTemperature();
+
+  Optional<Integer> getHumidityPercent();
 }

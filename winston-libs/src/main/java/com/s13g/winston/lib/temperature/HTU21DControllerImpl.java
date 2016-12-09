@@ -85,29 +85,55 @@ public class HTU21DControllerImpl implements TemperatureSensorController, AutoCl
   @Override
   public Optional<Temperature> getTemperature() {
     try {
-      // Tell the device to read the temperature value.
-      softReset();
-      mDevice.write((byte) (HTU21DF_READTEMP));
-      waitAfterCommand();
       return Optional.of(new Temperature(readTempFromDevice(), Temperature.Unit.CELSIUS));
     } catch (IOException e) {
-      LOG.error("Unable to read value from I2C device.", e);
+      LOG.error("Unable to read temperature from I2C device.", e);
+    }
+    return Optional.empty();
+  }
+
+  @Override
+  public Optional<Integer> getHumidityPercent() {
+    try {
+      return Optional.of((int) readHumidityFromDevice());
+    } catch (IOException e) {
+      LOG.error("Unable to read humidity from I2C device.", e);
     }
     return Optional.empty();
   }
 
   private float readTempFromDevice() throws IOException {
+    softReset();
+    // Tell the device to read the temperature value.
+    mDevice.write((byte) (HTU21DF_READTEMP));
+    waitAfterCommand();
+    float raw = readRaw();
+    raw *= 175.72;
+    raw /= (2 << 15);
+    raw -= 46.85;
+    return raw;
+  }
+
+  public float readHumidityFromDevice() throws IOException {
+    softReset();
+    // Tell the device to read the temperature value.
+    mDevice.write((byte) HTU21DF_READHUM);
+    waitAfterCommand();
+    float raw = readRaw();
+    raw *= 125;
+    raw /= (2 << 15);
+    raw -= 6;
+    return raw;
+  }
+
+  private int readRaw() throws IOException {
     byte[] buf = new byte[3];
     mDevice.read(buf, 0, 3);
     int msb = buf[0] & 0xFF;
     int lsb = buf[1] & 0xFF;
+    // TODO: Add check for CRC to ensure value is legal.
     int crc = buf[2] & 0xFF;
-    float raw = ((msb << 8) + lsb) & 0xFFFC;
-
-    raw *= 175.72;
-    raw /= 65536;
-    raw -= 46.85;
-    return raw;
+    return ((msb << 8) + lsb) & 0xFFFC;
   }
 
   private void softReset() throws IOException {

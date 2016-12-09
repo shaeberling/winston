@@ -114,6 +114,11 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
   }
 
   @Override
+  public Optional<Integer> getHumidityPercent() {
+    return Optional.empty();
+  }
+
+  @Override
   public NodePluginType getType() {
     return NodePluginType.DS18B20_TEMP;
   }
