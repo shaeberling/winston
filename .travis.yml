@@ -36,6 +36,7 @@ after_success:
     - ./gradlew masterDaemon
     - ./gradlew sauronDaemon
     - ./gradlew :winston-server:jar
+    - ./gradlew jacocoTestReport coveralls
 
 # Required to install new version of Java which does
 # not crash checker framework.
