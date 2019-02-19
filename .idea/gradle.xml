@@ -10,8 +10,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/winston-android" />
-            <option value="$PROJECT_DIR$/winston-android-wear" />
             <option value="$PROJECT_DIR$/winston-libs" />
             <option value="$PROJECT_DIR$/winston-protos" />
             <option value="$PROJECT_DIR$/winston-server" />

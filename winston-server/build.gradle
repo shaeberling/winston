@@ -16,95 +16,95 @@ configurations {
 }
 
 dependencies {
-  compile project(':winston-protos')
-  compile project(':winston-libs')
-  compile 'org.simpleframework:simple-http:6+'
-  compile 'com.google.guava:guava:20.0'
-  compile 'com.google.code.findbugs:jsr305:3+'
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.mockito:mockito-core:1.10.19'
-  testCompile 'com.google.truth:truth:0.28'
-  ext.checkerFrameworkVersion = '1.9.13'
-  ext.jdkVersion = 'jdk8'
-  checkerFrameworkAnnotatedJDK "org.checkerframework:${jdkVersion}:${checkerFrameworkVersion}"
-  checkerFramework "org.checkerframework:checker:${checkerFrameworkVersion}"
-  compile "org.checkerframework:checker-qual:${checkerFrameworkVersion}"
+    implementation project(':winston-protos')
+    implementation project(':winston-libs')
+    implementation 'org.simpleframework:simple-http:6+'
+    implementation 'com.google.guava:guava:20.0'
+    implementation 'com.google.code.findbugs:jsr305:3+'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:2.+"
+    testImplementation "com.google.truth:truth:0.42"
+    ext.checkerFrameworkVersion = '1.9.13'
+    ext.jdkVersion = 'jdk8'
+    checkerFrameworkAnnotatedJDK "org.checkerframework:${jdkVersion}:${checkerFrameworkVersion}"
+    checkerFramework "org.checkerframework:checker:${checkerFrameworkVersion}"
+    compile "org.checkerframework:checker-qual:${checkerFrameworkVersion}"
 }
 
 task checkNullServer(type: JavaCompile) {
-   source = fileTree(dir: 'src/main/java', include: '**/*.java')
-   destinationDir = file('build/checker-classes-ignore')
-   classpath = sourceSets.main.compileClasspath
-   options.debug = true
-   options.compilerArgs = [
-      "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
-      '-processor', 'org.checkerframework.checker.nullness.NullnessChecker',
-      '-processorpath', "${configurations.checkerFramework.asPath}",
-      '-implicit:class',
-      '-Awarns',  // TODO: Issues with Lists's having NonNull members.
-      '-AprintErrorStack'
-   ]
+    source = fileTree(dir: 'src/main/java', include: '**/*.java')
+    destinationDir = file('build/checker-classes-ignore')
+    classpath = sourceSets.main.compileClasspath
+    options.debug = true
+    options.compilerArgs = [
+            "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
+            '-processor', 'org.checkerframework.checker.nullness.NullnessChecker',
+            '-processorpath', "${configurations.checkerFramework.asPath}",
+            '-implicit:class',
+            '-Awarns',  // TODO: Issues with Lists's having NonNull members.
+            '-AprintErrorStack'
+    ]
 }
 
 task checkLocksServer(type: JavaCompile) {
-   source = fileTree(dir: 'src/main/java', include: '**/*.java')
-   destinationDir = file('build/checker-classes-ignore')
-   classpath = sourceSets.main.compileClasspath
-   options.debug = true
-   options.compilerArgs = [
-      "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
-      '-processor', 'org.checkerframework.checker.lock.LockChecker',
-      '-processorpath', "${configurations.checkerFramework.asPath}",
-      '-implicit:class',
-      '-AprintErrorStack'
-   ]
+    source = fileTree(dir: 'src/main/java', include: '**/*.java')
+    destinationDir = file('build/checker-classes-ignore')
+    classpath = sourceSets.main.compileClasspath
+    options.debug = true
+    options.compilerArgs = [
+            "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
+            '-processor', 'org.checkerframework.checker.lock.LockChecker',
+            '-processorpath', "${configurations.checkerFramework.asPath}",
+            '-implicit:class',
+            '-AprintErrorStack'
+    ]
 }
 
-jacocoTestReport {
-  dependsOn test
-  sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
-  classDirectories =  project.files(sourceSets.main.output)
-  reports {
-    xml.enabled true
-  }
+//jacocoTestReport {
+//    dependsOn test
+//    sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
+//    classDirectories = project.files(sourceSets.main.output)
+//    reports {
+//        xml.enabled true
+//    }
+//}
+
+task nodeDaemon(type: OneJar) {
+    mainClass = 'com.s13g.winston.node.NodeDaemon'
+    archiveName = 'winston-node-daemon.jar'
+    // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
+    manifestFile = file('etc/MANIFEST-node.MF')
+    // manifest {
+    //   attributes 'Implementation-Title': 'Winston Node Daemon',
+    //              'Implementation-Version': version,
+    //              'Timestamp': String.valueOf(System.currentTimeMillis())
+    // }
+    useStable = false
 }
 
-task nodeDaemon (type: OneJar) {
-  mainClass = 'com.s13g.winston.node.NodeDaemon'
-  archiveName = 'winston-node-daemon.jar'
-  // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-  manifestFile = file('etc/MANIFEST-node.MF')
-  // manifest {
-  //   attributes 'Implementation-Title': 'Winston Node Daemon',
-  //              'Implementation-Version': version,
-  //              'Timestamp': String.valueOf(System.currentTimeMillis())
-  // }
-  useStable = false
+task masterDaemon(type: OneJar) {
+    mainClass = 'com.s13g.winston.master.MasterDaemon'
+    archiveName 'winston-master-daemon.jar'
+    // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
+    manifestFile = file('etc/MANIFEST-master.MF')
+    // manifest {
+    //   attributes 'Implementation-Title': 'Winston Master Daemon',
+    //              'Implementation-Version': version,
+    //              'Timestamp': String.valueOf(System.currentTimeMillis())
+    // }
+    useStable = false
 }
 
-task masterDaemon (type: OneJar) {
-  mainClass = 'com.s13g.winston.master.MasterDaemon'
-  archiveName 'winston-master-daemon.jar'
-  // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-  manifestFile = file('etc/MANIFEST-master.MF')
-  // manifest {
-  //   attributes 'Implementation-Title': 'Winston Master Daemon',
-  //              'Implementation-Version': version,
-  //              'Timestamp': String.valueOf(System.currentTimeMillis())
-  // }
-  useStable = false
-}
-
-task sauronDaemon (type: OneJar) {
-  mainClass = 'com.s13g.winston.tools.sauron.SauronDaemon'
-  archiveName 'winston-sauron-daemon.jar'
-  // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-  manifestFile = file('etc/MANIFEST-sauron.MF')
-  // manifest {
-  //   attributes 'Implementation-Title': 'Winston Sauron Daemon',
-  //              'Implementation-Version': version,
-  //              'Timestamp': String.valueOf(System.currentTimeMillis())
-  // }
-  useStable = false
+task sauronDaemon(type: OneJar) {
+    mainClass = 'com.s13g.winston.tools.sauron.SauronDaemon'
+    archiveName 'winston-sauron-daemon.jar'
+    // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
+    manifestFile = file('etc/MANIFEST-sauron.MF')
+    // manifest {
+    //   attributes 'Implementation-Title': 'Winston Sauron Daemon',
+    //              'Implementation-Version': version,
+    //              'Timestamp': String.valueOf(System.currentTimeMillis())
+    // }
+    useStable = false
 }
 

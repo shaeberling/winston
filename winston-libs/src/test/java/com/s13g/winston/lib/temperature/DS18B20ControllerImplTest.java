@@ -18,6 +18,7 @@ package com.s13g.winston.lib.temperature;
 
 import com.s13g.winston.lib.core.file.ReadableFile;
 import com.s13g.winston.lib.plugin.NodePluginType;
+import com.s13g.winston.shared.data.Temperature;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +27,11 @@ import org.mockito.ArgumentCaptor;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -78,12 +81,13 @@ public class DS18B20ControllerImplTest {
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
     ArgumentCaptor<Path> pathArgument = ArgumentCaptor.forClass(Path.class);
     verify(mFileCreator).create(pathArgument.capture());
-    assertEquals(Paths.get("/sys/bus/w1/devices/SuperDuperDevice42/w1_slave"), pathArgument
-        .getValue());
+
+    assertThat(pathArgument.getValue().toString()).isEqualTo(
+        Paths.get("/sys/bus/w1/devices/SuperDuperDevice42/w1_slave").toString());
   }
 
   @Test
-  public void testDefaultTempWhenFileDoesNotExist() {
+  public void failWhenFileDoesNotExist() {
     ReadableFile fakeFile = new ReadableFile() {
       @Override
       public boolean exists() {
@@ -96,15 +100,14 @@ public class DS18B20ControllerImplTest {
       }
 
       @Override
-      public String readAsString() throws IOException {
+      public String readAsString() {
         return VALID_INPUT_1;
       }
     };
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -121,15 +124,14 @@ public class DS18B20ControllerImplTest {
       }
 
       @Override
-      public String readAsString() throws IOException {
+      public String readAsString() {
         return VALID_INPUT_1;
       }
     };
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -138,8 +140,9 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("20.912 C", temperature.toString());
+    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature().orElse(null);
+    assertThat(temperature).isNotNull();
+    assertThat(temperature.toString()).isEqualTo("20.912 C");
   }
 
   @Test
@@ -148,8 +151,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -158,8 +160,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -168,8 +169,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -178,8 +178,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -188,8 +187,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    com.s13g.winston.shared.data.Temperature temperature = controller.getTemperature();
-    assertEquals("-42.0 C", temperature.toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -198,8 +196,16 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    assertEquals("20.912 C", controller.getTemperature().toString());
-    assertEquals("42.123 C", controller.getTemperature().toString());
+    {
+      Optional<Temperature> temperature = controller.getTemperature();
+      assertThat(temperature.isPresent()).isTrue();
+      assertThat(temperature.get().toString()).isEqualTo("20.912 C");
+    }
+    {
+      Optional<Temperature> temperature = controller.getTemperature();
+      assertThat(temperature.isPresent()).isTrue();
+      assertThat(temperature.get().toString()).isEqualTo("42.123 C");
+    }
   }
 
   @Test
@@ -208,19 +214,25 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    assertEquals("-42.0 C", controller.getTemperature().toString());
-    assertEquals("42.123 C", controller.getTemperature().toString());
+
+    assertThat(controller.getTemperature().isPresent()).isFalse();
+    Optional<Temperature> temperature = controller.getTemperature();
+    assertThat(temperature.isPresent()).isTrue();
+    assertThat(temperature.get().toString()).isEqualTo("42.123 C");
   }
 
   @Test
-  public void testInvalidInputAfterValidNoChange() {
+  public void testInvalidInputAfterValid() {
     ReadableFile fakeFile = createFileWithTwoOutputs(VALID_INPUT_2, INVALID_INPUT_1);
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    assertEquals("42.123 C", controller.getTemperature().toString());
-    // An invalid input should not alter the last known good temperature reading.
-    assertEquals("42.123 C", controller.getTemperature().toString());
+    Optional<Temperature> temperature = controller.getTemperature();
+    assertThat(temperature.isPresent()).isTrue();
+    assertThat(temperature.get().toString()).isEqualTo("42.123 C");
+
+    // Second read is invalid.
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   @Test
@@ -244,7 +256,7 @@ public class DS18B20ControllerImplTest {
     when(mFileCreator.create(any(Path.class))).thenReturn(fakeFile);
     DS18B20ControllerImpl controller =
         new DS18B20ControllerImpl("SuperDuperDevice42", mFileCreator);
-    assertEquals("-42.0 C", controller.getTemperature().toString());
+    assertThat(controller.getTemperature().isPresent()).isFalse();
   }
 
   private static ReadableFile createFileWithOutput(final String output) {
@@ -260,7 +272,7 @@ public class DS18B20ControllerImplTest {
       }
 
       @Override
-      public String readAsString() throws IOException {
+      public String readAsString() {
         return output;
       }
     };
@@ -282,7 +294,7 @@ public class DS18B20ControllerImplTest {
       }
 
       @Override
-      public String readAsString() throws IOException {
+      public String readAsString() {
         if (mFirst) {
           mFirst = false;
           return output1;

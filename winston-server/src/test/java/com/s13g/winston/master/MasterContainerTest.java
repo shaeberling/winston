@@ -16,6 +16,7 @@
 
 package com.s13g.winston.master;
 
+import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 
 import org.junit.Before;
@@ -45,7 +46,7 @@ public class MasterContainerTest {
 
   private void initializeWithMap() throws IOException {
     when(mHttpRequester.requestUrl(anyString())).thenReturn("OK");
-    masterContainer = new MasterContainer(0, new ArrayList<>(), mHttpRequester);
+    masterContainer = new MasterContainer(0, new RequestHandlers(new ArrayList<>()));
   }
 
   @Test

@@ -32,6 +32,10 @@ script:
     - "./build-server-jar.sh && ./runAllTests.sh"
 
 after_success:
+    - ./gradlew build
+    - ./gradlew nodeDaemon
+    - ./gradlew masterDaemon
+    - ./gradlew sauronDaemon
     - ./gradlew coveralls
 
 # Required to install new version of Java which does
