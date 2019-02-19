@@ -29,14 +29,13 @@ android:
 script:
     - sudo apt-get update && sudo apt-get install oracle-java8-installer
     - java -version
-    - "./build-server-jar.sh && ./runAllTests.sh"
 
 after_success:
     - ./gradlew build
     - ./gradlew nodeDaemon
     - ./gradlew masterDaemon
     - ./gradlew sauronDaemon
-    - ./gradlew coveralls
+    - ./gradlew :winston-server:jar
 
 # Required to install new version of Java which does
 # not crash checker framework.

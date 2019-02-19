@@ -20,44 +20,12 @@ dependencies {
     compile 'com.google.guava:guava:20.0'
     compile 'com.google.code.findbugs:jsr305:3+'
     compile 'org.json:json:20160810'
+    compile 'com.google.code.gson:gson:2.8.5'
     compile 'org.jdom:jdom:2.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:2.+"
     testCompile "com.google.truth:truth:0.42"
-    ext.checkerFrameworkVersion = '1.9.13'
-    ext.jdkVersion = 'jdk8'
-    checkerFrameworkAnnotatedJDK "org.checkerframework:${jdkVersion}:${checkerFrameworkVersion}"
-    checkerFramework "org.checkerframework:checker:${checkerFrameworkVersion}"
-    compile "org.checkerframework:checker-qual:${checkerFrameworkVersion}"
-}
-
-task checkNullLibs(type: JavaCompile) {
-   source = fileTree(dir: 'src/main/java', include: '**/*.java')
-   destinationDir = file('build/checker-classes-ignore')
-   classpath = sourceSets.main.compileClasspath
-   options.debug = true
-   options.compilerArgs = [
-      "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
-      '-processor', 'org.checkerframework.checker.nullness.NullnessChecker',
-      '-processorpath', "${configurations.checkerFramework.asPath}",
-      '-implicit:class',
-      '-AprintErrorStack'
-   ]
-}
-
-task checkLocksLibs(type: JavaCompile) {
-   source = fileTree(dir: 'src/main/java', include: '**/*.java')
-   destinationDir = file('build/checker-classes-ignore')
-   classpath = sourceSets.main.compileClasspath
-   options.debug = true
-   options.compilerArgs = [
-      "-Xbootclasspath/p:${configurations.checkerFrameworkAnnotatedJDK.asPath}",
-      '-processor', 'org.checkerframework.checker.lock.LockChecker',
-      '-processorpath', "${configurations.checkerFramework.asPath}",
-      '-implicit:class',
-      '-AprintErrorStack'
-   ]
 }
 
 //jacocoTestReport {

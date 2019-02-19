@@ -15,23 +15,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="winston-libs" />
     <orderEntry type="module" module-name="winston-protos" />
-    <orderEntry type="module" module-name="winston-shared" />
+    <orderEntry type="module" module-name="winston-libs" />
     <orderEntry type="library" name="Gradle: org.checkerframework:checker-qual:1.9.13" level="project" />
     <orderEntry type="library" name="Gradle: org.simpleframework:simple-http:6.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:20.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.json:json:20160810" level="project" />
-    <orderEntry type="library" name="Gradle: org.jdom:jdom:2.0.2" level="project" />
     <orderEntry type="library" name="Gradle: org.simpleframework:simple-transport:6.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.simpleframework:simple-common:6.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: pi4j-core-javadoc" level="project" />
-    <orderEntry type="library" name="Gradle: pi4j-core-sources" level="project" />
-    <orderEntry type="library" name="Gradle: pi4j-core" level="project" />
+    <orderEntry type="module" module-name="winston-shared" scope="RUNTIME" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.logging.log4j:log4j-core:2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.logging.log4j:log4j-api:2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.json:json:20160810" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jdom:jdom:2.0.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: pi4j-core-javadoc" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: pi4j-core-sources" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: pi4j-core" level="project" />
+    <orderEntry type="module" module-name="winston-shared" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.truth:truth:0.42" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.checkerframework:checker-qual:2.5.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.guava:guava:25.1-android" level="project" />
@@ -47,5 +49,13 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.errorprone:error_prone_annotations:2.3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.logging.log4j:log4j-core:2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.logging.log4j:log4j-api:2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.json:json:20160810" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jdom:jdom:2.0.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: pi4j-core-javadoc" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: pi4j-core-sources" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: pi4j-core" level="project" />
   </component>
 </module>
