@@ -27,12 +27,26 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: protobuf-java-3.0.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: guava-20.0" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: truth-0.28" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: protobuf-java-3.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: guava-27.0.1-android" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: failureaccess-1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: listenablefuture-9999.0-empty-to-avoid-conflict-with-guava" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: jsr305-3.0.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: checker-compat-qual-2.5.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: error_prone_annotations-2.2.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: j2objc-annotations-1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: animal-sniffer-annotations-1.17" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: truth-0.42" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: junit-4.12" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: mockito-core-1.10.19" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: mockito-core-2.24.5" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: checker-compat-qual-2.5.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: error_prone_annotations-2.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: hamcrest-core-1.3" level="project" />
-    <orderEntry type="library" exported="" scope="TEST" name="Gradle: objenesis-2.1" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-1.9.7" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: byte-buddy-agent-1.9.7" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: objenesis-2.6" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: checker-qual-2.5.3" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: diffutils-1.3.0" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="Gradle: auto-value-annotations-1.6.2" level="project" />
   </component>
 </module>
