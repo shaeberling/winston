@@ -70,7 +70,7 @@ public class ChannelValueRequester {
                 // TODO: Let's check return code and not just content.
                 return true;
               }
-            });
+            }, mExecutor);
       }
     };
   }

@@ -5,6 +5,8 @@
 .settings
 
 local.properties
+linux.local.properties
+windows.local.properties
 
 .gradle/
 .idea/libraries

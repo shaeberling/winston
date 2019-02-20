@@ -29,6 +29,9 @@ import com.s13g.winston.shared.data.TypeConversion;
 import com.s13g.winston.views.tiles.LightTileView;
 import com.s13g.winston.views.tiles.TileWrapperView;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -38,10 +41,13 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  */
 abstract class GenericLightTileCreator extends ChannelTileCreator {
   private final ChannelValueRequester mRequester;
+  private final Executor postUpdateExecutor;
 
   GenericLightTileCreator(Context context, ChannelValueRequester requester) {
     super(context);
     mRequester = requester;
+    postUpdateExecutor = java.util.concurrent.Executors.newSingleThreadExecutor();
+
   }
 
   WrappedTileController createLightTile(final Channel channel,
@@ -67,7 +73,7 @@ abstract class GenericLightTileCreator extends ChannelTileCreator {
                       throw new RuntimeException("Cannot convert to boolean", e);
                     }
                   }
-                });
+                }, postUpdateExecutor);
           }
         }, new Function<Boolean, ListenableFuture<Boolean>>() {
           @Nullable

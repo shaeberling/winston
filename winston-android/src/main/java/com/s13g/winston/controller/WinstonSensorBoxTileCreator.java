@@ -32,6 +32,8 @@ import com.s13g.winston.views.tiles.TileWrapperView;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -44,10 +46,12 @@ import static com.s13g.winston.shared.ChannelType.WINSTON_SENSORBOX;
  */
 class WinstonSensorBoxTileCreator extends ChannelTileCreator {
   private final ChannelValueRequester mRequester;
+  private final Executor postUpdateExecutor;
 
   WinstonSensorBoxTileCreator(Context context, ChannelValueRequester requester) {
     super(context);
     mRequester = requester;
+    postUpdateExecutor = java.util.concurrent.Executors.newSingleThreadExecutor();
   }
 
   @Override
@@ -89,7 +93,7 @@ class WinstonSensorBoxTileCreator extends ChannelTileCreator {
                     // The result by the winston sensor box is always celsius.
                     return new Temperature(tempC, Temperature.Unit.CELSIUS);
                   }
-                });
+                }, postUpdateExecutor);
           }
         });
     String title = isNullOrEmpty(channel.name) ? channel.id : channel.name;

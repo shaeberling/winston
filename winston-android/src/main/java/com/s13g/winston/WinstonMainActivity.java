@@ -105,7 +105,7 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
         LOG.log(Level.SEVERE, "Request failed", t);
         mToaster.showToast(t.getMessage(), Toaster.Duration.LONG);
       }
-    });
+    }, mExecutors.getMainThreadExecutor());
   }
 
   @Override

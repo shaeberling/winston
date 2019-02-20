@@ -25,6 +25,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.R;
 import com.s13g.winston.views.tiles.TileWrapperView;
 
+import java.util.concurrent.Executor;
+
 import javax.annotation.Nullable;
 
 /**
@@ -33,10 +35,13 @@ import javax.annotation.Nullable;
 public class WrappedTileController implements TileController {
   private final TileController mTileController;
   private final TileWrapperView mTileWrapper;
+  // FIXME.
+  private final Executor postUpdateExecutor;
 
   WrappedTileController(TileController tileController, TileWrapperView tileWrapper) {
     mTileController = tileController;
     mTileWrapper = tileWrapper;
+    postUpdateExecutor = java.util.concurrent.Executors.newSingleThreadExecutor();
 
     // When the tile is clicked, send the main action to
     tileWrapper.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +68,7 @@ public class WrappedTileController implements TileController {
             }
             return onRefresh();
           }
-        });
+        }, postUpdateExecutor);
   }
 
   @Override
@@ -85,7 +90,7 @@ public class WrappedTileController implements TileController {
       public void onFailure(Throwable t) {
         mTileWrapper.setFooterText(R.string.tile_refreshing_failed);
       }
-    });
+    }, postUpdateExecutor);
     return refreshFuture;
   }
 

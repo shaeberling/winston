@@ -27,6 +27,8 @@ import com.google.common.util.concurrent.SettableFuture;
 import com.s13g.winston.async.Provider;
 import com.s13g.winston.views.tiles.TileView;
 
+import java.util.concurrent.Executor;
+
 import javax.annotation.Nullable;
 
 /**
@@ -38,7 +40,10 @@ abstract class BasicTileController<V extends TileView<T>, T> implements TileCont
   private final V mTileView;
   private final Provider<T> mProvider;
   private final Function<T, ListenableFuture<Boolean>> mMainAction;
+  // FIXME: This should be passed in.
+  private final Executor postUpdateExecutor;
   private final Object mLock;
+
   @Nullable
   private T mValue;
   private ListenableFuture<Boolean> mPreviousRequest;
@@ -48,6 +53,7 @@ abstract class BasicTileController<V extends TileView<T>, T> implements TileCont
     mTileView = Preconditions.checkNotNull(tileView);
     mProvider = Preconditions.checkNotNull(provider);
     mMainAction = mainAction;
+    postUpdateExecutor = java.util.concurrent.Executors.newSingleThreadExecutor();
     mLock = new Object();
     mValue = null;
     mPreviousRequest = null;
@@ -86,7 +92,7 @@ abstract class BasicTileController<V extends TileView<T>, T> implements TileCont
           Log.d(TAG, "Failed to get value", t);
           successFuture.set(false);
         }
-      });
+      }, postUpdateExecutor);
       mPreviousRequest = successFuture;
       return successFuture;
     }

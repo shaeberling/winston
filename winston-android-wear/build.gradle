@@ -6,21 +6,25 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.3.1'
     }
 }
 
+repositories {
+    jcenter()
+    google()
+}
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
-        applicationId "com.s13g.winston"
+        applicationId 'com.s13g.winston'
         minSdkVersion 19
-        targetSdkVersion 25
-        jackOptions {
-            enabled false
-        }
+        targetSdkVersion 28
+        versionCode 2
+        versionName '0.2'
     }
 
     buildTypes {
@@ -33,17 +37,10 @@ android {
             ext.enableCrashlytics = false
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
 }
 
 dependencies {
-    compile project(':winston-shared')
-    compile 'com.google.android.gms:play-services-wearable:+'
-    compile 'com.android.support:support-v13:+'
-    compile 'com.google.android.support:wearable:1.1.+'
+    implementation project(':winston-shared')
+    implementation 'com.google.android.gms:play-services-wearable:16.0.1'
 }
 
