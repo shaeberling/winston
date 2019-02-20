@@ -35,6 +35,8 @@ after_success:
     - ./gradlew nodeDaemon
     - ./gradlew masterDaemon
     - ./gradlew sauronDaemon
+    - ./gradlew winston-android:assembleDebug
+    - ./gradlew winston-android-wear:assembleDebug
     - ./gradlew :winston-server:jar
     - ./gradlew winston-libs:jacocoTestReport winston-server:jacocoTestReport coveralls
 
