@@ -31,7 +31,6 @@ script:
     - java -version
 
 after_success:
-    - ./gradlew build
     - ./gradlew nodeDaemon
     - ./gradlew masterDaemon
     - ./gradlew sauronDaemon
