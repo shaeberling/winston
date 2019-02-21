@@ -6,20 +6,13 @@ buildscript {
         mavenCentral()
         jcenter()
     }
-    dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
 }
 
 plugins {
     id 'net.saliman.cobertura' version '2.3.1'
     id 'com.github.kt3k.coveralls' version '2.8.2'
+    id 'jacoco'
 }
-apply plugin: 'jacoco'
-
 
 allprojects {
     repositories {

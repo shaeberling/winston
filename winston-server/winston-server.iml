@@ -71,5 +71,7 @@
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: failureaccess-1.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: listenablefuture-9999.0-empty-to-avoid-conflict-with-guava" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="Gradle: animal-sniffer-annotations-1.17" level="project" />
+    <orderEntry type="library" exported="" name="winston-server.winston-0.0.2-all" level="project" />
+    <orderEntry type="library" exported="" name="winston-server.winston-0.0.2-all" level="project" />
   </component>
 </module>

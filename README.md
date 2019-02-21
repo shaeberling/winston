@@ -51,9 +51,9 @@ Android Wear App |  `./gradlew winston-android-wear:assembleDebug`
 Once you have compiled the daemons, simply copy them to your server or node. You can find them in
  the following locations:
  
-- `winston-server/build/libs/winston-node-daemon.jar` 
-- `winston-server/build/libs/winston-master-daemon.jar` 
-- `winston-server/build/libs/winston-sauron-daemon.jar` 
+- `winston-server/build/libs/winston-{version}-master.jar`
+- `winston-server/build/libs/winston-{version}-node.jar`
+- `winston-server/build/libs/winston-{version}-sauron.jar`
 
 
 ### Configuration and Running

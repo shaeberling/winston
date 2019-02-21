@@ -1,12 +1,11 @@
 plugins {
     id 'jacoco'
+    id 'java'
+//    id 'gradle-one-jar'
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
-apply plugin: 'java'
-apply plugin: 'gradle-one-jar'
-
-
-version = '0.0.1'
+version = '0.0.2'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -30,46 +29,49 @@ jacocoTestReport {
     sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
     classDirectories = project.files(sourceSets.main.output)
     reports {
-        xml.enabled true
+        xml.enabled = true
     }
 }
 
-task nodeDaemon(type: OneJar) {
-    mainClass = 'com.s13g.winston.node.NodeDaemon'
-    archiveName = 'winston-node-daemon.jar'
-    // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-    manifestFile = file('etc/MANIFEST-node.MF')
-    // manifest {
-    //   attributes 'Implementation-Title': 'Winston Node Daemon',
-    //              'Implementation-Version': version,
-    //              'Timestamp': String.valueOf(System.currentTimeMillis())
-    // }
-    useStable = false
+task winstonJarConfig(type: Jar) {
+    manifest {
+        attributes 'Description': 'Winston server all-in-one JAR.'
+    }
 }
 
-task masterDaemon(type: OneJar) {
-    mainClass = 'com.s13g.winston.master.MasterDaemon'
-    archiveName 'winston-master-daemon.jar'
-    // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-    manifestFile = file('etc/MANIFEST-master.MF')
-    // manifest {
-    //   attributes 'Implementation-Title': 'Winston Master Daemon',
-    //              'Implementation-Version': version,
-    //              'Timestamp': String.valueOf(System.currentTimeMillis())
-    // }
-    useStable = false
+shadowJar {
+    version = version
+    manifest {
+        inheritFrom project.tasks.winstonJarConfig.manifest
+    }
 }
 
-task sauronDaemon(type: OneJar) {
-    mainClass = 'com.s13g.winston.tools.sauron.SauronDaemon'
-    archiveName 'winston-sauron-daemon.jar'
-    // Workaround for https://github.com/rholder/gradle-one-jar/issues/25
-    manifestFile = file('etc/MANIFEST-sauron.MF')
-    // manifest {
-    //   attributes 'Implementation-Title': 'Winston Sauron Daemon',
-    //              'Implementation-Version': version,
-    //              'Timestamp': String.valueOf(System.currentTimeMillis())
-    // }
-    useStable = false
+task masterDaemon(type: Jar, dependsOn: shadowJar) {
+    baseName = 'winston'
+    classifier = 'master'
+    manifest {
+        attributes('Main-Class': 'com.s13g.winston.master.MasterDaemon',
+                   'Implementation-Title': 'Winston Master Daemon')
+    }
+    from zipTree(shadowJar.archivePath)
 }
 
+task nodeDaemon(type: Jar, dependsOn: shadowJar) {
+    baseName = 'winston'
+    classifier = 'node'
+    manifest {
+        attributes('Main-Class': 'com.s13g.winston.node.NodeDaemon',
+                   'Implementation-Title': 'Winston Node Daemon')
+    }
+    from zipTree(shadowJar.archivePath)
+}
+
+task sauronDaemon(type: Jar, dependsOn: shadowJar) {
+    baseName = 'winston'
+    classifier = 'sauron'
+    manifest {
+        attributes('Main-Class': 'com.s13g.winston.tools.sauron.SauronDaemon',
+                   'Implementation-Title': 'Winston Sauron Daemon')
+    }
+    from zipTree(shadowJar.archivePath)
+}
