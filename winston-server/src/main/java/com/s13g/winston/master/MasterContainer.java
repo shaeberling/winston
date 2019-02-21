@@ -20,8 +20,6 @@ import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
 
-
-
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.Status;
@@ -74,27 +72,27 @@ public class MasterContainer implements Container {
       doHandle(request, response.getOutputStream());
       response.setStatus(Status.OK);
     } catch (RequestHandlingException e) {
-      log.atWarning().log("Cannot handle request", e);
+      log.atWarning().log("Cannot handle request: %s", e.getMessage());
       if (e.errorCode.isPresent()) {
         response.setStatus(e.errorCode.get());
       } else {
         response.setStatus(Status.BAD_REQUEST);
       }
     } catch (RequestHandlers.RequestNotAuthorizedException e) {
-      log.atWarning().log("Unauthorized access: " + request.getAddress().toString());
+      log.atWarning().log("Unauthorized access: %s", request.getAddress().toString());
       response.setStatus(Status.FORBIDDEN);
       try {
         response.getPrintStream().append(e.getMessage());
       } catch (IOException e1) {
-        log.atSevere().log("Cannot write error to response", e1);
+        log.atSevere().withCause(e1).log("Cannot write error to response");
       }
     } catch (Exception e) {
-      log.atSevere().log("Error handling request", e);
+      log.atSevere().withCause(e).log("Error handling request");
     } finally {
       try {
         response.close();
       } catch (IOException e) {
-        log.atWarning().log("Cannot close response", e);
+        log.atWarning().withCause(e).log("Cannot close response");
       }
     }
   }
