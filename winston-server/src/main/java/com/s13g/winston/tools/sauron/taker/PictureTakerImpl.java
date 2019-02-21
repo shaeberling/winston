@@ -16,11 +16,9 @@
 
 package com.s13g.winston.tools.sauron.taker;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,10 +32,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class PictureTakerImpl implements PictureTaker {
-  private static Logger LOG = LogManager.getLogger(PictureTakerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   /**
-   * The command to execute to capture an image.
-   * Note: Add '--no-banner' to remove the timestamp banner at the bottom of the image file.
+   * The command to execute to capture an image. Note: Add '--no-banner' to remove the timestamp
+   * banner at the bottom of the image file.
    */
   private static final String COMMAND = "/usr/bin/fswebcam -r 1920x1080 %s";
   private final Executor mExecutor;
@@ -55,7 +53,7 @@ public class PictureTakerImpl implements PictureTaker {
           .redirectErrorStream(true).start();
       handleProcess(process, result);
     } catch (IOException e) {
-      LOG.error("Could not capture image", e);
+      log.atSevere().withCause(e).log("Could not capture image");
       result.setException(e);
     }
     return result;
@@ -65,7 +63,7 @@ public class PictureTakerImpl implements PictureTaker {
    * Asynchronously waits to the process to finish and informs the given future.
    *
    * @param process the process to wait for to end.
-   * @param result  the future to set when the process is done.
+   * @param result the future to set when the process is done.
    */
   private void handleProcess(final Process process, final SettableFuture<Boolean> result) {
     mExecutor.execute(() -> {
@@ -73,7 +71,7 @@ public class PictureTakerImpl implements PictureTaker {
         int returnValue = process.waitFor();
         result.set(returnValue == 0);
       } catch (InterruptedException e) {
-        LOG.error("Interrupted while capturing image", e);
+        log.atSevere().withCause(e).log("Interrupted while capturing image");
         result.set(false);
       }
     });

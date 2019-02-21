@@ -16,6 +16,7 @@
 
 package com.s13g.winston.requests;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 import com.s13g.winston.net.HttpRequester;
@@ -23,7 +24,6 @@ import com.s13g.winston.proto.nano.ForClients.ChannelData;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
-import java.util.logging.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -34,7 +34,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @ParametersAreNonnullByDefault
 public class ChannelDataRequester implements AutoCloseable {
-  private static final Logger LOG = Logger.getLogger("ChannelDataRequest");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String CHANNEL_DATA_PATH = "/channeldata";
   private final HttpRequester mRequester;
   private final Executor mExecutor;
@@ -56,9 +56,9 @@ public class ChannelDataRequester implements AutoCloseable {
           return;
         }
         try {
-          LOG.info("Making request to channel data path");
+          log.atInfo().log("Making request to channel data path");
           byte[] response = mRequester.request(CHANNEL_DATA_PATH);
-          LOG.info("Response received ... " + response.length);
+          log.atInfo().log("Response received ... " + response.length);
           ChannelData channelData = ChannelData.parseFrom(response);
           if (!mIsClosed) {
             result.set(channelData);

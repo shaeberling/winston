@@ -16,10 +16,9 @@
 
 package com.s13g.winston.tools.sauron;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.common.io.DataLoader;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.Status;
 
@@ -38,8 +37,7 @@ import javax.annotation.concurrent.GuardedBy;
  */
 @ParametersAreNonnullByDefault
 public class ImageServer {
-
-  private static final Logger LOG = LogManager.getLogger(ImageServer.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   /** Used to read the file into memory to serve it. */
   private final Executor mFileReadExecutor;
@@ -74,10 +72,10 @@ public class ImageServer {
         if (currentImage.isPresent()) {
           mCurrentImageBytes = currentImage.get();
           if (!mmJpegQueue.offer(mCurrentImageBytes)) {
-            LOG.warn("Cannot add new image to mMjpegQueue.");
+            log.atWarning().log("Cannot add new image to mMjpegQueue.");
           }
         } else {
-          LOG.error("Could not load current image. Not updating.");
+          log.atSevere().log("Could not load current image. Not updating.");
         }
       }
     });
@@ -91,14 +89,14 @@ public class ImageServer {
   }
 
   void serveMotionJpegAsync(final Response response) throws IOException {
-    LOG.info("Serving MJPEG...");
+    log.atInfo().log("Serving MJPEG...");
     response.setContentType("multipart/x-mixed-replace;boundary=ipcamera");
     response.setStatus(Status.OK);
 
     OutputStream outputStream = response.getOutputStream();
     Executor mMjpegExecutor = Executors.newSingleThreadExecutor();
     mMjpegExecutor.execute(() -> {
-      byte[] jpegData = null;
+
       try {
         // Immediately serve most recent frame.
         synchronized (mBytesLock) {
@@ -107,11 +105,11 @@ public class ImageServer {
 
         // Skip the first frame, since it's old. Then continue to read updated frames.
         mmJpegQueue.take();
-        while ((jpegData = mmJpegQueue.take()) != null) {
+        for (byte[] jpegData = null; jpegData != null; jpegData = mmJpegQueue.take()) {
           serveMotionJpegFrame(jpegData, outputStream);
         }
       } catch (IOException | InterruptedException e) {
-        LOG.warn("Interrupted while serving MJPEG data. Exiting MJPEG loop.");
+        log.atWarning().log("Interrupted while serving MJPEG data. Exiting MJPEG loop.");
         try {
           response.close();
         } catch (IOException ignore) {
@@ -125,7 +123,7 @@ public class ImageServer {
     outputStream.write("Content-Type: image/jpeg\r\n".getBytes());
     outputStream.write(("Content-Length: " + jpegData.length + "\r\n\r\n").getBytes());
     outputStream.write(jpegData);
-    LOG.debug("Write mJpeg frame");
+    log.atFine().log("Wrote mJpeg frame");
   }
 
   /** Serves the given data and content type to the given response. */

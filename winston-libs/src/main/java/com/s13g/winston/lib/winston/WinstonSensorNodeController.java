@@ -17,11 +17,9 @@
 package com.s13g.winston.lib.winston;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.shared.data.Temperature;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -33,7 +31,7 @@ import java.util.function.Supplier;
  * Communicates with a Winston sensor node.
  */
 public class WinstonSensorNodeController {
-  private static final Logger LOG = LogManager.getLogger(WinstonSensorNodeController.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final String mNodeAddress;
   private final List<Supplier<Optional<Temperature>>> mTemperatureSensors;
@@ -64,11 +62,11 @@ public class WinstonSensorNodeController {
         tempStr = HttpUtil.requestUrl(address);
         return Optional.of(Temperature.parse(tempStr));
       } catch (IllegalArgumentException e) {
-        LOG.error("Request to '" + path + "'resulted in illegal temperature value request " +
-            "temperature: '" + tempStr + "': ", e);
+        log.atWarning().withCause(e).log("Request to '%s'resulted in illegal " +
+            "temperature value request temperature: '%s'", path, tempStr);
         return Optional.empty();
       } catch (IOException e) {
-        LOG.error("Cannot request temperature from '" + path + "'.", e);
+        log.atWarning().withCause(e).log("Cannot request temperature from '%s'.", path);
         return Optional.empty();
       }
     };

@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.common.base.Optional;
+import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -40,11 +41,8 @@ import com.s13g.winston.requests.ChannelValueRequester;
 import com.s13g.winston.views.TiledViewCreator;
 import com.s13g.winston.views.Toaster;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class WinstonMainActivity extends Activity implements View.OnClickListener {
-  private static final Logger LOG = Logger.getLogger("MainActivity");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private Scope mActivityScope;
   private Toaster mToaster;
@@ -102,7 +100,7 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
 
       @Override
       public void onFailure(Throwable t) {
-        LOG.log(Level.SEVERE, "Request failed", t);
+        log.atSevere().withCause(t).log("Request failed");
         mToaster.showToast(t.getMessage(), Toaster.Duration.LONG);
       }
     }, mExecutors.getMainThreadExecutor());
@@ -113,7 +111,7 @@ public class WinstonMainActivity extends Activity implements View.OnClickListene
     try {
       mActivityScope.close();
     } catch (Exception e) {
-      LOG.log(Level.WARNING, "Error while closing scope.", e);
+      log.atWarning().withCause(e).log("Error while closing scope.");
     }
     super.onStop();
   }

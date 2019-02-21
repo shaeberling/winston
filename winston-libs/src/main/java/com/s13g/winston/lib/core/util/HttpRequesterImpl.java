@@ -18,9 +18,6 @@ package com.s13g.winston.lib.core.util;
 
 import com.s13g.winston.lib.core.util.concurrent.HttpRequester;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,11 +29,9 @@ import java.net.URL;
  * Default implementation for making HTTP requests.
  */
 public class HttpRequesterImpl implements HttpRequester {
-  private static final Logger LOG = LogManager.getLogger("HttpUtil");
-
   @Override
   public String requestUrl(String rpcUrl) throws IOException {
-    StringBuffer resultStr = new StringBuffer();
+    StringBuilder resultStr = new StringBuilder();
     try {
       final HttpURLConnection connection = (HttpURLConnection) (new URL(
           rpcUrl)).openConnection();
@@ -47,7 +42,7 @@ public class HttpRequesterImpl implements HttpRequester {
       String line;
       boolean first = true;
       while ((line = reader.readLine()) != null) {
-        if (first == true) {
+        if (first) {
           first = false;
         } else {
           resultStr.append('\n');

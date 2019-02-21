@@ -16,8 +16,8 @@
 
 package com.s13g.winston.common;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.google.common.flogger.FluentLogger;
+
 import org.simpleframework.http.core.Container;
 import org.simpleframework.http.core.ContainerSocketProcessor;
 import org.simpleframework.transport.connect.Connection;
@@ -31,7 +31,7 @@ import java.net.SocketAddress;
  * Starts a server to start serving the given container.
  */
 public class ContainerServer {
-  private static final Logger LOG = LogManager.getLogger(ContainerServer.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final int mPort;
   private final int mNumThreads;
@@ -62,9 +62,9 @@ public class ContainerServer {
       Connection connection = new SocketConnection(processor);
       SocketAddress address = new InetSocketAddress(mPort);
       connection.connect(address);
-      LOG.info("Listening to: " + address.toString());
+      log.atInfo().log("Listening at %s ", address.toString());
     } catch (IOException e) {
-      LOG.error("Cannot start webserver: " + e.getMessage());
+      log.atSevere().withCause(e).log("Cannot start webserver");
     }
   }
 }

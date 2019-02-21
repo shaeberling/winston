@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.temperature;
 
+import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
@@ -23,19 +24,15 @@ import com.s13g.winston.lib.plugin.NodeController;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.shared.data.Temperature;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Reads temperature and humidity from the HTU21D I2C device.
- * See the following URL for specs:
+ * Reads temperature and humidity from the HTU21D I2C device. See the following URL for specs:
  * https://cdn.sparkfun.com/assets/6/a/8/e/f/525778d4757b7f50398b4567.pdf
  */
 public class HTU21DControllerImpl implements TemperatureSensorController, AutoCloseable {
-  private static final Logger LOG = LogManager.getLogger(HTU21DControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   /** Trigger Temperature Measurement */
   private final static int HTU21DF_READTEMP = 0xE3;
@@ -61,13 +58,15 @@ public class HTU21DControllerImpl implements TemperatureSensorController, AutoCl
   public static Optional<NodeController> create(int busNum, int address) {
     try {
       I2CBus bus = I2CFactory.getInstance(busNum);
-      LOG.info("Connected to I2C bus.");
+      log.atInfo().log("Connected to I2C bus.");
 
       I2CDevice device = bus.getDevice(address);
-      LOG.info("Connected to device");
+      log.atInfo().log("Connected to device");
       return Optional.of(new HTU21DControllerImpl(bus, device));
     } catch (IOException e) {
-      LOG.error("Cannot create I2C temp sensor controller.", e);
+      log.atSevere().withCause(e).log("Cannot create I2C temp sensor controller.");
+    } catch (I2CFactory.UnsupportedBusNumberException e) {
+      log.atSevere().withCause(e).log("Bad bus numer. Cannot create I2C temp sensor controller.");
     }
     return Optional.empty();
   }
@@ -87,7 +86,7 @@ public class HTU21DControllerImpl implements TemperatureSensorController, AutoCl
     try {
       return Optional.of(new Temperature(readTempFromDevice(), Temperature.Unit.CELSIUS));
     } catch (IOException e) {
-      LOG.error("Unable to read temperature from I2C device.", e);
+      log.atWarning().withCause(e).log("Unable to read temperature from I2C device.");
     }
     return Optional.empty();
   }
@@ -97,7 +96,7 @@ public class HTU21DControllerImpl implements TemperatureSensorController, AutoCl
     try {
       return Optional.of((int) readHumidityFromDevice());
     } catch (IOException e) {
-      LOG.error("Unable to read humidity from I2C device.", e);
+      log.atWarning().withCause(e).log("Unable to read humidity from I2C device.", e);
     }
     return Optional.empty();
   }
@@ -146,7 +145,7 @@ public class HTU21DControllerImpl implements TemperatureSensorController, AutoCl
     try {
       mBus.close();
     } catch (IOException e) {
-      LOG.warn("Error while trying to close I2C controller.", e);
+      log.atWarning().withCause(e).log("Error while trying to close I2C controller.", e);
     }
   }
 

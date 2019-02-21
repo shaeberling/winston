@@ -45,8 +45,7 @@ Node Daemon |  `./gradlew nodeDaemon`
 Master Daemon |  `./gradlew masterDaemon` 
 Sauron Daemon |  `./gradlew sauronDaemon` 
 Android App |  `./gradlew winston-android:assembleDebug` 
-Android Wear App |  `./gradlew winston-android-wear:assembleDebug` 
-Run all tests | `./runAllTests.sh`
+Android Wear App |  `./gradlew winston-android-wear:assembleDebug`
 
 ### Installation
 Once you have compiled the daemons, simply copy them to your server or node. You can find them in

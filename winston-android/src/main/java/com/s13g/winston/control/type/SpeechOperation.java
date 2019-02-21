@@ -23,6 +23,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.control.operation.IOperationProcess;
 
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.logging.Logger;
  * control winston functionality using the passed {@link IOperationProcess}
  */
 public class SpeechOperation implements IOperationType, RecognitionListener {
-    private static final Logger LOG = Logger.getLogger("SpeechOperation");
+    private static final FluentLogger log = FluentLogger.forEnclosingClass();
     private static final String RECOGNITION_APP_CONTEXT = "com.winston.control.voice";
     private static final String LANGUAGE_PREFERENCE = "en";
     private static final int MAX_SPEECH_RESULTS = 5;
@@ -91,7 +92,7 @@ public class SpeechOperation implements IOperationType, RecognitionListener {
             mSpeechRecognizer.startListening(recognizerIntent);
             wasStarted = true;
             mIsListening = true;
-            LOG.info("voice recognition started...");
+            log.atInfo().log("voice recognition started...");
         }
         return wasStarted;
     }
@@ -109,7 +110,7 @@ public class SpeechOperation implements IOperationType, RecognitionListener {
         mSpeechRecognizer.destroy();
         mSpeechRecognizer = null;
         mIsListening = false;
-        LOG.info("voice recognition stopped...");
+        log.atInfo().log("voice recognition stopped...");
         return true;
     }
 
@@ -138,12 +139,12 @@ public class SpeechOperation implements IOperationType, RecognitionListener {
         mIsListening = false;
 
         if (results != null && results.containsKey(SpeechRecognizer.RESULTS_RECOGNITION)) {
-            LOG.info("received results!");
+            log.atInfo().log("received results!");
             final List<String> recognizedWords = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
             final float[] confidenceScore = results.getFloatArray(SpeechRecognizer.CONFIDENCE_SCORES);
             mOperationProcessor.processRecognizedOperationResults(recognizedWords, confidenceScore);
         } else {
-            LOG.info("no results");
+            log.atInfo().log("no results");
         }
         if (mIsAutomaticActivation) {
             // restarts the recognition of speech operation after receiving results
@@ -179,32 +180,32 @@ public class SpeechOperation implements IOperationType, RecognitionListener {
 
         switch (errorCode) {
             case SpeechRecognizer.ERROR_NETWORK_TIMEOUT: // TODO
-                LOG.warning("received error code: ERROR_NETWORK_TIMEOUT");
+                log.atWarning().log("received error code: ERROR_NETWORK_TIMEOUT");
                 break;
             case SpeechRecognizer.ERROR_NETWORK:// TODO
-                LOG.warning("received error code: ERROR_NETWORK");
+                log.atWarning().log("received error code: ERROR_NETWORK");
                 break;
             case SpeechRecognizer.ERROR_AUDIO:// TODO
-                LOG.warning("received error code: ERROR_AUDIO");
+                log.atWarning().log("received error code: ERROR_AUDIO");
                 break;
             case SpeechRecognizer.ERROR_SERVER:// TODO
-                LOG.warning("received error code: ERROR_SERVER");
+                log.atWarning().log("received error code: ERROR_SERVER");
                 break;
             case SpeechRecognizer.ERROR_CLIENT:// TODO
-                LOG.warning("received error code: ERROR_CLIENT");
+                log.atWarning().log("received error code: ERROR_CLIENT");
                 break;
             case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:// TODO
-                LOG.warning("received error code: ERROR_SPEECH_TIMEOUT");
+                log.atWarning().log("received error code: ERROR_SPEECH_TIMEOUT");
                 break;
             case SpeechRecognizer.ERROR_NO_MATCH:// TODO
-                LOG.warning("received error code: ERROR_NO_MATCH");
+                log.atWarning().log("received error code: ERROR_NO_MATCH");
                 break;
             case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:// TODO
-                LOG.warning("received error code: ERROR_RECOGNIZER_BUSY");
+                log.atWarning().log("received error code: ERROR_RECOGNIZER_BUSY");
                 stopOperationRecognition();
                 break;
             case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:// TODO
-                LOG.warning("received error code: ERROR_INSUFFICIENT_PERMISSIONS");
+                log.atWarning().log("received error code: ERROR_INSUFFICIENT_PERMISSIONS");
                 break;
             default:
         }
@@ -217,17 +218,17 @@ public class SpeechOperation implements IOperationType, RecognitionListener {
 
     @Override
     public void onEvent(int eventType, Bundle params) {
-        LOG.info("onEvent");
+        log.atInfo().log("onEvent");
     }
 
     @Override
     public void onReadyForSpeech(Bundle params) {
-        LOG.info("onReadyForSpeech");
+        log.atInfo().log("onReadyForSpeech");
     }
 
     @Override
     public void onBeginningOfSpeech() {
-        LOG.info("onBeginningOfSpeech");
+        log.atInfo().log("onBeginningOfSpeech");
     }
 
     @Override
@@ -236,11 +237,11 @@ public class SpeechOperation implements IOperationType, RecognitionListener {
 
     @Override
     public void onBufferReceived(byte[] buffer) {
-        LOG.info("onBufferReceived");
+        log.atInfo().log("onBufferReceived");
     }
 
     @Override
     public void onEndOfSpeech() {
-        LOG.info("onEndOfSpeech");
+        log.atInfo().log("onEndOfSpeech");
     }
 }

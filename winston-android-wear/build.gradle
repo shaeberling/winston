@@ -42,5 +42,7 @@ android {
 dependencies {
     implementation project(':winston-shared')
     implementation 'com.google.android.gms:play-services-wearable:16.0.1'
+    implementation 'com.google.flogger:flogger:0.3.1'
+    implementation 'com.google.flogger:flogger-system-backend:0.3.1'
 }
 

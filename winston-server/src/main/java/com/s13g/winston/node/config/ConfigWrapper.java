@@ -16,11 +16,12 @@
 
 package com.s13g.winston.node.config;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.protobuf.TextFormat;
 import com.s13g.winston.proto.Node.NodeConfig;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +32,7 @@ import java.util.List;
  * Wrapper around the node configuration proto with some helper methods.
  */
 public class ConfigWrapper {
-  private static final Logger LOG = LogManager.getLogger(ConfigWrapper.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final NodeConfig mConfigProto;
 
@@ -47,7 +48,7 @@ public class ConfigWrapper {
    * @throws IOException Thrown if the configuration could not be parsed.
    */
   public static ConfigWrapper fromFile(File configFile) throws IOException {
-    LOG.info("Reading node configuration: " + configFile.getAbsolutePath());
+    log.atInfo().log("Reading node configuration: " + configFile.getAbsolutePath());
     NodeConfig.Builder builder = NodeConfig.newBuilder();
     String configStr = new String(Files.readAllBytes(configFile.toPath()));
     TextFormat.getParser().merge(configStr, builder);
@@ -94,29 +95,29 @@ public class ConfigWrapper {
    * Will print out the configuration to LOG.
    */
   public void printToLog() {
-    LOG.info("---------------------------------");
-    LOG.info("Daemon Port:" + mConfigProto.getDaemonPort());
+    log.atInfo().log("---------------------------------");
+    log.atInfo().log("Daemon Port:" + mConfigProto.getDaemonPort());
     List<NodeConfig.GpioPlugin> gpioPluginsList = mConfigProto.getGpioPluginsList();
-    LOG.info("Active GPIO plugins: " + gpioPluginsList.size());
+    log.atInfo().log("Active GPIO plugins: " + gpioPluginsList.size());
     for (NodeConfig.GpioPlugin plugin : gpioPluginsList) {
-      LOG.info("  Type    : " + plugin.getType());
-      LOG.info("  Mapping : " + plugin.getMappingList());
+      log.atInfo().log("  Type    : " + plugin.getType());
+      log.atInfo().log("  Mapping : " + plugin.getMappingList());
     }
-    LOG.info("---------------------------------");
+    log.atInfo().log("---------------------------------");
     List<NodeConfig.OneWirePlugin> oneWirePluginsList = mConfigProto.getOnewirePluginsList();
-    LOG.info("Active 1-Wire plugins: " + oneWirePluginsList.size());
+    log.atInfo().log("Active 1-Wire plugins: " + oneWirePluginsList.size());
     for (NodeConfig.OneWirePlugin plugin : oneWirePluginsList) {
-      LOG.info("  Type    : " + plugin.getType());
-      LOG.info("  Name    : " + plugin.getName());
+      log.atInfo().log("  Type    : " + plugin.getType());
+      log.atInfo().log("  Name    : " + plugin.getName());
     }
-    LOG.info("---------------------------------");
+    log.atInfo().log("---------------------------------");
     List<NodeConfig.I2cPlugin> i2cPluginsList = mConfigProto.getI2CPluginsList();
-    LOG.info("Active I2C plugins: " + i2cPluginsList.size());
+    log.atInfo().log("Active I2C plugins: " + i2cPluginsList.size());
     for (NodeConfig.I2cPlugin plugin : i2cPluginsList) {
-      LOG.info("  Type    : " + plugin.getType());
-      LOG.info("  Bus     : " + plugin.getBus());
-      LOG.info("  Addr    : " + plugin.getAddress());
+      log.atInfo().log("  Type    : " + plugin.getType());
+      log.atInfo().log("  Bus     : " + plugin.getBus());
+      log.atInfo().log("  Addr    : " + plugin.getAddress());
     }
-    LOG.info("---------------------------------");
+    log.atInfo().log("---------------------------------");
   }
 }

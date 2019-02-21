@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.wemo;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.lib.core.net.HttpUtil.Method;
 import com.s13g.winston.lib.core.xml.XmlUtil;
@@ -24,26 +25,19 @@ import org.jdom2.Element;
 import org.jdom2.Namespace;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.annotation.Nullable;
 
 /**
  * Default implementation of the Wemo controller.
  * <p>
- * See here for details:
- * https://objectpartners.com/2014/03/25/a-groovy-time-with-upnp-and-wemo/
+ * See here for details: https://objectpartners.com/2014/03/25/a-groovy-time-with-upnp-and-wemo/
  * </p>
  */
 public class WemoControllerImpl implements WemoController {
-  private static final Logger LOG = Logger.getLogger("WemoController");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String SETUP_URL = "http://%s:49153/setup.xml";
   private static final String EVENT_SERVICE_URL = "%s:49153/eventservice.xml";
   private static final String DEVICE_INFO_SERVICE_URL = "%s:49153/deviceinfoservice.xml";
@@ -60,12 +54,12 @@ public class WemoControllerImpl implements WemoController {
       String setupResponse = HttpUtil.requestUrl(String.format(SETUP_URL, ipAddress));
       Optional<Element> optRoot = XmlUtil.getRootFromString(setupResponse);
       if (!optRoot.isPresent()) {
-        LOG.log(Level.WARNING, "Cannot parse setup XML: " + ipAddress);
+        log.atWarning().log("Cannot parse setup XML: %s", ipAddress);
         return Optional.empty();
       }
       root = optRoot.get();
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Could not query switch: " + ipAddress, ex);
+      log.atWarning().withCause(ex).log("Cannot query switch: %s", ipAddress);
       return Optional.empty();
     }
 
@@ -92,7 +86,7 @@ public class WemoControllerImpl implements WemoController {
       String response = HttpUtil.requestUrl(url, Method.GET, headers, Optional.of(PAYLOAD_QUERY));
       return parseSwitchQueryResponse(response);
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Cannot send switch query", ex);
+      log.atWarning().withCause(ex).log("Cannot send switch query");
       return Optional.empty();
     }
   }
@@ -111,19 +105,19 @@ public class WemoControllerImpl implements WemoController {
     Namespace soapNamespace = rootOpt.get().getNamespace();
     Element body = rootOpt.get().getChild("Body", soapNamespace);
     if (body == null) {
-      LOG.warning("No 'body' found in query response.");
+      log.atWarning().log("No 'body' found in query response.");
       return Optional.empty();
     }
     Element responseElement = body.getChild("GetBinaryStateResponse", Namespace.getNamespace
         ("urn:Belkin:service:basicevent:1"));
     if (responseElement == null) {
-      LOG.warning("No 'GetBinaryStateResponse' found in query response.");
+      log.atWarning().log("No 'GetBinaryStateResponse' found in query response.");
       return Optional.empty();
     }
 
     Element binaryState = responseElement.getChild("BinaryState");
     if (binaryState == null) {
-      LOG.warning("No 'BinaryState' found in query response.");
+      log.atWarning().log("No 'BinaryState' found in query response.");
       return Optional.empty();
     }
 
@@ -131,7 +125,7 @@ public class WemoControllerImpl implements WemoController {
       int value = Integer.parseInt(binaryState.getText());
       return Optional.of(value != 0);
     } catch (NumberFormatException ex) {
-      LOG.warning("Cannot parse binary state value in query response.");
+      log.atWarning().log("Cannot parse binary state value in query response.");
       return Optional.empty();
     }
   }
@@ -148,7 +142,7 @@ public class WemoControllerImpl implements WemoController {
       Optional<Element> rootResponse = XmlUtil.getRootFromString(response);
       return rootResponse.isPresent();
     } catch (IOException ex) {
-      LOG.log(Level.WARNING, "Cannot send switch request", ex);
+      log.atWarning().withCause(ex).log("Cannot send switch request");
       return false;
     }
   }

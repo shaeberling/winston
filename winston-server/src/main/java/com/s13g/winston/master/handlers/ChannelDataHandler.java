@@ -16,6 +16,7 @@
 
 package com.s13g.winston.master.handlers;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.protobuf.TextFormat;
 import com.s13g.winston.common.RequestHandler;
 import com.s13g.winston.common.RequestHandlingException;
@@ -24,8 +25,8 @@ import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.proto.ForClients.ChannelData;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 import org.simpleframework.http.Status;
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * Handles requests to serve channel data information to clients.
  */
 public class ChannelDataHandler implements RequestHandler {
-  private static final Logger LOG = LogManager.getLogger(ChannelDataHandler.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String REQ_PREFIX = "channeldata";
   private static final String REQ_PREFIX_TEXT = "channeldatatext";
   private final ChannelData mChannelData;
@@ -72,7 +73,7 @@ public class ChannelDataHandler implements RequestHandler {
         writer.append(dataToText());
         return;
       } catch (IOException e) {
-        LOG.error("Cannot write response", e);
+        log.atSevere().log("Cannot write response", e);
         throw new RequestHandlingException("Cannot write response.", Status.INTERNAL_SERVER_ERROR);
       }
     }
@@ -80,7 +81,7 @@ public class ChannelDataHandler implements RequestHandler {
       mChannelData.writeTo(response);
       response.close();
     } catch (IOException e) {
-      LOG.error("Cannot write response", e);
+      log.atSevere().log("Cannot write response", e);
       throw new RequestHandlingException("Cannot write response.", Status.INTERNAL_SERVER_ERROR);
     }
   }
@@ -98,7 +99,7 @@ public class ChannelDataHandler implements RequestHandler {
       TextFormat.print(mChannelData, result);
       return result.toString();
     } catch (IOException e) {
-      LOG.error("Cannot turn protocol buffer into text.", e);
+      log.atSevere().log("Cannot turn protocol buffer into text.", e);
       throw new RequestHandlingException("Cannot produce output", Status.INTERNAL_SERVER_ERROR);
     }
   }

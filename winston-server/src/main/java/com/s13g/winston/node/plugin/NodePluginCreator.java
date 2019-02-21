@@ -17,6 +17,7 @@
 
 package com.s13g.winston.node.plugin;
 
+import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.gpio.GpioController;
 import com.s13g.winston.lib.core.file.ReadableFile;
 import com.s13g.winston.lib.led.LedController;
@@ -41,9 +42,6 @@ import com.s13g.winston.node.handler.RelayHandler;
 import com.s13g.winston.node.handler.TemperatureHandler;
 import com.s13g.winston.proto.Node.NodeConfig;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -52,7 +50,7 @@ import java.util.Optional;
  * Creates NodePlugins.
  */
 public class NodePluginCreator {
-  private static final Logger LOG = LogManager.getLogger(NodePluginCreator.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final GpioController mGpioController;
   private ReadableFile.Creator mFileCreator;
 
@@ -212,7 +210,7 @@ public class NodePluginCreator {
     try {
       return NodePluginType.valueOf(type.toUpperCase());
     } catch (IllegalArgumentException e) {
-      LOG.error("Illegal plugin name: " + type);
+      log.atSevere().log("Illegal plugin name: " + type);
       throw new RuntimeException("No controller for name: " + type);
     }
   }

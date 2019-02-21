@@ -16,12 +16,10 @@
 
 package com.s13g.winston.lib.temperature;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.file.ReadableFile;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.shared.data.Temperature;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -37,7 +35,7 @@ import java.util.Optional;
  * To enable 1wire on the Raspberry PI, see https://goo.gl/zc0iKt.
  */
 public class DS18B20ControllerImpl implements TemperatureSensorController {
-  private static final Logger LOG = LogManager.getLogger(DS18B20ControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private static final String READ_VALUE_PATH = "/sys/bus/w1/devices/%s/w1_slave";
 
@@ -108,7 +106,7 @@ public class DS18B20ControllerImpl implements TemperatureSensorController {
           Temperature.Unit.CELSIUS);
       return Optional.of(mLastKnownGoodTemperature);
     } catch (IOException ex) {
-      LOG.warn("Could not read temperature", ex);
+      log.atWarning().withCause(ex).log("Could not read temperature");
     }
     return Optional.empty();
   }

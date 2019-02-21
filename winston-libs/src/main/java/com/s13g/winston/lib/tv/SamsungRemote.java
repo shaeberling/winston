@@ -25,12 +25,10 @@
  */
 package com.s13g.winston.lib.tv;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.io.NoOpReader;
 import com.s13g.winston.lib.core.io.NoOpWriter;
 import com.s13g.winston.lib.core.util.MultiCloseable;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -51,14 +49,15 @@ import java.util.Base64;
  * <p>
  * https://github.com/mhvis/samsung-tv-control
  * <p>
- * API for controlling Samsung Smart TVs using a mSocket connection on port
- * 55000. The protocol information has been gathered from
- * http://sc0ty.pl/2012/02/samsung-tv-network-remote-control-protocol/ .
+ * API for controlling Samsung Smart TVs using a mSocket connection on port 55000. The protocol
+ * information has been gathered from http://sc0ty
+ * .pl/2012/02/samsung-tv-network-remote-control-protocol/
+ * .
  *
  * @author Maarten Visscher <mail@maartenvisscher.nl>
  */
 public class SamsungRemote {
-  private static final Logger LOG = LogManager.getLogger("SamsungRemote");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final int PORT = 55000;
   private final int SO_TIMEOUT = 3 * 1000; // Socket connect and read timeout mIn milliseconds.
   private final int SO_AUTHENTICATE_TIMEOUT = 300 * 1000; // Socket read timeout while
@@ -79,8 +78,7 @@ public class SamsungRemote {
   private MultiCloseable mSocketStreamCloseable;
 
   /**
-   * Opens a mSocket connection to the television and keeps a simple mLog when
-   * mDebug is true.
+   * Opens a mSocket connection to the television and keeps a simpTle mLog when mDebug is true.
    *
    * @param remoteName the human-readable name of this controller. Will be displaed on the TV during
    * authentication.
@@ -102,7 +100,7 @@ public class SamsungRemote {
       try {
         mSocketStreamCloseable.close();
       } catch (IOException ex) {
-        LOG.info("Issue when trying to close socket.", ex);
+        log.atInfo().withCause(ex).log("Issue when trying to close socket.");
       }
     }
 
@@ -114,8 +112,7 @@ public class SamsungRemote {
   }
 
   /**
-   * Authenticates with the television using host IP address for the ip and id
-   * parameters.
+   * Authenticates with the television using host IP address for the ip and id parameters.
    *
    * @param name the name for this controller, which is displayed on the television.
    * @return the response from the television.
@@ -129,8 +126,7 @@ public class SamsungRemote {
   }
 
   /**
-   * Authenticates with the television using host IP address for the ip
-   * parameter.
+   * Authenticates with the television using host IP address for the ip parameter.
    *
    * @param id a parameter for the television.
    * @param name the name for this controller, which is displayed on the television.
@@ -145,9 +141,8 @@ public class SamsungRemote {
   }
 
   /**
-   * Authenticates with the television. Has to be done every time when a new
-   * mSocket connection has been made, prior to sending key codes. Blocks
-   * while waiting for the television response.
+   * Authenticates with the television. Has to be done every time when a new mSocket connection has
+   * been made, prior to sending key codes. Blocks while waiting for the television response.
    *
    * @param ip a parameter for the television.
    * @param id a parameter for the television.
@@ -160,7 +155,7 @@ public class SamsungRemote {
     if (mIn == null) {
       throw new IllegalStateException("Connection not initialized.");
     }
-    LOG.info("Authenticating with ip: " + ip + ", id: " + id + ", name: " + name + ".");
+    log.atInfo().log("Authenticating with ip: " + ip + ", id: " + id + ", name: " + name + ".");
     sendPayload(getAuthenticationPayload(ip, id, name));
 
     mSocket.setSoTimeout(SO_AUTHENTICATE_TIMEOUT);
@@ -168,22 +163,22 @@ public class SamsungRemote {
     mSocket.setSoTimeout(SO_TIMEOUT);
 
     if (Arrays.equals(payload, ALLOWED)) {
-      LOG.info("Authentication response: access granted.");
+      log.atInfo().log("Authentication response: access granted.");
       return TVReply.ALLOWED; // Access granted.
     } else if (Arrays.equals(payload, DENIED)) {
-      LOG.warn("Authentication response: access denied.");
+      log.atInfo().log("Authentication response: access denied.");
       return TVReply.DENIED; // Access denied.
     } else if (Arrays.equals(payload, TIMEOUT)) {
-      LOG.warn("Authentication response: timeout.");
+      log.atInfo().log("Authentication response: timeout.");
       return TVReply.TIMEOUT; // Timeout.
     }
-    LOG.error("Authentication message is unknown: " + new String(payload));
+    log.atSevere().log("Authentication message is unknown: %s", new String(payload));
     throw new IOException("Got unknown response.");
   }
 
   /**
-   * Sends a key code to TV, blocks shortly waiting for TV response to check
-   * delivery. Only works when you are successfully authenticated.
+   * Sends a key code to TV, blocks shortly waiting for TV response to check delivery. Only works
+   * when you are successfully authenticated.
    *
    * @param keycode the key code to send.
    * @throws IOException if an I/O error occurs.
@@ -193,22 +188,21 @@ public class SamsungRemote {
   }
 
   /**
-   * Sends a key code to TV, blocks shortly waiting for TV response to check
-   * delivery. Only works when you are successfully authenticated.
+   * Sends a key code to TV, blocks shortly waiting for TV response to check delivery. Only works
+   * when you are successfully authenticated.
    *
    * @param keycode the key code to send.
    * @throws IOException if an I/O error occurs.
    */
   public void sendKeycode(String keycode) throws IOException {
-    LOG.info("Sending sendKeycode: " + keycode + ".");
+    log.atInfo().log("Sending sendKeycode: " + keycode + ".");
     sendPayload(getKeycodePayload(keycode));
     readMessage(mIn);
   }
 
   /**
-   * Sends a key code to TV mIn a non-blocking manner, thus it does not check
-   * the delivery (use checkConnection() to poll the TV status). Only works
-   * when you are successfully authenticated.
+   * Sends a key code to TV mIn a non-blocking manner, thus it does not check the delivery (use
+   * checkConnection() to poll the TV status). Only works when you are successfully authenticated.
    *
    * @param keycode the key code to send.
    * @throws IOException if an I/O error occurs.
@@ -218,15 +212,14 @@ public class SamsungRemote {
   }
 
   /**
-   * Sends a key code to TV mIn a non-blocking manner, thus it does not check
-   * the delivery (use checkConnection() to poll the TV status). Only works
-   * when you are successfully authenticated.
+   * Sends a key code to TV mIn a non-blocking manner, thus it does not check the delivery (use
+   * checkConnection() to poll the TV status). Only works when you are successfully authenticated.
    *
    * @param keycode the key code to send.
    * @throws IOException if an I/O error occurs.
    */
   public void sendKeycodeAsync(String keycode) throws IOException {
-    LOG.info("Sending sendKeycode without reading: " + keycode + ".");
+    log.atInfo().log("Sending sendKeycode without reading: %s.", keycode);
     sendPayload(getKeycodePayload(keycode), false);
   }
 
@@ -249,9 +242,8 @@ public class SamsungRemote {
   }
 
   /**
-   * Checks the connection by sending an empty key code, does not return
-   * anything but instead throws an exception when a problem arose (for
-   * instance the TV turned off).
+   * Checks the connection by sending an empty key code, does not return anything but instead throws
+   * an exception when a problem arose (for instance the TV turned off).
    *
    * @return Whether the connection to the TV is active.
    */
@@ -303,10 +295,9 @@ public class SamsungRemote {
   }
 
   /**
-   * Reads an incoming message or waits for a new one when it is not relevant.
-   * I believe non-relevant messages has to do with showing or hiding of
-   * windows on the TV, and start with 0x0a. This method returns the payload
-   * of the relevant message.
+   * Reads an incoming message or waits for a new one when it is not relevant. I believe
+   * non-relevant messages has to do with showing or hiding of windows on the TV, and start with
+   * 0x0a. This method returns the payload of the relevant message.
    *
    * @param reader the reader.
    * @return the payload which was sent with the relevant message.
@@ -314,7 +305,7 @@ public class SamsungRemote {
   private char[] readRelevantMessage(Reader reader) throws IOException {
     char[] payload = readMessage(reader);
     while (payload[0] == 0x0a) {
-      LOG.info("Message is not relevant, waiting for new message.");
+      log.atInfo().log("Message is not relevant, waiting for new message.");
       payload = readMessage(reader);
     }
     return payload;
@@ -333,7 +324,7 @@ public class SamsungRemote {
     }
     String response = readString(reader);
     char[] payload = readCharArray(reader);
-    LOG.info("Message: first byte: " + Integer.toHexString(first) + ", response: " +
+    log.atInfo().log("Message: first byte: " + Integer.toHexString(first) + ", response: " +
         response + ", " + "payload: " + readable(payload));
     return payload;
   }
@@ -366,8 +357,8 @@ public class SamsungRemote {
   }
 
   /**
-   * Encodes the string with base64 and writes the result length and the
-   * result itself to the writer.
+   * Encodes the string with base64 and writes the result length and the result itself to the
+   * writer.
    *
    * @param writer the writer.
    * @param string the string to encode using base64 and write.
@@ -390,8 +381,7 @@ public class SamsungRemote {
   }
 
   /**
-   * Reads the next characters from the reader using the length given mIn the
-   * first byte.
+   * Reads the next characters from the reader using the length given mIn the first byte.
    *
    * @param reader the reader.
    * @return the characters which were read.
@@ -412,7 +402,7 @@ public class SamsungRemote {
    * @throws IOException if an I/O error occurs.
    */
   private void emptyReaderBuffer(Reader reader) throws IOException {
-    LOG.info("Emptying reader buffer.");
+    log.atInfo().log("Emptying reader buffer.");
     while (reader.ready()) {
       readMessage(reader);
     }
@@ -426,7 +416,7 @@ public class SamsungRemote {
       authenticate(mRemoteName);
       return true;
     } catch (IOException ex) {
-      LOG.warn("Cannot authenticate", ex);
+      log.atWarning().withCause(ex).log("Cannot authenticate");
       return false;
     }
   }
@@ -447,7 +437,7 @@ public class SamsungRemote {
       try {
         mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
       } catch (SocketException ex) {
-        LOG.info("Failed to connect to TV, retrying ...");
+        log.atWarning().log("Failed to connect to TV, retrying ...");
         resetSocketAndStreams();
         mSocket.connect(mInetSocketAddress, SO_TIMEOUT);
       }
@@ -457,23 +447,22 @@ public class SamsungRemote {
       mSocketStreamCloseable.add(mOut, mIn);
       return true;
     } catch (IOException ex) {
-      LOG.warn("Cannot connect to TV", ex);
+      log.atWarning().withCause(ex).log("Cannot connect to TV");
       return false;
     }
   }
 
   /**
-   * Closes the mSocket connection. Should always be called at the end of a
-   * session.
+   * Closes the mSocket connection. Should always be called at the end of a session.
    */
   public void close() {
-    LOG.info("Closing mSocket connection.");
+    log.atInfo().log("Closing mSocket connection.");
     try {
       mOut = new NoOpWriter();
       mIn = new NoOpReader();
       mSocketStreamCloseable.close();
     } catch (IOException ex) {
-      LOG.warn("Error while closing connection", ex);
+      log.atWarning().withCause(ex).log("Error while closing connection");
     }
   }
 

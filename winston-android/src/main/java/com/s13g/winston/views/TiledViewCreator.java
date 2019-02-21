@@ -20,6 +20,7 @@ import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.controller.ChannelTileCreator;
 import com.s13g.winston.controller.WrappedTileController;
 import com.s13g.winston.proto.nano.ForClients.ChannelData;
@@ -28,8 +29,6 @@ import com.s13g.winston.shared.ChannelType;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -37,7 +36,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Helps to create and wrap tiles views.
  */
 public class TiledViewCreator {
-  private static final Logger LOG = Logger.getLogger("TiledViewCreator");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final ViewGroup mTileContainer;
   private final Context mContext;
@@ -58,13 +57,13 @@ public class TiledViewCreator {
    * @param data tile data.
    */
   public void addTiles(ChannelData data) {
-    LOG.info("Adding tiles: " + data.channel.length);
+    log.atInfo().log("Adding tiles: " + data.channel.length);
 
     ViewGroup newRow = null;
     int c = 0;
     for (int i = 0; i < data.channel.length; ++i) {
       ChannelData.Channel channel = data.channel[i];
-      LOG.info("Adding views for channel: " + channel.id);
+      log.atInfo().log("Adding views for channel: " + channel.id);
       List<WrappedTileController> tiles = createWrappedTiles(channel);
       for (WrappedTileController tile : tiles) {
         if (c++ % 2 == 0) {
@@ -91,7 +90,7 @@ public class TiledViewCreator {
     if (mCreators.containsKey(type)) {
       return mCreators.get(type).createWrappedTiles(channel);
     } else {
-      LOG.log(Level.WARNING, "Not supported channel type: " + type);
+      log.atWarning().log("Not supported channel type '%s' ", type);
     }
     return new LinkedList<>();
 

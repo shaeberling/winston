@@ -16,13 +16,11 @@
 
 package com.s13g.winston.tools.sauron;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.tools.sauron.taker.PictureTaker;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.util.concurrent.ScheduledExecutorService;
@@ -46,7 +44,7 @@ public class Scheduler {
     void onPictureReady(File pictureFile);
   }
 
-  private static Logger LOG = LogManager.getLogger(Scheduler.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final PictureTaker mPictureTaker;
   private final ImageRepository mImageRepository;
   private ScheduledExecutorService mExecutor;
@@ -73,7 +71,7 @@ public class Scheduler {
         @Override
         public void onSuccess(@Nullable Boolean result) {
           if (result == null || !result) {
-            LOG.warn("Taking picture not successful");
+            log.atWarning().log("Taking picture not successful");
             return;
           }
           // TODO: We might want to do ths on a different executor so that a long-running
@@ -83,7 +81,7 @@ public class Scheduler {
 
         @Override
         public void onFailure(Throwable t) {
-          LOG.warn("Taking picture failed", t);
+          log.atWarning().withCause(t).log("Taking picture failed");
         }
       });
     }, 0 /* No initial delay */, delayMillis, TimeUnit.MILLISECONDS);

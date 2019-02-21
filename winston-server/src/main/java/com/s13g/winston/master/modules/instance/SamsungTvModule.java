@@ -17,18 +17,15 @@
 package com.s13g.winston.master.modules.instance;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.tv.TvControllerFactory;
 import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.instance.SamsungTvChannel;
 import com.s13g.winston.master.modules.Module;
-import com.s13g.winston.master.modules.ModuleCreationException;
 import com.s13g.winston.master.modules.ModuleCreator;
 import com.s13g.winston.master.modules.ModuleParameters;
 import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,7 +34,7 @@ import java.util.List;
  * Module for interacting with Samsung TVs.
  */
 public class SamsungTvModule implements Module {
-  private static final Logger LOG = LogManager.getLogger(SamsungTvModule.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String MODULE_TYPE = "samsungtv";
   private static final String CHANNEL_TYPE_TV = "tv";
 
@@ -64,7 +61,7 @@ public class SamsungTvModule implements Module {
       channels.add(new SamsungTvChannel(tvIp, mFactory.forSamsungTv(tvIp)));
     }
     mChannels = ImmutableList.copyOf(channels);
-    LOG.info("Channels: " + mChannels.size());
+    log.atInfo().log("Channels: " + mChannels.size());
   }
 
   @Override
@@ -85,7 +82,7 @@ public class SamsungTvModule implements Module {
     }
 
     @Override
-    public SamsungTvModule create(ModuleContext context) throws ModuleCreationException {
+    public SamsungTvModule create(ModuleContext context) {
       return new SamsungTvModule(getType(), context.getTvControllerFactory());
     }
   }

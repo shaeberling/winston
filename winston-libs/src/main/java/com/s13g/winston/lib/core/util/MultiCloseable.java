@@ -16,8 +16,7 @@
 
 package com.s13g.winston.lib.core.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.google.common.flogger.FluentLogger;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -31,7 +30,7 @@ import javax.annotation.concurrent.ThreadSafe;
  */
 @ThreadSafe
 public class MultiCloseable implements Closeable {
-  private static final Logger LOG = LogManager.getLogger(MultiCloseable.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final List<Closeable> mCloseables;
   private final Object mLock;
   private boolean mIsClosed;
@@ -58,7 +57,7 @@ public class MultiCloseable implements Closeable {
   private MultiCloseable add(Closeable closeable) {
     synchronized (mLock) {
       if (mIsClosed) {
-        LOG.error("Cannot add to closed MultiCloseable.");
+        log.atSevere().log("Cannot add to closed MultiCloseable.");
       } else {
         mCloseables.add(closeable);
       }
@@ -70,7 +69,7 @@ public class MultiCloseable implements Closeable {
   public void close() throws IOException {
     synchronized (mLock) {
       if (mIsClosed) {
-        LOG.warn("MultiCloseable already closed.");
+        log.atWarning().log("MultiCloseable already closed.");
         return;
       }
       mIsClosed = true;
@@ -79,7 +78,7 @@ public class MultiCloseable implements Closeable {
         try {
           closeable.close();
         } catch (Exception e) {
-          LOG.warn("Closeable threw exception: ", e);
+          log.atWarning().withCause(e).log("Closeable threw an exception");
           exceptionThrown = true;
         }
       }

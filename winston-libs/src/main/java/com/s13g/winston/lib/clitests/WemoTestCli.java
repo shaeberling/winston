@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.clitests;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.wemo.WemoController;
 import com.s13g.winston.lib.wemo.WemoControllerImpl;
 import com.s13g.winston.lib.wemo.WemoSwitch;
@@ -28,26 +29,26 @@ import java.util.logging.Logger;
  * CLI to test Wemo switch library.
  */
 public class WemoTestCli {
-  private static final Logger LOG = Logger.getLogger("WemoTestCli");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   public static void main(String[] args) throws InterruptedException, IOException {
-    LOG.info("Running...");
+    log.atInfo().log("Running...");
     WemoController controller = new WemoControllerImpl();
     Optional<WemoSwitch> wemoSwitchOpt = controller.querySwitch("192.168.1.174");
     if (!wemoSwitchOpt.isPresent()) {
-      LOG.warning("Cannot not find switch.");
+      log.atWarning().log("Cannot not find switch.");
       return;
     }
     WemoSwitch wemoSwitch = wemoSwitchOpt.get();
 
-    LOG.info(wemoSwitch.toString());
+    log.atInfo().log(wemoSwitch.toString());
 
     wemoSwitch.setSwitch(false);
     Optional<Boolean> onState = wemoSwitch.isOn();
     if (!onState.isPresent()) {
-      LOG.warning("Unable to get switch state.");
+      log.atWarning().log("Unable to get switch state.");
     } else {
-      LOG.info("Switch is " + (onState.get() ? "ON" : "OFF"));
+      log.atInfo().log("Switch is " + (onState.get() ? "ON" : "OFF"));
     }
   }
 }

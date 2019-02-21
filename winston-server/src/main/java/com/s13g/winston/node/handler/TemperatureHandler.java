@@ -43,7 +43,7 @@ public class TemperatureHandler implements Handler {
     Optional<Integer> humidityOpt = mController.getHumidityPercent();
     // TODO: We need support some kind of exception with message here.
     String temperature = temperatureOpt.map(Temperature::toString).orElse("");
-    String humidity = humidityOpt.isPresent() ? humidityOpt.get().toString() : "";
+    String humidity = humidityOpt.map(Object::toString).orElse("");
     return temperature + "/" + humidity;
   }
 

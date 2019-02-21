@@ -17,10 +17,8 @@
 package com.s13g.winston.lib.winston;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.net.HttpUtil;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -33,7 +31,7 @@ import java.util.function.Supplier;
  * Controller for interfacing with a winston power node, such as the power box.
  */
 public class WinstonPowerNodeController {
-  private static final Logger LOG = LogManager.getLogger(WinstonPowerNodeController.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final String mNodeAddress;
   private final List<SwitchActions> mSwitches;
@@ -63,7 +61,7 @@ public class WinstonPowerNodeController {
         String response = HttpUtil.requestUrl(address);
         return "OK".equals(response);
       } catch (IOException e) {
-        LOG.error("Cannot perform switch action '" + address + "'.");
+        log.atWarning().log("Cannot perform switch action '%s'.", address);
       }
       return false;
     };
@@ -80,10 +78,10 @@ public class WinstonPowerNodeController {
         } else if ("0".equals(response) || "false".equalsIgnoreCase(response)) {
           return Optional.of(false);
         }
-        LOG.error("Illegal witch status response: '" + response + "'.");
+        log.atWarning().log("Illegal witch status response '%s'.", response);
         return Optional.empty();
       } catch (IOException e) {
-        LOG.error("Cannot perform switch action '" + address + "'.");
+        log.atWarning().log("Cannot perform switch action '%s'.", address);
       }
       return Optional.empty();
     };

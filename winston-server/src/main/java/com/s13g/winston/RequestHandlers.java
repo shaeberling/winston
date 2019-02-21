@@ -17,12 +17,11 @@
 package com.s13g.winston;
 
 import com.google.common.base.Strings;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.common.RequestHandler;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.proto.Master.AuthenticatedClient;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.simpleframework.http.Address;
 import org.simpleframework.http.Status;
 
@@ -36,7 +35,7 @@ import java.util.Map;
  * Contains all handlers that can handle incoming HTTP requests.
  */
 public class RequestHandlers {
-  private static final Logger LOG = LogManager.getLogger(RequestHandlers.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String AUTH_TOKEN_PARAM = "authtoken";
 
   private final Map<String, AuthenticatedClient> mAuthClients;
@@ -79,7 +78,7 @@ public class RequestHandlers {
     if (!mAuthClients.containsKey(authToken)) {
       throw new RequestNotAuthorizedException("Invalid authtoken");
     }
-    LOG.info("Authorized client: " + mAuthClients.get(authToken).getName());
+    log.atInfo().log("Authorized client: " + mAuthClients.get(authToken).getName());
     handleRequestTrusted(path, response);
   }
 

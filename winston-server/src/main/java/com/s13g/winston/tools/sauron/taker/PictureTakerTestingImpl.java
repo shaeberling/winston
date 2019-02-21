@@ -16,12 +16,13 @@
 
 package com.s13g.winston.tools.sauron.taker;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -39,7 +40,7 @@ import javax.annotation.Nullable;
  * A PictureTaker that can be used for testing, when a webcam is not accessible.
  */
 public class PictureTakerTestingImpl implements PictureTaker {
-  private static Logger LOG = LogManager.getLogger(PictureTakerTestingImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final List<byte[]> mTestImages;
   private int mCounter = 0;
 
@@ -56,7 +57,7 @@ public class PictureTakerTestingImpl implements PictureTaker {
       long bytesWritten = ByteStreams.copy(in, out);
       future.set(bytesWritten > 0);
     } catch (IOException e) {
-      LOG.error("Cannot write file.", e);
+      log.atSevere().log("Cannot write file.", e);
       future.set(false);
     }
     if (++mCounter >= mTestImages.size()) {
@@ -92,7 +93,7 @@ public class PictureTakerTestingImpl implements PictureTaker {
       ByteStreams.copy(input, data);
       return data.toByteArray();
     } catch (IOException e) {
-      LOG.warn("Cannot read file. ", e);
+      log.atWarning().log("Cannot read file. ", e);
       return null;
     }
   }

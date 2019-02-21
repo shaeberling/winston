@@ -17,6 +17,7 @@
 package com.s13g.winston.master.modules;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.master.ModuleContext;
 import com.s13g.winston.master.modules.instance.GroupModule;
@@ -26,8 +27,8 @@ import com.s13g.winston.master.modules.instance.WemoModule;
 import com.s13g.winston.master.modules.instance.WinstonModule;
 import com.s13g.winston.proto.Master;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +42,7 @@ import java.util.stream.Collectors;
  * Central class to access all module creators.
  */
 public class ModuleRegistry {
-  private static final Logger LOG = LogManager.getLogger(ModuleRegistry.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final List<Class<? extends ModuleCreator>> sCreatorClasses = initCreatorsList();
 
   private final ModuleContext mModuleContext;
@@ -82,7 +83,7 @@ public class ModuleRegistry {
     for (Master.Module moduleConfig : config.getModuleList()) {
       String type = moduleConfig.getType();
       if (!mCreators.containsKey(type)) {
-        LOG.error("Cannot find module creator for type: " + type);
+        log.atSevere().log("Cannot find module creator for type: " + type);
         continue;
       }
       try {
@@ -95,7 +96,7 @@ public class ModuleRegistry {
 
         modules.add(module);
       } catch (ModuleCreationException e) {
-        LOG.error("Unable to create module of type: " + type, e);
+        log.atSevere().log("Unable to create module of type: " + type, e);
       }
     }
 
@@ -105,7 +106,7 @@ public class ModuleRegistry {
     }
 
     mActiveModules = ImmutableList.copyOf(modules);
-    LOG.info("Active modules: " + mActiveModules.size());
+    log.atInfo().log("Active modules: " + mActiveModules.size());
   }
 
   private List<ModuleCreator> createCreators() {
@@ -114,7 +115,7 @@ public class ModuleRegistry {
       try {
         creators.add(creatorClass.newInstance());
       } catch (InstantiationException | IllegalAccessException ex) {
-        LOG.error("Cannot instantiate creator.", ex);
+        log.atSevere().log("Cannot instantiate creator.", ex);
       }
     }
     return ImmutableList.copyOf(creators);

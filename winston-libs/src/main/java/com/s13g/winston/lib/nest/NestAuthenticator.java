@@ -16,17 +16,17 @@
 
 package com.s13g.winston.lib.nest;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.net.HttpUtil;
 
 import java.io.IOException;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 /**
  * Deals with authenticating with Nest to get the credentials needed to interact with the Nest API.
  */
 public class NestAuthenticator {
-  private static final Logger LOG = Logger.getLogger("NestAuthenticator");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   /**
    * User browses to this URL to get a PIN code.
@@ -59,7 +59,7 @@ public class NestAuthenticator {
     String url = String.format(
         Locale.getDefault(), ACCESS_TOKEN_URL, clientId, pinCode, clientSecret);
     String response = HttpUtil.requestUrl(url, HttpUtil.Method.POST);
-    LOG.info("Access token response: '" + response + "'");
+    log.atInfo().log("Access token response: '" + response + "'");
     return response;
   }
 }

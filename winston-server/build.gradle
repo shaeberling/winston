@@ -1,7 +1,6 @@
-plugins {
-    id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.8.2'
-}
+//plugins {
+//    id 'jacoco'
+//}
 
 apply plugin: 'java'
 apply plugin: 'gradle-one-jar'
@@ -11,32 +10,30 @@ version = '0.0.1'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-configurations {
-    checkerFrameworkAnnotatedJDK {
-        description = 'a copy of JDK classes with Checker Framework type qualifers inserted'
-    }
-    checkerFramework {
-        description = 'The Checker Framework: custom pluggable types for Java'
-    }
-}
-
 dependencies {
     implementation project(':winston-protos')
     implementation project(':winston-libs')
-    implementation 'org.simpleframework:simple-http:6+'
-    implementation 'com.google.guava:guava:20.0'
-    implementation 'com.google.code.findbugs:jsr305:3+'
+    implementation project(':winston-shared')
+    implementation 'com.pi4j:pi4j-core:1.1'
+    implementation 'org.simpleframework:simple-http:6.0.1'
+    implementation 'com.google.guava:guava:23.0'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation 'com.google.flogger:flogger:0.3.1'
+    implementation 'com.google.flogger:flogger-system-backend:0.3.1'
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.mockito:mockito-core:2.+"
+    testImplementation "org.mockito:mockito-core:2.24.5"
     testImplementation "com.google.truth:truth:0.42"
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled = true // coveralls plugin depends on xml format report
-        html.enabled = true
-    }
-}
+//jacocoTestReport {
+//    dependsOn test
+//    sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
+//    classDirectories = project.files(sourceSets.main.output)
+//    reports {
+//        xml.enabled true
+//    }
+//}
+
 task nodeDaemon(type: OneJar) {
     mainClass = 'com.s13g.winston.node.NodeDaemon'
     archiveName = 'winston-node-daemon.jar'

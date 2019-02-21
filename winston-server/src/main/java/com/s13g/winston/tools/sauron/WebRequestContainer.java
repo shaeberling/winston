@@ -16,11 +16,12 @@
 
 package com.s13g.winston.tools.sauron;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.common.ContainerServer;
 import com.s13g.winston.common.io.ResourceLoader;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.Status;
@@ -32,7 +33,7 @@ import java.io.IOException;
  * Contaisner for the web frontend of Sauron. Handles all incoming requests.
  */
 class WebRequestContainer implements Container {
-  private static final Logger LOG = LogManager.getLogger(WebRequestContainer.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private static final int NUM_SERVER_THREADS = 10;
   private static final String CURRENT_IMAGE_PATH = "/now.jpg";
@@ -65,7 +66,7 @@ class WebRequestContainer implements Container {
     try {
       loadIndexPage();
     } catch (IOException e) {
-      LOG.error("Cannot start webserver: " + e.getMessage());
+      log.atSevere().log("Cannot start webserver: " + e.getMessage());
       return;
     }
     mContainerServer.startServing(this);
@@ -87,13 +88,13 @@ class WebRequestContainer implements Container {
         response.setStatus(Status.NOT_FOUND);
       }
     } catch (IOException e) {
-      LOG.error("Error while serving [" + requestUrl + "]: " + e.getMessage());
+      log.atSevere().log("Error while serving [" + requestUrl + "]: " + e.getMessage());
     } finally {
       if (closeResponse) {
         try {
           response.close();
         } catch (IOException e) {
-          LOG.warn("Cannot close response: " + e.getMessage());
+          log.atWarning().log("Cannot close response: " + e.getMessage());
         }
       }
     }

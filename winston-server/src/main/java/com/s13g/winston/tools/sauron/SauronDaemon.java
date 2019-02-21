@@ -16,6 +16,7 @@
 
 package com.s13g.winston.tools.sauron;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.common.ContainerServer;
 import com.s13g.winston.common.io.FileDataLoader;
 import com.s13g.winston.common.io.ResourceLoader;
@@ -25,9 +26,6 @@ import com.s13g.winston.lib.core.file.FileWrapperImpl;
 import com.s13g.winston.tools.sauron.taker.PictureTaker;
 import com.s13g.winston.tools.sauron.taker.PictureTakerImpl;
 import com.s13g.winston.tools.sauron.taker.PictureTakerTestingImpl;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +42,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class SauronDaemon {
-  private static Logger LOG = LogManager.getLogger(SauronDaemon.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final boolean EMULATE_CAMERA = false;
   /* Note: Set this when you do testing. */
   private static final String TEST_PICTURES_ROOT = "/dev/null";
@@ -77,12 +75,13 @@ public class SauronDaemon {
 
     // Start the scheduler to take pictures.
     scheduler.start(SHOT_DELAY_MILLIS, (pictureFile) -> {
-      LOG.debug("New picture available: " + pictureFile.getAbsolutePath());
+      log.atInfo().log("New picture available at %s ", pictureFile.getAbsolutePath());
       try {
         imageRepository.onFileWritten(new FileWrapperImpl(pictureFile.toPath()));
       } catch (IOException ex) {
         // TODO: We should probably kill the daemon to prevent a system out of memory condition.
-        LOG.error("Cannot delete oldest file. System might run out of memory soon.", ex);
+        log.atSevere().withCause(ex).log(
+            "Cannot delete oldest file. System might run out of memory soon.");
       }
       imageServer.updateCurrentFile(new FileDataLoader(pictureFile));
     });

@@ -18,6 +18,7 @@ package com.s13g.winston.lib.photocell;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalMultipurpose;
 import com.pi4j.io.gpio.PinMode;
@@ -28,9 +29,6 @@ import com.s13g.winston.lib.core.Pins;
 import com.s13g.winston.lib.core.util.concurrent.WinstonScheduledExecutor;
 import com.s13g.winston.lib.core.util.concurrent.WinstonScheduledExecutorImpl;
 import com.s13g.winston.lib.plugin.NodePluginType;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +46,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class PhotoCellControllerImpl implements PhotoCellController {
-  private static final Logger LOG = LogManager.getLogger(PhotoCellControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private static final boolean DEBUG_LOGGING = false;
 
@@ -87,7 +85,7 @@ public class PhotoCellControllerImpl implements PhotoCellController {
 
     mSleepTimeoutMillis = sleepTimeoutMillis;
     int gpioPin = mapping[0];
-    LOG.info("Initializing on GPIO pin: " + gpioPin);
+    log.atInfo().log("Initializing on GPIO pin: %d", gpioPin);
     mPin = gpioController.provisionDigitalMultipurposePin(
         Pins.GPIO_PIN[gpioPin], PinMode.DIGITAL_INPUT);
 
@@ -100,8 +98,8 @@ public class PhotoCellControllerImpl implements PhotoCellController {
           if (DEBUG_LOGGING) {
             mMax = Math.max(mMax, deltaNs);
             mMin = Math.min(mMin, deltaNs);
-            LOG.info("Value: " + (deltaNs / 1000000) + " ms.  (" + deltaNs + " ns.)");
-            LOG.info("Min: " + mMin + "  /  Max: " + mMax);
+            log.atInfo().log("Value: " + (deltaNs / 1000000) + " ms.  (" + deltaNs + " ns.)");
+            log.atInfo().log("Min: " + mMin + "  /  Max: " + mMax);
           }
 
           // Clamp the value.
@@ -154,7 +152,7 @@ public class PhotoCellControllerImpl implements PhotoCellController {
       try {
         Thread.sleep(mSleepTimeoutMillis);
       } catch (InterruptedException e) {
-        LOG.info("Interrupted.");
+        log.atWarning().log("Interrupted.");
         return;
       }
       // If no read-out happened, we want to fall back to zero. It means, that the resistance of

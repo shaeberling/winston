@@ -16,8 +16,10 @@
 
 package com.s13g.winston.tools.sauron;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
+
+import com.google.common.flogger.FluentLogger;
 
 import java.io.IOException;
 import java.nio.file.FileStore;
@@ -28,7 +30,7 @@ import java.nio.file.Path;
  * Reports whether enough free space is available on the given path.
  */
 public class FreeSpaceReporterImpl implements FreeSpaceReporter {
-  private static final Logger LOG = LogManager.getLogger(FreeSpaceReporterImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final long mMinFreeBytes;
   private final FileStore mFileStore;
 
@@ -46,11 +48,11 @@ public class FreeSpaceReporterImpl implements FreeSpaceReporter {
   public boolean isMinSpaceAvailable() {
     try {
       long freeSpaceBytes = mFileStore.getUsableSpace();
-      LOG.info("Space available: " + bytesToMb(freeSpaceBytes) + " MB. (Max: " +
+      log.atInfo().log("Space available: " + bytesToMb(freeSpaceBytes) + " MB. (Max: " +
           bytesToMb(mMinFreeBytes) + "MB)");
       return freeSpaceBytes >= mMinFreeBytes;
     } catch (IOException ex) {
-      LOG.error("Cannot determine free space.", ex);
+      log.atSevere().log("Cannot determine free space.", ex);
       return false;
     }
   }

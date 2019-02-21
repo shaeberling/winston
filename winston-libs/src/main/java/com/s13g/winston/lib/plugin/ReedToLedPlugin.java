@@ -16,20 +16,18 @@
 
 package com.s13g.winston.lib.plugin;
 
-import java.util.HashMap;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.reed.ReedController;
+
+import java.util.HashMap;
 
 /**
  * This node plugins listens to the given reed relays and switches the given LEDs on or off
  * depending on the reed relay's status.
  */
 public class ReedToLedPlugin implements NodeController, ReedController.RelayStateChangedListener {
-  private static final Logger LOG = LogManager.getLogger(ReedToLedPlugin.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   /** Maps relay number to LED number. */
   private final HashMap<Integer, Integer> mMapping;
@@ -54,7 +52,7 @@ public class ReedToLedPlugin implements NodeController, ReedController.RelayStat
 
   @Override
   public void onRelayStateChanged(int relayNum, boolean closed) {
-    LOG.debug("plugin: relay changed: " + relayNum + " to " + closed);
+    log.atFine().log("plugin: relay changed: " + relayNum + " to " + closed);
     Integer ledNum = mMapping.get(relayNum);
     if (ledNum == null) {
       // Ignore relay change since we don't listen to state changes of this one.

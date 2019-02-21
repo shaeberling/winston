@@ -16,6 +16,7 @@
 
 package com.s13g.winston.master;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.SslContextCreator;
 import com.s13g.winston.common.SslContextCreator.SslContextCreationException;
@@ -25,10 +26,6 @@ import com.s13g.winston.master.handlers.MasterModuleHandler;
 import com.s13g.winston.master.modules.Module;
 import com.s13g.winston.master.modules.ModuleRegistry;
 import com.s13g.winston.proto.Master;
-
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,13 +39,13 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * The master daemon executable of the Winston home automation system.
  */
 public class MasterDaemon {
-  private static final Logger LOG = LogManager.getLogger(MasterDaemon.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final int NUM_HTTP_THREADS = 8;
 
   public static void main(final String... args) throws IOException, SslContextCreationException {
     File configFile = new File("master.config");
     if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
-      LOG.log(Level.ERROR, "Cannot read config file: " + configFile.getAbsolutePath());
+      log.atSevere().log("Cannot read config file: '%s'", configFile.getAbsolutePath());
       return;
     }
 

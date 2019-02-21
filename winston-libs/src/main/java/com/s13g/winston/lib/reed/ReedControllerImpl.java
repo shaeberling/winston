@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.reed;
 
+import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.PinPullResistance;
@@ -24,27 +25,24 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 import com.s13g.winston.lib.core.Pins;
 import com.s13g.winston.lib.plugin.NodePluginType;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.Arrays;
 import java.util.HashSet;
 
 public class ReedControllerImpl implements ReedController {
-  private static final Logger LOG = LogManager.getLogger(ReedControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   /**
-   * Contains the current state of the reed relay. If true, the relay is closed,
-   * otherwise it is open.
+   * Contains the current state of the reed relay. If true, the relay is closed, otherwise it is
+   * open.
    */
   private final boolean mRelayClosed[];
 
   private final HashSet<RelayStateChangedListener> mListeners = new HashSet<>();
 
   public ReedControllerImpl(int mapping[], GpioController gpioController) {
-    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
+    log.atInfo().log("Initializing with mapping: " + Arrays.toString(mapping));
     mRelayClosed = new boolean[mapping.length];
     initializePins(mapping, gpioController, (relayNum, closed) -> {
-      LOG.debug("Relay " + relayNum + " now " + (closed ? "Closed" : "Open"));
+      log.atFine().log("Relay " + relayNum + " now " + (closed ? "Closed" : "Open"));
       mRelayClosed[relayNum] = closed;
 
       synchronized (mListeners) {
@@ -54,7 +52,7 @@ public class ReedControllerImpl implements ReedController {
         }
       }
     });
-    LOG.info("Reed relays initialized");
+    log.atInfo().log("Reed relays initialized");
   }
 
   private static GpioPinDigitalInput[] initializePins(int mapping[], GpioController gpioController,
@@ -78,7 +76,7 @@ public class ReedControllerImpl implements ReedController {
   @Override
   public boolean isClosed(int num) {
     if (num < 0 || num >= mRelayClosed.length) {
-      LOG.warn("Invalid reed relay number: " + num);
+      log.atWarning().log("Invalid reed relay number: %d", num);
       return false;
     }
     return mRelayClosed[num];
@@ -88,7 +86,7 @@ public class ReedControllerImpl implements ReedController {
   public void addListener(RelayStateChangedListener listener) {
     synchronized (mListeners) {
       if (mListeners.contains(listener)) {
-        LOG.error("Listener already registered");
+        log.atSevere().log("Listener already registered");
         return;
       }
       mListeners.add(listener);
@@ -104,7 +102,7 @@ public class ReedControllerImpl implements ReedController {
   public void removeListener(RelayStateChangedListener listener) {
     synchronized (mListeners) {
       if (!mListeners.contains(listener)) {
-        LOG.error("Listener never registered");
+        log.atSevere().log("Listener never registered");
         return;
       }
       mListeners.remove(listener);

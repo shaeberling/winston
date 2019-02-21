@@ -16,6 +16,8 @@
 
 package com.s13g.winston.lib.wemo;
 
+import com.google.common.flogger.FluentLogger;
+
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.logging.Logger;
@@ -24,7 +26,7 @@ import java.util.logging.Logger;
  * Default implementation of a Wemo switch.
  */
 class WemoSwitchImpl implements WemoSwitch {
-  private static final Logger LOG = Logger.getLogger("WemoSwitch");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final String mFriendlyName;
   private final String mManufacturer;
   private final String mModelDescription;

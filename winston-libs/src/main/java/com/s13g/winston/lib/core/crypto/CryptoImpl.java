@@ -16,8 +16,7 @@
 
 package com.s13g.winston.lib.core.crypto;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.google.common.flogger.FluentLogger;
 
 import java.io.UnsupportedEncodingException;
 import java.security.AlgorithmParameters;
@@ -39,7 +38,7 @@ import javax.crypto.spec.SecretKeySpec;
  * Common cryptographic functions, default implementation.
  */
 public class CryptoImpl implements Crypto {
-  private static final Logger LOG = LogManager.getLogger(CryptoImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String ENCODING = "UTF-8";
 
   private final SecretKeySpec mKeySpec;
@@ -60,7 +59,7 @@ public class CryptoImpl implements Crypto {
    * @param keySpec the key to use for the operation
    * @param iv if to be used for decryption, an initialization vector is needed. If a random one is
    * supposed to be used for encryption, this can be left null.
-   * @return A valid Cipher implementation or null, if it could not be created.
+   * @return A valid Cipher implementation or null, if it Cannot be created.
    */
   @Nullable
   private static Cipher createCypher(int mode, SecretKeySpec keySpec, byte[] iv) {
@@ -74,7 +73,7 @@ public class CryptoImpl implements Crypto {
       return cipher;
     } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |
         InvalidAlgorithmParameterException e) {
-      LOG.error("Could not create cipher", e);
+      log.atSevere().withCause(e).log("Cannot create cipher");
     }
     return null;
   }
@@ -84,7 +83,7 @@ public class CryptoImpl implements Crypto {
     try {
       return encrypt(input.getBytes(ENCODING));
     } catch (UnsupportedEncodingException e) {
-      LOG.error("Could not encrypt", e);
+      log.atSevere().withCause(e).log("Cannot encrypt");
     }
     return Optional.empty();
   }
@@ -101,7 +100,7 @@ public class CryptoImpl implements Crypto {
       AlgorithmParameters params = cipher.getParameters();
       iv = params.getParameterSpec(IvParameterSpec.class).getIV();
     } catch (InvalidParameterSpecException e) {
-      LOG.error("Could not encrypt", e);
+      log.atSevere().withCause(e).log("Cannot encrypt");
       return Optional.empty();
     }
 
@@ -110,7 +109,7 @@ public class CryptoImpl implements Crypto {
       message = cipher.doFinal(input);
       return Optional.of(new EncryptedMessage(iv, message));
     } catch (IllegalBlockSizeException | BadPaddingException e) {
-      LOG.error("Could not encrypt", e);
+      log.atSevere().withCause(e).log("Cannot encrypt", e);
     }
     return Optional.empty();
   }
@@ -125,21 +124,21 @@ public class CryptoImpl implements Crypto {
     try {
       return Optional.ofNullable(cipher.doFinal(message.message));
     } catch (IllegalBlockSizeException | BadPaddingException e) {
-      LOG.error("Could not decrypt", e);
+      log.atSevere().withCause(e).log("Cannot decrypt");
     }
     return Optional.empty();
   }
 
   @Override
   public Optional<String> decryptString(EncryptedMessage message) {
-    byte[] decrypted = decrypt(message).get();
-    if (decrypted == null) {
+    Optional<byte[]> decrypted = decrypt(message);
+    if (!decrypted.isPresent()) {
       return Optional.empty();
     }
     try {
-      return Optional.of(new String(decrypted, ENCODING));
+      return Optional.of(new String(decrypted.get(), ENCODING));
     } catch (UnsupportedEncodingException e) {
-      LOG.error("Could not decrypt", e);
+      log.atSevere().withCause(e).log("Cannot decrypt");
     }
     return Optional.empty();
   }

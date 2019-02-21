@@ -17,11 +17,9 @@
 package com.s13g.winston.lib.winston;
 
 import com.google.common.collect.ImmutableList;
-import com.s13g.winston.shared.data.TypeConversion;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.net.HttpUtil;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.s13g.winston.shared.data.TypeConversion;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -33,7 +31,7 @@ import java.util.function.Supplier;
  * Controller to interface with a Winston garage node.
  */
 public class WinstonGarageNodeController {
-  private static final Logger LOG = LogManager.getLogger(WinstonGarageNodeController.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final String mNodeAddress;
   private final List<Supplier<Boolean>> mClickers;
@@ -73,7 +71,7 @@ public class WinstonGarageNodeController {
         String response = HttpUtil.requestUrl(address);
         return "OK".equals(response);
       } catch (IOException e) {
-        LOG.error("Cannot get garage stratus '" + address + "'.", e);
+        log.atWarning().withCause(e).log("Cannot get garage stratus '%s'", address);
       }
       return false;
     };
@@ -86,9 +84,9 @@ public class WinstonGarageNodeController {
       try {
         return Optional.of(TypeConversion.stringToBoolean(HttpUtil.requestUrl(address)));
       } catch (IOException e) {
-        LOG.error("Cannot get garage stratus '" + address + "'.", e);
+        log.atWarning().withCause(e).log("Cannot get garage status '%s'", address);
       } catch (TypeConversion.IllegalFormatException e) {
-        LOG.error("Return value of type conversion not valid '" + address + "'.", e);
+        log.atWarning().withCause(e).log("Return value of type conversion not valid '%s'", address);
       }
       return Optional.empty();
     };

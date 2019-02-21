@@ -18,18 +18,12 @@ package com.s13g.winston.tools.sauron;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.file.Directory;
 import com.s13g.winston.lib.core.file.FileWrapper;
-import com.s13g.winston.lib.core.file.SimpleFileVisitor;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Path;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -46,7 +40,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @ParametersAreNonnullByDefault
 public class ImageRepository {
-  private static final Logger LOG = LogManager.getLogger(ImageRepository.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String FILE_EXTENSION = ".jpg";
   private final Directory mRootDirectory;
   private final FreeSpaceReporter mFreeSpaceReporter;
@@ -108,7 +102,7 @@ public class ImageRepository {
 
     while (!mFreeSpaceReporter.isMinSpaceAvailable()) {
       ImageRepoFile oldestImage = mImageFiles.removeFirst();
-      LOG.info("Not enough space. Deleting: " + oldestImage);
+      log.atInfo().log("Not enough space. Deleting: %d", oldestImage);
       oldestImage.delete();
     }
   }
@@ -120,22 +114,22 @@ public class ImageRepository {
   @VisibleForTesting
   void init() {
     Preconditions.checkState(mImageFiles.isEmpty(), "ImageRepo already initialized.");
-    LOG.info("Initializing ImageRepository");
+    log.atInfo().log("Initializing ImageRepository");
 
     // Build list of existing image repo files.
     try {
       mRootDirectory.walkFileTree(file -> {
         if (file.toString().toLowerCase().endsWith(".jpg")) {
           mImageFiles.add(new ImageRepoFile(file));
-          LOG.info("INIT: Adding existing file: " + file);
+          log.atInfo().log("INIT: Adding existing file: %s", file);
         }
       });
-      LOG.info("Found " + mImageFiles.size() + " existing files.");
-      LOG.info("Sorting...");
+      log.atInfo().log("Found %d existing files.", mImageFiles.size());
+      log.atInfo().log("Sorting...");
       Collections.sort(mImageFiles);
-      LOG.info("Sorting Done.");
+      log.atInfo().log("Sorting Done.");
     } catch (IOException | RuntimeException ex) {
-      LOG.error("Cannot scan existing image repo.", ex);
+      log.atSevere().withCause(ex).log("Cannot scan existing image repo.");
     }
   }
 

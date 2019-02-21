@@ -16,7 +16,6 @@
 
 package com.s13g.winston.shared.data;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 import java.util.Locale;

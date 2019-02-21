@@ -16,11 +16,10 @@
 
 package com.s13g.winston.lib.nest.data;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.util.Pair;
 import com.s13g.winston.shared.data.Temperature;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +34,7 @@ import java.util.Optional;
  * Parses Nest JSON responses.
  */
 public class NestResponseParser {
-  private static final Logger LOG = LogManager.getLogger(NestResponseParser.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   public StructureData[] parseStructureAndDevicesResponse(String json) {
     JSONObject root = new JSONObject(json);
@@ -50,7 +49,7 @@ public class NestResponseParser {
       List<JSONObject> jsonThermostats = new ArrayList<>();
       thermostats.keys().forEachRemaining(
           (key) -> jsonThermostats.add(thermostats.getJSONObject(key)));
-      LOG.info("Thermostats found: " + jsonThermostats.size());
+      log.atInfo().log("%d thermostats found", jsonThermostats.size());
 
       Map<String, ThermostatData> thermostatMap = new HashMap<>();
       for (JSONObject jsonThermostat : jsonThermostats) {

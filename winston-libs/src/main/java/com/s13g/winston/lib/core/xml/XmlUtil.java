@@ -16,6 +16,8 @@
 
 package com.s13g.winston.lib.core.xml;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
@@ -30,7 +32,7 @@ import java.util.logging.Logger;
  * Simple XML util class
  */
 public final class XmlUtil {
-  private static final Logger LOG = Logger.getLogger("XmlUtil");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private XmlUtil() {
   }
@@ -46,7 +48,7 @@ public final class XmlUtil {
     try {
       return Optional.ofNullable(builder.build(new StringReader(xml)).getRootElement());
     } catch (JDOMException | IOException ex) {
-      LOG.log(Level.WARNING, "Error parsing XML", ex);
+      log.atWarning().withCause(ex).log("Error parsing XML");
       return Optional.empty();
     }
   }

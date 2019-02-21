@@ -16,10 +16,10 @@
 
 package com.s13g.winston.lib.core.crypto;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.google.common.flogger.FluentLogger;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -48,9 +48,9 @@ public class KeyGenerator {
   public static final SecretKeyFactoryProducer DEFAULT_SECRECT_KEY_FACTORY = () ->
       new SecretKeyFactoryProxy(SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1"));
   public static final BytesToStringConverter DEFAULT_STRING_CONVERTER =
-      (bytes) -> new String(bytes, "UTF-8");
+      (bytes) -> new String(bytes, StandardCharsets.UTF_8);
 
-  private static Logger LOG = LogManager.getLogger(KeyGenerator.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   @Nullable
   private static KeyGenerator sInstance = null;
 
@@ -83,7 +83,7 @@ public class KeyGenerator {
     try {
       factory = secretKeyFactoryProducer.produce();
     } catch (NoSuchAlgorithmException e) {
-      LOG.error("Cannot not generate key", e);
+      log.atSevere().withCause(e).log("Cannot not generate key");
       return new byte[0];
     }
 
@@ -98,21 +98,19 @@ public class KeyGenerator {
     try {
       randomPasswordStr = bytesToString.convert(randomPassword);
     } catch (UnsupportedEncodingException e) {
-      LOG.error("Cannot not generate key", e);
+      log.atSevere().withCause(e).log("Cannot not generate key");
       return new byte[0];
     }
 
     KeySpec spec = new PBEKeySpec(randomPasswordStr.toCharArray(), randomSalt, 65536, 128);
 
-    SecretKey tmp = null;
     try {
-      tmp = factory.generateSecret(spec);
+      SecretKey tmp = factory.generateSecret(spec);
+      SecretKey secret = new SecretKeySpec(tmp.getEncoded(), "AES");
+      return secret.getEncoded();
     } catch (InvalidKeySpecException e) {
-      LOG.error("Cannot not generate key", e);
+      log.atSevere().withCause(e).log("Cannot not generate key");
       return new byte[0];
     }
-    SecretKey secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-    return secret.getEncoded();
   }
-
 }

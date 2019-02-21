@@ -16,11 +16,8 @@
 
 package com.s13g.winston.node;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.node.config.ConfigWrapper;
-
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,15 +30,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class NodeDaemon {
   private static final int NUM_THREADS = 4;
-  private static Logger LOG = LogManager.getLogger(NodeDaemon.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   public static void main(final String... args) throws IOException {
     File configFile = new File("node.config");
     if (!configFile.exists() || !configFile.isFile() || !configFile.canRead()) {
-      LOG.log(Level.ERROR, "Cannot read config file: " + configFile.getAbsolutePath());
+      log.atSevere().log("Cannot read config file: %s", configFile.getAbsolutePath());
       return;
     }
-    LOG.info("Node starting up ...");
+    log.atInfo().log("Node starting up ...");
 
     ConfigWrapper configWrapper = ConfigWrapper.fromFile(configFile);
     configWrapper.printToLog();

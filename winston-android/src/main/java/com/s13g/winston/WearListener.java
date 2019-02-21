@@ -18,18 +18,17 @@ package com.s13g.winston;
 
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
-
-import java.util.logging.Logger;
+import com.google.common.flogger.FluentLogger;
 
 /**
  * Listens to messages from the Winston wear app.
  */
 public class WearListener extends WearableListenerService {
-    private static final Logger LOG = Logger.getLogger("MainActivity");
+    private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
-        LOG.info("Wear message received: " + messageEvent.getPath());
+        log.atInfo().log("Wear message received: %s", messageEvent.getPath());
     }
 
     @Override

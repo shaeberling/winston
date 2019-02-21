@@ -18,6 +18,7 @@ package com.s13g.winston.master.modules.instance;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.winston.WinstonController;
 import com.s13g.winston.lib.winston.WinstonGarageNodeController;
 import com.s13g.winston.lib.winston.WinstonPowerNodeController;
@@ -33,8 +34,8 @@ import com.s13g.winston.master.modules.ModuleCreator;
 import com.s13g.winston.master.modules.ModuleParameters;
 import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,7 +45,7 @@ import java.util.Optional;
  * Module that handles talking to Winston nodes.
  */
 public class WinstonModule implements Module {
-  private static Logger LOG = LogManager.getLogger(WinstonModule.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private static final String MODULE_TYPE = "winston";
   private static final String CHANNEL_TYPE_SENSOR = "sensors";
@@ -79,7 +80,7 @@ public class WinstonModule implements Module {
       }
       Optional<List<String>> tempSensorsOpt = sensorConfig.getParam(PARAM_TEMP_SENSOR);
       if (!tempSensorsOpt.isPresent()) {
-        LOG.warn("No 'temp-sensor' configured for Winston power channel.");
+        log.atWarning().log("No 'temp-sensor' configured for Winston power channel.");
         continue;
       }
       WinstonSensorNodeController sensorNodeController =
@@ -97,7 +98,7 @@ public class WinstonModule implements Module {
       }
       Optional<List<String>> powerSwitchesOpt = powerConfig.getParam(PARAM_SWITCH_IDS);
       if (!powerSwitchesOpt.isPresent()) {
-        LOG.warn("No 'switch-ids' configured for Winston power channel.");
+        log.atWarning().log("No 'switch-ids' configured for Winston power channel.");
         continue;
       }
       WinstonPowerNodeController powerNodeController =

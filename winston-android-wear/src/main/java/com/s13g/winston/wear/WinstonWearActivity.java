@@ -28,17 +28,17 @@ import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.R;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 /**
  * Main activity for the Winston Android Wear app.
  */
 public class WinstonWearActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private static final Logger LOG = Logger.getLogger("WinstonWearActivity");
+    private static final FluentLogger log = FluentLogger.forEnclosingClass();
     private GoogleApiClient mGoogleApiClient;
     private ExecutorService mPool;
     private boolean mGmsConnected;
@@ -88,26 +88,26 @@ public class WinstonWearActivity extends Activity implements GoogleApiClient.Con
     @Override
     // Google Play Services
     public void onConnected(Bundle bundle) {
-        LOG.info("Google Play Services connected");
+        log.atInfo().log("Google Play Services connected");
         mGmsConnected = true;
     }
 
     @Override
     // Google Play Services
     public void onConnectionSuspended(int i) {
-        LOG.info("Google Play Services connection suspended");
+        log.atInfo().log("Google Play Services connection suspended");
         mGmsConnected = false;
     }
 
     @Override
     // Google Play Services
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        LOG.warning("Google Play Services connectione failed");
+        log.atWarning().log("Google Play Services connectione failed");
 
     }
 
     private void sendMessageToAllNodes(final String path) {
-        LOG.info("About to send message to all nodes: " + path);
+        log.atInfo().log("About to send message to all nodes: " + path);
         Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
             @Override
             public void onResult(NodeApi.GetConnectedNodesResult nodes) {
@@ -119,17 +119,17 @@ public class WinstonWearActivity extends Activity implements GoogleApiClient.Con
     }
 
     private void sendMessageToNode(String path, Node node) {
-        LOG.info("Sending to node: " + node.getId() + " (" + node.getDisplayName() + ")");
+        log.atInfo().log("Sending to node: " + node.getId() + " (" + node.getDisplayName() + ")");
         Wearable.MessageApi.sendMessage(
             mGoogleApiClient, node.getId(), path, null).setResultCallback(
             new ResultCallback<MessageApi.SendMessageResult>() {
                 @Override
                 public void onResult(MessageApi.SendMessageResult sendMessageResult) {
                     if (!sendMessageResult.getStatus().isSuccess()) {
-                        LOG.warning("Failed to send message with status code: "
+                        log.atWarning().log("Failed to send message with status code: "
                             + sendMessageResult.getStatus().getStatusCode());
                     } else {
-                        LOG.info("Sending message: success");
+                        log.atInfo().log("Sending message: success");
                     }
                 }
             }

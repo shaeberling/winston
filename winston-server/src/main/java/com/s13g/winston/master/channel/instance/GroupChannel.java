@@ -21,12 +21,9 @@ import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.master.channel.Channel;
 import com.s13g.winston.master.channel.ChannelException;
-import com.s13g.winston.shared.ChannelType;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.proto.Master;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.s13g.winston.shared.ChannelType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,7 +36,6 @@ import java.util.concurrent.Executors;
  * This channel produces a value for each configured group.
  */
 public class GroupChannel implements Channel {
-  private static final Logger LOG = LogManager.getLogger(GroupChannel.class);
   private final List<Master.Group> mGroups;
   private final RequestHandlers mRequestHandlers;
   private final Executor mExecutor;

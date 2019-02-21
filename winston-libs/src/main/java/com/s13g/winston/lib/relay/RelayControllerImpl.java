@@ -16,15 +16,13 @@
 
 package com.s13g.winston.lib.relay;
 
+import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.s13g.winston.lib.core.Pins;
 import com.s13g.winston.lib.plugin.NodePluginType;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,7 +31,7 @@ import java.util.HashMap;
  * A {@link RelayController} that uses Pi4J to access the GPIO pins directly.
  */
 public class RelayControllerImpl implements RelayController {
-  private static final Logger LOG = LogManager.getLogger(RelayControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private static final int DEFAULT_CLICK_DELAY_MILLIS = 500;
 
@@ -48,14 +46,14 @@ public class RelayControllerImpl implements RelayController {
   private final HashMap<Integer, GpioPinDigitalOutput> mActivePins = new HashMap<>();
 
   public RelayControllerImpl(int[] mapping, GpioController gpioController) {
-    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
+    log.atInfo().log("Initializing with mapping: " + Arrays.toString(mapping));
     mMapping = mapping;
     mGpioController = gpioController;
     mClickDelay = DEFAULT_CLICK_DELAY_MILLIS;
   }
 
   public RelayControllerImpl(int[] mapping, GpioController gpioController, int clickDelay) {
-    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
+    log.atInfo().log("Initializing with mapping: " + Arrays.toString(mapping));
     mMapping = mapping;
     mGpioController = gpioController;
     mClickDelay = clickDelay;
@@ -64,11 +62,11 @@ public class RelayControllerImpl implements RelayController {
   @Override
   public synchronized void switchRelay(int num, boolean on) {
     if (num < 0 || num >= mMapping.length) {
-      LOG.warn("Invalid relay number: " + num);
+      log.atWarning().log("Invalid relay number: %d", num);
       return;
     }
 
-    LOG.info("Switching relay" + num + " on? " + on);
+    log.atInfo().log("Switching relay" + num + " on? " + on);
     GpioPinDigitalOutput gpio = mActivePins.get(num);
     if (gpio != null) {
       // If we already initialize the pin, simply switch the state.
@@ -103,7 +101,7 @@ public class RelayControllerImpl implements RelayController {
   @Override
   public synchronized void clickRelay(int num) {
     if (isRelayOn(num)) {
-      LOG.warn("Cannot click relay " + num + " since it appears to be on.");
+      log.atWarning().log("Cannot click relay %d since it appears to be on.", num);
       return;
     }
 
@@ -112,7 +110,7 @@ public class RelayControllerImpl implements RelayController {
       Thread.sleep(mClickDelay);
       switchRelay(num, false);
     } catch (final InterruptedException ex) {
-      LOG.error("Interrupted during click event.", ex);
+      log.atWarning().log("Interrupted during click event.");
     }
   }
 

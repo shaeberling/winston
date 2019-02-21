@@ -17,6 +17,7 @@
 package com.s13g.winston.net;
 
 import com.google.common.base.Optional;
+import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
@@ -36,7 +37,7 @@ import java.util.logging.Logger;
  * Default implementation for making HTTP requests.
  */
 public class HttpRequesterImpl implements HttpRequester {
-  private static final Logger LOG = Logger.getLogger("HttpRequester");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final String mRequestPattern;
 
@@ -63,15 +64,14 @@ public class HttpRequesterImpl implements HttpRequester {
   public byte[] request(String path) throws IOException {
     try {
       String url = String.format(mRequestPattern, path);
-      LOG.info("Making request to: '" + url + "'.");
+      log.atInfo().log("Making request to: '" + url + "'.");
       URLConnection conn = new URL(url).openConnection();
       conn.setUseCaches(false);
       ByteArrayOutputStream buffer = new ByteArrayOutputStream();
       long bytesRead = ByteStreams.copy(conn.getInputStream(), buffer);
-      LOG.info("Read " + bytesRead + " bytes.");
+      log.atInfo().log("Read " + bytesRead + " bytes.");
       return buffer.toByteArray();
     } catch (Throwable e) {
-      LOG.log(Level.SEVERE, "HTTP request failed ... ", e);
       throw new IOException("HTTP request failed.", e);
     }
   }

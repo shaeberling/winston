@@ -17,26 +17,18 @@
 package com.s13g.winston.lib.core.crypto;
 
 import org.junit.Test;
-import org.mockito.Mockito;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.security.Provider;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.SecretKeyFactorySpi;
 
 public class KeyGeneratorTest {
 

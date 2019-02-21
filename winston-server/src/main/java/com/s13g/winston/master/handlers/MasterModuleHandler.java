@@ -17,6 +17,7 @@
 package com.s13g.winston.master.handlers;
 
 import com.google.common.base.Joiner;
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.common.RequestHandler;
 import com.s13g.winston.common.RequestHandlingException;
 import com.s13g.winston.master.channel.Channel;
@@ -24,8 +25,8 @@ import com.s13g.winston.master.channel.ChannelException;
 import com.s13g.winston.master.channel.ChannelValue;
 import com.s13g.winston.master.modules.Module;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 import org.simpleframework.http.Status;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * Handles requests for master modules, such as the 'nest' module.
  */
 public class MasterModuleHandler implements RequestHandler {
-  private static final Logger LOG = LogManager.getLogger(MasterModuleHandler.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String REQ_PREFIX = "io";
 
   /** module -> channel -> channelValue. */
@@ -57,7 +58,7 @@ public class MasterModuleHandler implements RequestHandler {
     try (OutputStreamWriter writer = new OutputStreamWriter(response)) {
       writer.write(handle(request));
     } catch (IOException e) {
-      LOG.error("Cannot write response", e);
+      log.atSevere().log("Cannot write response", e);
       throw new RequestHandlingException("Cannot write response.", Status.INTERNAL_SERVER_ERROR);
     }
   }

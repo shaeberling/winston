@@ -18,9 +18,8 @@ package com.s13g.winston.node.handler;
 
 import java.util.HashMap;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.led.LedController;
 import com.s13g.winston.lib.plugin.NodePluginType;
 
@@ -29,7 +28,7 @@ public class LedHandler implements Handler {
     void runForLed(int num);
   }
 
-  private static final Logger LOG = LogManager.getLogger(LedHandler.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final LedController mLedController;
 
   private enum LedCommand {
@@ -41,27 +40,22 @@ public class LedHandler implements Handler {
 
   public LedHandler(LedController ledController) {
     mLedController = ledController;
-    mCommands.put(LedCommand.OFF, (num) -> {
-      mLedController.switchLed(num, false);
-    });
-    mCommands.put(LedCommand.ON, (num) -> {
-      mLedController.switchLed(num, true);
-    });
+    mCommands.put(LedCommand.OFF, (num) -> mLedController.switchLed(num, false));
+    mCommands.put(LedCommand.ON, (num) -> mLedController.switchLed(num, true));
   }
 
   @Override
   public String handleRequest(String arguments) {
     // TODO: Argument validation!
     final int ledNo = Integer.parseInt(arguments.substring(0, arguments.indexOf('/')));
-    final int commandNo = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1,
-        arguments.length()));
+    final int commandNo = Integer.parseInt(arguments.substring(arguments.indexOf('/') + 1));
     if (commandNo < 0 || commandNo >= COMMANDS.length) {
-      LOG.warn("Unknown LED command: " + commandNo);
+      log.atWarning().log("Unknown LED command: " + commandNo);
       return "FAIL";
     }
     LedCommandRunner commandRunner = mCommands.get(COMMANDS[commandNo]);
     if (commandRunner == null) {
-      LOG.warn("Unmapped LED command: " + commandNo);
+      log.atWarning().log("Unmapped LED command: " + commandNo);
       return "FAIL";
     }
     commandRunner.runForLed(ledNo);
@@ -72,5 +66,4 @@ public class LedHandler implements Handler {
   public NodePluginType getRpcName() {
     return NodePluginType.LED;
   }
-
 }

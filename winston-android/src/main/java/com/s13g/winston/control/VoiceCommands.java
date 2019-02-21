@@ -18,6 +18,7 @@ package com.s13g.winston.control;
 
 import android.content.Context;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.control.filter.IOperationFilter;
 import com.s13g.winston.control.filter.StringComparisonFilter;
 import com.s13g.winston.control.filter.compare.EditDistancePlugin;
@@ -27,7 +28,6 @@ import com.s13g.winston.control.type.IOperationFactory;
 import com.s13g.winston.control.type.OperationFactoryImpl;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Handles voice commands.
@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  * Needs to be refactored. Currently not working.
  */
 public class VoiceCommands {
-  private static final Logger LOG = Logger.getLogger("VoiceCommands");
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   // control
   private static final int TOLERANCE = 1;
@@ -73,7 +73,7 @@ public class VoiceCommands {
 //                // TODO
 //              }
 //            } else {
-//              LOG.info("no command processing");
+//              log.atInfo().log("no command processing");
 //            }
           }
         })
@@ -112,10 +112,10 @@ public class VoiceCommands {
 //      } else if (operation.equals("close garage")) {
 //        onActionCloseGarage();
 //      } else {
-//        LOG.warning("unkown operation");
+//        log.atWarning().log("unkown operation");
 //      }
 //    } else {
-//      LOG.info("no command processing");
+//      log.atInfo().log("no command processing");
 //    }
 //  }
 }

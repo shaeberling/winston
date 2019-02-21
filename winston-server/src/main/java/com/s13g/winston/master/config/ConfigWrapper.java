@@ -16,7 +16,7 @@
 
 package com.s13g.winston.master.config;
 
-import com.google.common.base.Strings;
+import com.google.common.flogger.FluentLogger;
 import com.google.protobuf.TextFormat;
 import com.s13g.winston.proto.Master;
 import com.s13g.winston.proto.Master.Channel;
@@ -24,9 +24,6 @@ import com.s13g.winston.proto.Master.KnownNode;
 import com.s13g.winston.proto.Master.MasterConfig;
 import com.s13g.winston.proto.Master.Module;
 import com.s13g.winston.proto.Master.Parameter;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +36,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
  * Wrapper around the configuration proto with some helper methods.
  */
 public class ConfigWrapper {
-  private static Logger LOG = LogManager.getLogger(ConfigWrapper.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   private final MasterConfig mConfigProto;
 
@@ -55,7 +52,7 @@ public class ConfigWrapper {
    * @throws IOException Thrown if the configuration could not be parsed.
    */
   public static ConfigWrapper fromFile(File configFile) throws IOException {
-    LOG.info("Reading master configuration: " + configFile.getAbsolutePath());
+    log.atInfo().log("Reading master configuration: " + configFile.getAbsolutePath());
     MasterConfig.Builder builder = MasterConfig.newBuilder();
     String configStr = new String(Files.readAllBytes(configFile.toPath()));
     TextFormat.getParser().merge(configStr, builder);
@@ -70,8 +67,8 @@ public class ConfigWrapper {
   }
 
   /**
-   * Verifies that the proto is in good shape. If something is not sane, will
-   * throw an AssertionError.
+   * Verifies that the proto is in good shape. If something is not sane, will throw an
+   * AssertionError.
    */
   public void assertSane() {
     if (mConfigProto.getDaemonPort() <= 0) {
@@ -127,44 +124,44 @@ public class ConfigWrapper {
    * Will print out the configuration to LOG.
    */
   public void printToLog() {
-    LOG.info("Daemon Port     :" + mConfigProto.getDaemonPort());
-    LOG.info("Keystore        :" + mConfigProto.getSslKeystorePath());
-    LOG.info("Keystore passwd : " + (isNullOrEmpty(mConfigProto.getSslKeystorePassword())
+    log.atInfo().log("Daemon Port     :" + mConfigProto.getDaemonPort());
+    log.atInfo().log("Keystore        :" + mConfigProto.getSslKeystorePath());
+    log.atInfo().log("Keystore passwd : " + (isNullOrEmpty(mConfigProto.getSslKeystorePassword())
         ? "<not given>" : "<given>"));
-    LOG.info("Auth clients    :" + mConfigProto.getAuthClientCount());
+    log.atInfo().log("Auth clients    :" + mConfigProto.getAuthClientCount());
     List<Module> modules = mConfigProto.getModuleList();
-    LOG.info("Modules         : " + modules.size());
-    LOG.info("---------------------------------");
+    log.atInfo().log("Modules         : " + modules.size());
+    log.atInfo().log("---------------------------------");
     for (Module module : modules) {
-      LOG.info("  Type : " + module.getType());
+      log.atInfo().log("  Type : " + module.getType());
       for (Channel channel : module.getChannelList()) {
-        LOG.info("    Type   : " + channel.getType());
-        LOG.info("    Addr   : " + channel.getAddress());
+        log.atInfo().log("    Type   : " + channel.getType());
+        log.atInfo().log("    Addr   : " + channel.getAddress());
         for (Parameter param : channel.getParameterList()) {
-          LOG.info("    Param   : " + param.getName() + " -> " + param.getValue());
+          log.atInfo().log("    Param   : " + param.getName() + " -> " + param.getValue());
         }
-        LOG.info("---------------------------------");
+        log.atInfo().log("---------------------------------");
       }
-      LOG.info("---------------------------------");
+      log.atInfo().log("---------------------------------");
     }
 
     List<Master.Group> groups = mConfigProto.getGroupList();
-    LOG.info("Groups defined: " + groups.size());
+    log.atInfo().log("Groups defined: " + groups.size());
     for (Master.Group group : groups) {
-      LOG.info("  Name    : " + group.getName());
-      LOG.info("  Triggers: " + group.getTriggerCount());
+      log.atInfo().log("  Name    : " + group.getName());
+      log.atInfo().log("  Triggers: " + group.getTriggerCount());
     }
 
     List<KnownNode> knownNodes = mConfigProto.getKnownClientList();
-    LOG.info("Known nodes: " + knownNodes.size());
-    LOG.info("---------------------------------");
+    log.atInfo().log("Known nodes: " + knownNodes.size());
+    log.atInfo().log("---------------------------------");
     for (KnownNode knownNode : knownNodes) {
-      LOG.info("  MAC Addr : " + knownNode.getMacAddress());
-      LOG.info("  Name     : " + knownNode.getName());
-      LOG.info("  Port     : " + knownNode.getPort());
-      LOG.info("  Use SSL  : " + knownNode.getUseSsl());
-      LOG.info("  Config   : " + knownNode.getConfigFile());
-      LOG.info("---------------------------------");
+      log.atInfo().log("  MAC Addr : " + knownNode.getMacAddress());
+      log.atInfo().log("  Name     : " + knownNode.getName());
+      log.atInfo().log("  Port     : " + knownNode.getPort());
+      log.atInfo().log("  Use SSL  : " + knownNode.getUseSsl());
+      log.atInfo().log("  Config   : " + knownNode.getConfigFile());
+      log.atInfo().log("---------------------------------");
     }
   }
 }

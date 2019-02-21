@@ -16,6 +16,7 @@
 
 package com.s13g.winston.lib.led;
 
+import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
@@ -23,21 +24,18 @@ import com.pi4j.io.gpio.PinState;
 import com.s13g.winston.lib.core.Pins;
 import com.s13g.winston.lib.plugin.NodePluginType;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.Arrays;
 
 /**
- * A controller that can be used to switch LED by controlling the HIGH/LOW state
- * of the given GPIO pins.
+ * A controller that can be used to switch LED by controlling the HIGH/LOW state of the given GPIO
+ * pins.
  */
 public class LedControllerImpl implements LedController {
-  private static final Logger LOG = LogManager.getLogger(LedControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final GpioPinDigitalOutput[] mPins;
 
   public LedControllerImpl(int[] mapping, GpioController gpioController) {
-    LOG.info("Initializing with mapping: " + Arrays.toString(mapping));
+    log.atInfo().log("Initializing with mapping: " + Arrays.toString(mapping));
     mPins = initializePins(mapping, gpioController);
   }
 
@@ -54,7 +52,7 @@ public class LedControllerImpl implements LedController {
   @Override
   public void switchLed(int num, boolean on) {
     if (num < 0 || num >= mPins.length) {
-      LOG.warn("Invalid LED number: " + num);
+      log.atWarning().log("Invalid LED number: %d", num);
       return;
     }
     mPins[num].setState(on ? PinState.HIGH : PinState.LOW);

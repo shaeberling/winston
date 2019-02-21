@@ -97,7 +97,7 @@ public class NestModule implements Module {
     }
 
     @Override
-    public NestModule create(ModuleContext context) throws ModuleCreationException {
+    public NestModule create(ModuleContext context) {
       return new NestModule(getType(), context.getNestControllerFactory());
     }
   }

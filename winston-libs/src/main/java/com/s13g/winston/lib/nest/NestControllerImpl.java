@@ -16,15 +16,13 @@
 
 package com.s13g.winston.lib.nest;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.lib.core.net.HttpUtil;
 import com.s13g.winston.lib.nest.data.AwayMode;
 import com.s13g.winston.lib.nest.data.NestResponseParser;
 import com.s13g.winston.lib.nest.data.StructureData;
 import com.s13g.winston.lib.nest.data.ThermostatData;
 import com.s13g.winston.shared.data.Temperature;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,7 +31,7 @@ import java.util.Optional;
 
 /** Default implementation of the Nest controller. */
 public class NestControllerImpl implements NestController {
-  private static final Logger LOG = LogManager.getLogger(NestControllerImpl.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final String ROOT_URL = "https://developer-api.nest.com/";
   private final String mAuthHeader;
   private final NestResponseParser mResponseParser;
@@ -56,10 +54,10 @@ public class NestControllerImpl implements NestController {
       result = HttpUtil.requestUrl(ROOT_URL, HttpUtil.Method.GET, HttpUtil.ContentType.JSON,
           mAuthHeader);
     } catch (IOException ex) {
-      LOG.warn("Cannot load data", ex);
+      log.atWarning().withCause(ex).log("Cannot load data");
       return false;
     }
-    LOG.info("Get all devices response:\n" + result);
+    log.atInfo().log("Get all devices response:\n%s", result);
 
     StructureData[] structures = mResponseParser.parseStructureAndDevicesResponse(result);
     for (StructureData structure : structures) {
@@ -93,10 +91,10 @@ public class NestControllerImpl implements NestController {
     try {
       String result = HttpUtil.requestUrl(url, HttpUtil.Method.PUT, HttpUtil.ContentType.JSON,
           mAuthHeader, Optional.of(data));
-      LOG.info("Result from changing temperature: " + result);
+      log.atInfo().log("Result from changing temperature: " + result);
       // TODO: Check result to ensure setting temperature succeeded.
     } catch (IOException ex) {
-      LOG.warn("Error changing temperature", ex);
+      log.atWarning().withCause(ex).log("Error changing temperature", ex);
       return false;
     }
     return true;
@@ -113,10 +111,10 @@ public class NestControllerImpl implements NestController {
       String data = "{\"away\": \"" + awayMode.str + "\"}";
       String result = HttpUtil.requestUrl(url, HttpUtil.Method.PUT, HttpUtil.ContentType.JSON,
           mAuthHeader, Optional.of(data));
-      LOG.info("Result from setting away state: " + result);
+      log.atInfo().log("Result from setting away state: " + result);
       return true;
     } catch (IOException ex) {
-      LOG.warn("Error changing away mode", ex);
+      log.atWarning().withCause(ex).log("Error changing away mode");
     }
     return false;
   }

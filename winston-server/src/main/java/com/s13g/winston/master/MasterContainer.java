@@ -16,11 +16,12 @@
 
 package com.s13g.winston.master;
 
+import com.google.common.flogger.FluentLogger;
 import com.s13g.winston.RequestHandlers;
 import com.s13g.winston.common.RequestHandlingException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 import org.simpleframework.http.Status;
@@ -41,7 +42,7 @@ import javax.net.ssl.SSLContext;
  */
 public class MasterContainer implements Container {
 
-  private static final Logger LOG = LogManager.getLogger(MasterContainer.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private final int mPort;
   private final RequestHandlers mRequestHandlers;
 
@@ -64,7 +65,7 @@ public class MasterContainer implements Container {
     final Connection connection = new SocketConnection(processor);
     final SocketAddress address = new InetSocketAddress(mPort);
     connection.connect(address, context);
-    LOG.info("Listening to: " + address.toString());
+    log.atInfo().log("Listening to: " + address.toString());
   }
 
   @Override
@@ -73,27 +74,27 @@ public class MasterContainer implements Container {
       doHandle(request, response.getOutputStream());
       response.setStatus(Status.OK);
     } catch (RequestHandlingException e) {
-      LOG.warn("Cannot handle request", e);
+      log.atWarning().log("Cannot handle request", e);
       if (e.errorCode.isPresent()) {
         response.setStatus(e.errorCode.get());
       } else {
         response.setStatus(Status.BAD_REQUEST);
       }
     } catch (RequestHandlers.RequestNotAuthorizedException e) {
-      LOG.warn("Unauthorized access: " + request.getAddress().toString());
+      log.atWarning().log("Unauthorized access: " + request.getAddress().toString());
       response.setStatus(Status.FORBIDDEN);
       try {
         response.getPrintStream().append(e.getMessage());
       } catch (IOException e1) {
-        LOG.error("Cannot write error to response", e1);
+        log.atSevere().log("Cannot write error to response", e1);
       }
     } catch (Exception e) {
-      LOG.error("Error handling request", e);
+      log.atSevere().log("Error handling request", e);
     } finally {
       try {
         response.close();
       } catch (IOException e) {
-        LOG.warn("Cannot close response", e);
+        log.atWarning().log("Cannot close response", e);
       }
     }
   }
@@ -112,7 +113,7 @@ public class MasterContainer implements Container {
     if (requestPath.equals("/favicon.ico")) {
       return;
     }
-    LOG.info("Request Path: " + requestPath);
+    log.atInfo().log("Request Path: " + requestPath);
 
     if (!requestPath.startsWith("/")) {
       throw new RequestHandlingException("Cannot handle request: " + requestPath);

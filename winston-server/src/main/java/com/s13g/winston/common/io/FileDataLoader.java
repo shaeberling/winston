@@ -16,10 +16,8 @@
 
 package com.s13g.winston.common.io;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.common.io.ByteStreams;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +31,7 @@ import javax.annotation.concurrent.GuardedBy;
  * Loads data from a given file. Doesn't cache loaded data.
  */
 public class FileDataLoader implements DataLoader {
-  private static final Logger LOG = LogManager.getLogger(FileDataLoader.class);
+  private static final FluentLogger log = FluentLogger.forEnclosingClass();
   @GuardedBy("mLock")
   private final File mFile;
   private final Object mLock;
@@ -50,14 +48,15 @@ public class FileDataLoader implements DataLoader {
       try {
         fileInputStream = new FileInputStream(mFile);
       } catch (FileNotFoundException e) {
-        LOG.error("Cannot not find file [" + mFile.getAbsolutePath() + "]: "
-            + e.getMessage());
+        log.atWarning().log("Cannot not find file [%s]: %s",
+            mFile.getAbsolutePath(), e.getMessage());
         return Optional.empty();
       }
       try {
         return Optional.of(ByteStreams.toByteArray(fileInputStream));
       } catch (IOException e) {
-        LOG.error("Cannot read file [" + mFile.getAbsolutePath() + "]: " + e.getMessage());
+        log.atWarning().log("Cannot read file [%s]: %s",
+            mFile.getAbsolutePath(), e.getMessage());
         return Optional.empty();
       }
     }
