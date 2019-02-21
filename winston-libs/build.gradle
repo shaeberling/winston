@@ -1,6 +1,6 @@
-//plugins {
-//    id 'jacoco'
-//}
+plugins {
+    id 'jacoco'
+}
 
 apply plugin: 'java'
 
@@ -23,11 +23,11 @@ dependencies {
     testImplementation "com.google.truth:truth:0.42"
 }
 
-//jacocoTestReport {
-//  dependsOn test
-//  sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
-//  classDirectories =  project.files(sourceSets.main.output)
-//  reports {
-//    xml.enabled = true
-//  }
-//}
+jacocoTestReport {
+  dependsOn test
+  sourceDirectories = project.files(sourceSets.main.allSource.srcDirs)
+  classDirectories =  project.files(sourceSets.main.output)
+  reports {
+    xml.enabled = true
+  }
+}

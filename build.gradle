@@ -2,6 +2,8 @@
 
 buildscript {
     repositories {
+        gradlePluginPortal()
+        mavenCentral()
         jcenter()
     }
     dependencies {
@@ -12,48 +14,56 @@ buildscript {
     }
 }
 
-allprojects {
-  repositories {
-    jcenter()
-  }
+plugins {
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
+}
+apply plugin: 'jacoco'
 
-//apply plugin: 'jacoco'
-//  jacoco {
-//    toolVersion = '0.7.5.201505241946'
-//  }
+
+allprojects {
+    repositories {
+        jcenter()
+    }
 }
 
 
-//// Code Coverage and reporting.
-//// The coveralls gradle plugin cannot handle multiple projects, so we have to flatten
-//// the reports here in order to get coverage for all subprojects.
-//def publishedProjects = subprojects.findAll {
-//  (it.path == ':winston-libs') || (it.path == ':winston-server')
-//}
-//evaluationDependsOn(':winston-libs')
-//evaluationDependsOn(':winston-server')
-//
+// Code Coverage and reporting.
+// The coveralls gradle plugin cannot handle multiple projects, so we have to flatten
+// the reports here in order to get coverage for all subprojects.
+def publishedProjects = subprojects.findAll {
+    (it.path == ':winston-libs') || (it.path == ':winston-server')
+}
+evaluationDependsOn(':winston-libs')
+evaluationDependsOn(':winston-server')
 
-//apply plugin: 'com.github.kt3k.coveralls'
-//
-//// Collect reports from subprojects to be submitted to coveralls.io.
-//task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
-//   dependsOn = publishedProjects.jacocoTestReport
-//   sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
-//   classDirectories = files(publishedProjects.sourceSets.main.output)
-//   executionData = files(publishedProjects.jacocoTestReport.executionData)
-//   reports {
-//       xml.enabled true
-//       xml.destination ="${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-//   }
-//   setOnlyIf { true }
-//}
-//
-//coveralls {
-//    sourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs).files.absolutePath
-//}
-//
-//tasks.coveralls {
-//    dependsOn jacocoRootReport
-//}
+task jacocoMerge(type: JacocoMerge) {
+    publishedProjects.each { subproject ->
+        executionData subproject.tasks.withType(Test)
+    }
+    doFirst {
+        executionData = files(executionData.findAll { it.exists() })
+    }
+}
+
+// Collect reports from subprojects to be submitted to coveralls.io.
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+    description = 'Generates an aggregate report from all subprojects'
+    dependsOn publishedProjects.test, jacocoMerge
+    sourceDirectories = files(publishedProjects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(publishedProjects.sourceSets.main.output)
+    executionData = files(publishedProjects.jacocoTestReport.executionData)
+    reports {
+        html.enabled = true // human readable
+        xml.enabled = true // required by coveralls
+    }
+}
+
+coveralls {
+    sourceDirs = files(publishedProjects.sourceSets.main.allSource.srcDirs).files.absolutePath
+}
+
+tasks.coveralls {
+    dependsOn jacocoRootReport
+}
 
