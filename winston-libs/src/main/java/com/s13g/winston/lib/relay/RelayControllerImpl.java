@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * A {@link RelayController} that uses Pi4J to access the GPIO pins directly.
+ * A RelayController that uses Pi4J to access the GPIO pins directly.
  */
 public class RelayControllerImpl implements RelayController {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
@@ -52,7 +52,7 @@ public class RelayControllerImpl implements RelayController {
     mClickDelay = DEFAULT_CLICK_DELAY_MILLIS;
   }
 
-  public RelayControllerImpl(int[] mapping, GpioController gpioController, int clickDelay) {
+  RelayControllerImpl(int[] mapping, GpioController gpioController, int clickDelay) {
     log.atInfo().log("Initializing with mapping: " + Arrays.toString(mapping));
     mMapping = mapping;
     mGpioController = gpioController;
