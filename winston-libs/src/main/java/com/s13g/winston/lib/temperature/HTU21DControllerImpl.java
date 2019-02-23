@@ -55,7 +55,7 @@ public class HTU21DControllerImpl implements TemperatureSensorController, AutoCl
   /** The I2C device instance of the device. */
   private final I2CDevice mDevice;
 
-  public static Optional<NodeController> create(int busNum, int address) {
+  public static Optional<HTU21DControllerImpl> create(int busNum, int address) {
     try {
       I2CBus bus = I2CFactory.getInstance(busNum);
       log.atInfo().log("Connected to I2C bus.");

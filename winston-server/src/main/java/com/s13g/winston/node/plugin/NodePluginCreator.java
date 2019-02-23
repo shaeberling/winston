@@ -193,7 +193,8 @@ public class NodePluginCreator {
     // Add new 1-Wire based controllers here.
     switch (pluginType) {
       case HTU21D_TEMP_HUMID:
-        Optional<NodeController> controllerOpt = HTU21DControllerImpl.create(bus, address);
+        Optional<? extends NodeController> controllerOpt =
+            HTU21DControllerImpl.create(bus, address);
         if (!controllerOpt.isPresent()) {
           throw new RuntimeException("Cannot initialize I2C controller of type: " + type);
         }
