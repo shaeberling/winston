@@ -73,6 +73,7 @@ public final class ForClients {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.ChannelData)
       ChannelDataOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ChannelData.newBuilder() to construct.
     private ChannelData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -84,14 +85,19 @@ public final class ForClients {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ChannelData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -100,12 +106,6 @@ public final class ForClients {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 channel_ = new java.util.ArrayList<com.s13g.winston.proto.ForClients.ChannelData.Channel>();
@@ -113,6 +113,13 @@ public final class ForClients {
               }
               channel_.add(
                   input.readMessage(com.s13g.winston.proto.ForClients.ChannelData.Channel.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -126,6 +133,7 @@ public final class ForClients {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
           channel_ = java.util.Collections.unmodifiableList(channel_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -134,6 +142,7 @@ public final class ForClients {
       return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_fieldAccessorTable
@@ -150,7 +159,7 @@ public final class ForClients {
        * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
        * </pre>
        *
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
        */
       java.lang.String getId();
       /**
@@ -158,7 +167,7 @@ public final class ForClients {
        * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
        * </pre>
        *
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
        */
       com.google.protobuf.ByteString
           getIdBytes();
@@ -168,7 +177,7 @@ public final class ForClients {
        * The ID of the module. 
        * </pre>
        *
-       * <code>optional string module_type = 2;</code>
+       * <code>string module_type = 2;</code>
        */
       java.lang.String getModuleType();
       /**
@@ -176,7 +185,7 @@ public final class ForClients {
        * The ID of the module. 
        * </pre>
        *
-       * <code>optional string module_type = 2;</code>
+       * <code>string module_type = 2;</code>
        */
       com.google.protobuf.ByteString
           getModuleTypeBytes();
@@ -186,7 +195,7 @@ public final class ForClients {
        * The type of the channel, like 'temperature' etc. 
        * </pre>
        *
-       * <code>optional string type = 3;</code>
+       * <code>string type = 3;</code>
        */
       java.lang.String getType();
       /**
@@ -194,7 +203,7 @@ public final class ForClients {
        * The type of the channel, like 'temperature' etc. 
        * </pre>
        *
-       * <code>optional string type = 3;</code>
+       * <code>string type = 3;</code>
        */
       com.google.protobuf.ByteString
           getTypeBytes();
@@ -204,7 +213,7 @@ public final class ForClients {
        * Human readable name, to be used as a label. 
        * </pre>
        *
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       java.lang.String getName();
       /**
@@ -212,7 +221,7 @@ public final class ForClients {
        * Human readable name, to be used as a label. 
        * </pre>
        *
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
@@ -272,6 +281,7 @@ public final class ForClients {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.ChannelData.Channel)
         ChannelOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use Channel.newBuilder() to construct.
       private Channel(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -287,14 +297,19 @@ public final class ForClients {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private Channel(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -303,12 +318,6 @@ public final class ForClients {
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!input.skipField(tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 10: {
                 java.lang.String s = input.readStringRequireUtf8();
 
@@ -342,6 +351,13 @@ public final class ForClients {
                     input.readMessage(com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue.parser(), extensionRegistry));
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -353,6 +369,7 @@ public final class ForClients {
           if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
             value_ = java.util.Collections.unmodifiableList(value_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -361,6 +378,7 @@ public final class ForClients {
         return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_fieldAccessorTable
@@ -377,7 +395,7 @@ public final class ForClients {
          * The id of the ChannelValue. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         java.lang.String getId();
         /**
@@ -385,7 +403,7 @@ public final class ForClients {
          * The id of the ChannelValue. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         com.google.protobuf.ByteString
             getIdBytes();
@@ -395,7 +413,7 @@ public final class ForClients {
          * Read/write mode. 
          * </pre>
          *
-         * <code>optional string mode = 2;</code>
+         * <code>string mode = 2;</code>
          */
         java.lang.String getMode();
         /**
@@ -403,7 +421,7 @@ public final class ForClients {
          * Read/write mode. 
          * </pre>
          *
-         * <code>optional string mode = 2;</code>
+         * <code>string mode = 2;</code>
          */
         com.google.protobuf.ByteString
             getModeBytes();
@@ -419,6 +437,7 @@ public final class ForClients {
           com.google.protobuf.GeneratedMessageV3 implements
           // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.ChannelData.Channel.ChannelValue)
           ChannelValueOrBuilder {
+      private static final long serialVersionUID = 0L;
         // Use ChannelValue.newBuilder() to construct.
         private ChannelValue(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
           super(builder);
@@ -431,14 +450,19 @@ public final class ForClients {
         @java.lang.Override
         public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+          return this.unknownFields;
         }
         private ChannelValue(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           this();
+          if (extensionRegistry == null) {
+            throw new java.lang.NullPointerException();
+          }
           int mutable_bitField0_ = 0;
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder();
           try {
             boolean done = false;
             while (!done) {
@@ -447,12 +471,6 @@ public final class ForClients {
                 case 0:
                   done = true;
                   break;
-                default: {
-                  if (!input.skipField(tag)) {
-                    done = true;
-                  }
-                  break;
-                }
                 case 10: {
                   java.lang.String s = input.readStringRequireUtf8();
 
@@ -465,6 +483,13 @@ public final class ForClients {
                   mode_ = s;
                   break;
                 }
+                default: {
+                  if (!parseUnknownFieldProto3(
+                      input, unknownFields, extensionRegistry, tag)) {
+                    done = true;
+                  }
+                  break;
+                }
               }
             }
           } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -473,6 +498,7 @@ public final class ForClients {
             throw new com.google.protobuf.InvalidProtocolBufferException(
                 e).setUnfinishedMessage(this);
           } finally {
+            this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
           }
         }
@@ -481,6 +507,7 @@ public final class ForClients {
           return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_ChannelValue_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_ChannelValue_fieldAccessorTable
@@ -495,7 +522,7 @@ public final class ForClients {
          * The id of the ChannelValue. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public java.lang.String getId() {
           java.lang.Object ref = id_;
@@ -514,7 +541,7 @@ public final class ForClients {
          * The id of the ChannelValue. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public com.google.protobuf.ByteString
             getIdBytes() {
@@ -537,7 +564,7 @@ public final class ForClients {
          * Read/write mode. 
          * </pre>
          *
-         * <code>optional string mode = 2;</code>
+         * <code>string mode = 2;</code>
          */
         public java.lang.String getMode() {
           java.lang.Object ref = mode_;
@@ -556,7 +583,7 @@ public final class ForClients {
          * Read/write mode. 
          * </pre>
          *
-         * <code>optional string mode = 2;</code>
+         * <code>string mode = 2;</code>
          */
         public com.google.protobuf.ByteString
             getModeBytes() {
@@ -573,6 +600,7 @@ public final class ForClients {
         }
 
         private byte memoizedIsInitialized = -1;
+        @java.lang.Override
         public final boolean isInitialized() {
           byte isInitialized = memoizedIsInitialized;
           if (isInitialized == 1) return true;
@@ -582,6 +610,7 @@ public final class ForClients {
           return true;
         }
 
+        @java.lang.Override
         public void writeTo(com.google.protobuf.CodedOutputStream output)
                             throws java.io.IOException {
           if (!getIdBytes().isEmpty()) {
@@ -590,8 +619,10 @@ public final class ForClients {
           if (!getModeBytes().isEmpty()) {
             com.google.protobuf.GeneratedMessageV3.writeString(output, 2, mode_);
           }
+          unknownFields.writeTo(output);
         }
 
+        @java.lang.Override
         public int getSerializedSize() {
           int size = memoizedSize;
           if (size != -1) return size;
@@ -603,11 +634,11 @@ public final class ForClients {
           if (!getModeBytes().isEmpty()) {
             size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, mode_);
           }
+          size += unknownFields.getSerializedSize();
           memoizedSize = size;
           return size;
         }
 
-        private static final long serialVersionUID = 0L;
         @java.lang.Override
         public boolean equals(final java.lang.Object obj) {
           if (obj == this) {
@@ -623,6 +654,7 @@ public final class ForClients {
               .equals(other.getId());
           result = result && getMode()
               .equals(other.getMode());
+          result = result && unknownFields.equals(other.unknownFields);
           return result;
         }
 
@@ -632,7 +664,7 @@ public final class ForClients {
             return memoizedHashCode;
           }
           int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (19 * hash) + getDescriptor().hashCode();
           hash = (37 * hash) + ID_FIELD_NUMBER;
           hash = (53 * hash) + getId().hashCode();
           hash = (37 * hash) + MODE_FIELD_NUMBER;
@@ -642,6 +674,17 @@ public final class ForClients {
           return hash;
         }
 
+        public static com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
         public static com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -701,6 +744,7 @@ public final class ForClients {
               .parseWithIOException(PARSER, input, extensionRegistry);
         }
 
+        @java.lang.Override
         public Builder newBuilderForType() { return newBuilder(); }
         public static Builder newBuilder() {
           return DEFAULT_INSTANCE.toBuilder();
@@ -708,6 +752,7 @@ public final class ForClients {
         public static Builder newBuilder(com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue prototype) {
           return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
         }
+        @java.lang.Override
         public Builder toBuilder() {
           return this == DEFAULT_INSTANCE
               ? new Builder() : new Builder().mergeFrom(this);
@@ -735,6 +780,7 @@ public final class ForClients {
             return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_ChannelValue_descriptor;
           }
 
+          @java.lang.Override
           protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
               internalGetFieldAccessorTable() {
             return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_ChannelValue_fieldAccessorTable
@@ -757,6 +803,7 @@ public final class ForClients {
                     .alwaysUseFieldBuilders) {
             }
           }
+          @java.lang.Override
           public Builder clear() {
             super.clear();
             id_ = "";
@@ -766,15 +813,18 @@ public final class ForClients {
             return this;
           }
 
+          @java.lang.Override
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
             return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_ChannelValue_descriptor;
           }
 
+          @java.lang.Override
           public com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue getDefaultInstanceForType() {
             return com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue.getDefaultInstance();
           }
 
+          @java.lang.Override
           public com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue build() {
             com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue result = buildPartial();
             if (!result.isInitialized()) {
@@ -783,6 +833,7 @@ public final class ForClients {
             return result;
           }
 
+          @java.lang.Override
           public com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue buildPartial() {
             com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue result = new com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue(this);
             result.id_ = id_;
@@ -791,32 +842,39 @@ public final class ForClients {
             return result;
           }
 
+          @java.lang.Override
           public Builder clone() {
             return (Builder) super.clone();
           }
+          @java.lang.Override
           public Builder setField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.setField(field, value);
           }
+          @java.lang.Override
           public Builder clearField(
               com.google.protobuf.Descriptors.FieldDescriptor field) {
             return (Builder) super.clearField(field);
           }
+          @java.lang.Override
           public Builder clearOneof(
               com.google.protobuf.Descriptors.OneofDescriptor oneof) {
             return (Builder) super.clearOneof(oneof);
           }
+          @java.lang.Override
           public Builder setRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
+              int index, java.lang.Object value) {
             return (Builder) super.setRepeatedField(field, index, value);
           }
+          @java.lang.Override
           public Builder addRepeatedField(
               com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
+              java.lang.Object value) {
             return (Builder) super.addRepeatedField(field, value);
           }
+          @java.lang.Override
           public Builder mergeFrom(com.google.protobuf.Message other) {
             if (other instanceof com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue) {
               return mergeFrom((com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue)other);
@@ -836,14 +894,17 @@ public final class ForClients {
               mode_ = other.mode_;
               onChanged();
             }
+            this.mergeUnknownFields(other.unknownFields);
             onChanged();
             return this;
           }
 
+          @java.lang.Override
           public final boolean isInitialized() {
             return true;
           }
 
+          @java.lang.Override
           public Builder mergeFrom(
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -868,7 +929,7 @@ public final class ForClients {
            * The id of the ChannelValue. 
            * </pre>
            *
-           * <code>optional string id = 1;</code>
+           * <code>string id = 1;</code>
            */
           public java.lang.String getId() {
             java.lang.Object ref = id_;
@@ -887,7 +948,7 @@ public final class ForClients {
            * The id of the ChannelValue. 
            * </pre>
            *
-           * <code>optional string id = 1;</code>
+           * <code>string id = 1;</code>
            */
           public com.google.protobuf.ByteString
               getIdBytes() {
@@ -907,7 +968,7 @@ public final class ForClients {
            * The id of the ChannelValue. 
            * </pre>
            *
-           * <code>optional string id = 1;</code>
+           * <code>string id = 1;</code>
            */
           public Builder setId(
               java.lang.String value) {
@@ -924,7 +985,7 @@ public final class ForClients {
            * The id of the ChannelValue. 
            * </pre>
            *
-           * <code>optional string id = 1;</code>
+           * <code>string id = 1;</code>
            */
           public Builder clearId() {
             
@@ -937,7 +998,7 @@ public final class ForClients {
            * The id of the ChannelValue. 
            * </pre>
            *
-           * <code>optional string id = 1;</code>
+           * <code>string id = 1;</code>
            */
           public Builder setIdBytes(
               com.google.protobuf.ByteString value) {
@@ -957,7 +1018,7 @@ public final class ForClients {
            * Read/write mode. 
            * </pre>
            *
-           * <code>optional string mode = 2;</code>
+           * <code>string mode = 2;</code>
            */
           public java.lang.String getMode() {
             java.lang.Object ref = mode_;
@@ -976,7 +1037,7 @@ public final class ForClients {
            * Read/write mode. 
            * </pre>
            *
-           * <code>optional string mode = 2;</code>
+           * <code>string mode = 2;</code>
            */
           public com.google.protobuf.ByteString
               getModeBytes() {
@@ -996,7 +1057,7 @@ public final class ForClients {
            * Read/write mode. 
            * </pre>
            *
-           * <code>optional string mode = 2;</code>
+           * <code>string mode = 2;</code>
            */
           public Builder setMode(
               java.lang.String value) {
@@ -1013,7 +1074,7 @@ public final class ForClients {
            * Read/write mode. 
            * </pre>
            *
-           * <code>optional string mode = 2;</code>
+           * <code>string mode = 2;</code>
            */
           public Builder clearMode() {
             
@@ -1026,7 +1087,7 @@ public final class ForClients {
            * Read/write mode. 
            * </pre>
            *
-           * <code>optional string mode = 2;</code>
+           * <code>string mode = 2;</code>
            */
           public Builder setModeBytes(
               com.google.protobuf.ByteString value) {
@@ -1039,14 +1100,16 @@ public final class ForClients {
             onChanged();
             return this;
           }
+          @java.lang.Override
           public final Builder setUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.setUnknownFieldsProto3(unknownFields);
           }
 
+          @java.lang.Override
           public final Builder mergeUnknownFields(
               final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
+            return super.mergeUnknownFields(unknownFields);
           }
 
 
@@ -1065,11 +1128,12 @@ public final class ForClients {
 
         private static final com.google.protobuf.Parser<ChannelValue>
             PARSER = new com.google.protobuf.AbstractParser<ChannelValue>() {
+          @java.lang.Override
           public ChannelValue parsePartialFrom(
               com.google.protobuf.CodedInputStream input,
               com.google.protobuf.ExtensionRegistryLite extensionRegistry)
               throws com.google.protobuf.InvalidProtocolBufferException {
-              return new ChannelValue(input, extensionRegistry);
+            return new ChannelValue(input, extensionRegistry);
           }
         };
 
@@ -1082,6 +1146,7 @@ public final class ForClients {
           return PARSER;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.ForClients.ChannelData.Channel.ChannelValue getDefaultInstanceForType() {
           return DEFAULT_INSTANCE;
         }
@@ -1096,7 +1161,7 @@ public final class ForClients {
        * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
        * </pre>
        *
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
        */
       public java.lang.String getId() {
         java.lang.Object ref = id_;
@@ -1115,7 +1180,7 @@ public final class ForClients {
        * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
        * </pre>
        *
-       * <code>optional string id = 1;</code>
+       * <code>string id = 1;</code>
        */
       public com.google.protobuf.ByteString
           getIdBytes() {
@@ -1138,7 +1203,7 @@ public final class ForClients {
        * The ID of the module. 
        * </pre>
        *
-       * <code>optional string module_type = 2;</code>
+       * <code>string module_type = 2;</code>
        */
       public java.lang.String getModuleType() {
         java.lang.Object ref = moduleType_;
@@ -1157,7 +1222,7 @@ public final class ForClients {
        * The ID of the module. 
        * </pre>
        *
-       * <code>optional string module_type = 2;</code>
+       * <code>string module_type = 2;</code>
        */
       public com.google.protobuf.ByteString
           getModuleTypeBytes() {
@@ -1180,7 +1245,7 @@ public final class ForClients {
        * The type of the channel, like 'temperature' etc. 
        * </pre>
        *
-       * <code>optional string type = 3;</code>
+       * <code>string type = 3;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -1199,7 +1264,7 @@ public final class ForClients {
        * The type of the channel, like 'temperature' etc. 
        * </pre>
        *
-       * <code>optional string type = 3;</code>
+       * <code>string type = 3;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -1222,7 +1287,7 @@ public final class ForClients {
        * Human readable name, to be used as a label. 
        * </pre>
        *
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -1241,7 +1306,7 @@ public final class ForClients {
        * Human readable name, to be used as a label. 
        * </pre>
        *
-       * <code>optional string name = 4;</code>
+       * <code>string name = 4;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -1313,6 +1378,7 @@ public final class ForClients {
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -1322,6 +1388,7 @@ public final class ForClients {
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (!getIdBytes().isEmpty()) {
@@ -1339,8 +1406,10 @@ public final class ForClients {
         for (int i = 0; i < value_.size(); i++) {
           output.writeMessage(5, value_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -1362,11 +1431,11 @@ public final class ForClients {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(5, value_.get(i));
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1388,6 +1457,7 @@ public final class ForClients {
             .equals(other.getName());
         result = result && getValueList()
             .equals(other.getValueList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1397,7 +1467,7 @@ public final class ForClients {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + ID_FIELD_NUMBER;
         hash = (53 * hash) + getId().hashCode();
         hash = (37 * hash) + MODULE_TYPE_FIELD_NUMBER;
@@ -1415,6 +1485,17 @@ public final class ForClients {
         return hash;
       }
 
+      public static com.s13g.winston.proto.ForClients.ChannelData.Channel parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.s13g.winston.proto.ForClients.ChannelData.Channel parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.s13g.winston.proto.ForClients.ChannelData.Channel parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1474,6 +1555,7 @@ public final class ForClients {
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -1481,6 +1563,7 @@ public final class ForClients {
       public static Builder newBuilder(com.s13g.winston.proto.ForClients.ChannelData.Channel prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -1508,6 +1591,7 @@ public final class ForClients {
           return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_fieldAccessorTable
@@ -1531,6 +1615,7 @@ public final class ForClients {
             getValueFieldBuilder();
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           id_ = "";
@@ -1550,15 +1635,18 @@ public final class ForClients {
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_Channel_descriptor;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.ForClients.ChannelData.Channel getDefaultInstanceForType() {
           return com.s13g.winston.proto.ForClients.ChannelData.Channel.getDefaultInstance();
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.ForClients.ChannelData.Channel build() {
           com.s13g.winston.proto.ForClients.ChannelData.Channel result = buildPartial();
           if (!result.isInitialized()) {
@@ -1567,6 +1655,7 @@ public final class ForClients {
           return result;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.ForClients.ChannelData.Channel buildPartial() {
           com.s13g.winston.proto.ForClients.ChannelData.Channel result = new com.s13g.winston.proto.ForClients.ChannelData.Channel(this);
           int from_bitField0_ = bitField0_;
@@ -1589,32 +1678,39 @@ public final class ForClients {
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof com.s13g.winston.proto.ForClients.ChannelData.Channel) {
             return mergeFrom((com.s13g.winston.proto.ForClients.ChannelData.Channel)other);
@@ -1668,14 +1764,17 @@ public final class ForClients {
               }
             }
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1701,7 +1800,7 @@ public final class ForClients {
          * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public java.lang.String getId() {
           java.lang.Object ref = id_;
@@ -1720,7 +1819,7 @@ public final class ForClients {
          * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public com.google.protobuf.ByteString
             getIdBytes() {
@@ -1740,7 +1839,7 @@ public final class ForClients {
          * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public Builder setId(
             java.lang.String value) {
@@ -1757,7 +1856,7 @@ public final class ForClients {
          * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public Builder clearId() {
           
@@ -1770,7 +1869,7 @@ public final class ForClients {
          * System-wide unique ID, e.g. 'io/winston/pi-power-1'. 
          * </pre>
          *
-         * <code>optional string id = 1;</code>
+         * <code>string id = 1;</code>
          */
         public Builder setIdBytes(
             com.google.protobuf.ByteString value) {
@@ -1790,7 +1889,7 @@ public final class ForClients {
          * The ID of the module. 
          * </pre>
          *
-         * <code>optional string module_type = 2;</code>
+         * <code>string module_type = 2;</code>
          */
         public java.lang.String getModuleType() {
           java.lang.Object ref = moduleType_;
@@ -1809,7 +1908,7 @@ public final class ForClients {
          * The ID of the module. 
          * </pre>
          *
-         * <code>optional string module_type = 2;</code>
+         * <code>string module_type = 2;</code>
          */
         public com.google.protobuf.ByteString
             getModuleTypeBytes() {
@@ -1829,7 +1928,7 @@ public final class ForClients {
          * The ID of the module. 
          * </pre>
          *
-         * <code>optional string module_type = 2;</code>
+         * <code>string module_type = 2;</code>
          */
         public Builder setModuleType(
             java.lang.String value) {
@@ -1846,7 +1945,7 @@ public final class ForClients {
          * The ID of the module. 
          * </pre>
          *
-         * <code>optional string module_type = 2;</code>
+         * <code>string module_type = 2;</code>
          */
         public Builder clearModuleType() {
           
@@ -1859,7 +1958,7 @@ public final class ForClients {
          * The ID of the module. 
          * </pre>
          *
-         * <code>optional string module_type = 2;</code>
+         * <code>string module_type = 2;</code>
          */
         public Builder setModuleTypeBytes(
             com.google.protobuf.ByteString value) {
@@ -1879,7 +1978,7 @@ public final class ForClients {
          * The type of the channel, like 'temperature' etc. 
          * </pre>
          *
-         * <code>optional string type = 3;</code>
+         * <code>string type = 3;</code>
          */
         public java.lang.String getType() {
           java.lang.Object ref = type_;
@@ -1898,7 +1997,7 @@ public final class ForClients {
          * The type of the channel, like 'temperature' etc. 
          * </pre>
          *
-         * <code>optional string type = 3;</code>
+         * <code>string type = 3;</code>
          */
         public com.google.protobuf.ByteString
             getTypeBytes() {
@@ -1918,7 +2017,7 @@ public final class ForClients {
          * The type of the channel, like 'temperature' etc. 
          * </pre>
          *
-         * <code>optional string type = 3;</code>
+         * <code>string type = 3;</code>
          */
         public Builder setType(
             java.lang.String value) {
@@ -1935,7 +2034,7 @@ public final class ForClients {
          * The type of the channel, like 'temperature' etc. 
          * </pre>
          *
-         * <code>optional string type = 3;</code>
+         * <code>string type = 3;</code>
          */
         public Builder clearType() {
           
@@ -1948,7 +2047,7 @@ public final class ForClients {
          * The type of the channel, like 'temperature' etc. 
          * </pre>
          *
-         * <code>optional string type = 3;</code>
+         * <code>string type = 3;</code>
          */
         public Builder setTypeBytes(
             com.google.protobuf.ByteString value) {
@@ -1968,7 +2067,7 @@ public final class ForClients {
          * Human readable name, to be used as a label. 
          * </pre>
          *
-         * <code>optional string name = 4;</code>
+         * <code>string name = 4;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -1987,7 +2086,7 @@ public final class ForClients {
          * Human readable name, to be used as a label. 
          * </pre>
          *
-         * <code>optional string name = 4;</code>
+         * <code>string name = 4;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -2007,7 +2106,7 @@ public final class ForClients {
          * Human readable name, to be used as a label. 
          * </pre>
          *
-         * <code>optional string name = 4;</code>
+         * <code>string name = 4;</code>
          */
         public Builder setName(
             java.lang.String value) {
@@ -2024,7 +2123,7 @@ public final class ForClients {
          * Human readable name, to be used as a label. 
          * </pre>
          *
-         * <code>optional string name = 4;</code>
+         * <code>string name = 4;</code>
          */
         public Builder clearName() {
           
@@ -2037,7 +2136,7 @@ public final class ForClients {
          * Human readable name, to be used as a label. 
          * </pre>
          *
-         * <code>optional string name = 4;</code>
+         * <code>string name = 4;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
@@ -2362,14 +2461,16 @@ public final class ForClients {
           }
           return valueBuilder_;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -2388,11 +2489,12 @@ public final class ForClients {
 
       private static final com.google.protobuf.Parser<Channel>
           PARSER = new com.google.protobuf.AbstractParser<Channel>() {
+        @java.lang.Override
         public Channel parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new Channel(input, extensionRegistry);
+          return new Channel(input, extensionRegistry);
         }
       };
 
@@ -2405,6 +2507,7 @@ public final class ForClients {
         return PARSER;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.ForClients.ChannelData.Channel getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -2467,6 +2570,7 @@ public final class ForClients {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2476,13 +2580,16 @@ public final class ForClients {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < channel_.size(); i++) {
         output.writeMessage(1, channel_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2492,11 +2599,11 @@ public final class ForClients {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, channel_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2510,6 +2617,7 @@ public final class ForClients {
       boolean result = true;
       result = result && getChannelList()
           .equals(other.getChannelList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2519,7 +2627,7 @@ public final class ForClients {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getChannelCount() > 0) {
         hash = (37 * hash) + CHANNEL_FIELD_NUMBER;
         hash = (53 * hash) + getChannelList().hashCode();
@@ -2529,6 +2637,17 @@ public final class ForClients {
       return hash;
     }
 
+    public static com.s13g.winston.proto.ForClients.ChannelData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.ForClients.ChannelData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.ForClients.ChannelData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2588,6 +2707,7 @@ public final class ForClients {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2595,6 +2715,7 @@ public final class ForClients {
     public static Builder newBuilder(com.s13g.winston.proto.ForClients.ChannelData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2622,6 +2743,7 @@ public final class ForClients {
         return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_fieldAccessorTable
@@ -2645,6 +2767,7 @@ public final class ForClients {
           getChannelFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (channelBuilder_ == null) {
@@ -2656,15 +2779,18 @@ public final class ForClients {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.ForClients.internal_static_com_s13g_winston_proto_ChannelData_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.ForClients.ChannelData getDefaultInstanceForType() {
         return com.s13g.winston.proto.ForClients.ChannelData.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.ForClients.ChannelData build() {
         com.s13g.winston.proto.ForClients.ChannelData result = buildPartial();
         if (!result.isInitialized()) {
@@ -2673,6 +2799,7 @@ public final class ForClients {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.ForClients.ChannelData buildPartial() {
         com.s13g.winston.proto.ForClients.ChannelData result = new com.s13g.winston.proto.ForClients.ChannelData(this);
         int from_bitField0_ = bitField0_;
@@ -2689,32 +2816,39 @@ public final class ForClients {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.ForClients.ChannelData) {
           return mergeFrom((com.s13g.winston.proto.ForClients.ChannelData)other);
@@ -2752,14 +2886,17 @@ public final class ForClients {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3090,14 +3227,16 @@ public final class ForClients {
         }
         return channelBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3116,11 +3255,12 @@ public final class ForClients {
 
     private static final com.google.protobuf.Parser<ChannelData>
         PARSER = new com.google.protobuf.AbstractParser<ChannelData>() {
+      @java.lang.Override
       public ChannelData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ChannelData(input, extensionRegistry);
+        return new ChannelData(input, extensionRegistry);
       }
     };
 
@@ -3133,6 +3273,7 @@ public final class ForClients {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.ForClients.ChannelData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }

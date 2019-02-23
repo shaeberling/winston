@@ -23,7 +23,7 @@ public final class Node {
      * The port to start the node daemon on. 
      * </pre>
      *
-     * <code>optional int32 daemon_port = 1;</code>
+     * <code>int32 daemon_port = 1;</code>
      */
     int getDaemonPort();
 
@@ -35,10 +35,10 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
     java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> 
-        getGpioPluginsList();
+        getGpioPluginList();
     /**
      * <pre>
      * GPIO plugins to be activated on this node.
@@ -47,9 +47,9 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getGpioPlugins(int index);
+    com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getGpioPlugin(int index);
     /**
      * <pre>
      * GPIO plugins to be activated on this node.
@@ -58,9 +58,9 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    int getGpioPluginsCount();
+    int getGpioPluginCount();
     /**
      * <pre>
      * GPIO plugins to be activated on this node.
@@ -69,10 +69,10 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder> 
-        getGpioPluginsOrBuilderList();
+        getGpioPluginOrBuilderList();
     /**
      * <pre>
      * GPIO plugins to be activated on this node.
@@ -81,9 +81,9 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder getGpioPluginsOrBuilder(
+    com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder getGpioPluginOrBuilder(
         int index);
 
     /**
@@ -91,43 +91,43 @@ public final class Node {
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
     java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> 
-        getOnewirePluginsList();
+        getOnewirePluginList();
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getOnewirePlugins(int index);
+    com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getOnewirePlugin(int index);
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    int getOnewirePluginsCount();
+    int getOnewirePluginCount();
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder> 
-        getOnewirePluginsOrBuilderList();
+        getOnewirePluginOrBuilderList();
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginsOrBuilder(
+    com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginOrBuilder(
         int index);
 
     /**
@@ -135,43 +135,43 @@ public final class Node {
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
     java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> 
-        getI2CPluginsList();
+        getI2CPluginList();
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugins(int index);
+    com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugin(int index);
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    int getI2CPluginsCount();
+    int getI2CPluginCount();
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
     java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
-        getI2CPluginsOrBuilderList();
+        getI2CPluginOrBuilderList();
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginsOrBuilder(
+    com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginOrBuilder(
         int index);
   }
   /**
@@ -186,28 +186,34 @@ public final class Node {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.NodeConfig)
       NodeConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use NodeConfig.newBuilder() to construct.
     private NodeConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
     private NodeConfig() {
       daemonPort_ = 0;
-      gpioPlugins_ = java.util.Collections.emptyList();
-      onewirePlugins_ = java.util.Collections.emptyList();
-      i2CPlugins_ = java.util.Collections.emptyList();
+      gpioPlugin_ = java.util.Collections.emptyList();
+      onewirePlugin_ = java.util.Collections.emptyList();
+      i2CPlugin_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private NodeConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -216,12 +222,6 @@ public final class Node {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               daemonPort_ = input.readInt32();
@@ -229,29 +229,36 @@ public final class Node {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                gpioPlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin>();
+                gpioPlugin_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              gpioPlugins_.add(
+              gpioPlugin_.add(
                   input.readMessage(com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.parser(), extensionRegistry));
               break;
             }
             case 26: {
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                onewirePlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin>();
+                onewirePlugin_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin>();
                 mutable_bitField0_ |= 0x00000004;
               }
-              onewirePlugins_.add(
+              onewirePlugin_.add(
                   input.readMessage(com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.parser(), extensionRegistry));
               break;
             }
             case 34: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                i2CPlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin>();
+                i2CPlugin_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin>();
                 mutable_bitField0_ |= 0x00000008;
               }
-              i2CPlugins_.add(
+              i2CPlugin_.add(
                   input.readMessage(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -263,14 +270,15 @@ public final class Node {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          gpioPlugins_ = java.util.Collections.unmodifiableList(gpioPlugins_);
+          gpioPlugin_ = java.util.Collections.unmodifiableList(gpioPlugin_);
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          onewirePlugins_ = java.util.Collections.unmodifiableList(onewirePlugins_);
+          onewirePlugin_ = java.util.Collections.unmodifiableList(onewirePlugin_);
         }
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          i2CPlugins_ = java.util.Collections.unmodifiableList(i2CPlugins_);
+          i2CPlugin_ = java.util.Collections.unmodifiableList(i2CPlugin_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -279,6 +287,7 @@ public final class Node {
       return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_fieldAccessorTable
@@ -295,7 +304,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       java.lang.String getType();
       /**
@@ -303,7 +312,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       com.google.protobuf.ByteString
           getTypeBytes();
@@ -313,7 +322,7 @@ public final class Node {
        * The name of the 1-Wire node, e.g. "28-000005abf27d". 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       java.lang.String getName();
       /**
@@ -321,7 +330,7 @@ public final class Node {
        * The name of the 1-Wire node, e.g. "28-000005abf27d". 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       com.google.protobuf.ByteString
           getNameBytes();
@@ -337,6 +346,7 @@ public final class Node {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.NodeConfig.OneWirePlugin)
         OneWirePluginOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use OneWirePlugin.newBuilder() to construct.
       private OneWirePlugin(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -349,14 +359,19 @@ public final class Node {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private OneWirePlugin(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -365,12 +380,6 @@ public final class Node {
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!input.skipField(tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 10: {
                 java.lang.String s = input.readStringRequireUtf8();
 
@@ -383,6 +392,13 @@ public final class Node {
                 name_ = s;
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -391,6 +407,7 @@ public final class Node {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -399,6 +416,7 @@ public final class Node {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_fieldAccessorTable
@@ -413,7 +431,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -432,7 +450,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -455,7 +473,7 @@ public final class Node {
        * The name of the 1-Wire node, e.g. "28-000005abf27d". 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -474,7 +492,7 @@ public final class Node {
        * The name of the 1-Wire node, e.g. "28-000005abf27d". 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -491,6 +509,7 @@ public final class Node {
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -500,6 +519,7 @@ public final class Node {
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (!getTypeBytes().isEmpty()) {
@@ -508,8 +528,10 @@ public final class Node {
         if (!getNameBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
         }
+        unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -521,11 +543,11 @@ public final class Node {
         if (!getNameBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -541,6 +563,7 @@ public final class Node {
             .equals(other.getType());
         result = result && getName()
             .equals(other.getName());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -550,7 +573,7 @@ public final class Node {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + getType().hashCode();
         hash = (37 * hash) + NAME_FIELD_NUMBER;
@@ -560,6 +583,17 @@ public final class Node {
         return hash;
       }
 
+      public static com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -619,6 +653,7 @@ public final class Node {
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -626,6 +661,7 @@ public final class Node {
       public static Builder newBuilder(com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -653,6 +689,7 @@ public final class Node {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_fieldAccessorTable
@@ -675,6 +712,7 @@ public final class Node {
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           type_ = "";
@@ -684,15 +722,18 @@ public final class Node {
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_descriptor;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getDefaultInstanceForType() {
           return com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.getDefaultInstance();
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin build() {
           com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin result = buildPartial();
           if (!result.isInitialized()) {
@@ -701,6 +742,7 @@ public final class Node {
           return result;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin buildPartial() {
           com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin result = new com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin(this);
           result.type_ = type_;
@@ -709,32 +751,39 @@ public final class Node {
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin) {
             return mergeFrom((com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin)other);
@@ -754,14 +803,17 @@ public final class Node {
             name_ = other.name_;
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -786,7 +838,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public java.lang.String getType() {
           java.lang.Object ref = type_;
@@ -805,7 +857,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public com.google.protobuf.ByteString
             getTypeBytes() {
@@ -825,7 +877,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder setType(
             java.lang.String value) {
@@ -842,7 +894,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder clearType() {
           
@@ -855,7 +907,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder setTypeBytes(
             com.google.protobuf.ByteString value) {
@@ -875,7 +927,7 @@ public final class Node {
          * The name of the 1-Wire node, e.g. "28-000005abf27d". 
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public java.lang.String getName() {
           java.lang.Object ref = name_;
@@ -894,7 +946,7 @@ public final class Node {
          * The name of the 1-Wire node, e.g. "28-000005abf27d". 
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public com.google.protobuf.ByteString
             getNameBytes() {
@@ -914,7 +966,7 @@ public final class Node {
          * The name of the 1-Wire node, e.g. "28-000005abf27d". 
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public Builder setName(
             java.lang.String value) {
@@ -931,7 +983,7 @@ public final class Node {
          * The name of the 1-Wire node, e.g. "28-000005abf27d". 
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public Builder clearName() {
           
@@ -944,7 +996,7 @@ public final class Node {
          * The name of the 1-Wire node, e.g. "28-000005abf27d". 
          * </pre>
          *
-         * <code>optional string name = 2;</code>
+         * <code>string name = 2;</code>
          */
         public Builder setNameBytes(
             com.google.protobuf.ByteString value) {
@@ -957,14 +1009,16 @@ public final class Node {
           onChanged();
           return this;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -983,11 +1037,12 @@ public final class Node {
 
       private static final com.google.protobuf.Parser<OneWirePlugin>
           PARSER = new com.google.protobuf.AbstractParser<OneWirePlugin>() {
+        @java.lang.Override
         public OneWirePlugin parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new OneWirePlugin(input, extensionRegistry);
+          return new OneWirePlugin(input, extensionRegistry);
         }
       };
 
@@ -1000,6 +1055,7 @@ public final class Node {
         return PARSER;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -1015,7 +1071,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       java.lang.String getType();
       /**
@@ -1023,7 +1079,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       com.google.protobuf.ByteString
           getTypeBytes();
@@ -1064,6 +1120,7 @@ public final class Node {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.NodeConfig.GpioPlugin)
         GpioPluginOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use GpioPlugin.newBuilder() to construct.
       private GpioPlugin(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -1076,14 +1133,19 @@ public final class Node {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private GpioPlugin(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -1092,12 +1154,6 @@ public final class Node {
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!input.skipField(tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 10: {
                 java.lang.String s = input.readStringRequireUtf8();
 
@@ -1125,6 +1181,13 @@ public final class Node {
                 input.popLimit(limit);
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1136,6 +1199,7 @@ public final class Node {
           if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
             mapping_ = java.util.Collections.unmodifiableList(mapping_);
           }
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -1144,6 +1208,7 @@ public final class Node {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_fieldAccessorTable
@@ -1159,7 +1224,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -1178,7 +1243,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -1230,6 +1295,7 @@ public final class Node {
       private int mappingMemoizedSerializedSize = -1;
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -1239,6 +1305,7 @@ public final class Node {
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         getSerializedSize();
@@ -1252,8 +1319,10 @@ public final class Node {
         for (int i = 0; i < mapping_.size(); i++) {
           output.writeInt32NoTag(mapping_.get(i));
         }
+        unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -1276,11 +1345,11 @@ public final class Node {
           }
           mappingMemoizedSerializedSize = dataSize;
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -1296,6 +1365,7 @@ public final class Node {
             .equals(other.getType());
         result = result && getMappingList()
             .equals(other.getMappingList());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -1305,7 +1375,7 @@ public final class Node {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + getType().hashCode();
         if (getMappingCount() > 0) {
@@ -1317,6 +1387,17 @@ public final class Node {
         return hash;
       }
 
+      public static com.s13g.winston.proto.Node.NodeConfig.GpioPlugin parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.GpioPlugin parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.s13g.winston.proto.Node.NodeConfig.GpioPlugin parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1376,6 +1457,7 @@ public final class Node {
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -1383,6 +1465,7 @@ public final class Node {
       public static Builder newBuilder(com.s13g.winston.proto.Node.NodeConfig.GpioPlugin prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -1410,6 +1493,7 @@ public final class Node {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_fieldAccessorTable
@@ -1432,6 +1516,7 @@ public final class Node {
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           type_ = "";
@@ -1441,15 +1526,18 @@ public final class Node {
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_GpioPlugin_descriptor;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getDefaultInstanceForType() {
           return com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.getDefaultInstance();
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin build() {
           com.s13g.winston.proto.Node.NodeConfig.GpioPlugin result = buildPartial();
           if (!result.isInitialized()) {
@@ -1458,6 +1546,7 @@ public final class Node {
           return result;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin buildPartial() {
           com.s13g.winston.proto.Node.NodeConfig.GpioPlugin result = new com.s13g.winston.proto.Node.NodeConfig.GpioPlugin(this);
           int from_bitField0_ = bitField0_;
@@ -1473,32 +1562,39 @@ public final class Node {
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof com.s13g.winston.proto.Node.NodeConfig.GpioPlugin) {
             return mergeFrom((com.s13g.winston.proto.Node.NodeConfig.GpioPlugin)other);
@@ -1524,14 +1620,17 @@ public final class Node {
             }
             onChanged();
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1557,7 +1656,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public java.lang.String getType() {
           java.lang.Object ref = type_;
@@ -1576,7 +1675,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public com.google.protobuf.ByteString
             getTypeBytes() {
@@ -1596,7 +1695,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder setType(
             java.lang.String value) {
@@ -1613,7 +1712,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder clearType() {
           
@@ -1626,7 +1725,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder setTypeBytes(
             com.google.protobuf.ByteString value) {
@@ -1733,14 +1832,16 @@ public final class Node {
           onChanged();
           return this;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -1759,11 +1860,12 @@ public final class Node {
 
       private static final com.google.protobuf.Parser<GpioPlugin>
           PARSER = new com.google.protobuf.AbstractParser<GpioPlugin>() {
+        @java.lang.Override
         public GpioPlugin parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new GpioPlugin(input, extensionRegistry);
+          return new GpioPlugin(input, extensionRegistry);
         }
       };
 
@@ -1776,6 +1878,7 @@ public final class Node {
         return PARSER;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -1791,7 +1894,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       java.lang.String getType();
       /**
@@ -1799,7 +1902,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       com.google.protobuf.ByteString
           getTypeBytes();
@@ -1809,7 +1912,7 @@ public final class Node {
        ** The I2C bus of the device. Typically "1". 
        * </pre>
        *
-       * <code>optional int32 bus = 2;</code>
+       * <code>int32 bus = 2;</code>
        */
       int getBus();
 
@@ -1818,7 +1921,7 @@ public final class Node {
        * The address of the I2C device, e.g. "64" for "0x40". 
        * </pre>
        *
-       * <code>optional int32 address = 3;</code>
+       * <code>int32 address = 3;</code>
        */
       int getAddress();
     }
@@ -1833,6 +1936,7 @@ public final class Node {
         com.google.protobuf.GeneratedMessageV3 implements
         // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.NodeConfig.I2cPlugin)
         I2cPluginOrBuilder {
+    private static final long serialVersionUID = 0L;
       // Use I2cPlugin.newBuilder() to construct.
       private I2cPlugin(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
@@ -1846,14 +1950,19 @@ public final class Node {
       @java.lang.Override
       public final com.google.protobuf.UnknownFieldSet
       getUnknownFields() {
-        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        return this.unknownFields;
       }
       private I2cPlugin(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
         int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
         try {
           boolean done = false;
           while (!done) {
@@ -1862,12 +1971,6 @@ public final class Node {
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!input.skipField(tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 10: {
                 java.lang.String s = input.readStringRequireUtf8();
 
@@ -1884,6 +1987,13 @@ public final class Node {
                 address_ = input.readInt32();
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1892,6 +2002,7 @@ public final class Node {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
+          this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
         }
       }
@@ -1900,6 +2011,7 @@ public final class Node {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_fieldAccessorTable
@@ -1914,7 +2026,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -1933,7 +2045,7 @@ public final class Node {
        * The type defines which plugin to load. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -1956,7 +2068,7 @@ public final class Node {
        ** The I2C bus of the device. Typically "1". 
        * </pre>
        *
-       * <code>optional int32 bus = 2;</code>
+       * <code>int32 bus = 2;</code>
        */
       public int getBus() {
         return bus_;
@@ -1969,13 +2081,14 @@ public final class Node {
        * The address of the I2C device, e.g. "64" for "0x40". 
        * </pre>
        *
-       * <code>optional int32 address = 3;</code>
+       * <code>int32 address = 3;</code>
        */
       public int getAddress() {
         return address_;
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -1985,6 +2098,7 @@ public final class Node {
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (!getTypeBytes().isEmpty()) {
@@ -1996,8 +2110,10 @@ public final class Node {
         if (address_ != 0) {
           output.writeInt32(3, address_);
         }
+        unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -2014,11 +2130,11 @@ public final class Node {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(3, address_);
         }
+        size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
       }
 
-      private static final long serialVersionUID = 0L;
       @java.lang.Override
       public boolean equals(final java.lang.Object obj) {
         if (obj == this) {
@@ -2036,6 +2152,7 @@ public final class Node {
             == other.getBus());
         result = result && (getAddress()
             == other.getAddress());
+        result = result && unknownFields.equals(other.unknownFields);
         return result;
       }
 
@@ -2045,7 +2162,7 @@ public final class Node {
           return memoizedHashCode;
         }
         int hash = 41;
-        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + getType().hashCode();
         hash = (37 * hash) + BUS_FIELD_NUMBER;
@@ -2057,6 +2174,17 @@ public final class Node {
         return hash;
       }
 
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
       public static com.s13g.winston.proto.Node.NodeConfig.I2cPlugin parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2116,6 +2244,7 @@ public final class Node {
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -2123,6 +2252,7 @@ public final class Node {
       public static Builder newBuilder(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -2150,6 +2280,7 @@ public final class Node {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_fieldAccessorTable
@@ -2172,6 +2303,7 @@ public final class Node {
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           type_ = "";
@@ -2183,15 +2315,18 @@ public final class Node {
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_I2cPlugin_descriptor;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getDefaultInstanceForType() {
           return com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance();
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin build() {
           com.s13g.winston.proto.Node.NodeConfig.I2cPlugin result = buildPartial();
           if (!result.isInitialized()) {
@@ -2200,6 +2335,7 @@ public final class Node {
           return result;
         }
 
+        @java.lang.Override
         public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin buildPartial() {
           com.s13g.winston.proto.Node.NodeConfig.I2cPlugin result = new com.s13g.winston.proto.Node.NodeConfig.I2cPlugin(this);
           result.type_ = type_;
@@ -2209,32 +2345,39 @@ public final class Node {
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            int index, Object value) {
+            int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
-            Object value) {
+            java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof com.s13g.winston.proto.Node.NodeConfig.I2cPlugin) {
             return mergeFrom((com.s13g.winston.proto.Node.NodeConfig.I2cPlugin)other);
@@ -2256,14 +2399,17 @@ public final class Node {
           if (other.getAddress() != 0) {
             setAddress(other.getAddress());
           }
+          this.mergeUnknownFields(other.unknownFields);
           onChanged();
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2288,7 +2434,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public java.lang.String getType() {
           java.lang.Object ref = type_;
@@ -2307,7 +2453,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public com.google.protobuf.ByteString
             getTypeBytes() {
@@ -2327,7 +2473,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder setType(
             java.lang.String value) {
@@ -2344,7 +2490,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder clearType() {
           
@@ -2357,7 +2503,7 @@ public final class Node {
          * The type defines which plugin to load. 
          * </pre>
          *
-         * <code>optional string type = 1;</code>
+         * <code>string type = 1;</code>
          */
         public Builder setTypeBytes(
             com.google.protobuf.ByteString value) {
@@ -2377,7 +2523,7 @@ public final class Node {
          ** The I2C bus of the device. Typically "1". 
          * </pre>
          *
-         * <code>optional int32 bus = 2;</code>
+         * <code>int32 bus = 2;</code>
          */
         public int getBus() {
           return bus_;
@@ -2387,7 +2533,7 @@ public final class Node {
          ** The I2C bus of the device. Typically "1". 
          * </pre>
          *
-         * <code>optional int32 bus = 2;</code>
+         * <code>int32 bus = 2;</code>
          */
         public Builder setBus(int value) {
           
@@ -2400,7 +2546,7 @@ public final class Node {
          ** The I2C bus of the device. Typically "1". 
          * </pre>
          *
-         * <code>optional int32 bus = 2;</code>
+         * <code>int32 bus = 2;</code>
          */
         public Builder clearBus() {
           
@@ -2415,7 +2561,7 @@ public final class Node {
          * The address of the I2C device, e.g. "64" for "0x40". 
          * </pre>
          *
-         * <code>optional int32 address = 3;</code>
+         * <code>int32 address = 3;</code>
          */
         public int getAddress() {
           return address_;
@@ -2425,7 +2571,7 @@ public final class Node {
          * The address of the I2C device, e.g. "64" for "0x40". 
          * </pre>
          *
-         * <code>optional int32 address = 3;</code>
+         * <code>int32 address = 3;</code>
          */
         public Builder setAddress(int value) {
           
@@ -2438,7 +2584,7 @@ public final class Node {
          * The address of the I2C device, e.g. "64" for "0x40". 
          * </pre>
          *
-         * <code>optional int32 address = 3;</code>
+         * <code>int32 address = 3;</code>
          */
         public Builder clearAddress() {
           
@@ -2446,14 +2592,16 @@ public final class Node {
           onChanged();
           return this;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
-          return this;
+          return super.mergeUnknownFields(unknownFields);
         }
 
 
@@ -2472,11 +2620,12 @@ public final class Node {
 
       private static final com.google.protobuf.Parser<I2cPlugin>
           PARSER = new com.google.protobuf.AbstractParser<I2cPlugin>() {
+        @java.lang.Override
         public I2cPlugin parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
-            return new I2cPlugin(input, extensionRegistry);
+          return new I2cPlugin(input, extensionRegistry);
         }
       };
 
@@ -2489,6 +2638,7 @@ public final class Node {
         return PARSER;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -2503,14 +2653,14 @@ public final class Node {
      * The port to start the node daemon on. 
      * </pre>
      *
-     * <code>optional int32 daemon_port = 1;</code>
+     * <code>int32 daemon_port = 1;</code>
      */
     public int getDaemonPort() {
       return daemonPort_;
     }
 
-    public static final int GPIO_PLUGINS_FIELD_NUMBER = 2;
-    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> gpioPlugins_;
+    public static final int GPIO_PLUGIN_FIELD_NUMBER = 2;
+    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> gpioPlugin_;
     /**
      * <pre>
      * GPIO plugins to be activated on this node.
@@ -2519,10 +2669,10 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> getGpioPluginsList() {
-      return gpioPlugins_;
+    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> getGpioPluginList() {
+      return gpioPlugin_;
     }
     /**
      * <pre>
@@ -2532,11 +2682,11 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder> 
-        getGpioPluginsOrBuilderList() {
-      return gpioPlugins_;
+        getGpioPluginOrBuilderList() {
+      return gpioPlugin_;
     }
     /**
      * <pre>
@@ -2546,10 +2696,10 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    public int getGpioPluginsCount() {
-      return gpioPlugins_.size();
+    public int getGpioPluginCount() {
+      return gpioPlugin_.size();
     }
     /**
      * <pre>
@@ -2559,10 +2709,10 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getGpioPlugins(int index) {
-      return gpioPlugins_.get(index);
+    public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getGpioPlugin(int index) {
+      return gpioPlugin_.get(index);
     }
     /**
      * <pre>
@@ -2572,124 +2722,125 @@ public final class Node {
      * Also we assume only one plugin of each type can be present.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
      */
-    public com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder getGpioPluginsOrBuilder(
+    public com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder getGpioPluginOrBuilder(
         int index) {
-      return gpioPlugins_.get(index);
+      return gpioPlugin_.get(index);
     }
 
-    public static final int ONEWIRE_PLUGINS_FIELD_NUMBER = 3;
-    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> onewirePlugins_;
+    public static final int ONEWIRE_PLUGIN_FIELD_NUMBER = 3;
+    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> onewirePlugin_;
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> getOnewirePluginsList() {
-      return onewirePlugins_;
+    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> getOnewirePluginList() {
+      return onewirePlugin_;
     }
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder> 
-        getOnewirePluginsOrBuilderList() {
-      return onewirePlugins_;
+        getOnewirePluginOrBuilderList() {
+      return onewirePlugin_;
     }
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    public int getOnewirePluginsCount() {
-      return onewirePlugins_.size();
+    public int getOnewirePluginCount() {
+      return onewirePlugin_.size();
     }
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getOnewirePlugins(int index) {
-      return onewirePlugins_.get(index);
+    public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getOnewirePlugin(int index) {
+      return onewirePlugin_.get(index);
     }
     /**
      * <pre>
      * 1-Wire plugins to be activated on this node.
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
      */
-    public com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginsOrBuilder(
+    public com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginOrBuilder(
         int index) {
-      return onewirePlugins_.get(index);
+      return onewirePlugin_.get(index);
     }
 
-    public static final int I2C_PLUGINS_FIELD_NUMBER = 4;
-    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> i2CPlugins_;
+    public static final int I2C_PLUGIN_FIELD_NUMBER = 4;
+    private java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> i2CPlugin_;
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> getI2CPluginsList() {
-      return i2CPlugins_;
+    public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> getI2CPluginList() {
+      return i2CPlugin_;
     }
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
     public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
-        getI2CPluginsOrBuilderList() {
-      return i2CPlugins_;
+        getI2CPluginOrBuilderList() {
+      return i2CPlugin_;
     }
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    public int getI2CPluginsCount() {
-      return i2CPlugins_.size();
+    public int getI2CPluginCount() {
+      return i2CPlugin_.size();
     }
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugins(int index) {
-      return i2CPlugins_.get(index);
+    public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugin(int index) {
+      return i2CPlugin_.get(index);
     }
     /**
      * <pre>
      ** I2C plugins to be activated on this node. 
      * </pre>
      *
-     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+     * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
      */
-    public com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginsOrBuilder(
+    public com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginOrBuilder(
         int index) {
-      return i2CPlugins_.get(index);
+      return i2CPlugin_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2699,22 +2850,25 @@ public final class Node {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (daemonPort_ != 0) {
         output.writeInt32(1, daemonPort_);
       }
-      for (int i = 0; i < gpioPlugins_.size(); i++) {
-        output.writeMessage(2, gpioPlugins_.get(i));
+      for (int i = 0; i < gpioPlugin_.size(); i++) {
+        output.writeMessage(2, gpioPlugin_.get(i));
       }
-      for (int i = 0; i < onewirePlugins_.size(); i++) {
-        output.writeMessage(3, onewirePlugins_.get(i));
+      for (int i = 0; i < onewirePlugin_.size(); i++) {
+        output.writeMessage(3, onewirePlugin_.get(i));
       }
-      for (int i = 0; i < i2CPlugins_.size(); i++) {
-        output.writeMessage(4, i2CPlugins_.get(i));
+      for (int i = 0; i < i2CPlugin_.size(); i++) {
+        output.writeMessage(4, i2CPlugin_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2724,23 +2878,23 @@ public final class Node {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, daemonPort_);
       }
-      for (int i = 0; i < gpioPlugins_.size(); i++) {
+      for (int i = 0; i < gpioPlugin_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, gpioPlugins_.get(i));
+          .computeMessageSize(2, gpioPlugin_.get(i));
       }
-      for (int i = 0; i < onewirePlugins_.size(); i++) {
+      for (int i = 0; i < onewirePlugin_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, onewirePlugins_.get(i));
+          .computeMessageSize(3, onewirePlugin_.get(i));
       }
-      for (int i = 0; i < i2CPlugins_.size(); i++) {
+      for (int i = 0; i < i2CPlugin_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, i2CPlugins_.get(i));
+          .computeMessageSize(4, i2CPlugin_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2754,12 +2908,13 @@ public final class Node {
       boolean result = true;
       result = result && (getDaemonPort()
           == other.getDaemonPort());
-      result = result && getGpioPluginsList()
-          .equals(other.getGpioPluginsList());
-      result = result && getOnewirePluginsList()
-          .equals(other.getOnewirePluginsList());
-      result = result && getI2CPluginsList()
-          .equals(other.getI2CPluginsList());
+      result = result && getGpioPluginList()
+          .equals(other.getGpioPluginList());
+      result = result && getOnewirePluginList()
+          .equals(other.getOnewirePluginList());
+      result = result && getI2CPluginList()
+          .equals(other.getI2CPluginList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -2769,26 +2924,37 @@ public final class Node {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DAEMON_PORT_FIELD_NUMBER;
       hash = (53 * hash) + getDaemonPort();
-      if (getGpioPluginsCount() > 0) {
-        hash = (37 * hash) + GPIO_PLUGINS_FIELD_NUMBER;
-        hash = (53 * hash) + getGpioPluginsList().hashCode();
+      if (getGpioPluginCount() > 0) {
+        hash = (37 * hash) + GPIO_PLUGIN_FIELD_NUMBER;
+        hash = (53 * hash) + getGpioPluginList().hashCode();
       }
-      if (getOnewirePluginsCount() > 0) {
-        hash = (37 * hash) + ONEWIRE_PLUGINS_FIELD_NUMBER;
-        hash = (53 * hash) + getOnewirePluginsList().hashCode();
+      if (getOnewirePluginCount() > 0) {
+        hash = (37 * hash) + ONEWIRE_PLUGIN_FIELD_NUMBER;
+        hash = (53 * hash) + getOnewirePluginList().hashCode();
       }
-      if (getI2CPluginsCount() > 0) {
-        hash = (37 * hash) + I2C_PLUGINS_FIELD_NUMBER;
-        hash = (53 * hash) + getI2CPluginsList().hashCode();
+      if (getI2CPluginCount() > 0) {
+        hash = (37 * hash) + I2C_PLUGIN_FIELD_NUMBER;
+        hash = (53 * hash) + getI2CPluginList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
+    public static com.s13g.winston.proto.Node.NodeConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Node.NodeConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Node.NodeConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2848,6 +3014,7 @@ public final class Node {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2855,6 +3022,7 @@ public final class Node {
     public static Builder newBuilder(com.s13g.winston.proto.Node.NodeConfig prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2883,6 +3051,7 @@ public final class Node {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_fieldAccessorTable
@@ -2903,45 +3072,49 @@ public final class Node {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getGpioPluginsFieldBuilder();
-          getOnewirePluginsFieldBuilder();
-          getI2CPluginsFieldBuilder();
+          getGpioPluginFieldBuilder();
+          getOnewirePluginFieldBuilder();
+          getI2CPluginFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         daemonPort_ = 0;
 
-        if (gpioPluginsBuilder_ == null) {
-          gpioPlugins_ = java.util.Collections.emptyList();
+        if (gpioPluginBuilder_ == null) {
+          gpioPlugin_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          gpioPluginsBuilder_.clear();
+          gpioPluginBuilder_.clear();
         }
-        if (onewirePluginsBuilder_ == null) {
-          onewirePlugins_ = java.util.Collections.emptyList();
+        if (onewirePluginBuilder_ == null) {
+          onewirePlugin_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
-          onewirePluginsBuilder_.clear();
+          onewirePluginBuilder_.clear();
         }
-        if (i2CPluginsBuilder_ == null) {
-          i2CPlugins_ = java.util.Collections.emptyList();
+        if (i2CPluginBuilder_ == null) {
+          i2CPlugin_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
         } else {
-          i2CPluginsBuilder_.clear();
+          i2CPluginBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Node.internal_static_com_s13g_winston_proto_NodeConfig_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Node.NodeConfig getDefaultInstanceForType() {
         return com.s13g.winston.proto.Node.NodeConfig.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Node.NodeConfig build() {
         com.s13g.winston.proto.Node.NodeConfig result = buildPartial();
         if (!result.isInitialized()) {
@@ -2950,69 +3123,77 @@ public final class Node {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Node.NodeConfig buildPartial() {
         com.s13g.winston.proto.Node.NodeConfig result = new com.s13g.winston.proto.Node.NodeConfig(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.daemonPort_ = daemonPort_;
-        if (gpioPluginsBuilder_ == null) {
+        if (gpioPluginBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            gpioPlugins_ = java.util.Collections.unmodifiableList(gpioPlugins_);
+            gpioPlugin_ = java.util.Collections.unmodifiableList(gpioPlugin_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.gpioPlugins_ = gpioPlugins_;
+          result.gpioPlugin_ = gpioPlugin_;
         } else {
-          result.gpioPlugins_ = gpioPluginsBuilder_.build();
+          result.gpioPlugin_ = gpioPluginBuilder_.build();
         }
-        if (onewirePluginsBuilder_ == null) {
+        if (onewirePluginBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            onewirePlugins_ = java.util.Collections.unmodifiableList(onewirePlugins_);
+            onewirePlugin_ = java.util.Collections.unmodifiableList(onewirePlugin_);
             bitField0_ = (bitField0_ & ~0x00000004);
           }
-          result.onewirePlugins_ = onewirePlugins_;
+          result.onewirePlugin_ = onewirePlugin_;
         } else {
-          result.onewirePlugins_ = onewirePluginsBuilder_.build();
+          result.onewirePlugin_ = onewirePluginBuilder_.build();
         }
-        if (i2CPluginsBuilder_ == null) {
+        if (i2CPluginBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            i2CPlugins_ = java.util.Collections.unmodifiableList(i2CPlugins_);
+            i2CPlugin_ = java.util.Collections.unmodifiableList(i2CPlugin_);
             bitField0_ = (bitField0_ & ~0x00000008);
           }
-          result.i2CPlugins_ = i2CPlugins_;
+          result.i2CPlugin_ = i2CPlugin_;
         } else {
-          result.i2CPlugins_ = i2CPluginsBuilder_.build();
+          result.i2CPlugin_ = i2CPluginBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Node.NodeConfig) {
           return mergeFrom((com.s13g.winston.proto.Node.NodeConfig)other);
@@ -3027,92 +3208,95 @@ public final class Node {
         if (other.getDaemonPort() != 0) {
           setDaemonPort(other.getDaemonPort());
         }
-        if (gpioPluginsBuilder_ == null) {
-          if (!other.gpioPlugins_.isEmpty()) {
-            if (gpioPlugins_.isEmpty()) {
-              gpioPlugins_ = other.gpioPlugins_;
+        if (gpioPluginBuilder_ == null) {
+          if (!other.gpioPlugin_.isEmpty()) {
+            if (gpioPlugin_.isEmpty()) {
+              gpioPlugin_ = other.gpioPlugin_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
-              ensureGpioPluginsIsMutable();
-              gpioPlugins_.addAll(other.gpioPlugins_);
+              ensureGpioPluginIsMutable();
+              gpioPlugin_.addAll(other.gpioPlugin_);
             }
             onChanged();
           }
         } else {
-          if (!other.gpioPlugins_.isEmpty()) {
-            if (gpioPluginsBuilder_.isEmpty()) {
-              gpioPluginsBuilder_.dispose();
-              gpioPluginsBuilder_ = null;
-              gpioPlugins_ = other.gpioPlugins_;
+          if (!other.gpioPlugin_.isEmpty()) {
+            if (gpioPluginBuilder_.isEmpty()) {
+              gpioPluginBuilder_.dispose();
+              gpioPluginBuilder_ = null;
+              gpioPlugin_ = other.gpioPlugin_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              gpioPluginsBuilder_ = 
+              gpioPluginBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getGpioPluginsFieldBuilder() : null;
+                   getGpioPluginFieldBuilder() : null;
             } else {
-              gpioPluginsBuilder_.addAllMessages(other.gpioPlugins_);
+              gpioPluginBuilder_.addAllMessages(other.gpioPlugin_);
             }
           }
         }
-        if (onewirePluginsBuilder_ == null) {
-          if (!other.onewirePlugins_.isEmpty()) {
-            if (onewirePlugins_.isEmpty()) {
-              onewirePlugins_ = other.onewirePlugins_;
+        if (onewirePluginBuilder_ == null) {
+          if (!other.onewirePlugin_.isEmpty()) {
+            if (onewirePlugin_.isEmpty()) {
+              onewirePlugin_ = other.onewirePlugin_;
               bitField0_ = (bitField0_ & ~0x00000004);
             } else {
-              ensureOnewirePluginsIsMutable();
-              onewirePlugins_.addAll(other.onewirePlugins_);
+              ensureOnewirePluginIsMutable();
+              onewirePlugin_.addAll(other.onewirePlugin_);
             }
             onChanged();
           }
         } else {
-          if (!other.onewirePlugins_.isEmpty()) {
-            if (onewirePluginsBuilder_.isEmpty()) {
-              onewirePluginsBuilder_.dispose();
-              onewirePluginsBuilder_ = null;
-              onewirePlugins_ = other.onewirePlugins_;
+          if (!other.onewirePlugin_.isEmpty()) {
+            if (onewirePluginBuilder_.isEmpty()) {
+              onewirePluginBuilder_.dispose();
+              onewirePluginBuilder_ = null;
+              onewirePlugin_ = other.onewirePlugin_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              onewirePluginsBuilder_ = 
+              onewirePluginBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getOnewirePluginsFieldBuilder() : null;
+                   getOnewirePluginFieldBuilder() : null;
             } else {
-              onewirePluginsBuilder_.addAllMessages(other.onewirePlugins_);
+              onewirePluginBuilder_.addAllMessages(other.onewirePlugin_);
             }
           }
         }
-        if (i2CPluginsBuilder_ == null) {
-          if (!other.i2CPlugins_.isEmpty()) {
-            if (i2CPlugins_.isEmpty()) {
-              i2CPlugins_ = other.i2CPlugins_;
+        if (i2CPluginBuilder_ == null) {
+          if (!other.i2CPlugin_.isEmpty()) {
+            if (i2CPlugin_.isEmpty()) {
+              i2CPlugin_ = other.i2CPlugin_;
               bitField0_ = (bitField0_ & ~0x00000008);
             } else {
-              ensureI2CPluginsIsMutable();
-              i2CPlugins_.addAll(other.i2CPlugins_);
+              ensureI2CPluginIsMutable();
+              i2CPlugin_.addAll(other.i2CPlugin_);
             }
             onChanged();
           }
         } else {
-          if (!other.i2CPlugins_.isEmpty()) {
-            if (i2CPluginsBuilder_.isEmpty()) {
-              i2CPluginsBuilder_.dispose();
-              i2CPluginsBuilder_ = null;
-              i2CPlugins_ = other.i2CPlugins_;
+          if (!other.i2CPlugin_.isEmpty()) {
+            if (i2CPluginBuilder_.isEmpty()) {
+              i2CPluginBuilder_.dispose();
+              i2CPluginBuilder_ = null;
+              i2CPlugin_ = other.i2CPlugin_;
               bitField0_ = (bitField0_ & ~0x00000008);
-              i2CPluginsBuilder_ = 
+              i2CPluginBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getI2CPluginsFieldBuilder() : null;
+                   getI2CPluginFieldBuilder() : null;
             } else {
-              i2CPluginsBuilder_.addAllMessages(other.i2CPlugins_);
+              i2CPluginBuilder_.addAllMessages(other.i2CPlugin_);
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3138,7 +3322,7 @@ public final class Node {
        * The port to start the node daemon on. 
        * </pre>
        *
-       * <code>optional int32 daemon_port = 1;</code>
+       * <code>int32 daemon_port = 1;</code>
        */
       public int getDaemonPort() {
         return daemonPort_;
@@ -3148,7 +3332,7 @@ public final class Node {
        * The port to start the node daemon on. 
        * </pre>
        *
-       * <code>optional int32 daemon_port = 1;</code>
+       * <code>int32 daemon_port = 1;</code>
        */
       public Builder setDaemonPort(int value) {
         
@@ -3161,7 +3345,7 @@ public final class Node {
        * The port to start the node daemon on. 
        * </pre>
        *
-       * <code>optional int32 daemon_port = 1;</code>
+       * <code>int32 daemon_port = 1;</code>
        */
       public Builder clearDaemonPort() {
         
@@ -3170,17 +3354,17 @@ public final class Node {
         return this;
       }
 
-      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> gpioPlugins_ =
+      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> gpioPlugin_ =
         java.util.Collections.emptyList();
-      private void ensureGpioPluginsIsMutable() {
+      private void ensureGpioPluginIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          gpioPlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin>(gpioPlugins_);
+          gpioPlugin_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin>(gpioPlugin_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.s13g.winston.proto.Node.NodeConfig.GpioPlugin, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder> gpioPluginsBuilder_;
+          com.s13g.winston.proto.Node.NodeConfig.GpioPlugin, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder> gpioPluginBuilder_;
 
       /**
        * <pre>
@@ -3190,13 +3374,13 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> getGpioPluginsList() {
-        if (gpioPluginsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(gpioPlugins_);
+      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> getGpioPluginList() {
+        if (gpioPluginBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(gpioPlugin_);
         } else {
-          return gpioPluginsBuilder_.getMessageList();
+          return gpioPluginBuilder_.getMessageList();
         }
       }
       /**
@@ -3207,13 +3391,13 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public int getGpioPluginsCount() {
-        if (gpioPluginsBuilder_ == null) {
-          return gpioPlugins_.size();
+      public int getGpioPluginCount() {
+        if (gpioPluginBuilder_ == null) {
+          return gpioPlugin_.size();
         } else {
-          return gpioPluginsBuilder_.getCount();
+          return gpioPluginBuilder_.getCount();
         }
       }
       /**
@@ -3224,13 +3408,13 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getGpioPlugins(int index) {
-        if (gpioPluginsBuilder_ == null) {
-          return gpioPlugins_.get(index);
+      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin getGpioPlugin(int index) {
+        if (gpioPluginBuilder_ == null) {
+          return gpioPlugin_.get(index);
         } else {
-          return gpioPluginsBuilder_.getMessage(index);
+          return gpioPluginBuilder_.getMessage(index);
         }
       }
       /**
@@ -3241,19 +3425,19 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder setGpioPlugins(
+      public Builder setGpioPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin value) {
-        if (gpioPluginsBuilder_ == null) {
+        if (gpioPluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.set(index, value);
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.set(index, value);
           onChanged();
         } else {
-          gpioPluginsBuilder_.setMessage(index, value);
+          gpioPluginBuilder_.setMessage(index, value);
         }
         return this;
       }
@@ -3265,16 +3449,16 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder setGpioPlugins(
+      public Builder setGpioPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder builderForValue) {
-        if (gpioPluginsBuilder_ == null) {
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.set(index, builderForValue.build());
+        if (gpioPluginBuilder_ == null) {
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.set(index, builderForValue.build());
           onChanged();
         } else {
-          gpioPluginsBuilder_.setMessage(index, builderForValue.build());
+          gpioPluginBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -3286,18 +3470,18 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder addGpioPlugins(com.s13g.winston.proto.Node.NodeConfig.GpioPlugin value) {
-        if (gpioPluginsBuilder_ == null) {
+      public Builder addGpioPlugin(com.s13g.winston.proto.Node.NodeConfig.GpioPlugin value) {
+        if (gpioPluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.add(value);
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.add(value);
           onChanged();
         } else {
-          gpioPluginsBuilder_.addMessage(value);
+          gpioPluginBuilder_.addMessage(value);
         }
         return this;
       }
@@ -3309,19 +3493,19 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder addGpioPlugins(
+      public Builder addGpioPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin value) {
-        if (gpioPluginsBuilder_ == null) {
+        if (gpioPluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.add(index, value);
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.add(index, value);
           onChanged();
         } else {
-          gpioPluginsBuilder_.addMessage(index, value);
+          gpioPluginBuilder_.addMessage(index, value);
         }
         return this;
       }
@@ -3333,16 +3517,16 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder addGpioPlugins(
+      public Builder addGpioPlugin(
           com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder builderForValue) {
-        if (gpioPluginsBuilder_ == null) {
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.add(builderForValue.build());
+        if (gpioPluginBuilder_ == null) {
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.add(builderForValue.build());
           onChanged();
         } else {
-          gpioPluginsBuilder_.addMessage(builderForValue.build());
+          gpioPluginBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
@@ -3354,16 +3538,16 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder addGpioPlugins(
+      public Builder addGpioPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder builderForValue) {
-        if (gpioPluginsBuilder_ == null) {
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.add(index, builderForValue.build());
+        if (gpioPluginBuilder_ == null) {
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.add(index, builderForValue.build());
           onChanged();
         } else {
-          gpioPluginsBuilder_.addMessage(index, builderForValue.build());
+          gpioPluginBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -3375,17 +3559,17 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder addAllGpioPlugins(
+      public Builder addAllGpioPlugin(
           java.lang.Iterable<? extends com.s13g.winston.proto.Node.NodeConfig.GpioPlugin> values) {
-        if (gpioPluginsBuilder_ == null) {
-          ensureGpioPluginsIsMutable();
+        if (gpioPluginBuilder_ == null) {
+          ensureGpioPluginIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, gpioPlugins_);
+              values, gpioPlugin_);
           onChanged();
         } else {
-          gpioPluginsBuilder_.addAllMessages(values);
+          gpioPluginBuilder_.addAllMessages(values);
         }
         return this;
       }
@@ -3397,15 +3581,15 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder clearGpioPlugins() {
-        if (gpioPluginsBuilder_ == null) {
-          gpioPlugins_ = java.util.Collections.emptyList();
+      public Builder clearGpioPlugin() {
+        if (gpioPluginBuilder_ == null) {
+          gpioPlugin_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          gpioPluginsBuilder_.clear();
+          gpioPluginBuilder_.clear();
         }
         return this;
       }
@@ -3417,15 +3601,15 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public Builder removeGpioPlugins(int index) {
-        if (gpioPluginsBuilder_ == null) {
-          ensureGpioPluginsIsMutable();
-          gpioPlugins_.remove(index);
+      public Builder removeGpioPlugin(int index) {
+        if (gpioPluginBuilder_ == null) {
+          ensureGpioPluginIsMutable();
+          gpioPlugin_.remove(index);
           onChanged();
         } else {
-          gpioPluginsBuilder_.remove(index);
+          gpioPluginBuilder_.remove(index);
         }
         return this;
       }
@@ -3437,11 +3621,11 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder getGpioPluginsBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder getGpioPluginBuilder(
           int index) {
-        return getGpioPluginsFieldBuilder().getBuilder(index);
+        return getGpioPluginFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
@@ -3451,13 +3635,13 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder getGpioPluginsOrBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder getGpioPluginOrBuilder(
           int index) {
-        if (gpioPluginsBuilder_ == null) {
-          return gpioPlugins_.get(index);  } else {
-          return gpioPluginsBuilder_.getMessageOrBuilder(index);
+        if (gpioPluginBuilder_ == null) {
+          return gpioPlugin_.get(index);  } else {
+          return gpioPluginBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
@@ -3468,14 +3652,14 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder> 
-           getGpioPluginsOrBuilderList() {
-        if (gpioPluginsBuilder_ != null) {
-          return gpioPluginsBuilder_.getMessageOrBuilderList();
+           getGpioPluginOrBuilderList() {
+        if (gpioPluginBuilder_ != null) {
+          return gpioPluginBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(gpioPlugins_);
+          return java.util.Collections.unmodifiableList(gpioPlugin_);
         }
       }
       /**
@@ -3486,10 +3670,10 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder addGpioPluginsBuilder() {
-        return getGpioPluginsFieldBuilder().addBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder addGpioPluginBuilder() {
+        return getGpioPluginFieldBuilder().addBuilder(
             com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.getDefaultInstance());
       }
       /**
@@ -3500,11 +3684,11 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder addGpioPluginsBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder addGpioPluginBuilder(
           int index) {
-        return getGpioPluginsFieldBuilder().addBuilder(
+        return getGpioPluginFieldBuilder().addBuilder(
             index, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.getDefaultInstance());
       }
       /**
@@ -3515,51 +3699,51 @@ public final class Node {
        * Also we assume only one plugin of each type can be present.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugins = 2;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.GpioPlugin gpio_plugin = 2;</code>
        */
       public java.util.List<com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder> 
-           getGpioPluginsBuilderList() {
-        return getGpioPluginsFieldBuilder().getBuilderList();
+           getGpioPluginBuilderList() {
+        return getGpioPluginFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           com.s13g.winston.proto.Node.NodeConfig.GpioPlugin, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder> 
-          getGpioPluginsFieldBuilder() {
-        if (gpioPluginsBuilder_ == null) {
-          gpioPluginsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getGpioPluginFieldBuilder() {
+        if (gpioPluginBuilder_ == null) {
+          gpioPluginBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Node.NodeConfig.GpioPlugin, com.s13g.winston.proto.Node.NodeConfig.GpioPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.GpioPluginOrBuilder>(
-                  gpioPlugins_,
+                  gpioPlugin_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          gpioPlugins_ = null;
+          gpioPlugin_ = null;
         }
-        return gpioPluginsBuilder_;
+        return gpioPluginBuilder_;
       }
 
-      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> onewirePlugins_ =
+      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> onewirePlugin_ =
         java.util.Collections.emptyList();
-      private void ensureOnewirePluginsIsMutable() {
+      private void ensureOnewirePluginIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          onewirePlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin>(onewirePlugins_);
+          onewirePlugin_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin>(onewirePlugin_);
           bitField0_ |= 0x00000004;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder> onewirePluginsBuilder_;
+          com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder> onewirePluginBuilder_;
 
       /**
        * <pre>
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> getOnewirePluginsList() {
-        if (onewirePluginsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(onewirePlugins_);
+      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> getOnewirePluginList() {
+        if (onewirePluginBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(onewirePlugin_);
         } else {
-          return onewirePluginsBuilder_.getMessageList();
+          return onewirePluginBuilder_.getMessageList();
         }
       }
       /**
@@ -3567,13 +3751,13 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public int getOnewirePluginsCount() {
-        if (onewirePluginsBuilder_ == null) {
-          return onewirePlugins_.size();
+      public int getOnewirePluginCount() {
+        if (onewirePluginBuilder_ == null) {
+          return onewirePlugin_.size();
         } else {
-          return onewirePluginsBuilder_.getCount();
+          return onewirePluginBuilder_.getCount();
         }
       }
       /**
@@ -3581,13 +3765,13 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getOnewirePlugins(int index) {
-        if (onewirePluginsBuilder_ == null) {
-          return onewirePlugins_.get(index);
+      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin getOnewirePlugin(int index) {
+        if (onewirePluginBuilder_ == null) {
+          return onewirePlugin_.get(index);
         } else {
-          return onewirePluginsBuilder_.getMessage(index);
+          return onewirePluginBuilder_.getMessage(index);
         }
       }
       /**
@@ -3595,19 +3779,19 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder setOnewirePlugins(
+      public Builder setOnewirePlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin value) {
-        if (onewirePluginsBuilder_ == null) {
+        if (onewirePluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.set(index, value);
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.set(index, value);
           onChanged();
         } else {
-          onewirePluginsBuilder_.setMessage(index, value);
+          onewirePluginBuilder_.setMessage(index, value);
         }
         return this;
       }
@@ -3616,16 +3800,16 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder setOnewirePlugins(
+      public Builder setOnewirePlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder builderForValue) {
-        if (onewirePluginsBuilder_ == null) {
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.set(index, builderForValue.build());
+        if (onewirePluginBuilder_ == null) {
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.set(index, builderForValue.build());
           onChanged();
         } else {
-          onewirePluginsBuilder_.setMessage(index, builderForValue.build());
+          onewirePluginBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -3634,18 +3818,18 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder addOnewirePlugins(com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin value) {
-        if (onewirePluginsBuilder_ == null) {
+      public Builder addOnewirePlugin(com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin value) {
+        if (onewirePluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.add(value);
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.add(value);
           onChanged();
         } else {
-          onewirePluginsBuilder_.addMessage(value);
+          onewirePluginBuilder_.addMessage(value);
         }
         return this;
       }
@@ -3654,19 +3838,19 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder addOnewirePlugins(
+      public Builder addOnewirePlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin value) {
-        if (onewirePluginsBuilder_ == null) {
+        if (onewirePluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.add(index, value);
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.add(index, value);
           onChanged();
         } else {
-          onewirePluginsBuilder_.addMessage(index, value);
+          onewirePluginBuilder_.addMessage(index, value);
         }
         return this;
       }
@@ -3675,16 +3859,16 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder addOnewirePlugins(
+      public Builder addOnewirePlugin(
           com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder builderForValue) {
-        if (onewirePluginsBuilder_ == null) {
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.add(builderForValue.build());
+        if (onewirePluginBuilder_ == null) {
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.add(builderForValue.build());
           onChanged();
         } else {
-          onewirePluginsBuilder_.addMessage(builderForValue.build());
+          onewirePluginBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
@@ -3693,16 +3877,16 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder addOnewirePlugins(
+      public Builder addOnewirePlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder builderForValue) {
-        if (onewirePluginsBuilder_ == null) {
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.add(index, builderForValue.build());
+        if (onewirePluginBuilder_ == null) {
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.add(index, builderForValue.build());
           onChanged();
         } else {
-          onewirePluginsBuilder_.addMessage(index, builderForValue.build());
+          onewirePluginBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -3711,17 +3895,17 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder addAllOnewirePlugins(
+      public Builder addAllOnewirePlugin(
           java.lang.Iterable<? extends com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin> values) {
-        if (onewirePluginsBuilder_ == null) {
-          ensureOnewirePluginsIsMutable();
+        if (onewirePluginBuilder_ == null) {
+          ensureOnewirePluginIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, onewirePlugins_);
+              values, onewirePlugin_);
           onChanged();
         } else {
-          onewirePluginsBuilder_.addAllMessages(values);
+          onewirePluginBuilder_.addAllMessages(values);
         }
         return this;
       }
@@ -3730,15 +3914,15 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder clearOnewirePlugins() {
-        if (onewirePluginsBuilder_ == null) {
-          onewirePlugins_ = java.util.Collections.emptyList();
+      public Builder clearOnewirePlugin() {
+        if (onewirePluginBuilder_ == null) {
+          onewirePlugin_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
-          onewirePluginsBuilder_.clear();
+          onewirePluginBuilder_.clear();
         }
         return this;
       }
@@ -3747,15 +3931,15 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public Builder removeOnewirePlugins(int index) {
-        if (onewirePluginsBuilder_ == null) {
-          ensureOnewirePluginsIsMutable();
-          onewirePlugins_.remove(index);
+      public Builder removeOnewirePlugin(int index) {
+        if (onewirePluginBuilder_ == null) {
+          ensureOnewirePluginIsMutable();
+          onewirePlugin_.remove(index);
           onChanged();
         } else {
-          onewirePluginsBuilder_.remove(index);
+          onewirePluginBuilder_.remove(index);
         }
         return this;
       }
@@ -3764,24 +3948,24 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder getOnewirePluginsBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder getOnewirePluginBuilder(
           int index) {
-        return getOnewirePluginsFieldBuilder().getBuilder(index);
+        return getOnewirePluginFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginsOrBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder getOnewirePluginOrBuilder(
           int index) {
-        if (onewirePluginsBuilder_ == null) {
-          return onewirePlugins_.get(index);  } else {
-          return onewirePluginsBuilder_.getMessageOrBuilder(index);
+        if (onewirePluginBuilder_ == null) {
+          return onewirePlugin_.get(index);  } else {
+          return onewirePluginBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
@@ -3789,14 +3973,14 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder> 
-           getOnewirePluginsOrBuilderList() {
-        if (onewirePluginsBuilder_ != null) {
-          return onewirePluginsBuilder_.getMessageOrBuilderList();
+           getOnewirePluginOrBuilderList() {
+        if (onewirePluginBuilder_ != null) {
+          return onewirePluginBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(onewirePlugins_);
+          return java.util.Collections.unmodifiableList(onewirePlugin_);
         }
       }
       /**
@@ -3804,10 +3988,10 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder addOnewirePluginsBuilder() {
-        return getOnewirePluginsFieldBuilder().addBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder addOnewirePluginBuilder() {
+        return getOnewirePluginFieldBuilder().addBuilder(
             com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.getDefaultInstance());
       }
       /**
@@ -3815,11 +3999,11 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder addOnewirePluginsBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder addOnewirePluginBuilder(
           int index) {
-        return getOnewirePluginsFieldBuilder().addBuilder(
+        return getOnewirePluginFieldBuilder().addBuilder(
             index, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.getDefaultInstance());
       }
       /**
@@ -3827,51 +4011,51 @@ public final class Node {
        * 1-Wire plugins to be activated on this node.
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugins = 3;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.OneWirePlugin onewire_plugin = 3;</code>
        */
       public java.util.List<com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder> 
-           getOnewirePluginsBuilderList() {
-        return getOnewirePluginsFieldBuilder().getBuilderList();
+           getOnewirePluginBuilderList() {
+        return getOnewirePluginFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder> 
-          getOnewirePluginsFieldBuilder() {
-        if (onewirePluginsBuilder_ == null) {
-          onewirePluginsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getOnewirePluginFieldBuilder() {
+        if (onewirePluginBuilder_ == null) {
+          onewirePluginBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin, com.s13g.winston.proto.Node.NodeConfig.OneWirePlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.OneWirePluginOrBuilder>(
-                  onewirePlugins_,
+                  onewirePlugin_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
-          onewirePlugins_ = null;
+          onewirePlugin_ = null;
         }
-        return onewirePluginsBuilder_;
+        return onewirePluginBuilder_;
       }
 
-      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> i2CPlugins_ =
+      private java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> i2CPlugin_ =
         java.util.Collections.emptyList();
-      private void ensureI2CPluginsIsMutable() {
+      private void ensureI2CPluginIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          i2CPlugins_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin>(i2CPlugins_);
+          i2CPlugin_ = new java.util.ArrayList<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin>(i2CPlugin_);
           bitField0_ |= 0x00000008;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> i2CPluginsBuilder_;
+          com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> i2CPluginBuilder_;
 
       /**
        * <pre>
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> getI2CPluginsList() {
-        if (i2CPluginsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(i2CPlugins_);
+      public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> getI2CPluginList() {
+        if (i2CPluginBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(i2CPlugin_);
         } else {
-          return i2CPluginsBuilder_.getMessageList();
+          return i2CPluginBuilder_.getMessageList();
         }
       }
       /**
@@ -3879,13 +4063,13 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public int getI2CPluginsCount() {
-        if (i2CPluginsBuilder_ == null) {
-          return i2CPlugins_.size();
+      public int getI2CPluginCount() {
+        if (i2CPluginBuilder_ == null) {
+          return i2CPlugin_.size();
         } else {
-          return i2CPluginsBuilder_.getCount();
+          return i2CPluginBuilder_.getCount();
         }
       }
       /**
@@ -3893,13 +4077,13 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugins(int index) {
-        if (i2CPluginsBuilder_ == null) {
-          return i2CPlugins_.get(index);
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin getI2CPlugin(int index) {
+        if (i2CPluginBuilder_ == null) {
+          return i2CPlugin_.get(index);
         } else {
-          return i2CPluginsBuilder_.getMessage(index);
+          return i2CPluginBuilder_.getMessage(index);
         }
       }
       /**
@@ -3907,19 +4091,19 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder setI2CPlugins(
+      public Builder setI2CPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
-        if (i2CPluginsBuilder_ == null) {
+        if (i2CPluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.set(index, value);
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.set(index, value);
           onChanged();
         } else {
-          i2CPluginsBuilder_.setMessage(index, value);
+          i2CPluginBuilder_.setMessage(index, value);
         }
         return this;
       }
@@ -3928,16 +4112,16 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder setI2CPlugins(
+      public Builder setI2CPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder builderForValue) {
-        if (i2CPluginsBuilder_ == null) {
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.set(index, builderForValue.build());
+        if (i2CPluginBuilder_ == null) {
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.set(index, builderForValue.build());
           onChanged();
         } else {
-          i2CPluginsBuilder_.setMessage(index, builderForValue.build());
+          i2CPluginBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -3946,18 +4130,18 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder addI2CPlugins(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
-        if (i2CPluginsBuilder_ == null) {
+      public Builder addI2CPlugin(com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
+        if (i2CPluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.add(value);
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.add(value);
           onChanged();
         } else {
-          i2CPluginsBuilder_.addMessage(value);
+          i2CPluginBuilder_.addMessage(value);
         }
         return this;
       }
@@ -3966,19 +4150,19 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder addI2CPlugins(
+      public Builder addI2CPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin value) {
-        if (i2CPluginsBuilder_ == null) {
+        if (i2CPluginBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.add(index, value);
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.add(index, value);
           onChanged();
         } else {
-          i2CPluginsBuilder_.addMessage(index, value);
+          i2CPluginBuilder_.addMessage(index, value);
         }
         return this;
       }
@@ -3987,16 +4171,16 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder addI2CPlugins(
+      public Builder addI2CPlugin(
           com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder builderForValue) {
-        if (i2CPluginsBuilder_ == null) {
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.add(builderForValue.build());
+        if (i2CPluginBuilder_ == null) {
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.add(builderForValue.build());
           onChanged();
         } else {
-          i2CPluginsBuilder_.addMessage(builderForValue.build());
+          i2CPluginBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
@@ -4005,16 +4189,16 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder addI2CPlugins(
+      public Builder addI2CPlugin(
           int index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder builderForValue) {
-        if (i2CPluginsBuilder_ == null) {
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.add(index, builderForValue.build());
+        if (i2CPluginBuilder_ == null) {
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.add(index, builderForValue.build());
           onChanged();
         } else {
-          i2CPluginsBuilder_.addMessage(index, builderForValue.build());
+          i2CPluginBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
@@ -4023,17 +4207,17 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder addAllI2CPlugins(
+      public Builder addAllI2CPlugin(
           java.lang.Iterable<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPlugin> values) {
-        if (i2CPluginsBuilder_ == null) {
-          ensureI2CPluginsIsMutable();
+        if (i2CPluginBuilder_ == null) {
+          ensureI2CPluginIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, i2CPlugins_);
+              values, i2CPlugin_);
           onChanged();
         } else {
-          i2CPluginsBuilder_.addAllMessages(values);
+          i2CPluginBuilder_.addAllMessages(values);
         }
         return this;
       }
@@ -4042,15 +4226,15 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder clearI2CPlugins() {
-        if (i2CPluginsBuilder_ == null) {
-          i2CPlugins_ = java.util.Collections.emptyList();
+      public Builder clearI2CPlugin() {
+        if (i2CPluginBuilder_ == null) {
+          i2CPlugin_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
-          i2CPluginsBuilder_.clear();
+          i2CPluginBuilder_.clear();
         }
         return this;
       }
@@ -4059,15 +4243,15 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public Builder removeI2CPlugins(int index) {
-        if (i2CPluginsBuilder_ == null) {
-          ensureI2CPluginsIsMutable();
-          i2CPlugins_.remove(index);
+      public Builder removeI2CPlugin(int index) {
+        if (i2CPluginBuilder_ == null) {
+          ensureI2CPluginIsMutable();
+          i2CPlugin_.remove(index);
           onChanged();
         } else {
-          i2CPluginsBuilder_.remove(index);
+          i2CPluginBuilder_.remove(index);
         }
         return this;
       }
@@ -4076,24 +4260,24 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder getI2CPluginsBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder getI2CPluginBuilder(
           int index) {
-        return getI2CPluginsFieldBuilder().getBuilder(index);
+        return getI2CPluginFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginsOrBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder getI2CPluginOrBuilder(
           int index) {
-        if (i2CPluginsBuilder_ == null) {
-          return i2CPlugins_.get(index);  } else {
-          return i2CPluginsBuilder_.getMessageOrBuilder(index);
+        if (i2CPluginBuilder_ == null) {
+          return i2CPlugin_.get(index);  } else {
+          return i2CPluginBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
@@ -4101,14 +4285,14 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
       public java.util.List<? extends com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
-           getI2CPluginsOrBuilderList() {
-        if (i2CPluginsBuilder_ != null) {
-          return i2CPluginsBuilder_.getMessageOrBuilderList();
+           getI2CPluginOrBuilderList() {
+        if (i2CPluginBuilder_ != null) {
+          return i2CPluginBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(i2CPlugins_);
+          return java.util.Collections.unmodifiableList(i2CPlugin_);
         }
       }
       /**
@@ -4116,10 +4300,10 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder addI2CPluginsBuilder() {
-        return getI2CPluginsFieldBuilder().addBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder addI2CPluginBuilder() {
+        return getI2CPluginFieldBuilder().addBuilder(
             com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance());
       }
       /**
@@ -4127,11 +4311,11 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
-      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder addI2CPluginsBuilder(
+      public com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder addI2CPluginBuilder(
           int index) {
-        return getI2CPluginsFieldBuilder().addBuilder(
+        return getI2CPluginFieldBuilder().addBuilder(
             index, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.getDefaultInstance());
       }
       /**
@@ -4139,34 +4323,36 @@ public final class Node {
        ** I2C plugins to be activated on this node. 
        * </pre>
        *
-       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugins = 4;</code>
+       * <code>repeated .com.s13g.winston.proto.NodeConfig.I2cPlugin i2c_plugin = 4;</code>
        */
       public java.util.List<com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder> 
-           getI2CPluginsBuilderList() {
-        return getI2CPluginsFieldBuilder().getBuilderList();
+           getI2CPluginBuilderList() {
+        return getI2CPluginFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder> 
-          getI2CPluginsFieldBuilder() {
-        if (i2CPluginsBuilder_ == null) {
-          i2CPluginsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getI2CPluginFieldBuilder() {
+        if (i2CPluginBuilder_ == null) {
+          i2CPluginBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.s13g.winston.proto.Node.NodeConfig.I2cPlugin, com.s13g.winston.proto.Node.NodeConfig.I2cPlugin.Builder, com.s13g.winston.proto.Node.NodeConfig.I2cPluginOrBuilder>(
-                  i2CPlugins_,
+                  i2CPlugin_,
                   ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
-          i2CPlugins_ = null;
+          i2CPlugin_ = null;
         }
-        return i2CPluginsBuilder_;
+        return i2CPluginBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4185,11 +4371,12 @@ public final class Node {
 
     private static final com.google.protobuf.Parser<NodeConfig>
         PARSER = new com.google.protobuf.AbstractParser<NodeConfig>() {
+      @java.lang.Override
       public NodeConfig parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new NodeConfig(input, extensionRegistry);
+        return new NodeConfig(input, extensionRegistry);
       }
     };
 
@@ -4202,6 +4389,7 @@ public final class Node {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Node.NodeConfig getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4238,18 +4426,18 @@ public final class Node {
   static {
     java.lang.String[] descriptorData = {
       "\n\034etc/protos/node_config.proto\022\026com.s13g" +
-      ".winston.proto\"\207\003\n\nNodeConfig\022\023\n\013daemon_" +
-      "port\030\001 \001(\005\022C\n\014gpio_plugins\030\002 \003(\0132-.com.s" +
-      "13g.winston.proto.NodeConfig.GpioPlugin\022" +
-      "I\n\017onewire_plugins\030\003 \003(\01320.com.s13g.wins" +
-      "ton.proto.NodeConfig.OneWirePlugin\022A\n\013i2" +
-      "c_plugins\030\004 \003(\0132,.com.s13g.winston.proto" +
-      ".NodeConfig.I2cPlugin\032+\n\rOneWirePlugin\022\014" +
-      "\n\004type\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\032+\n\nGpioPlugin" +
-      "\022\014\n\004type\030\001 \001(\t\022\017\n\007mapping\030\002 \003(\005\0327\n\tI2cPl",
-      "ugin\022\014\n\004type\030\001 \001(\t\022\013\n\003bus\030\002 \001(\005\022\017\n\007addre" +
-      "ss\030\003 \001(\005B\036\n\026com.s13g.winston.protoB\004Node" +
-      "b\006proto3"
+      ".winston.proto\"\204\003\n\nNodeConfig\022\023\n\013daemon_" +
+      "port\030\001 \001(\005\022B\n\013gpio_plugin\030\002 \003(\0132-.com.s1" +
+      "3g.winston.proto.NodeConfig.GpioPlugin\022H" +
+      "\n\016onewire_plugin\030\003 \003(\01320.com.s13g.winsto" +
+      "n.proto.NodeConfig.OneWirePlugin\022@\n\ni2c_" +
+      "plugin\030\004 \003(\0132,.com.s13g.winston.proto.No" +
+      "deConfig.I2cPlugin\032+\n\rOneWirePlugin\022\014\n\004t" +
+      "ype\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\032+\n\nGpioPlugin\022\014\n" +
+      "\004type\030\001 \001(\t\022\017\n\007mapping\030\002 \003(\005\0327\n\tI2cPlugi" +
+      "n\022\014\n\004type\030\001 \001(\t\022\013\n\003bus\030\002 \001(\005\022\017\n\007address\030" +
+      "\003 \001(\005B\036\n\026com.s13g.winston.protoB\004Nodeb\006p" +
+      "roto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4268,7 +4456,7 @@ public final class Node {
     internal_static_com_s13g_winston_proto_NodeConfig_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_s13g_winston_proto_NodeConfig_descriptor,
-        new java.lang.String[] { "DaemonPort", "GpioPlugins", "OnewirePlugins", "I2CPlugins", });
+        new java.lang.String[] { "DaemonPort", "GpioPlugin", "OnewirePlugin", "I2CPlugin", });
     internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_descriptor =
       internal_static_com_s13g_winston_proto_NodeConfig_descriptor.getNestedTypes().get(0);
     internal_static_com_s13g_winston_proto_NodeConfig_OneWirePlugin_fieldAccessorTable = new

@@ -71,20 +71,20 @@ public class ConfigWrapper {
       throw new AssertionError("Invalid Port:" + mConfigProto.getDaemonPort());
     }
 
-    int numPlugins = mConfigProto.getGpioPluginsList().size() +
-        mConfigProto.getOnewirePluginsList().size() +
-        mConfigProto.getI2CPluginsList().size();
+    int numPlugins = mConfigProto.getGpioPluginList().size() +
+        mConfigProto.getOnewirePluginList().size() +
+        mConfigProto.getI2CPluginList().size();
     if (numPlugins == 0) {
       throw new AssertionError("No active plugins found");
     }
 
-    for (NodeConfig.GpioPlugin plugin : mConfigProto.getGpioPluginsList()) {
+    for (NodeConfig.GpioPlugin plugin : mConfigProto.getGpioPluginList()) {
       if (plugin.getType() == null || plugin.getType().isEmpty()) {
         throw new AssertionError("Missing plugin type");
       }
     }
 
-    for (NodeConfig.OneWirePlugin plugin : mConfigProto.getOnewirePluginsList()) {
+    for (NodeConfig.OneWirePlugin plugin : mConfigProto.getOnewirePluginList()) {
       if (plugin.getType() == null || plugin.getType().isEmpty()) {
         throw new AssertionError("Missing plugin type");
       }
@@ -97,21 +97,21 @@ public class ConfigWrapper {
   public void printToLog() {
     log.atInfo().log("---------------------------------");
     log.atInfo().log("Daemon Port:" + mConfigProto.getDaemonPort());
-    List<NodeConfig.GpioPlugin> gpioPluginsList = mConfigProto.getGpioPluginsList();
+    List<NodeConfig.GpioPlugin> gpioPluginsList = mConfigProto.getGpioPluginList();
     log.atInfo().log("Active GPIO plugins: " + gpioPluginsList.size());
     for (NodeConfig.GpioPlugin plugin : gpioPluginsList) {
       log.atInfo().log("  Type    : " + plugin.getType());
       log.atInfo().log("  Mapping : " + plugin.getMappingList());
     }
     log.atInfo().log("---------------------------------");
-    List<NodeConfig.OneWirePlugin> oneWirePluginsList = mConfigProto.getOnewirePluginsList();
+    List<NodeConfig.OneWirePlugin> oneWirePluginsList = mConfigProto.getOnewirePluginList();
     log.atInfo().log("Active 1-Wire plugins: " + oneWirePluginsList.size());
     for (NodeConfig.OneWirePlugin plugin : oneWirePluginsList) {
       log.atInfo().log("  Type    : " + plugin.getType());
       log.atInfo().log("  Name    : " + plugin.getName());
     }
     log.atInfo().log("---------------------------------");
-    List<NodeConfig.I2cPlugin> i2cPluginsList = mConfigProto.getI2CPluginsList();
+    List<NodeConfig.I2cPlugin> i2cPluginsList = mConfigProto.getI2CPluginList();
     log.atInfo().log("Active I2C plugins: " + i2cPluginsList.size());
     for (NodeConfig.I2cPlugin plugin : i2cPluginsList) {
       log.atInfo().log("  Type    : " + plugin.getType());

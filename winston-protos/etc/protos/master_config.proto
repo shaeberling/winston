@@ -27,11 +27,11 @@ option java_outer_classname = "Master";
 
 message MasterConfig {
   /* The port on which the master daemon should listen for connections. */
-  int32 daemonPort = 1;
+  int32 daemon_port = 1;
   /* Path to the certificate keystore for serving SSL connections. */
-  string sslKeystorePath = 2;
+  string ssl_keystore_path = 2;
   /* Password for the keystore used to serve SSL connections. */
-  string sslKeystorePassword = 3;
+  string ssl_keystore_password = 3;
   /* A list of active modules. */
   repeated Module module = 4;
   /* A list of defined group actions. */

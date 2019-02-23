@@ -34,13 +34,13 @@ message NodeConfig {
    * dependency. Dependencies have to be available a this point.
    * Also we assume only one plugin of each type can be present.
    */
-  repeated GpioPlugin gpio_plugins = 2;
+  repeated GpioPlugin gpio_plugin = 2;
 
   /* 1-Wire plugins to be activated on this node.*/
-  repeated OneWirePlugin onewire_plugins = 3;
+  repeated OneWirePlugin onewire_plugin = 3;
 
   /** I2C plugins to be activated on this node. */
-  repeated I2cPlugin i2c_plugins = 4;
+  repeated I2cPlugin i2c_plugin = 4;
 
   /* Defines a 1-Wire plugin that should be active on this node. */
   message OneWirePlugin {

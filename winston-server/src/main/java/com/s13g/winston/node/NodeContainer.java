@@ -81,7 +81,7 @@ public class NodeContainer implements Container {
     // NOTE: The order is important since some plugins might depend on other controllers and
     // therefore need to be instantiated later.
     // ==== GPIO ====
-    for (NodeConfig.GpioPlugin gpioPlugin : config.getGpioPluginsList()) {
+    for (NodeConfig.GpioPlugin gpioPlugin : config.getGpioPluginList()) {
       NodePlugin plugin = nodePluginCreator.create(gpioPlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
@@ -90,7 +90,7 @@ public class NodeContainer implements Container {
     }
 
     // ==== 1-Wire ====
-    for (NodeConfig.OneWirePlugin oneWirePlugin : config.getOnewirePluginsList()) {
+    for (NodeConfig.OneWirePlugin oneWirePlugin : config.getOnewirePluginList()) {
       NodePlugin plugin = nodePluginCreator.create(oneWirePlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.
@@ -99,7 +99,7 @@ public class NodeContainer implements Container {
     }
 
     // ==== I2C ====
-    for (NodeConfig.I2cPlugin i2cPlugin : config.getI2CPluginsList()) {
+    for (NodeConfig.I2cPlugin i2cPlugin : config.getI2CPluginList()) {
       NodePlugin plugin = nodePluginCreator.create(i2cPlugin);
       if (plugin.hasHandler()) {
         // Add all active handlers so we can forward HTTP requests to it.

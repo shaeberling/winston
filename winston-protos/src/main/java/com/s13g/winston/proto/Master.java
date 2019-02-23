@@ -23,7 +23,7 @@ public final class Master {
      * The port on which the master daemon should listen for connections. 
      * </pre>
      *
-     * <code>optional int32 daemonPort = 1;</code>
+     * <code>int32 daemon_port = 1;</code>
      */
     int getDaemonPort();
 
@@ -32,7 +32,7 @@ public final class Master {
      * Path to the certificate keystore for serving SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePath = 2;</code>
+     * <code>string ssl_keystore_path = 2;</code>
      */
     java.lang.String getSslKeystorePath();
     /**
@@ -40,7 +40,7 @@ public final class Master {
      * Path to the certificate keystore for serving SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePath = 2;</code>
+     * <code>string ssl_keystore_path = 2;</code>
      */
     com.google.protobuf.ByteString
         getSslKeystorePathBytes();
@@ -50,7 +50,7 @@ public final class Master {
      * Password for the keystore used to serve SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePassword = 3;</code>
+     * <code>string ssl_keystore_password = 3;</code>
      */
     java.lang.String getSslKeystorePassword();
     /**
@@ -58,7 +58,7 @@ public final class Master {
      * Password for the keystore used to serve SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePassword = 3;</code>
+     * <code>string ssl_keystore_password = 3;</code>
      */
     com.google.protobuf.ByteString
         getSslKeystorePasswordBytes();
@@ -246,6 +246,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.MasterConfig)
       MasterConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MasterConfig.newBuilder() to construct.
     private MasterConfig(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -263,14 +264,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private MasterConfig(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -279,12 +285,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               daemonPort_ = input.readInt32();
@@ -338,6 +338,13 @@ public final class Master {
                   input.readMessage(com.s13g.winston.proto.Master.KnownNode.parser(), extensionRegistry));
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -358,6 +365,7 @@ public final class Master {
         if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           knownClient_ = java.util.Collections.unmodifiableList(knownClient_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -366,6 +374,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_MasterConfig_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_MasterConfig_fieldAccessorTable
@@ -374,27 +383,27 @@ public final class Master {
     }
 
     private int bitField0_;
-    public static final int DAEMONPORT_FIELD_NUMBER = 1;
+    public static final int DAEMON_PORT_FIELD_NUMBER = 1;
     private int daemonPort_;
     /**
      * <pre>
      * The port on which the master daemon should listen for connections. 
      * </pre>
      *
-     * <code>optional int32 daemonPort = 1;</code>
+     * <code>int32 daemon_port = 1;</code>
      */
     public int getDaemonPort() {
       return daemonPort_;
     }
 
-    public static final int SSLKEYSTOREPATH_FIELD_NUMBER = 2;
+    public static final int SSL_KEYSTORE_PATH_FIELD_NUMBER = 2;
     private volatile java.lang.Object sslKeystorePath_;
     /**
      * <pre>
      * Path to the certificate keystore for serving SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePath = 2;</code>
+     * <code>string ssl_keystore_path = 2;</code>
      */
     public java.lang.String getSslKeystorePath() {
       java.lang.Object ref = sslKeystorePath_;
@@ -413,7 +422,7 @@ public final class Master {
      * Path to the certificate keystore for serving SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePath = 2;</code>
+     * <code>string ssl_keystore_path = 2;</code>
      */
     public com.google.protobuf.ByteString
         getSslKeystorePathBytes() {
@@ -429,14 +438,14 @@ public final class Master {
       }
     }
 
-    public static final int SSLKEYSTOREPASSWORD_FIELD_NUMBER = 3;
+    public static final int SSL_KEYSTORE_PASSWORD_FIELD_NUMBER = 3;
     private volatile java.lang.Object sslKeystorePassword_;
     /**
      * <pre>
      * Password for the keystore used to serve SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePassword = 3;</code>
+     * <code>string ssl_keystore_password = 3;</code>
      */
     public java.lang.String getSslKeystorePassword() {
       java.lang.Object ref = sslKeystorePassword_;
@@ -455,7 +464,7 @@ public final class Master {
      * Password for the keystore used to serve SSL connections. 
      * </pre>
      *
-     * <code>optional string sslKeystorePassword = 3;</code>
+     * <code>string ssl_keystore_password = 3;</code>
      */
     public com.google.protobuf.ByteString
         getSslKeystorePasswordBytes() {
@@ -692,6 +701,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -701,6 +711,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (daemonPort_ != 0) {
@@ -724,8 +735,10 @@ public final class Master {
       for (int i = 0; i < knownClient_.size(); i++) {
         output.writeMessage(7, knownClient_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -757,11 +770,11 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, knownClient_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -787,6 +800,7 @@ public final class Master {
           .equals(other.getAuthClientList());
       result = result && getKnownClientList()
           .equals(other.getKnownClientList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -796,12 +810,12 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + DAEMONPORT_FIELD_NUMBER;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DAEMON_PORT_FIELD_NUMBER;
       hash = (53 * hash) + getDaemonPort();
-      hash = (37 * hash) + SSLKEYSTOREPATH_FIELD_NUMBER;
+      hash = (37 * hash) + SSL_KEYSTORE_PATH_FIELD_NUMBER;
       hash = (53 * hash) + getSslKeystorePath().hashCode();
-      hash = (37 * hash) + SSLKEYSTOREPASSWORD_FIELD_NUMBER;
+      hash = (37 * hash) + SSL_KEYSTORE_PASSWORD_FIELD_NUMBER;
       hash = (53 * hash) + getSslKeystorePassword().hashCode();
       if (getModuleCount() > 0) {
         hash = (37 * hash) + MODULE_FIELD_NUMBER;
@@ -824,6 +838,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.MasterConfig parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.MasterConfig parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.MasterConfig parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -883,6 +908,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -890,6 +916,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.MasterConfig prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -913,6 +940,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_MasterConfig_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_MasterConfig_fieldAccessorTable
@@ -939,6 +967,7 @@ public final class Master {
           getKnownClientFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         daemonPort_ = 0;
@@ -974,15 +1003,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_MasterConfig_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.MasterConfig getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.MasterConfig.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.MasterConfig build() {
         com.s13g.winston.proto.Master.MasterConfig result = buildPartial();
         if (!result.isInitialized()) {
@@ -991,6 +1023,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.MasterConfig buildPartial() {
         com.s13g.winston.proto.Master.MasterConfig result = new com.s13g.winston.proto.Master.MasterConfig(this);
         int from_bitField0_ = bitField0_;
@@ -1039,32 +1072,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.MasterConfig) {
           return mergeFrom((com.s13g.winston.proto.Master.MasterConfig)other);
@@ -1191,14 +1231,17 @@ public final class Master {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1224,7 +1267,7 @@ public final class Master {
        * The port on which the master daemon should listen for connections. 
        * </pre>
        *
-       * <code>optional int32 daemonPort = 1;</code>
+       * <code>int32 daemon_port = 1;</code>
        */
       public int getDaemonPort() {
         return daemonPort_;
@@ -1234,7 +1277,7 @@ public final class Master {
        * The port on which the master daemon should listen for connections. 
        * </pre>
        *
-       * <code>optional int32 daemonPort = 1;</code>
+       * <code>int32 daemon_port = 1;</code>
        */
       public Builder setDaemonPort(int value) {
         
@@ -1247,7 +1290,7 @@ public final class Master {
        * The port on which the master daemon should listen for connections. 
        * </pre>
        *
-       * <code>optional int32 daemonPort = 1;</code>
+       * <code>int32 daemon_port = 1;</code>
        */
       public Builder clearDaemonPort() {
         
@@ -1262,7 +1305,7 @@ public final class Master {
        * Path to the certificate keystore for serving SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePath = 2;</code>
+       * <code>string ssl_keystore_path = 2;</code>
        */
       public java.lang.String getSslKeystorePath() {
         java.lang.Object ref = sslKeystorePath_;
@@ -1281,7 +1324,7 @@ public final class Master {
        * Path to the certificate keystore for serving SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePath = 2;</code>
+       * <code>string ssl_keystore_path = 2;</code>
        */
       public com.google.protobuf.ByteString
           getSslKeystorePathBytes() {
@@ -1301,7 +1344,7 @@ public final class Master {
        * Path to the certificate keystore for serving SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePath = 2;</code>
+       * <code>string ssl_keystore_path = 2;</code>
        */
       public Builder setSslKeystorePath(
           java.lang.String value) {
@@ -1318,7 +1361,7 @@ public final class Master {
        * Path to the certificate keystore for serving SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePath = 2;</code>
+       * <code>string ssl_keystore_path = 2;</code>
        */
       public Builder clearSslKeystorePath() {
         
@@ -1331,7 +1374,7 @@ public final class Master {
        * Path to the certificate keystore for serving SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePath = 2;</code>
+       * <code>string ssl_keystore_path = 2;</code>
        */
       public Builder setSslKeystorePathBytes(
           com.google.protobuf.ByteString value) {
@@ -1351,7 +1394,7 @@ public final class Master {
        * Password for the keystore used to serve SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePassword = 3;</code>
+       * <code>string ssl_keystore_password = 3;</code>
        */
       public java.lang.String getSslKeystorePassword() {
         java.lang.Object ref = sslKeystorePassword_;
@@ -1370,7 +1413,7 @@ public final class Master {
        * Password for the keystore used to serve SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePassword = 3;</code>
+       * <code>string ssl_keystore_password = 3;</code>
        */
       public com.google.protobuf.ByteString
           getSslKeystorePasswordBytes() {
@@ -1390,7 +1433,7 @@ public final class Master {
        * Password for the keystore used to serve SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePassword = 3;</code>
+       * <code>string ssl_keystore_password = 3;</code>
        */
       public Builder setSslKeystorePassword(
           java.lang.String value) {
@@ -1407,7 +1450,7 @@ public final class Master {
        * Password for the keystore used to serve SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePassword = 3;</code>
+       * <code>string ssl_keystore_password = 3;</code>
        */
       public Builder clearSslKeystorePassword() {
         
@@ -1420,7 +1463,7 @@ public final class Master {
        * Password for the keystore used to serve SSL connections. 
        * </pre>
        *
-       * <code>optional string sslKeystorePassword = 3;</code>
+       * <code>string ssl_keystore_password = 3;</code>
        */
       public Builder setSslKeystorePasswordBytes(
           com.google.protobuf.ByteString value) {
@@ -2681,14 +2724,16 @@ public final class Master {
         }
         return knownClientBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -2707,11 +2752,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<MasterConfig>
         PARSER = new com.google.protobuf.AbstractParser<MasterConfig>() {
+      @java.lang.Override
       public MasterConfig parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MasterConfig(input, extensionRegistry);
+        return new MasterConfig(input, extensionRegistry);
       }
     };
 
@@ -2724,6 +2770,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.MasterConfig getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2739,7 +2786,7 @@ public final class Master {
      * The type of the module, such as "nest". 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     java.lang.String getType();
     /**
@@ -2747,7 +2794,7 @@ public final class Master {
      * The type of the module, such as "nest". 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     com.google.protobuf.ByteString
         getTypeBytes();
@@ -2807,6 +2854,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.Module)
       ModuleOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Module.newBuilder() to construct.
     private Module(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2819,14 +2867,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Module(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -2835,12 +2888,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -2856,6 +2903,13 @@ public final class Master {
                   input.readMessage(com.s13g.winston.proto.Master.Channel.parser(), extensionRegistry));
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2867,6 +2921,7 @@ public final class Master {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           channel_ = java.util.Collections.unmodifiableList(channel_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -2875,6 +2930,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Module_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Module_fieldAccessorTable
@@ -2890,7 +2946,7 @@ public final class Master {
      * The type of the module, such as "nest". 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     public java.lang.String getType() {
       java.lang.Object ref = type_;
@@ -2909,7 +2965,7 @@ public final class Master {
      * The type of the module, such as "nest". 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     public com.google.protobuf.ByteString
         getTypeBytes() {
@@ -2981,6 +3037,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2990,6 +3047,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getTypeBytes().isEmpty()) {
@@ -2998,8 +3056,10 @@ public final class Master {
       for (int i = 0; i < channel_.size(); i++) {
         output.writeMessage(2, channel_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3012,11 +3072,11 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, channel_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3032,6 +3092,7 @@ public final class Master {
           .equals(other.getType());
       result = result && getChannelList()
           .equals(other.getChannelList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -3041,7 +3102,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getType().hashCode();
       if (getChannelCount() > 0) {
@@ -3053,6 +3114,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.Module parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Module parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.Module parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3112,6 +3184,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3119,6 +3192,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.Module prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3146,6 +3220,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Module_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Module_fieldAccessorTable
@@ -3169,6 +3244,7 @@ public final class Master {
           getChannelFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = "";
@@ -3182,15 +3258,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Module_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Module getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.Module.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Module build() {
         com.s13g.winston.proto.Master.Module result = buildPartial();
         if (!result.isInitialized()) {
@@ -3199,6 +3278,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Module buildPartial() {
         com.s13g.winston.proto.Master.Module result = new com.s13g.winston.proto.Master.Module(this);
         int from_bitField0_ = bitField0_;
@@ -3218,32 +3298,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.Module) {
           return mergeFrom((com.s13g.winston.proto.Master.Module)other);
@@ -3285,14 +3372,17 @@ public final class Master {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3318,7 +3408,7 @@ public final class Master {
        * The type of the module, such as "nest". 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -3337,7 +3427,7 @@ public final class Master {
        * The type of the module, such as "nest". 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -3357,7 +3447,7 @@ public final class Master {
        * The type of the module, such as "nest". 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder setType(
           java.lang.String value) {
@@ -3374,7 +3464,7 @@ public final class Master {
        * The type of the module, such as "nest". 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder clearType() {
         
@@ -3387,7 +3477,7 @@ public final class Master {
        * The type of the module, such as "nest". 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder setTypeBytes(
           com.google.protobuf.ByteString value) {
@@ -3712,14 +3802,16 @@ public final class Master {
         }
         return channelBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -3738,11 +3830,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<Module>
         PARSER = new com.google.protobuf.AbstractParser<Module>() {
+      @java.lang.Override
       public Module parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Module(input, extensionRegistry);
+        return new Module(input, extensionRegistry);
       }
     };
 
@@ -3755,6 +3848,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.Module getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3770,7 +3864,7 @@ public final class Master {
      * The name of this group. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -3778,7 +3872,7 @@ public final class Master {
      * The name of this group. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -3838,6 +3932,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.Group)
       GroupOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Group.newBuilder() to construct.
     private Group(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3850,14 +3945,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Group(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -3866,12 +3966,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -3887,6 +3981,13 @@ public final class Master {
                   input.readMessage(com.s13g.winston.proto.Master.GroupTrigger.parser(), extensionRegistry));
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3898,6 +3999,7 @@ public final class Master {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           trigger_ = java.util.Collections.unmodifiableList(trigger_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -3906,6 +4008,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_fieldAccessorTable
@@ -3921,7 +4024,7 @@ public final class Master {
      * The name of this group. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -3940,7 +4043,7 @@ public final class Master {
      * The name of this group. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -4012,6 +4115,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4021,6 +4125,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getNameBytes().isEmpty()) {
@@ -4029,8 +4134,10 @@ public final class Master {
       for (int i = 0; i < trigger_.size(); i++) {
         output.writeMessage(2, trigger_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4043,11 +4150,11 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, trigger_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -4063,6 +4170,7 @@ public final class Master {
           .equals(other.getName());
       result = result && getTriggerList()
           .equals(other.getTriggerList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -4072,7 +4180,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       if (getTriggerCount() > 0) {
@@ -4084,6 +4192,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Group parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.Group parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4143,6 +4262,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4150,6 +4270,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.Group prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4177,6 +4298,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_fieldAccessorTable
@@ -4200,6 +4322,7 @@ public final class Master {
           getTriggerFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         name_ = "";
@@ -4213,15 +4336,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Group_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Group getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.Group.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Group build() {
         com.s13g.winston.proto.Master.Group result = buildPartial();
         if (!result.isInitialized()) {
@@ -4230,6 +4356,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Group buildPartial() {
         com.s13g.winston.proto.Master.Group result = new com.s13g.winston.proto.Master.Group(this);
         int from_bitField0_ = bitField0_;
@@ -4249,32 +4376,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.Group) {
           return mergeFrom((com.s13g.winston.proto.Master.Group)other);
@@ -4316,14 +4450,17 @@ public final class Master {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4349,7 +4486,7 @@ public final class Master {
        * The name of this group. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -4368,7 +4505,7 @@ public final class Master {
        * The name of this group. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -4388,7 +4525,7 @@ public final class Master {
        * The name of this group. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -4405,7 +4542,7 @@ public final class Master {
        * The name of this group. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -4418,7 +4555,7 @@ public final class Master {
        * The name of this group. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -4743,14 +4880,16 @@ public final class Master {
         }
         return triggerBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -4769,11 +4908,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<Group>
         PARSER = new com.google.protobuf.AbstractParser<Group>() {
+      @java.lang.Override
       public Group parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Group(input, extensionRegistry);
+        return new Group(input, extensionRegistry);
       }
     };
 
@@ -4786,6 +4926,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.Group getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4877,6 +5018,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.GroupTrigger)
       GroupTriggerOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use GroupTrigger.newBuilder() to construct.
     private GroupTrigger(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -4889,14 +5031,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private GroupTrigger(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -4905,12 +5052,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -4929,6 +5070,13 @@ public final class Master {
               action_.add(s);
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4943,6 +5091,7 @@ public final class Master {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           action_ = action_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -4951,6 +5100,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable
@@ -5049,6 +5199,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5058,6 +5209,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < input_.size(); i++) {
@@ -5066,8 +5218,10 @@ public final class Master {
       for (int i = 0; i < action_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, action_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5089,11 +5243,11 @@ public final class Master {
         size += dataSize;
         size += 1 * getActionList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -5109,6 +5263,7 @@ public final class Master {
           .equals(other.getInputList());
       result = result && getActionList()
           .equals(other.getActionList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -5118,7 +5273,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (getInputCount() > 0) {
         hash = (37 * hash) + INPUT_FIELD_NUMBER;
         hash = (53 * hash) + getInputList().hashCode();
@@ -5132,6 +5287,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.GroupTrigger parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5191,6 +5357,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -5198,6 +5365,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.GroupTrigger prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -5225,6 +5393,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_fieldAccessorTable
@@ -5247,6 +5416,7 @@ public final class Master {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         input_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -5256,15 +5426,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_GroupTrigger_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.GroupTrigger getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.GroupTrigger.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.GroupTrigger build() {
         com.s13g.winston.proto.Master.GroupTrigger result = buildPartial();
         if (!result.isInitialized()) {
@@ -5273,6 +5446,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.GroupTrigger buildPartial() {
         com.s13g.winston.proto.Master.GroupTrigger result = new com.s13g.winston.proto.Master.GroupTrigger(this);
         int from_bitField0_ = bitField0_;
@@ -5290,32 +5464,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.GroupTrigger) {
           return mergeFrom((com.s13g.winston.proto.Master.GroupTrigger)other);
@@ -5347,14 +5528,17 @@ public final class Master {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5633,14 +5817,16 @@ public final class Master {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -5659,11 +5845,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<GroupTrigger>
         PARSER = new com.google.protobuf.AbstractParser<GroupTrigger>() {
+      @java.lang.Override
       public GroupTrigger parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GroupTrigger(input, extensionRegistry);
+        return new GroupTrigger(input, extensionRegistry);
       }
     };
 
@@ -5676,6 +5863,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.GroupTrigger getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5691,7 +5879,7 @@ public final class Master {
      * The type of the channel. 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     java.lang.String getType();
     /**
@@ -5699,7 +5887,7 @@ public final class Master {
      * The type of the channel. 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     com.google.protobuf.ByteString
         getTypeBytes();
@@ -5709,7 +5897,7 @@ public final class Master {
      * An optional address to localize the channel. 
      * </pre>
      *
-     * <code>optional string address = 2;</code>
+     * <code>string address = 2;</code>
      */
     java.lang.String getAddress();
     /**
@@ -5717,7 +5905,7 @@ public final class Master {
      * An optional address to localize the channel. 
      * </pre>
      *
-     * <code>optional string address = 2;</code>
+     * <code>string address = 2;</code>
      */
     com.google.protobuf.ByteString
         getAddressBytes();
@@ -5777,6 +5965,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.Channel)
       ChannelOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Channel.newBuilder() to construct.
     private Channel(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -5790,14 +5979,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Channel(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -5806,12 +6000,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -5833,6 +6021,13 @@ public final class Master {
                   input.readMessage(com.s13g.winston.proto.Master.Parameter.parser(), extensionRegistry));
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5844,6 +6039,7 @@ public final class Master {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           parameter_ = java.util.Collections.unmodifiableList(parameter_);
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -5852,6 +6048,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable
@@ -5867,7 +6064,7 @@ public final class Master {
      * The type of the channel. 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     public java.lang.String getType() {
       java.lang.Object ref = type_;
@@ -5886,7 +6083,7 @@ public final class Master {
      * The type of the channel. 
      * </pre>
      *
-     * <code>optional string type = 1;</code>
+     * <code>string type = 1;</code>
      */
     public com.google.protobuf.ByteString
         getTypeBytes() {
@@ -5909,7 +6106,7 @@ public final class Master {
      * An optional address to localize the channel. 
      * </pre>
      *
-     * <code>optional string address = 2;</code>
+     * <code>string address = 2;</code>
      */
     public java.lang.String getAddress() {
       java.lang.Object ref = address_;
@@ -5928,7 +6125,7 @@ public final class Master {
      * An optional address to localize the channel. 
      * </pre>
      *
-     * <code>optional string address = 2;</code>
+     * <code>string address = 2;</code>
      */
     public com.google.protobuf.ByteString
         getAddressBytes() {
@@ -6000,6 +6197,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6009,6 +6207,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getTypeBytes().isEmpty()) {
@@ -6020,8 +6219,10 @@ public final class Master {
       for (int i = 0; i < parameter_.size(); i++) {
         output.writeMessage(3, parameter_.get(i));
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6037,11 +6238,11 @@ public final class Master {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, parameter_.get(i));
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -6059,6 +6260,7 @@ public final class Master {
           .equals(other.getAddress());
       result = result && getParameterList()
           .equals(other.getParameterList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -6068,7 +6270,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getType().hashCode();
       hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
@@ -6082,6 +6284,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Channel parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.Channel parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6141,6 +6354,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6148,6 +6362,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.Channel prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6175,6 +6390,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_fieldAccessorTable
@@ -6198,6 +6414,7 @@ public final class Master {
           getParameterFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = "";
@@ -6213,15 +6430,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Channel_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Channel getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.Channel.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Channel build() {
         com.s13g.winston.proto.Master.Channel result = buildPartial();
         if (!result.isInitialized()) {
@@ -6230,6 +6450,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Channel buildPartial() {
         com.s13g.winston.proto.Master.Channel result = new com.s13g.winston.proto.Master.Channel(this);
         int from_bitField0_ = bitField0_;
@@ -6250,32 +6471,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.Channel) {
           return mergeFrom((com.s13g.winston.proto.Master.Channel)other);
@@ -6321,14 +6549,17 @@ public final class Master {
             }
           }
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6354,7 +6585,7 @@ public final class Master {
        * The type of the channel. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public java.lang.String getType() {
         java.lang.Object ref = type_;
@@ -6373,7 +6604,7 @@ public final class Master {
        * The type of the channel. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public com.google.protobuf.ByteString
           getTypeBytes() {
@@ -6393,7 +6624,7 @@ public final class Master {
        * The type of the channel. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder setType(
           java.lang.String value) {
@@ -6410,7 +6641,7 @@ public final class Master {
        * The type of the channel. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder clearType() {
         
@@ -6423,7 +6654,7 @@ public final class Master {
        * The type of the channel. 
        * </pre>
        *
-       * <code>optional string type = 1;</code>
+       * <code>string type = 1;</code>
        */
       public Builder setTypeBytes(
           com.google.protobuf.ByteString value) {
@@ -6443,7 +6674,7 @@ public final class Master {
        * An optional address to localize the channel. 
        * </pre>
        *
-       * <code>optional string address = 2;</code>
+       * <code>string address = 2;</code>
        */
       public java.lang.String getAddress() {
         java.lang.Object ref = address_;
@@ -6462,7 +6693,7 @@ public final class Master {
        * An optional address to localize the channel. 
        * </pre>
        *
-       * <code>optional string address = 2;</code>
+       * <code>string address = 2;</code>
        */
       public com.google.protobuf.ByteString
           getAddressBytes() {
@@ -6482,7 +6713,7 @@ public final class Master {
        * An optional address to localize the channel. 
        * </pre>
        *
-       * <code>optional string address = 2;</code>
+       * <code>string address = 2;</code>
        */
       public Builder setAddress(
           java.lang.String value) {
@@ -6499,7 +6730,7 @@ public final class Master {
        * An optional address to localize the channel. 
        * </pre>
        *
-       * <code>optional string address = 2;</code>
+       * <code>string address = 2;</code>
        */
       public Builder clearAddress() {
         
@@ -6512,7 +6743,7 @@ public final class Master {
        * An optional address to localize the channel. 
        * </pre>
        *
-       * <code>optional string address = 2;</code>
+       * <code>string address = 2;</code>
        */
       public Builder setAddressBytes(
           com.google.protobuf.ByteString value) {
@@ -6837,14 +7068,16 @@ public final class Master {
         }
         return parameterBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -6863,11 +7096,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<Channel>
         PARSER = new com.google.protobuf.AbstractParser<Channel>() {
+      @java.lang.Override
       public Channel parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Channel(input, extensionRegistry);
+        return new Channel(input, extensionRegistry);
       }
     };
 
@@ -6880,6 +7114,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.Channel getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -6895,7 +7130,7 @@ public final class Master {
      * Name of the parameter. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -6903,7 +7138,7 @@ public final class Master {
      * Name of the parameter. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -6913,7 +7148,7 @@ public final class Master {
      * Value of the parameter. 
      * </pre>
      *
-     * <code>optional string value = 2;</code>
+     * <code>string value = 2;</code>
      */
     java.lang.String getValue();
     /**
@@ -6921,7 +7156,7 @@ public final class Master {
      * Value of the parameter. 
      * </pre>
      *
-     * <code>optional string value = 2;</code>
+     * <code>string value = 2;</code>
      */
     com.google.protobuf.ByteString
         getValueBytes();
@@ -6937,6 +7172,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.Parameter)
       ParameterOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Parameter.newBuilder() to construct.
     private Parameter(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -6949,14 +7185,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private Parameter(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -6965,12 +7206,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -6983,6 +7218,13 @@ public final class Master {
               value_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6991,6 +7233,7 @@ public final class Master {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -6999,6 +7242,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Parameter_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Parameter_fieldAccessorTable
@@ -7013,7 +7257,7 @@ public final class Master {
      * Name of the parameter. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -7032,7 +7276,7 @@ public final class Master {
      * Name of the parameter. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -7055,7 +7299,7 @@ public final class Master {
      * Value of the parameter. 
      * </pre>
      *
-     * <code>optional string value = 2;</code>
+     * <code>string value = 2;</code>
      */
     public java.lang.String getValue() {
       java.lang.Object ref = value_;
@@ -7074,7 +7318,7 @@ public final class Master {
      * Value of the parameter. 
      * </pre>
      *
-     * <code>optional string value = 2;</code>
+     * <code>string value = 2;</code>
      */
     public com.google.protobuf.ByteString
         getValueBytes() {
@@ -7091,6 +7335,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7100,6 +7345,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getNameBytes().isEmpty()) {
@@ -7108,8 +7354,10 @@ public final class Master {
       if (!getValueBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, value_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7121,11 +7369,11 @@ public final class Master {
       if (!getValueBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, value_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -7141,6 +7389,7 @@ public final class Master {
           .equals(other.getName());
       result = result && getValue()
           .equals(other.getValue());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -7150,7 +7399,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + VALUE_FIELD_NUMBER;
@@ -7160,6 +7409,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.Parameter parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.Parameter parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.Parameter parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7219,6 +7479,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -7226,6 +7487,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.Parameter prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -7253,6 +7515,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Parameter_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Parameter_fieldAccessorTable
@@ -7275,6 +7538,7 @@ public final class Master {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         name_ = "";
@@ -7284,15 +7548,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_Parameter_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Parameter getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.Parameter.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Parameter build() {
         com.s13g.winston.proto.Master.Parameter result = buildPartial();
         if (!result.isInitialized()) {
@@ -7301,6 +7568,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.Parameter buildPartial() {
         com.s13g.winston.proto.Master.Parameter result = new com.s13g.winston.proto.Master.Parameter(this);
         result.name_ = name_;
@@ -7309,32 +7577,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.Parameter) {
           return mergeFrom((com.s13g.winston.proto.Master.Parameter)other);
@@ -7354,14 +7629,17 @@ public final class Master {
           value_ = other.value_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7386,7 +7664,7 @@ public final class Master {
        * Name of the parameter. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -7405,7 +7683,7 @@ public final class Master {
        * Name of the parameter. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -7425,7 +7703,7 @@ public final class Master {
        * Name of the parameter. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -7442,7 +7720,7 @@ public final class Master {
        * Name of the parameter. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -7455,7 +7733,7 @@ public final class Master {
        * Name of the parameter. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -7475,7 +7753,7 @@ public final class Master {
        * Value of the parameter. 
        * </pre>
        *
-       * <code>optional string value = 2;</code>
+       * <code>string value = 2;</code>
        */
       public java.lang.String getValue() {
         java.lang.Object ref = value_;
@@ -7494,7 +7772,7 @@ public final class Master {
        * Value of the parameter. 
        * </pre>
        *
-       * <code>optional string value = 2;</code>
+       * <code>string value = 2;</code>
        */
       public com.google.protobuf.ByteString
           getValueBytes() {
@@ -7514,7 +7792,7 @@ public final class Master {
        * Value of the parameter. 
        * </pre>
        *
-       * <code>optional string value = 2;</code>
+       * <code>string value = 2;</code>
        */
       public Builder setValue(
           java.lang.String value) {
@@ -7531,7 +7809,7 @@ public final class Master {
        * Value of the parameter. 
        * </pre>
        *
-       * <code>optional string value = 2;</code>
+       * <code>string value = 2;</code>
        */
       public Builder clearValue() {
         
@@ -7544,7 +7822,7 @@ public final class Master {
        * Value of the parameter. 
        * </pre>
        *
-       * <code>optional string value = 2;</code>
+       * <code>string value = 2;</code>
        */
       public Builder setValueBytes(
           com.google.protobuf.ByteString value) {
@@ -7557,14 +7835,16 @@ public final class Master {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -7583,11 +7863,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<Parameter>
         PARSER = new com.google.protobuf.AbstractParser<Parameter>() {
+      @java.lang.Override
       public Parameter parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Parameter(input, extensionRegistry);
+        return new Parameter(input, extensionRegistry);
       }
     };
 
@@ -7600,6 +7881,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.Parameter getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7615,7 +7897,7 @@ public final class Master {
      * Human readable name of this client. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
@@ -7623,7 +7905,7 @@ public final class Master {
      * Human readable name of this client. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -7633,7 +7915,7 @@ public final class Master {
      * A random auth_token used to authenticate the client. 
      * </pre>
      *
-     * <code>optional string auth_token = 2;</code>
+     * <code>string auth_token = 2;</code>
      */
     java.lang.String getAuthToken();
     /**
@@ -7641,7 +7923,7 @@ public final class Master {
      * A random auth_token used to authenticate the client. 
      * </pre>
      *
-     * <code>optional string auth_token = 2;</code>
+     * <code>string auth_token = 2;</code>
      */
     com.google.protobuf.ByteString
         getAuthTokenBytes();
@@ -7657,6 +7939,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.AuthenticatedClient)
       AuthenticatedClientOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use AuthenticatedClient.newBuilder() to construct.
     private AuthenticatedClient(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -7669,14 +7952,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private AuthenticatedClient(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -7685,12 +7973,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -7703,6 +7985,13 @@ public final class Master {
               authToken_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7711,6 +8000,7 @@ public final class Master {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -7719,6 +8009,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_fieldAccessorTable
@@ -7733,7 +8024,7 @@ public final class Master {
      * Human readable name of this client. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -7752,7 +8043,7 @@ public final class Master {
      * Human readable name of this client. 
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -7775,7 +8066,7 @@ public final class Master {
      * A random auth_token used to authenticate the client. 
      * </pre>
      *
-     * <code>optional string auth_token = 2;</code>
+     * <code>string auth_token = 2;</code>
      */
     public java.lang.String getAuthToken() {
       java.lang.Object ref = authToken_;
@@ -7794,7 +8085,7 @@ public final class Master {
      * A random auth_token used to authenticate the client. 
      * </pre>
      *
-     * <code>optional string auth_token = 2;</code>
+     * <code>string auth_token = 2;</code>
      */
     public com.google.protobuf.ByteString
         getAuthTokenBytes() {
@@ -7811,6 +8102,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7820,6 +8112,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getNameBytes().isEmpty()) {
@@ -7828,8 +8121,10 @@ public final class Master {
       if (!getAuthTokenBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, authToken_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7841,11 +8136,11 @@ public final class Master {
       if (!getAuthTokenBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, authToken_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -7861,6 +8156,7 @@ public final class Master {
           .equals(other.getName());
       result = result && getAuthToken()
           .equals(other.getAuthToken());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -7870,7 +8166,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + AUTH_TOKEN_FIELD_NUMBER;
@@ -7880,6 +8176,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.AuthenticatedClient parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7939,6 +8246,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -7946,6 +8254,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.AuthenticatedClient prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -7973,6 +8282,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_fieldAccessorTable
@@ -7995,6 +8305,7 @@ public final class Master {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         name_ = "";
@@ -8004,15 +8315,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_AuthenticatedClient_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.AuthenticatedClient getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.AuthenticatedClient.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.AuthenticatedClient build() {
         com.s13g.winston.proto.Master.AuthenticatedClient result = buildPartial();
         if (!result.isInitialized()) {
@@ -8021,6 +8335,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.AuthenticatedClient buildPartial() {
         com.s13g.winston.proto.Master.AuthenticatedClient result = new com.s13g.winston.proto.Master.AuthenticatedClient(this);
         result.name_ = name_;
@@ -8029,32 +8344,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.AuthenticatedClient) {
           return mergeFrom((com.s13g.winston.proto.Master.AuthenticatedClient)other);
@@ -8074,14 +8396,17 @@ public final class Master {
           authToken_ = other.authToken_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8106,7 +8431,7 @@ public final class Master {
        * Human readable name of this client. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -8125,7 +8450,7 @@ public final class Master {
        * Human readable name of this client. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -8145,7 +8470,7 @@ public final class Master {
        * Human readable name of this client. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -8162,7 +8487,7 @@ public final class Master {
        * Human readable name of this client. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -8175,7 +8500,7 @@ public final class Master {
        * Human readable name of this client. 
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -8195,7 +8520,7 @@ public final class Master {
        * A random auth_token used to authenticate the client. 
        * </pre>
        *
-       * <code>optional string auth_token = 2;</code>
+       * <code>string auth_token = 2;</code>
        */
       public java.lang.String getAuthToken() {
         java.lang.Object ref = authToken_;
@@ -8214,7 +8539,7 @@ public final class Master {
        * A random auth_token used to authenticate the client. 
        * </pre>
        *
-       * <code>optional string auth_token = 2;</code>
+       * <code>string auth_token = 2;</code>
        */
       public com.google.protobuf.ByteString
           getAuthTokenBytes() {
@@ -8234,7 +8559,7 @@ public final class Master {
        * A random auth_token used to authenticate the client. 
        * </pre>
        *
-       * <code>optional string auth_token = 2;</code>
+       * <code>string auth_token = 2;</code>
        */
       public Builder setAuthToken(
           java.lang.String value) {
@@ -8251,7 +8576,7 @@ public final class Master {
        * A random auth_token used to authenticate the client. 
        * </pre>
        *
-       * <code>optional string auth_token = 2;</code>
+       * <code>string auth_token = 2;</code>
        */
       public Builder clearAuthToken() {
         
@@ -8264,7 +8589,7 @@ public final class Master {
        * A random auth_token used to authenticate the client. 
        * </pre>
        *
-       * <code>optional string auth_token = 2;</code>
+       * <code>string auth_token = 2;</code>
        */
       public Builder setAuthTokenBytes(
           com.google.protobuf.ByteString value) {
@@ -8277,14 +8602,16 @@ public final class Master {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -8303,11 +8630,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<AuthenticatedClient>
         PARSER = new com.google.protobuf.AbstractParser<AuthenticatedClient>() {
+      @java.lang.Override
       public AuthenticatedClient parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AuthenticatedClient(input, extensionRegistry);
+        return new AuthenticatedClient(input, extensionRegistry);
       }
     };
 
@@ -8320,6 +8648,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.AuthenticatedClient getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -8335,7 +8664,7 @@ public final class Master {
      * MAC address uniquly addresses a client. 
      * </pre>
      *
-     * <code>optional string mac_address = 1;</code>
+     * <code>string mac_address = 1;</code>
      */
     java.lang.String getMacAddress();
     /**
@@ -8343,7 +8672,7 @@ public final class Master {
      * MAC address uniquly addresses a client. 
      * </pre>
      *
-     * <code>optional string mac_address = 1;</code>
+     * <code>string mac_address = 1;</code>
      */
     com.google.protobuf.ByteString
         getMacAddressBytes();
@@ -8353,7 +8682,7 @@ public final class Master {
      * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
      * </pre>
      *
-     * <code>optional string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     java.lang.String getName();
     /**
@@ -8361,7 +8690,7 @@ public final class Master {
      * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
      * </pre>
      *
-     * <code>optional string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -8371,7 +8700,7 @@ public final class Master {
      * The port to access the node daemon, typically 1984. 
      * </pre>
      *
-     * <code>optional int32 port = 3;</code>
+     * <code>int32 port = 3;</code>
      */
     int getPort();
 
@@ -8380,7 +8709,7 @@ public final class Master {
      * Whether the node daemon should accessed through https. 
      * </pre>
      *
-     * <code>optional bool use_ssl = 4;</code>
+     * <code>bool use_ssl = 4;</code>
      */
     boolean getUseSsl();
 
@@ -8389,7 +8718,7 @@ public final class Master {
      * The config to send to the client, which defines its active plugins. 
      * </pre>
      *
-     * <code>optional string config_file = 5;</code>
+     * <code>string config_file = 5;</code>
      */
     java.lang.String getConfigFile();
     /**
@@ -8397,7 +8726,7 @@ public final class Master {
      * The config to send to the client, which defines its active plugins. 
      * </pre>
      *
-     * <code>optional string config_file = 5;</code>
+     * <code>string config_file = 5;</code>
      */
     com.google.protobuf.ByteString
         getConfigFileBytes();
@@ -8413,6 +8742,7 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:com.s13g.winston.proto.KnownNode)
       KnownNodeOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use KnownNode.newBuilder() to construct.
     private KnownNode(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -8428,14 +8758,19 @@ public final class Master {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private KnownNode(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -8444,12 +8779,6 @@ public final class Master {
             case 0:
               done = true;
               break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -8478,6 +8807,13 @@ public final class Master {
               configFile_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -8486,6 +8822,7 @@ public final class Master {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -8494,6 +8831,7 @@ public final class Master {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable
@@ -8508,7 +8846,7 @@ public final class Master {
      * MAC address uniquly addresses a client. 
      * </pre>
      *
-     * <code>optional string mac_address = 1;</code>
+     * <code>string mac_address = 1;</code>
      */
     public java.lang.String getMacAddress() {
       java.lang.Object ref = macAddress_;
@@ -8527,7 +8865,7 @@ public final class Master {
      * MAC address uniquly addresses a client. 
      * </pre>
      *
-     * <code>optional string mac_address = 1;</code>
+     * <code>string mac_address = 1;</code>
      */
     public com.google.protobuf.ByteString
         getMacAddressBytes() {
@@ -8550,7 +8888,7 @@ public final class Master {
      * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
      * </pre>
      *
-     * <code>optional string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -8569,7 +8907,7 @@ public final class Master {
      * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
      * </pre>
      *
-     * <code>optional string name = 2;</code>
+     * <code>string name = 2;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -8592,7 +8930,7 @@ public final class Master {
      * The port to access the node daemon, typically 1984. 
      * </pre>
      *
-     * <code>optional int32 port = 3;</code>
+     * <code>int32 port = 3;</code>
      */
     public int getPort() {
       return port_;
@@ -8605,7 +8943,7 @@ public final class Master {
      * Whether the node daemon should accessed through https. 
      * </pre>
      *
-     * <code>optional bool use_ssl = 4;</code>
+     * <code>bool use_ssl = 4;</code>
      */
     public boolean getUseSsl() {
       return useSsl_;
@@ -8618,7 +8956,7 @@ public final class Master {
      * The config to send to the client, which defines its active plugins. 
      * </pre>
      *
-     * <code>optional string config_file = 5;</code>
+     * <code>string config_file = 5;</code>
      */
     public java.lang.String getConfigFile() {
       java.lang.Object ref = configFile_;
@@ -8637,7 +8975,7 @@ public final class Master {
      * The config to send to the client, which defines its active plugins. 
      * </pre>
      *
-     * <code>optional string config_file = 5;</code>
+     * <code>string config_file = 5;</code>
      */
     public com.google.protobuf.ByteString
         getConfigFileBytes() {
@@ -8654,6 +8992,7 @@ public final class Master {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -8663,6 +9002,7 @@ public final class Master {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getMacAddressBytes().isEmpty()) {
@@ -8680,8 +9020,10 @@ public final class Master {
       if (!getConfigFileBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, configFile_);
       }
+      unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -8704,11 +9046,11 @@ public final class Master {
       if (!getConfigFileBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, configFile_);
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -8730,6 +9072,7 @@ public final class Master {
           == other.getUseSsl());
       result = result && getConfigFile()
           .equals(other.getConfigFile());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -8739,7 +9082,7 @@ public final class Master {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + MAC_ADDRESS_FIELD_NUMBER;
       hash = (53 * hash) + getMacAddress().hashCode();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
@@ -8756,6 +9099,17 @@ public final class Master {
       return hash;
     }
 
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.s13g.winston.proto.Master.KnownNode parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.s13g.winston.proto.Master.KnownNode parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8815,6 +9169,7 @@ public final class Master {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -8822,6 +9177,7 @@ public final class Master {
     public static Builder newBuilder(com.s13g.winston.proto.Master.KnownNode prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -8849,6 +9205,7 @@ public final class Master {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_fieldAccessorTable
@@ -8871,6 +9228,7 @@ public final class Master {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         macAddress_ = "";
@@ -8886,15 +9244,18 @@ public final class Master {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.s13g.winston.proto.Master.internal_static_com_s13g_winston_proto_KnownNode_descriptor;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.KnownNode getDefaultInstanceForType() {
         return com.s13g.winston.proto.Master.KnownNode.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.KnownNode build() {
         com.s13g.winston.proto.Master.KnownNode result = buildPartial();
         if (!result.isInitialized()) {
@@ -8903,6 +9264,7 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public com.s13g.winston.proto.Master.KnownNode buildPartial() {
         com.s13g.winston.proto.Master.KnownNode result = new com.s13g.winston.proto.Master.KnownNode(this);
         result.macAddress_ = macAddress_;
@@ -8914,32 +9276,39 @@ public final class Master {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.s13g.winston.proto.Master.KnownNode) {
           return mergeFrom((com.s13g.winston.proto.Master.KnownNode)other);
@@ -8969,14 +9338,17 @@ public final class Master {
           configFile_ = other.configFile_;
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9001,7 +9373,7 @@ public final class Master {
        * MAC address uniquly addresses a client. 
        * </pre>
        *
-       * <code>optional string mac_address = 1;</code>
+       * <code>string mac_address = 1;</code>
        */
       public java.lang.String getMacAddress() {
         java.lang.Object ref = macAddress_;
@@ -9020,7 +9392,7 @@ public final class Master {
        * MAC address uniquly addresses a client. 
        * </pre>
        *
-       * <code>optional string mac_address = 1;</code>
+       * <code>string mac_address = 1;</code>
        */
       public com.google.protobuf.ByteString
           getMacAddressBytes() {
@@ -9040,7 +9412,7 @@ public final class Master {
        * MAC address uniquly addresses a client. 
        * </pre>
        *
-       * <code>optional string mac_address = 1;</code>
+       * <code>string mac_address = 1;</code>
        */
       public Builder setMacAddress(
           java.lang.String value) {
@@ -9057,7 +9429,7 @@ public final class Master {
        * MAC address uniquly addresses a client. 
        * </pre>
        *
-       * <code>optional string mac_address = 1;</code>
+       * <code>string mac_address = 1;</code>
        */
       public Builder clearMacAddress() {
         
@@ -9070,7 +9442,7 @@ public final class Master {
        * MAC address uniquly addresses a client. 
        * </pre>
        *
-       * <code>optional string mac_address = 1;</code>
+       * <code>string mac_address = 1;</code>
        */
       public Builder setMacAddressBytes(
           com.google.protobuf.ByteString value) {
@@ -9090,7 +9462,7 @@ public final class Master {
        * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -9109,7 +9481,7 @@ public final class Master {
        * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -9129,7 +9501,7 @@ public final class Master {
        * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -9146,7 +9518,7 @@ public final class Master {
        * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public Builder clearName() {
         
@@ -9159,7 +9531,7 @@ public final class Master {
        * Human-readable unique alias for the node, e.g. 'pi-power-1'. 
        * </pre>
        *
-       * <code>optional string name = 2;</code>
+       * <code>string name = 2;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -9179,7 +9551,7 @@ public final class Master {
        * The port to access the node daemon, typically 1984. 
        * </pre>
        *
-       * <code>optional int32 port = 3;</code>
+       * <code>int32 port = 3;</code>
        */
       public int getPort() {
         return port_;
@@ -9189,7 +9561,7 @@ public final class Master {
        * The port to access the node daemon, typically 1984. 
        * </pre>
        *
-       * <code>optional int32 port = 3;</code>
+       * <code>int32 port = 3;</code>
        */
       public Builder setPort(int value) {
         
@@ -9202,7 +9574,7 @@ public final class Master {
        * The port to access the node daemon, typically 1984. 
        * </pre>
        *
-       * <code>optional int32 port = 3;</code>
+       * <code>int32 port = 3;</code>
        */
       public Builder clearPort() {
         
@@ -9217,7 +9589,7 @@ public final class Master {
        * Whether the node daemon should accessed through https. 
        * </pre>
        *
-       * <code>optional bool use_ssl = 4;</code>
+       * <code>bool use_ssl = 4;</code>
        */
       public boolean getUseSsl() {
         return useSsl_;
@@ -9227,7 +9599,7 @@ public final class Master {
        * Whether the node daemon should accessed through https. 
        * </pre>
        *
-       * <code>optional bool use_ssl = 4;</code>
+       * <code>bool use_ssl = 4;</code>
        */
       public Builder setUseSsl(boolean value) {
         
@@ -9240,7 +9612,7 @@ public final class Master {
        * Whether the node daemon should accessed through https. 
        * </pre>
        *
-       * <code>optional bool use_ssl = 4;</code>
+       * <code>bool use_ssl = 4;</code>
        */
       public Builder clearUseSsl() {
         
@@ -9255,7 +9627,7 @@ public final class Master {
        * The config to send to the client, which defines its active plugins. 
        * </pre>
        *
-       * <code>optional string config_file = 5;</code>
+       * <code>string config_file = 5;</code>
        */
       public java.lang.String getConfigFile() {
         java.lang.Object ref = configFile_;
@@ -9274,7 +9646,7 @@ public final class Master {
        * The config to send to the client, which defines its active plugins. 
        * </pre>
        *
-       * <code>optional string config_file = 5;</code>
+       * <code>string config_file = 5;</code>
        */
       public com.google.protobuf.ByteString
           getConfigFileBytes() {
@@ -9294,7 +9666,7 @@ public final class Master {
        * The config to send to the client, which defines its active plugins. 
        * </pre>
        *
-       * <code>optional string config_file = 5;</code>
+       * <code>string config_file = 5;</code>
        */
       public Builder setConfigFile(
           java.lang.String value) {
@@ -9311,7 +9683,7 @@ public final class Master {
        * The config to send to the client, which defines its active plugins. 
        * </pre>
        *
-       * <code>optional string config_file = 5;</code>
+       * <code>string config_file = 5;</code>
        */
       public Builder clearConfigFile() {
         
@@ -9324,7 +9696,7 @@ public final class Master {
        * The config to send to the client, which defines its active plugins. 
        * </pre>
        *
-       * <code>optional string config_file = 5;</code>
+       * <code>string config_file = 5;</code>
        */
       public Builder setConfigFileBytes(
           com.google.protobuf.ByteString value) {
@@ -9337,14 +9709,16 @@ public final class Master {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -9363,11 +9737,12 @@ public final class Master {
 
     private static final com.google.protobuf.Parser<KnownNode>
         PARSER = new com.google.protobuf.AbstractParser<KnownNode>() {
+      @java.lang.Override
       public KnownNode parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new KnownNode(input, extensionRegistry);
+        return new KnownNode(input, extensionRegistry);
       }
     };
 
@@ -9380,6 +9755,7 @@ public final class Master {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.s13g.winston.proto.Master.KnownNode getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -9436,28 +9812,28 @@ public final class Master {
   static {
     java.lang.String[] descriptorData = {
       "\n\036etc/protos/master_config.proto\022\026com.s1" +
-      "3g.winston.proto\"\261\002\n\014MasterConfig\022\022\n\ndae" +
-      "monPort\030\001 \001(\005\022\027\n\017sslKeystorePath\030\002 \001(\t\022\033" +
-      "\n\023sslKeystorePassword\030\003 \001(\t\022.\n\006module\030\004 " +
-      "\003(\0132\036.com.s13g.winston.proto.Module\022,\n\005g" +
-      "roup\030\005 \003(\0132\035.com.s13g.winston.proto.Grou" +
-      "p\022@\n\013auth_client\030\006 \003(\0132+.com.s13g.winsto" +
-      "n.proto.AuthenticatedClient\0227\n\014known_cli" +
-      "ent\030\007 \003(\0132!.com.s13g.winston.proto.Known" +
-      "Node\"H\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007channel\030",
-      "\002 \003(\0132\037.com.s13g.winston.proto.Channel\"L" +
-      "\n\005Group\022\014\n\004name\030\001 \001(\t\0225\n\007trigger\030\002 \003(\0132$" +
-      ".com.s13g.winston.proto.GroupTrigger\"-\n\014" +
-      "GroupTrigger\022\r\n\005input\030\001 \003(\t\022\016\n\006action\030\002 " +
-      "\003(\t\"^\n\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n\007address\030" +
-      "\002 \001(\t\0224\n\tparameter\030\003 \003(\0132!.com.s13g.wins" +
-      "ton.proto.Parameter\"(\n\tParameter\022\014\n\004name" +
-      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"7\n\023AuthenticatedCl" +
-      "ient\022\014\n\004name\030\001 \001(\t\022\022\n\nauth_token\030\002 \001(\t\"b" +
-      "\n\tKnownNode\022\023\n\013mac_address\030\001 \001(\t\022\014\n\004name",
-      "\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030\004 \001(\010\022\023\n" +
-      "\013config_file\030\005 \001(\tB \n\026com.s13g.winston.p" +
-      "rotoB\006Masterb\006proto3"
+      "3g.winston.proto\"\266\002\n\014MasterConfig\022\023\n\013dae" +
+      "mon_port\030\001 \001(\005\022\031\n\021ssl_keystore_path\030\002 \001(" +
+      "\t\022\035\n\025ssl_keystore_password\030\003 \001(\t\022.\n\006modu" +
+      "le\030\004 \003(\0132\036.com.s13g.winston.proto.Module" +
+      "\022,\n\005group\030\005 \003(\0132\035.com.s13g.winston.proto" +
+      ".Group\022@\n\013auth_client\030\006 \003(\0132+.com.s13g.w" +
+      "inston.proto.AuthenticatedClient\0227\n\014know" +
+      "n_client\030\007 \003(\0132!.com.s13g.winston.proto." +
+      "KnownNode\"H\n\006Module\022\014\n\004type\030\001 \001(\t\0220\n\007cha" +
+      "nnel\030\002 \003(\0132\037.com.s13g.winston.proto.Chan" +
+      "nel\"L\n\005Group\022\014\n\004name\030\001 \001(\t\0225\n\007trigger\030\002 " +
+      "\003(\0132$.com.s13g.winston.proto.GroupTrigge" +
+      "r\"-\n\014GroupTrigger\022\r\n\005input\030\001 \003(\t\022\016\n\006acti" +
+      "on\030\002 \003(\t\"^\n\007Channel\022\014\n\004type\030\001 \001(\t\022\017\n\007add" +
+      "ress\030\002 \001(\t\0224\n\tparameter\030\003 \003(\0132!.com.s13g" +
+      ".winston.proto.Parameter\"(\n\tParameter\022\014\n" +
+      "\004name\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"7\n\023Authentica" +
+      "tedClient\022\014\n\004name\030\001 \001(\t\022\022\n\nauth_token\030\002 " +
+      "\001(\t\"b\n\tKnownNode\022\023\n\013mac_address\030\001 \001(\t\022\014\n" +
+      "\004name\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022\017\n\007use_ssl\030\004 \001" +
+      "(\010\022\023\n\013config_file\030\005 \001(\tB \n\026com.s13g.wins" +
+      "ton.protoB\006Masterb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
