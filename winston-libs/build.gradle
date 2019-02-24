@@ -14,7 +14,7 @@ dependencies {
     implementation 'org.json:json:20180813'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.jdom:jdom:2.0.2'
-    implementation 'com.pi4j:pi4j-core:1.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.beust:jcommander:1.74'
     testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-core:2.24.5"
