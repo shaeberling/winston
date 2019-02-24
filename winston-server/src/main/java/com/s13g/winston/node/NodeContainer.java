@@ -152,7 +152,7 @@ public class NodeContainer implements Container {
 
     try {
       resp.setStatus(returnValue.isPresent() ? Status.OK : Status.NOT_FOUND);
-      resp.getPrintStream().append(returnValue.isPresent() ? returnValue.get() : "");
+      resp.getPrintStream().append(returnValue.orElse(""));
       resp.close();
     } catch (final IOException e) {
       log.atWarning().log("Could not deliver response");

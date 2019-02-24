@@ -20,7 +20,6 @@ import com.google.common.flogger.FluentLogger;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
-import com.s13g.winston.lib.plugin.NodeController;
 import com.s13g.winston.lib.plugin.NodePluginType;
 import com.s13g.winston.shared.data.Temperature;
 

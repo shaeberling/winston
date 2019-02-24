@@ -54,6 +54,7 @@ public class WinstonSensorNodeController {
   }
 
   private Supplier<Optional<Temperature>> forTemperatureSensor(String path) {
+    // TODO: Port should not be hardcoded.
     final String addressFmt = "http://%s:1984/io/%s";
     final String address = String.format(addressFmt, mNodeAddress, path);
     return () -> {

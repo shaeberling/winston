@@ -35,8 +35,6 @@ import com.s13g.winston.master.modules.ModuleParameters;
 import com.s13g.winston.master.modules.ModuleParameters.ChannelConfig;
 
 
-
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -165,7 +163,7 @@ public class WinstonModule implements Module {
     }
 
     @Override
-    public WinstonModule create(ModuleContext context) throws ModuleCreationException {
+    public WinstonModule create(ModuleContext context) {
       return new WinstonModule(getType(), context.getWinstonController());
     }
   }

@@ -169,14 +169,14 @@ public class NodePluginCreator {
   private NodePlugin createOneWire(String type, String name) {
     NodePluginType pluginType = getPluginType(type);
 
-    NodeController controller;
+    TemperatureSensorController controller;
     Handler handler;
 
     // Add new 1-Wire based controllers here.
     switch (pluginType) {
       case DS18B20_TEMP:
         controller = new DS18B20ControllerImpl(name, mFileCreator);
-        handler = new TemperatureHandler((TemperatureSensorController) controller, pluginType);
+        handler = new TemperatureHandler(controller, pluginType);
         break;
       default:
         throw new RuntimeException("No 1-wire controller defined for valid type: " + type);

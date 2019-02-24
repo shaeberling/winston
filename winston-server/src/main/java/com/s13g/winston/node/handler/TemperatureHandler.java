@@ -44,7 +44,9 @@ public class TemperatureHandler implements Handler {
     // TODO: We need support some kind of exception with message here.
     String temperature = temperatureOpt.map(Temperature::toString).orElse("");
     String humidity = humidityOpt.map(Object::toString).orElse("");
-    return temperature + "/" + humidity;
+    // TODO: Should output structured JSON data.
+//    return temperature + "/" + humidity;
+    return temperature;
   }
 
   @Override

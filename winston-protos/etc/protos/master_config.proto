@@ -95,7 +95,7 @@ message AuthenticatedClient {
 
 /* A known client/node. */
 message KnownNode {
-  /* MAC address uniquly addresses a client. */
+  /* MAC address uniquely addresses a client. */
   string mac_address = 1;
   /* Human-readable unique alias for the node, e.g. 'pi-power-1'. */
   string name = 2;
