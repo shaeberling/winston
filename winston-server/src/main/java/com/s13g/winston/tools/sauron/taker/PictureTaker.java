@@ -22,10 +22,20 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
-/**
- * Common interface for picture taker.
- */
+/** Common interface for picture taker. */
 public interface PictureTaker {
+
+  enum Command {
+    FSWEBCAM("/usr/bin/fswebcam -r 1920x1080 %s"),
+    RASPISTILL("raspistill -o %s"),
+    RASPISTILL_FLIP("raspistill -vf -hf -o %s");
+
+    final String commandLine;
+
+    Command(String cmd) {
+      this.commandLine = cmd;
+    }
+  }
 
   /**
    * Captures an image and writes it to the give file.

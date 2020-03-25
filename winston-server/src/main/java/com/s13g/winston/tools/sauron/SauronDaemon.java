@@ -44,6 +44,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class SauronDaemon {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
   private static final boolean EMULATE_CAMERA = false;
+  private static final PictureTaker.Command command = PictureTaker.Command.RASPISTILL_FLIP;
   /* Note: Set this when you do testing. */
   private static final String TEST_PICTURES_ROOT = "/dev/null";
 
@@ -60,7 +61,7 @@ public class SauronDaemon {
 
     PictureTaker pictureTaker = EMULATE_CAMERA ?
         PictureTakerTestingImpl.from(new File(TEST_PICTURES_ROOT))
-        : new PictureTakerImpl(cameraCommandExecutor);
+        : new PictureTakerImpl(command, cameraCommandExecutor);
     final ImageRepository imageRepository =
         ImageRepository.init(MIN_BYTES_AVAILABLE, DirectoryImpl.create(REPOSITORY_ROOT));
     ContainerServer.Creator serverCreator = ContainerServer.getDefaultCreator();

@@ -37,10 +37,11 @@ public class PictureTakerImpl implements PictureTaker {
    * The command to execute to capture an image. Note: Add '--no-banner' to remove the timestamp
    * banner at the bottom of the image file.
    */
-  private static final String COMMAND = "/usr/bin/fswebcam -r 1920x1080 %s";
+  private final Command mCommand;
   private final Executor mExecutor;
 
-  public PictureTakerImpl(Executor executor) {
+  public PictureTakerImpl(Command command, Executor executor) {
+    mCommand = command;
     mExecutor = executor;
   }
 
@@ -79,6 +80,6 @@ public class PictureTakerImpl implements PictureTaker {
 
   @Nonnull
   private String[] createCommandForFileName(String fileName) {
-    return String.format(COMMAND, fileName).split("\\s+");
+    return String.format(mCommand.commandLine, fileName).split("\\s+");
   }
 }
