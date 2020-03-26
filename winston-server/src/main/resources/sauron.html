@@ -30,11 +30,6 @@
   	</style>
   </head>
   <body>
-  	<img id="webcam-image" src="/now.jpg">
-  	<script>
-  	  window.setInterval(function(){
-          $("#webcam-image").attr("src", "/now.jpg?time=" + (new Date()).getTime());
-      }, 50000);
-  	</script>
+  	<img id="webcam-image" src="/videostream.cgi">
   </body>
 </html>

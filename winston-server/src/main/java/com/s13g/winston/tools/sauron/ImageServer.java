@@ -16,7 +16,13 @@
 
 package com.s13g.winston.tools.sauron;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
+import com.google.common.io.MoreFiles;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 import com.s13g.winston.common.io.DataLoader;
 
 import org.simpleframework.http.Response;
@@ -24,29 +30,37 @@ import org.simpleframework.http.Status;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.annotation.concurrent.GuardedBy;
 
-/**
- * Simple web server to serve the webcam pictures.
- */
+/** Simple web server to serve the webcam pictures. */
 @ParametersAreNonnullByDefault
 public class ImageServer {
   private static final FluentLogger log = FluentLogger.forEnclosingClass();
 
   /** Used to read the file into memory to serve it. */
   private final Executor mFileReadExecutor;
+  /** Serves the responses to the incoming requests. */
+  private final ListeningExecutorService mServeMjpegExecutor;
   /** The bytes of the current image to serve. */
   @GuardedBy("mBytesLock")
   private byte[] mCurrentImageBytes;
   /** Locks access on the mCurrentImageBytes object */
   private final Object mBytesLock;
+
   private final LinkedBlockingQueue<byte[]> mmJpegQueue = new LinkedBlockingQueue<>(1);
+
+  private final Set<Response> mActiveMjpegResponses = new HashSet<>();
 
   /**
    * Creates a new image server.
@@ -55,8 +69,19 @@ public class ImageServer {
    */
   public ImageServer(Executor fileReadExecutor) {
     mFileReadExecutor = fileReadExecutor;
+    mServeMjpegExecutor = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
     mCurrentImageBytes = new byte[0];
     mBytesLock = new Object();
+    startServing();
+  }
+
+  /** For testing. */
+  ImageServer(Executor fileReadExecutor, ExecutorService serveMjpegExecutor) {
+    mFileReadExecutor = fileReadExecutor;
+    mServeMjpegExecutor = MoreExecutors.listeningDecorator(serveMjpegExecutor);
+    mCurrentImageBytes = new byte[0];
+    mBytesLock = new Object();
+    startServing();
   }
 
   /**
@@ -66,19 +91,21 @@ public class ImageServer {
    * @param currentImageLoader loads the current image file.
    */
   void updateCurrentFile(DataLoader currentImageLoader) {
-    mFileReadExecutor.execute(() -> {
-      synchronized (mBytesLock) {
-        Optional<byte[]> currentImage = currentImageLoader.load();
-        if (currentImage.isPresent()) {
-          mCurrentImageBytes = currentImage.get();
-          if (!mmJpegQueue.offer(mCurrentImageBytes)) {
-            log.atWarning().log("Cannot add new image to mMjpegQueue.");
+    mFileReadExecutor.execute(
+        () -> {
+          Optional<byte[]> currentImage = currentImageLoader.load();
+          if (currentImage.isPresent()) {
+            synchronized (mBytesLock) {
+              mCurrentImageBytes = currentImage.get();
+              log.atInfo().log("Offering new mJPEG to mJPEG queue.");
+              if (!mmJpegQueue.offer(mCurrentImageBytes)) {
+                log.atWarning().log("Cannot add new image to mJPEG queue.");
+              }
+            }
+          } else {
+            log.atSevere().log("Could not load current image. Not updating.");
           }
-        } else {
-          log.atSevere().log("Could not load current image. Not updating.");
-        }
-      }
-    });
+        });
   }
 
   /** Serves the current image file to the given response. */
@@ -88,34 +115,64 @@ public class ImageServer {
     }
   }
 
-  void serveMotionJpegAsync(final Response response) throws IOException {
-    log.atInfo().log("Serving MJPEG...");
+  private void startServing() {
+    // One master thread that loops until interrupted.
+    Executors.newSingleThreadExecutor()
+        .execute(
+            () -> {
+              while (true) {
+                try {
+                  // Get the data to serve to all outstanding requests.
+                  byte[] jpegData = mmJpegQueue.take();
+                  Set<ListenableFuture<?>> servingFutures = new HashSet<>();
+                  for (Response response : ImmutableList.copyOf(mActiveMjpegResponses)) {
+                    // Fires up a thread per active response being served.
+                    ListenableFuture<?> future =
+                        mServeMjpegExecutor.submit(() -> serveMotionJpeg(response, jpegData));
+                    servingFutures.add(future);
+                  }
+                  // Wait for all serves to complete.
+                  Futures.allAsList(servingFutures).get();
+                } catch (InterruptedException | ExecutionException ex) {
+                  log.atInfo().log("Got interrupted while retrieving from mJpeg queue.");
+                  break;
+                }
+              }
+            });
+  }
+
+  void startServingMjpegTo(final Response response) {
     response.setContentType("multipart/x-mixed-replace;boundary=ipcamera");
     response.setStatus(Status.OK);
 
-    OutputStream outputStream = response.getOutputStream();
-    Executor mMjpegExecutor = Executors.newSingleThreadExecutor();
-    mMjpegExecutor.execute(() -> {
-
+    // Immediately serve the most current frame.
+    synchronized (mBytesLock) {
       try {
-        // Immediately serve most recent frame.
-        synchronized (mBytesLock) {
-          serveMotionJpegFrame(mCurrentImageBytes, outputStream);
-        }
-
-        // Skip the first frame, since it's old. Then continue to read updated frames.
-        mmJpegQueue.take();
-        for (byte[] jpegData = null; jpegData != null; jpegData = mmJpegQueue.take()) {
-          serveMotionJpegFrame(jpegData, outputStream);
-        }
-      } catch (IOException | InterruptedException e) {
-        log.atWarning().log("Interrupted while serving MJPEG data. Exiting MJPEG loop.");
-        try {
-          response.close();
-        } catch (IOException ignore) {
-        }
+        serveMotionJpegFrame(mCurrentImageBytes, response.getOutputStream());
+      } catch (IOException ignore) {
       }
-    });
+    }
+
+    mActiveMjpegResponses.add(response);
+    log.atInfo().log("Added active mJPEG response. Total now %d.", mActiveMjpegResponses.size());
+  }
+
+  private void serveMotionJpeg(final Response response, byte[] jpegData) {
+    try {
+      OutputStream outputStream = response.getOutputStream();
+
+      // When we get an IOException trying to write out data, at which point we end
+      // serving data as the request has likely been cancelled, we remove the response so it is
+      // no longer being served.
+      serveMotionJpegFrame(jpegData, outputStream);
+    } catch (IOException ex) {
+      mActiveMjpegResponses.remove(response);
+      log.atInfo().log("Removing inactive response. Total now %d.", mActiveMjpegResponses.size());
+      try {
+        response.close();
+      } catch (IOException ignore) {
+      }
+    }
   }
 
   private void serveMotionJpegFrame(byte[] jpegData, OutputStream outputStream) throws IOException {

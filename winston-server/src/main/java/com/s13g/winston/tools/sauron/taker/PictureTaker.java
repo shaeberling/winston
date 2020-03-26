@@ -27,8 +27,8 @@ public interface PictureTaker {
 
   enum Command {
     FSWEBCAM("/usr/bin/fswebcam -r 1920x1080 %s"),
-    RASPISTILL("raspistill -o %s"),
-    RASPISTILL_FLIP("raspistill -vf -hf -o %s");
+    RASPISTILL("raspistill -w 1200 -h 800 -q 10 -o %s"),
+    RASPISTILL_FLIP("raspistill -vf -hf -w 1200 -h 800 -q 10 -o %s");
 
     final String commandLine;
 

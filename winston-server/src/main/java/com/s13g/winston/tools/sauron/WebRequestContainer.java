@@ -82,7 +82,7 @@ class WebRequestContainer implements Container {
       } else if (requestUrl.startsWith(CURRENT_IMAGE_PATH)) {
         mImageServer.serveCurrentFile(response);
       } else if (requestUrl.startsWith(FOSCAM_VIDEO_STREAM)) {
-        mImageServer.serveMotionJpegAsync(response);
+        mImageServer.startServingMjpegTo(response);
         closeResponse = false;
       } else {
         response.setStatus(Status.NOT_FOUND);

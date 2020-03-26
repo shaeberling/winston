@@ -23,6 +23,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.s13g.winston.tools.sauron.taker.PictureTaker;
 
 import java.io.File;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -64,27 +65,37 @@ public class Scheduler {
    * work here since it might delay the next shot.
    */
   void start(int delayMillis, final Listener listener) {
-    mExecutor.scheduleAtFixedRate(() -> {
-      final File nextImageFile = mImageRepository.getCurrentFile();
-      ListenableFuture<Boolean> captureResult = mPictureTaker.captureImage(nextImageFile);
-      Futures.addCallback(captureResult, new FutureCallback<Boolean>() {
-        @Override
-        public void onSuccess(@Nullable Boolean result) {
-          if (result == null || !result) {
-            log.atWarning().log("Taking picture not successful");
-            return;
-          }
-          // TODO: We might want to do ths on a different executor so that a long-running
-          // listener is not blocking the taking queue.
-          listener.onPictureReady(nextImageFile);
-        }
+    mExecutor.scheduleAtFixedRate(
+        () -> {
+          log.atInfo().log("About to take a new pic.");
+          final File nextImageFile = mImageRepository.getCurrentFile();
+          ListenableFuture<Boolean> captureResult = mPictureTaker.captureImage(nextImageFile);
 
-        @Override
-        public void onFailure(Throwable t) {
-          log.atWarning().withCause(t).log("Taking picture failed");
-        }
-      });
-    }, 0 /* No initial delay */, delayMillis, TimeUnit.MILLISECONDS);
+          Futures.addCallback(
+              captureResult,
+              new FutureCallback<Boolean>() {
+                @Override
+                public void onSuccess(@Nullable Boolean result) {
+                  if (result == null || !result) {
+                    log.atWarning().log("Taking picture not successful");
+                    return;
+                  }
+                  log.atInfo().log("Taking pic was successful.");
+                  // TODO: We might want to do ths on a different executor so that a long-running
+                  // listener is not blocking the taking queue.
+                  listener.onPictureReady(nextImageFile);
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                  log.atWarning().withCause(t).log("Taking picture failed");
+                }
+              },
+              Executors.newCachedThreadPool());
+        },
+        0 /* No initial delay */,
+        delayMillis,
+        TimeUnit.MILLISECONDS);
   }
 
   /** Shuts down the executor and thus stops scheduler. */
