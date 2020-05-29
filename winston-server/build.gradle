@@ -65,13 +65,3 @@ task nodeDaemon(type: Jar, dependsOn: shadowJar) {
     }
     from zipTree(shadowJar.archivePath)
 }
-
-task sauronDaemon(type: Jar, dependsOn: shadowJar) {
-    baseName = 'winston'
-    classifier = 'sauron'
-    manifest {
-        attributes('Main-Class': 'com.s13g.winston.tools.sauron.SauronDaemon',
-                   'Implementation-Title': 'Winston Sauron Daemon')
-    }
-    from zipTree(shadowJar.archivePath)
-}

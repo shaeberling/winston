@@ -15,7 +15,6 @@ in the future as the different parts are getting fleshed out:
  * **winston-server** contains the master and node servers. The latter is run on the Winston nodes,
  communicates to sensors and actuators directly, and the former is responsible for collecting data
  from the nodes and communicates with the clients.
-   * **sauron webcam** Sauron is a stand-alone daemon that connects to a webcam and shoots pictures at a set interval. Pictures are stored on disk in a configurable path. Sauron also has storage space protection built in: Once the free space within the image repository path falls below a configurable threshold, Sauron will start to remove the oldest files. Sauron's main use case is as a security camera. The newest image taken will be served from within the build-in webserver.
 
 ## Goal
 The goal is to run the nodes on Raspberry Pi devices and to connect various
@@ -43,7 +42,6 @@ Target | Build command
 --- | --- 
 Node Daemon |  `./gradlew nodeDaemon` 
 Master Daemon |  `./gradlew masterDaemon` 
-Sauron Daemon |  `./gradlew sauronDaemon` 
 Android App |  `./gradlew winston-android:assembleDebug` 
 Android Wear App |  `./gradlew winston-android-wear:assembleDebug`
 
@@ -53,7 +51,11 @@ Once you have compiled the daemons, simply copy them to your server or node. You
  
 - `winston-server/build/libs/winston-{version}-master.jar`
 - `winston-server/build/libs/winston-{version}-node.jar`
-- `winston-server/build/libs/winston-{version}-sauron.jar`
+
+Dependencies:
+
+sudo apt-get install wiringpi
+also: java
 
 
 ### Configuration and Running
@@ -62,18 +64,21 @@ winston-master-daemon.jar`.
 
 A master.config could look like this (subject to change):
 ```
-daemon_port:1984
-node_mapping: {
-  name: "node-1"
-  address: 192.168.12.34
-  port: 1984
-  use_ssl: false
+daemon_port:1981
+auth_client {
+  name: "John Doe"
+  auth_token: "{secret token} 
 }
-node_mapping: {
-  name: "node-2"
-  address: 192.168.12.35
-  port: 1984
-  use_ssl: false
+module {
+  type: "winston"
+  channel {
+    type: "sensors"
+    address: "raspberrypi"
+    parameter {
+      name: "temp-sensor"
+      value: "htu21d_temp_humid/"
+    }
+  }
 }
 ```
 
@@ -83,6 +88,11 @@ winston-node-daemon.jar`. It is necessary to launch the node daemon with `sudo` 
 A node.config could look like this (subject to change):
 ```
 daemon_port: 1984
+i2c_plugin {
+  type: "HTU21D_TEMP_HUMID"
+  bus: 1
+  address: 0x40
+}
 gpio_plugins: {
   name: "relay"
   mapping: 1
@@ -96,4 +106,3 @@ gpio_plugins: {
   mapping: 6
 }
 ```
-
